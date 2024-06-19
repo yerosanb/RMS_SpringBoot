@@ -1447,7 +1447,7 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 					} else if (min_upload_date == 0 && max_upload_date == 0 && search.getMin_amount() == ""
 							&& search.getMax_amount() == "" && min_match_date == 0 && max_match_date == 0
 							&& value_date != "" && reference == "" && branch_code == "") {
-
+System.out.println("111111111111111111111111111111111");
 						general = rtgsMapper.searchWithValueDateCore(value_date);
 
 					}
@@ -1455,7 +1455,7 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 					else if (min_upload_date == 0 && max_upload_date == 0 && search.getMin_amount() == ""
 							&& search.getMax_amount() == "" && min_match_date == 0 && max_match_date == 0
 							&& branch_code != "" && reference == "" && value_date == "") {
-
+						System.out.println("2222222222222222222222222222222222");
 						general = rtgsMapper.searchWithBranchCodeCore(branch_code);
 
 					}
@@ -1463,19 +1463,19 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 					else if (min_upload_date == 0 && max_upload_date == 0 && search.getMin_amount() == ""
 							&& search.getMax_amount() == "" && min_match_date == 0 && max_match_date == 0
 							&& value_date != "" && reference != "" && branch_code == "") {
-
+						System.out.println("33333333333333333333333333");
 						general = rtgsMapper.searchWithValueDateAndReferenceCore(value_date, reference);
 
 					} else if (min_upload_date == 0 && max_upload_date == 0 && search.getMin_amount() == ""
 							&& search.getMax_amount() == "" && min_match_date == 0 && max_match_date == 0
 							&& value_date != "" && branch_code != "" && reference == "") {
-
+						System.out.println("4444444444444444444444444444444444444444");
 						general = rtgsMapper.searchWithValueDateAndBranchCodeCore(value_date, branch_code);
 
 					} else if (min_upload_date == 0 && max_upload_date == 0 && search.getMin_amount() == ""
 							&& search.getMax_amount() == "" && min_match_date == 0 && max_match_date == 0
 							&& value_date != "" && branch_code != "" && reference != "") {
-
+						System.out.println("555555555555555555555555555555555555");
 						general = rtgsMapper.searchWithRefValueDateBranchCode(reference, value_date, branch_code);
 
 					}
@@ -1483,14 +1483,14 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 					else if (min_upload_date == 0 && max_upload_date == 0 && search.getMin_amount() == ""
 							&& search.getMax_amount() == "" && min_match_date == 0 && max_match_date == 0
 							&& reference != "" && branch_code != "" && value_date == "") {
-
+						System.out.println("666666666666666666666666666666666666666666");
 						general = rtgsMapper.searchWithReferenceAndBranchCodeCore(reference, branch_code);
 
 					}
 
 					else if (min_upload_date != 0 && max_upload_date != 0 && search.getMax_amount() == ""
 							&& search.getMin_amount() == "" && min_match_date == 0 && max_match_date == 0) {
-
+						System.out.println("7777777777777777777777777777777");
 						general = rtgsMapper.searchWithUploadDateCore(min_upload_date, max_upload_date, reference,
 								value_date, branch_code);
 
@@ -1498,7 +1498,7 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 
 					else if (min_upload_date == 0 && max_upload_date == 0 && search.getMax_amount() == ""
 							&& search.getMin_amount() == "" && min_match_date != 0 && max_match_date != 0) {
-
+						System.out.println("8888888888888888888888888888888888888");
 						general = rtgsMapper.searchWithMatchDateCore(min_match_date, max_match_date, reference,
 								value_date, branch_code);
 
@@ -1549,7 +1549,7 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 
 					else if (min_upload_date != 0 && max_upload_date != 0 && search.getMax_amount() == ""
 							&& search.getMin_amount() == "" && min_match_date != 0 && max_match_date != 0) {
-
+                                System.out.println("99999999999999999999999999999999999999");
 						general = rtgsMapper.searchWithUploadDateAndMatchDateCore(min_match_date, max_match_date,
 								min_upload_date, max_upload_date, reference, value_date, branch_code);
 					}
