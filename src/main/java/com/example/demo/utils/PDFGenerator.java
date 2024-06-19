@@ -400,6 +400,8 @@ public class PDFGenerator {
 				.replace("$", ""), fo));
 		table.addCell(cell2);
 
+		
+		cell.setPhrase(new Phrase("Diff", fo));
 		table.addCell(cell);
 		cell.setPhrase(new Phrase("", fo));
 		table.addCell(cell);
@@ -407,9 +409,10 @@ public class PDFGenerator {
 		table.addCell(cell);
 		cell.setPhrase(new Phrase("", fo));
 		table.addCell(cell);
-		cell.setPhrase(new Phrase("", fo));
-		table.addCell(cell);
-		cell.setPhrase(new Phrase("", fo));
+		cell2.setPhrase(new Phrase(NumberFormat.getCurrencyInstance()
+				.format(((ats_ending_balance + total_core_debit) - total_core_credit)-((conventional_ending_balance + ifb_ending_balance + total_ats_credit) - total_ats_debit))
+				.replace("$", ""), fo));
+		table.addCell(cell2);
 
 		document.add(table);
 

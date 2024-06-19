@@ -550,8 +550,17 @@ public class ExcelHelper {
 			row_15.setHeight((short) (row_15.getHeight()));
 			for (int col = 0; col < HEADERs.length; col++) {
 				Cell cell = row_15.createCell(col);
-				cell.setCellValue("");
+				if (col == 0) {
+					cell.setCellValue("Diff");
+				} else if (col == 4) {
+					cell.setCellValue(NumberFormat.getCurrencyInstance().format(
+							(((ats_ending_balance + total_core_debit) - total_core_credit)-((conventional_ending_balance + ifb_ending_balance + total_ats_credit) - total_ats_debit)))
+							.replace("$", ""));
+				}
 				cell.setCellStyle(style);
+				CellUtil.setVerticalAlignment(cell, VerticalAlignment.CENTER);
+				if (col == 4)
+					CellUtil.setAlignment(cell, HorizontalAlignment.RIGHT);
 			}
 
 			rowIdx++;
