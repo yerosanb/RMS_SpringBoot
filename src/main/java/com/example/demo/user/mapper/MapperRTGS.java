@@ -728,7 +728,7 @@ public interface MapperRTGS {
 				"union \r\n" + //
 				"select \r\n" + //
 				"\tdistinct sac.id, sac.amount, sac.branch_code, sac.additional_information, sac.value_date from sos_awb_core sac, sos_matched sm, sos_nbe_ats sna \r\n" + //
-				"\t\twhere sac.dr_cr = 'DR' and sac.upload_date <= #{date} and ((sna.id = sm.sos_nbe_ats_id and sac.match_id = sm.match_id and sna.upload_date >= #{date})) and sac.additional_information != 'ECX Interbank' and sac.status = 1 and sac.availability = 1  \r\n" + //
+				"\t\twhere sac.dr_cr = 'DR' and sac.upload_date <= #{date} and ((sna.id = sm.sos_nbe_ats_id and sac.match_id = sm.match_id and sna.upload_date > #{date})) and sac.additional_information != 'ECX Interbank' and sac.status = 1 and sac.availability = 1  \r\n" + //
 				"\t\tand sm.status = 1 and sm.availability = 1  and sna.status = 1 and sna.availability = 1 \r\n" + //
 				"union \r\n" + //
 				"select \r\n" + //
@@ -934,7 +934,7 @@ public interface MapperRTGS {
 				"union \r\n" + //
 				"select \r\n" + //
 				"\tdistinct sac.id, sac.amount, sac.branch_code, sac.additional_information, sac.value_date from sos_awb_core sac, sos_matched sm, sos_nbe_ats sna \r\n" + //
-				"\t\twhere sac.dr_cr = 'CR' and sac.upload_date <= #{date} and ((sna.id = sm.sos_nbe_ats_id and sac.match_id = sm.match_id and sna.upload_date >= #{date})) and sac.additional_information != 'ECX Interbank' and sac.status = 1 and sac.availability = 1  \r\n" + //
+				"\t\twhere sac.dr_cr = 'CR' and sac.upload_date <= #{date} and ((sna.id = sm.sos_nbe_ats_id and sac.match_id = sm.match_id and sna.upload_date > #{date})) and sac.additional_information != 'ECX Interbank' and sac.status = 1 and sac.availability = 1  \r\n" + //
 				"\t\tand sm.status = 1 and sm.availability = 1  and sna.status = 1 and sna.availability = 1 \r\n" + //
 				"union \r\n" + //
 				"select \r\n" + //
