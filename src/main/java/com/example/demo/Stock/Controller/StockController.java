@@ -23,10 +23,10 @@ public class StockController {
 		return APIResponse.response(stockService.get_stock_mms_for_recon_auto(request, datas));
 	}
 
-	@RequestMapping(value = "get_core_for_recon_auto", method = RequestMethod.POST, produces = "application/json")
-	public ResponseEntity<Object> get_fixed_core_for_recon_auto_computer(HttpServletRequest request,
+	@RequestMapping(value = "get__for_recon_auto", method = RequestMethod.POST, produces = "application/json")
+	public ResponseEntity<Object> get_fixed__for_recon_auto_computer(HttpServletRequest request,
 			@RequestBody() String datas) {
-		return APIResponse.response(stockService.get_fixed_core_for_recon_auto(request, datas));
+		return APIResponse.response(stockService.get_fixed__for_recon_auto(request, datas));
 	}
 	
 	@RequestMapping(value = "match_single_transaction", method = RequestMethod.POST, produces = "application/json")
@@ -47,10 +47,10 @@ public class StockController {
 		return APIResponse.response(stockService.get_stock_mms_matched_for_view(request, datas));
 	}
 
-	@RequestMapping(value = "get_stock_core_matched_for_view", method = RequestMethod.POST, produces = "application/json")
-	public ResponseEntity<Object> get_stock_core_matched_for_view(HttpServletRequest request,
+	@RequestMapping(value = "get_stock__matched_for_view", method = RequestMethod.POST, produces = "application/json")
+	public ResponseEntity<Object> get_stock__matched_for_view(HttpServletRequest request,
 			@RequestBody() String datas) {
-		return APIResponse.response(stockService.get_stock_core_matched_for_view(request, datas));
+		return APIResponse.response(stockService.get_stock__matched_for_view(request, datas));
 	}
 	@RequestMapping(value = "get_stock_mms_unmatched_for_view", method = RequestMethod.POST, produces = "application/json")
 	public ResponseEntity<Object> get_stock_mms_unmatched_for_view(HttpServletRequest request,
@@ -58,22 +58,22 @@ public class StockController {
 		return APIResponse.response(stockService.get_stock_mms_unmatched_for_view(request, datas));
 	}
 
-	@RequestMapping(value = "get_stock_core_unmatched_for_view", method = RequestMethod.POST, produces = "application/json")
-	public ResponseEntity<Object> get_stock_core_unmatched_for_view(HttpServletRequest request,
+	@RequestMapping(value = "get_stock__unmatched_for_view", method = RequestMethod.POST, produces = "application/json")
+	public ResponseEntity<Object> get_stock__unmatched_for_view(HttpServletRequest request,
 			@RequestBody() String datas) {
-		return APIResponse.response(stockService.get_stock_core_unmatched_for_view(request, datas));
+		return APIResponse.response(stockService.get_stock__unmatched_for_view(request, datas));
 	}
-	@RequestMapping(value = "get_stock_core_reversal/{c_date}", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Object> get_stock_core_reversal(HttpServletRequest request,
+	@RequestMapping(value = "get_stock__reversal/{c_date}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Object> get_stock__reversal(HttpServletRequest request,
 			@PathVariable String c_date) {
-		return APIResponse.response(stockService.get_stock_core_reversal(request, c_date));
+		return APIResponse.response(stockService.get_stock__reversal(request, c_date));
 	}
 	
 //	added by Demeke
-	@RequestMapping(value = "get_stock_core_for_recon_manual", method = RequestMethod.POST, produces = "application/json")
-	public ResponseEntity<Object> get_stock_core_for_recon_manual(HttpServletRequest request,
+	@RequestMapping(value = "get_stock__for_recon_manual", method = RequestMethod.POST, produces = "application/json")
+	public ResponseEntity<Object> get_stock__for_recon_manual(HttpServletRequest request,
 			@RequestBody() String datas) {
-		return APIResponse.response(stockService.get_stock_core_for_recon_manual(request, datas));
+		return APIResponse.response(stockService.get_stock__for_recon_manual(request, datas));
 	}
 	
 	@RequestMapping(value = "get_stock_mms_for_recon_manual", method = RequestMethod.POST, produces = "application/json")
@@ -111,10 +111,10 @@ public class StockController {
 		return APIResponse.response(stockService.get_stock_mms_matched_with_reason(request, datas));
 	}
 
-	@RequestMapping(value = "get_stock_core_matched_with_reason", method = RequestMethod.POST, produces = "application/json")
-	public ResponseEntity<Object> get_stock_core_matched_with_reason(HttpServletRequest request,
+	@RequestMapping(value = "get_stock__matched_with_reason", method = RequestMethod.POST, produces = "application/json")
+	public ResponseEntity<Object> get_stock__matched_with_reason(HttpServletRequest request,
 			@RequestBody() String datas) {
-		return APIResponse.response(stockService.get_stock_core_matched_with_reason(request, datas));
+		return APIResponse.response(stockService.get_stock__matched_with_reason(request, datas));
 	}
 //	added by Demeke
 
@@ -126,13 +126,13 @@ public class StockController {
 	public ResponseEntity<Boolean> unmatch_reversal_transactions(HttpServletRequest request, @RequestBody() String data_ids) {
 		return APIResponse.response(stockService.unmatch_reversal_transactions(request, data_ids));
 	}
-	@RequestMapping(value = "get-deleted-stock-core", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Object> get_edited_stock_core(HttpServletRequest request) {
-		return APIResponse.response(stockService.get_edited_stock_core(request));
+	@RequestMapping(value = "get-deleted-stock-", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Object> get_edited_stock_(HttpServletRequest request) {
+		return APIResponse.response(stockService.get_edited_stock_(request));
 	}
-	@RequestMapping(value = "get-edited-detail-stock-core/{id}", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Object> get_edited_detail_stock_core(HttpServletRequest request, @PathVariable("id") Long id) {
-		return APIResponse.response(stockService.get_edited_detail_stock_core(request, id));
+	@RequestMapping(value = "get-edited-detail-stock-/{id}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Object> get_edited_detail_stock_(HttpServletRequest request, @PathVariable("id") Long id) {
+		return APIResponse.response(stockService.get_edited_detail_stock_(request, id));
 	}
 	
 	@RequestMapping(value = "get-deleted-stock-mms", method = RequestMethod.GET, produces = "application/json")

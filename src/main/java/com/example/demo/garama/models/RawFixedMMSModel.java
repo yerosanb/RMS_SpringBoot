@@ -22,11 +22,11 @@ public class RawFixedMMSModel {
 	private String availability;
 	private String match_status;
 	private String match_id;
-	private Long core_id;
+	private Long _id;
 	RawFixedMMSModel(Long id, String created_date, String asset_id, String asset_description, String tag_number,
 			String branch_name, Long quantity, String grv_number, String giv_number, double original_cost,
 			Long book_value, String main_pg, String old_main_pg, String status, String availability,
-			String match_status, String match_id, Long core_id) {
+			String match_status, String match_id, Long _id) {
 		super();
 		this.id = id;
 		this.created_date = created_date;
@@ -45,7 +45,7 @@ public class RawFixedMMSModel {
 		this.availability = availability;
 		this.match_status = match_status;
 		this.match_id = match_id;
-		this.core_id=core_id;
+		this._id=_id;
 		
 	}
 	public Long getId() {
@@ -150,11 +150,11 @@ public class RawFixedMMSModel {
 	public void setMatch_id(String match_id) {
 		this.match_id = match_id;
 	}
-	public Long getCore_id() {
-		return core_id;
+	public Long get_id() {
+		return _id;
 	}
-	public void setCore_id(Long core_id) {
-		this.core_id = core_id;
+	public void set_id(Long _id) {
+		this._id = _id;
 	}
 	
 	

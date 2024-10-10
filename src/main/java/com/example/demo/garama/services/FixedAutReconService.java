@@ -18,15 +18,15 @@ import com.example.demo.garama.mapper.FixedAutReconMapper;
 import com.example.demo.garama.models.FixedMmsDisposed;
 import com.example.demo.garama.models.FixedMmsRemoved;
 import com.example.demo.garama.models.FixedMmsWaiting;
-import com.example.demo.garama.models.RawFixedCoreModel;
+import com.example.demo.garama.models.RawFixedModel;
 import com.example.demo.garama.models.RawFixedMMSModel;
 import com.example.demo.garama.models.UnMatchFixed;
-import com.example.demo.garama.models.UnMatchFixedCoreModel;
-import com.example.demo.garama.models.fixedCoreReversal;
+import com.example.demo.garama.models.UnMatchFixedModel;
+import com.example.demo.garama.models.fixedReversal;
 import com.example.demo.user.mapper.MapperAccount;
 import com.example.demo.user.mapper.MapperRTGS;
-import com.example.demo.user.model.File_rtgs_awb_core;
-import com.example.demo.user.model.File_rtgs_nbe_ats;
+import com.example.demo.user.model.File_rtgs__;
+import com.example.demo.user.model.File_rtgs__ats;
 import com.example.demo.user.model.Transactionhistory;
 import com.example.demo.utils.Utils;
 import com.google.gson.JsonObject;
@@ -146,13 +146,13 @@ public class FixedAutReconService {
 
     }
 
-    public List<RawFixedCoreModel> get_fixed_core_for_recon_auto_computer(HttpServletRequest request, String recon_date) {
+    public List<RawFixedModel> get_fixed__for_recon_auto_computer(HttpServletRequest request, String recon_date) {
         try {
-            if (util.isPermitted(request, "FixedAsset", "get_fixed_core_for_recon_auto")) {
-                util.registerActivity(request, "Get all Core transactions",
-                        "Get Core transactions to match automatically");
+            if (util.isPermitted(request, "FixedAsset", "get_fixed__for_recon_auto")) {
+                util.registerActivity(request, "Get all  transactions",
+                        "Get  transactions to match automatically");
                 System.out.println("hello world: " + recon_date);
-                List<RawFixedCoreModel> a = fixedMapper.get_fixed_core_for_recon_auto_computer(
+                List<RawFixedModel> a = fixedMapper.get_fixed__for_recon_auto_computer(
                         accountMapper.getUserAccountId(util.get_user_id(request)),
                         recon_date);
                 System.out.println("size: " + a.size());
@@ -165,33 +165,13 @@ public class FixedAutReconService {
             throw new ExceptionsList(e);
         }
     }
-    public List<RawFixedCoreModel> get_fixed_core_for_recon_auto_equipment(HttpServletRequest request, String recon_date) {
+    public List<RawFixedModel> get_fixed__for_recon_auto_equipment(HttpServletRequest request, String recon_date) {
         try {
-            if (util.isPermitted(request, "FixedAsset", "get_fixed_core_for_recon_auto")) {
-                util.registerActivity(request, "Get all Core transactions",
-                        "Get Core transactions to match automatically");
+            if (util.isPermitted(request, "FixedAsset", "get_fixed__for_recon_auto")) {
+                util.registerActivity(request, "Get all  transactions",
+                        "Get  transactions to match automatically");
                 System.out.println("hello world: " + recon_date);
-                List<RawFixedCoreModel> a = fixedMapper.get_fixed_core_for_recon_auto_equipment(
-                        accountMapper.getUserAccountId(util.get_user_id(request)),
-                        recon_date);
-                System.out.println("size: " + a.size());
-                return a;
-            } else {
-                System.out.println("No user does not have permission.");
-                return null;
-            }
-        } catch (Exception e) {
-            throw new ExceptionsList(e);
-        }
-    }
-    
-    public List<RawFixedCoreModel> get_fixed_core_for_recon_auto_vehicle(HttpServletRequest request, String recon_date) {
-        try {
-            if (util.isPermitted(request, "FixedAsset", "get_fixed_core_for_recon_auto")) {
-                util.registerActivity(request, "Get all Core transactions",
-                        "Get Core transactions to match automatically");
-                System.out.println("hello world: " + recon_date);
-                List<RawFixedCoreModel> a = fixedMapper.get_fixed_core_for_recon_auto_vehicle(
+                List<RawFixedModel> a = fixedMapper.get_fixed__for_recon_auto_equipment(
                         accountMapper.getUserAccountId(util.get_user_id(request)),
                         recon_date);
                 System.out.println("size: " + a.size());
@@ -205,13 +185,33 @@ public class FixedAutReconService {
         }
     }
     
-    public List<RawFixedCoreModel> get_fixed_core_for_recon_auto_furniture(HttpServletRequest request, String recon_date) {
+    public List<RawFixedModel> get_fixed__for_recon_auto_vehicle(HttpServletRequest request, String recon_date) {
         try {
-            if (util.isPermitted(request, "FixedAsset", "get_fixed_core_for_recon_auto")) {
-                util.registerActivity(request, "Get all Core transactions",
-                        "Get Core transactions to match automatically");
+            if (util.isPermitted(request, "FixedAsset", "get_fixed__for_recon_auto")) {
+                util.registerActivity(request, "Get all  transactions",
+                        "Get  transactions to match automatically");
                 System.out.println("hello world: " + recon_date);
-                List<RawFixedCoreModel> a = fixedMapper.get_fixed_core_for_recon_auto_furniture(
+                List<RawFixedModel> a = fixedMapper.get_fixed__for_recon_auto_vehicle(
+                        accountMapper.getUserAccountId(util.get_user_id(request)),
+                        recon_date);
+                System.out.println("size: " + a.size());
+                return a;
+            } else {
+                System.out.println("No user does not have permission.");
+                return null;
+            }
+        } catch (Exception e) {
+            throw new ExceptionsList(e);
+        }
+    }
+    
+    public List<RawFixedModel> get_fixed__for_recon_auto_furniture(HttpServletRequest request, String recon_date) {
+        try {
+            if (util.isPermitted(request, "FixedAsset", "get_fixed__for_recon_auto")) {
+                util.registerActivity(request, "Get all  transactions",
+                        "Get  transactions to match automatically");
+                System.out.println("hello world: " + recon_date);
+                List<RawFixedModel> a = fixedMapper.get_fixed__for_recon_auto_furniture(
                         accountMapper.getUserAccountId(util.get_user_id(request)),
                         recon_date);
                 System.out.println("size: " + a.size());
@@ -265,9 +265,9 @@ public class FixedAutReconService {
                          rtgsMapper.updateEditReason(current_id, matched_data_id, type, id_1[i]);
                     }
                     for (int i = 0; i < id_2.length; i++) {
-                        type = "fixed_core";
+                        type = "fixed_";
                         System.out.println(id_2[i]);
-                        current_id = fixedMapper.moveCoreFixedData(id_2[i], match_id);
+                        current_id = fixedMapper.moveFixedData(id_2[i], match_id);
                         rtgsMapper.updateEditReason(current_id, matched_data_id, type, id_2[i]);
                     }
 
@@ -305,7 +305,7 @@ public class FixedAutReconService {
                 util.registerActivity(request, "match all transactions", "match all transactions automatically");
                 JsonObject id_data_object = JsonParser.parseString(data_ids).getAsJsonObject();
                 String[] type = id_data_object.get("type").getAsString().split(",");
-                String[] core_id = id_data_object.get("core_id").getAsString().split(",");
+                String[] _id = id_data_object.get("_id").getAsString().split(",");
                 String[] id_1_string = id_data_object.get("id_1").getAsString().split(",");
                 String[] id_2_string = id_data_object.get("id_2").getAsString().split(",");
                 Long[] id_1 = new Long[id_1_string.length];
@@ -334,11 +334,11 @@ public class FixedAutReconService {
  
                     rtgsMapper.updateEditReason(current_id, matched_data_id, typee, id_1[i]);
 
-                    current_id = fixedMapper.moveCoreFixedData(Long.parseLong(core_id[i]), match_id);
-                    typee = "fixed_core";
-                    rtgsMapper.updateEditReason(current_id, matched_data_id, typee, Long.parseLong(core_id[i]));
+                    current_id = fixedMapper.moveFixedData(Long.parseLong(_id[i]), match_id);
+                    typee = "fixed_";
+                    rtgsMapper.updateEditReason(current_id, matched_data_id, typee, Long.parseLong(_id[i]));
 
-                    //// Long id_2_2 = rtgsMapper.getMatchedIdsFromCoreByAtsId(id_1[i],
+                    //// Long id_2_2 = rtgsMapper.getMatchedIdsFromByAtsId(id_1[i],
                     //// recon_date.replace("-", ""));
 
                 }
@@ -369,11 +369,11 @@ public class FixedAutReconService {
         }
     }
 
-    public List<UnMatchFixedCoreModel> get_fixed_core_for_view(HttpServletRequest request, String matched_date) {
+    public List<UnMatchFixedModel> get_fixed__for_view(HttpServletRequest request, String matched_date) {
         try {
-            if (util.isPermitted(request, "FixedAsset", "get_fixed_core_matched")) {
-                util.registerActivity(request, "Get fixed core matched trnsaction", "-");
-                return fixedMapper.get_fixed_core_for_view(matched_date.replace("-", ""));
+            if (util.isPermitted(request, "FixedAsset", "get_fixed__matched")) {
+                util.registerActivity(request, "Get fixed  matched trnsaction", "-");
+                return fixedMapper.get_fixed__for_view(matched_date.replace("-", ""));
             } else {
                 System.out.println("No user does not have permission.");
                 return null;
@@ -410,19 +410,19 @@ public class FixedAutReconService {
         }
     }
 
-    public List<Transactionhistory> get_fixed_core_for_view_reason(HttpServletRequest request, String matched_date) {
+    public List<Transactionhistory> get_fixed__for_view_reason(HttpServletRequest request, String matched_date) {
         try {
-            if (util.isPermitted(request, "FixedAsset", "get_fixed_core_for_view_reason")) {
+            if (util.isPermitted(request, "FixedAsset", "get_fixed__for_view_reason")) {
                 util.registerActivity(request, "Get fixed mms matched trnsaction", "-");
 
 
                 if ( matched_date != "") {
-                    return fixedMapper.get_fixed_core_for_view_reason(Integer.parseInt(matched_date.replace("-", "")));
+                    return fixedMapper.get_fixed__for_view_reason(Integer.parseInt(matched_date.replace("-", "")));
 
                 } else {
                 
 
-                    return fixedMapper.get_fixed_core_for_view_reason(0);
+                    return fixedMapper.get_fixed__for_view_reason(0);
 
                 }
             }else{
@@ -464,9 +464,9 @@ public class FixedAutReconService {
                 String type = "";
                 Long matched_data_id = null;
                 for (int i = 0; i < id_2.length; i++) {
-                    System.out.println("Core id=" + id_2[i]);
-                    current_id = fixedMapper.moveFixedCoreMatched(id_2[i]);
-                    type = "data_fixed_core";
+                    System.out.println(" id=" + id_2[i]);
+                    current_id = fixedMapper.moveFixedMatched(id_2[i]);
+                    type = "data_fixed_";
                     rtgsMapper.updateEditReason(current_id, matched_data_id, type, id_2[i]);
                     System.out.println("edite reason updated after unmatche id----->" + id_2[i]);
                 }
@@ -510,18 +510,18 @@ public class FixedAutReconService {
         }
     }
 
-    public List<RawFixedCoreModel> get_unmatched_fixed_core_for_view(HttpServletRequest request,
+    public List<RawFixedModel> get_unmatched_fixed__for_view(HttpServletRequest request,
             String matched_date) {
         try {
-            if (util.isPermitted(request, "FixedAsset", "get_fixed_core_matched")) {
-                util.registerActivity(request, "Get fixed core matched trnsaction", "-");
+            if (util.isPermitted(request, "FixedAsset", "get_fixed__matched")) {
+                util.registerActivity(request, "Get fixed  matched trnsaction", "-");
                 // return
-                // fixedMapper.get_unmatched_fixed_core_for_view(matched_date.replace("-", ""));
-                List<RawFixedCoreModel> fixedCoreList = fixedMapper.get_unmatched_fixed_core_for_view();
+                // fixedMapper.get_unmatched_fixed__for_view(matched_date.replace("-", ""));
+                List<RawFixedModel> fixedList = fixedMapper.get_unmatched_fixed__for_view();
 
-                return fixedCoreList;
+                return fixedList;
             } else {
-                System.out.println("No user does not have permission in get_raw_fixed_core_for_recon");
+                System.out.println("No user does not have permission in get_raw_fixed__for_recon");
                 return null;
             }
         } catch (Exception e) {
@@ -547,12 +547,12 @@ public class FixedAutReconService {
 	}
 
     
-  public List<RawFixedCoreModel> get_computer_core_unmatched_for_view(HttpServletRequest request, String recon_date) {
+  public List<RawFixedModel> get_computer__unmatched_for_view(HttpServletRequest request, String recon_date) {
 
 		try {
-			if (util.isPermitted(request, "FixedAsset", "get_computer_core_fixed_unmatch")) {
-				util.registerActivity(request, "Get computer core fixed unmatch transaction ", "-");
-				return fixedMapper.get_computer_core_unmatched_for_view(recon_date);
+			if (util.isPermitted(request, "FixedAsset", "get_computer__fixed_unmatch")) {
+				util.registerActivity(request, "Get computer  fixed unmatch transaction ", "-");
+				return fixedMapper.get_computer__unmatched_for_view(recon_date);
 
 			} else {
 				System.out.println("No user does not have permission.");
@@ -581,13 +581,13 @@ public class FixedAutReconService {
 	}
 
   
-public List<RawFixedCoreModel> get_furniture_core_unmatched_for_view(HttpServletRequest request, String recon_date) {
+public List<RawFixedModel> get_furniture__unmatched_for_view(HttpServletRequest request, String recon_date) {
 
 		try {
-			if (util.isPermitted(request, "FixedAsset", "get_Furniture_core_fixed_unmatch")) {
-				util.registerActivity(request, "Get furniture core fixed unmatch transaction ", "-");
+			if (util.isPermitted(request, "FixedAsset", "get_Furniture__fixed_unmatch")) {
+				util.registerActivity(request, "Get furniture  fixed unmatch transaction ", "-");
 				System.out.println("the date----->: " + recon_date.replace("-", ""));
-				return fixedMapper.get_furniture_core_unmatched_for_view(recon_date);
+				return fixedMapper.get_furniture__unmatched_for_view(recon_date);
 
 			} else {
 				System.out.println("No user does not have permission.");
@@ -617,13 +617,13 @@ public List<Raw_fixed_mms> get_equipment_mms_unmatched_for_view(HttpServletReque
 }
 
 
-public List<RawFixedCoreModel> get_equipment_core_unmatched_for_view(HttpServletRequest request, String recon_date) {
+public List<RawFixedModel> get_equipment__unmatched_for_view(HttpServletRequest request, String recon_date) {
 
 	try {
-		if (util.isPermitted(request, "FixedAsset", "get_equipment_core_fixed_unmatch")) {
-			util.registerActivity(request, "Get equipment core fixed unmatch transaction ", "-");
+		if (util.isPermitted(request, "FixedAsset", "get_equipment__fixed_unmatch")) {
+			util.registerActivity(request, "Get equipment  fixed unmatch transaction ", "-");
 			System.out.println("the date: " + recon_date.replace("-", ""));
-			return fixedMapper.get_equipment_core_unmatched_for_view(recon_date);
+			return fixedMapper.get_equipment__unmatched_for_view(recon_date);
 
 		} else {
 			System.out.println("No user does not have permission.");
@@ -651,13 +651,13 @@ public List<Raw_fixed_mms> get_vehicle_mms_unmatched_for_view(HttpServletRequest
 	}
 }
 
-public List<RawFixedCoreModel> get_vehicle_core_unmatched_for_view(HttpServletRequest request, String recon_date) {
+public List<RawFixedModel> get_vehicle__unmatched_for_view(HttpServletRequest request, String recon_date) {
 
 	try {
-		if (util.isPermitted(request, "FixedAsset", "get_vehicle_core_fixed_unmatch")) {
-			util.registerActivity(request, "Get motor vehicle core unmatch transaction ", "-");
+		if (util.isPermitted(request, "FixedAsset", "get_vehicle__fixed_unmatch")) {
+			util.registerActivity(request, "Get motor vehicle  unmatch transaction ", "-");
 			System.out.println("the date: " + recon_date.replace("-", ""));
-			return fixedMapper.get_vehicle_core_unmatched_for_view(recon_date);
+			return fixedMapper.get_vehicle__unmatched_for_view(recon_date);
 
 		} else {
 			System.out.println("No user does not have permission.");
@@ -685,12 +685,12 @@ public List<Raw_fixed_mms> get_computer_mms_matched_for_view(HttpServletRequest 
 }
 
 
-public List<UnMatchFixedCoreModel> get_computer_core_matched_for_view(HttpServletRequest request, String recon_date) {
+public List<UnMatchFixedModel> get_computer__matched_for_view(HttpServletRequest request, String recon_date) {
 
 	try {
-		if (util.isPermitted(request, "FixedAsset", "get_computer_core_fixed_matched")) {
-			util.registerActivity(request, "Get computer core fixed match transaction ", "-");
-			return fixedMapper.get_computer_core_matched_for_view(Integer.parseInt(recon_date.replace("-", "")));
+		if (util.isPermitted(request, "FixedAsset", "get_computer__fixed_matched")) {
+			util.registerActivity(request, "Get computer  fixed match transaction ", "-");
+			return fixedMapper.get_computer__matched_for_view(Integer.parseInt(recon_date.replace("-", "")));
 
 		} else {
 			System.out.println("No user does not have permission.");
@@ -719,13 +719,13 @@ public List<Raw_fixed_mms> get_furniture_mms_matched_for_view(HttpServletRequest
 }
 
 
-public List<UnMatchFixedCoreModel> get_furniture_core_matched_for_view(HttpServletRequest request, String recon_date) {
+public List<UnMatchFixedModel> get_furniture__matched_for_view(HttpServletRequest request, String recon_date) {
 
 	try {
-		if (util.isPermitted(request, "FixedAsset", "get_Furniture_core_fixed_matched")) {
-			util.registerActivity(request, "Get furniture core fixed match transaction ", "-");
+		if (util.isPermitted(request, "FixedAsset", "get_Furniture__fixed_matched")) {
+			util.registerActivity(request, "Get furniture  fixed match transaction ", "-");
 			System.out.println("the date: " + recon_date.replace("-", ""));
-			return fixedMapper.get_furniture_core_matched_for_view(Integer.parseInt(recon_date.replace("-", "")));
+			return fixedMapper.get_furniture__matched_for_view(Integer.parseInt(recon_date.replace("-", "")));
 
 		} else {
 			System.out.println("No user does not have permission.");
@@ -755,13 +755,13 @@ try {
 }
 
 
-public List<UnMatchFixedCoreModel> get_equipment_core_matched_for_view(HttpServletRequest request, String recon_date) {
+public List<UnMatchFixedModel> get_equipment__matched_for_view(HttpServletRequest request, String recon_date) {
 
 try {
-	if (util.isPermitted(request, "FixedAsset", "get_equipment_core_fixed_matched")) {
-		util.registerActivity(request, "Get equipment core fixed match transaction ", "-");
+	if (util.isPermitted(request, "FixedAsset", "get_equipment__fixed_matched")) {
+		util.registerActivity(request, "Get equipment  fixed match transaction ", "-");
 		System.out.println("the date: " + recon_date.replace("-", ""));
-		return fixedMapper.get_equipment_core_matched_for_view(Integer.parseInt(recon_date.replace("-", "")));
+		return fixedMapper.get_equipment__matched_for_view(Integer.parseInt(recon_date.replace("-", "")));
 
 	} else {
 		System.out.println("No user does not have permission.");
@@ -789,13 +789,13 @@ try {
 }
 }
 
-public List<UnMatchFixedCoreModel> get_vehicle_core_matched_for_view(HttpServletRequest request, String recon_date) {
+public List<UnMatchFixedModel> get_vehicle__matched_for_view(HttpServletRequest request, String recon_date) {
 
 try {
-	if (util.isPermitted(request, "FixedAsset", "get_vehicle_core_fixed_matched")) {
-		util.registerActivity(request, "Get motor vehicle core match transaction ", "-");
+	if (util.isPermitted(request, "FixedAsset", "get_vehicle__fixed_matched")) {
+		util.registerActivity(request, "Get motor vehicle  match transaction ", "-");
 		System.out.println("the date: " + recon_date.replace("-", ""));
-		return fixedMapper.get_vehicle_core_matched_for_view(Integer.parseInt(recon_date.replace("-", "")));
+		return fixedMapper.get_vehicle__matched_for_view(Integer.parseInt(recon_date.replace("-", "")));
 
 	} else {
 		System.out.println("No user does not have permission.");
@@ -865,11 +865,11 @@ public List<FixedMmsRemoved> View_mms_removed(HttpServletRequest request, String
 	}
 }
 
-public List<fixedCoreReversal> get_coreReversal_for_view(HttpServletRequest request, String matched_date) {
+public List<fixedReversal> get_Reversal_for_view(HttpServletRequest request, String matched_date) {
 	try {
-		if (util.isPermitted(request, "FixedAsset", "get_vehicle_core_fixed_matched")) {
+		if (util.isPermitted(request, "FixedAsset", "get_vehicle__fixed_matched")) {
 			util.registerActivity(request, "view matched transactions reversaly  ", "-");
-			return fixedMapper.get_coreReversal_for_view(matched_date.replace("-", ""));
+			return fixedMapper.get_Reversal_for_view(matched_date.replace("-", ""));
 		} else {
 			System.out.println("No user does not have permission.");
 			return null;
@@ -879,10 +879,10 @@ public List<fixedCoreReversal> get_coreReversal_for_view(HttpServletRequest requ
 	}
 }
 
-public Boolean unmatch_core_reversal_transactions(HttpServletRequest request, String data_ids) {
+public Boolean unmatch__reversal_transactions(HttpServletRequest request, String data_ids) {
 	try {
 		if (util.isPermitted(request, "FixedAsset", "unmatch_transactions_fixed")) {
-			util.registerActivity(request, "unmatch transactions reversaly matched on core", "-");
+			util.registerActivity(request, "unmatch transactions reversaly matched on ", "-");
 			JsonObject id_data_object = JsonParser.parseString(data_ids).getAsJsonObject();
 			String[] id_2_string = id_data_object.get("id_2").getAsString().split(",");
 			Long[] id_2 = new Long[id_2_string.length];
@@ -898,7 +898,7 @@ public Boolean unmatch_core_reversal_transactions(HttpServletRequest request, St
 			String type = "";
 			Long matched_data_id = null;
 			for (int i = 0; i < id_2.length; i++) {
-				fixedMapper.moveCoreReversalMatched(id_2[i]);
+				fixedMapper.moveReversalMatched(id_2[i]);
 			}
 
 			return true;

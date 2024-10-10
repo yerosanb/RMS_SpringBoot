@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Select;
 
 import com.example.demo.approver.model.Remark;
 import com.example.demo.user.model.AtsBeginningEnding;
-import com.example.demo.user.model.CoreBeginningEnding;
+import com.example.demo.user.model.BeginningEnding;
 
 @Mapper
 public interface ApproverDashboardMapper {

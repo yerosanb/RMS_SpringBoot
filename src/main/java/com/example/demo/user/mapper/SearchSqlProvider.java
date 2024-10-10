@@ -336,7 +336,7 @@ public class SearchSqlProvider {
 		return sql_all;
 	}
 	
-	public String getStockCoreSearchQuery(@Param("min_amount") String min_amount, @Param("max_amount") String max_amount,
+	public String getStockSearchQuery(@Param("min_amount") String min_amount, @Param("max_amount") String max_amount,
 			@Param("reference") String reference, @Param("category") String category, @Param("source_branch") String source_branch,  
 			@Param("branch_code") String branch_code,@Param("min_upload_date") int min_upload_date,
 			@Param("max_upload_date") int max_upload_date, @Param("min_match_date") int min_match_date,
@@ -346,7 +346,7 @@ public class SearchSqlProvider {
  		SQL sql = new SQL().SELECT_DISTINCT(""	
 				+ "dp.id, dp.description, dp.amount, dp.dr_cr, dp.match_status, dp.transaction_reference,"
 				+ "dp.source_branch, dp.value_date, dp.posting_date, dp.account as stock_account_segment, dp.branch_name as branch_code")
-				.FROM("data_stock_core dp").WHERE("1 = 1");
+				.FROM("data_stock_ dp").WHERE("1 = 1");
  		
  		if (reference != "") {
 			System.out.println("from reference stockkkkkk: " + reference);
@@ -407,7 +407,7 @@ public class SearchSqlProvider {
 		SQL sql_payable_credit = new SQL().SELECT_DISTINCT(""
 				+ "dp.id, dp.description,dp.amount,dp.dr_cr,dp.match_status,dp.transaction_reference,"
 				+ "dp.source_branch,dp.value_date, dp.posting_date, dp.account as stock_account_segment, dp.branch_name as branch_code")
-				.FROM("stock_core dp, stock_matched pm").WHERE("1 = 1");
+				.FROM("stock_ dp, stock_matched pm").WHERE("1 = 1");
 		if (reference.trim() != "") {
 			System.out.println("from reference: " + reference);
 			sql_payable_credit.AND().WHERE("dp.description like '%' + #{reference} + '%'");

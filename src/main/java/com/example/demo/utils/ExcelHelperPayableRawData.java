@@ -37,8 +37,8 @@ import org.apache.poi.ss.util.CellUtil;
 import org.apache.poi.util.IOUtils;
 import org.springframework.stereotype.Component;
 
-import com.example.demo.user.model.File_rtgs_awb_core;
-import com.example.demo.user.model.File_rtgs_nbe_ats;
+import com.example.demo.user.model.File_rtgs__;
+import com.example.demo.user.model.File_rtgs__ats;
 import com.google.zxing.WriterException;
 
 @Component
@@ -51,7 +51,7 @@ public class ExcelHelperPayableRawData {
 			throws IOException, WriterException, ParseException {
 
 //		final String DIRECTORY_logo = System.getProperty("user.dir")
-//				+ "/src/main/resources/static/awash_logo/awash_logo_002.png";
+//				+ "/src/main/resources/static//_002.png";
 //		File file_path = new File(StringUtils.join(DIRECTORY_logo));
 //		if (!file_path.exists()) {
 //			file_path.mkdirs();
@@ -63,7 +63,7 @@ public class ExcelHelperPayableRawData {
 		cal.setTime(date2);
 		String monthName = new SimpleDateFormat("MMMM").format(cal.getTime());
 
-		String signature = "AWASH BANK RECONCCILIATION SYSTEM " + "Payable Raw Data" + monthName + " " + date2.getDate()
+		String signature = " RECONCCILIATION SYSTEM " + "Payable Raw Data" + monthName + " " + date2.getDate()
 				+ ", " + date2.toString().split(" ")[5];
 		byte[] image = new byte[0];
 		image = QRCodeGenerator.getQRCodeImage(signature, 300, 300);
@@ -86,7 +86,7 @@ public class ExcelHelperPayableRawData {
 	private static void insertLogoToCell(Workbook workbook, int rowNum, Drawing drawing) throws IOException {
 
 		final String DIRECTORY_logo = System.getProperty("user.dir")
-				+ "/src/main/resources/static/awash_logo/awash_logo_002.png";
+				+ "/src/main/resources/static//_002.png";
 		File file_path = new File(StringUtils.join(DIRECTORY_logo));
 		if (!file_path.exists()) {
 			file_path.mkdirs();
@@ -106,7 +106,7 @@ public class ExcelHelperPayableRawData {
 
 	}
 
-	public static ByteArrayInputStream tutorialsToExcelPayable(String date, List<File_rtgs_awb_core> Payable_raw_data_all,
+	public static ByteArrayInputStream tutorialsToExcelPayable(String date, List<File_rtgs__> Payable_raw_data_all,
 			double beginning_balance) throws ParseException, WriterException {
 
 		try (Workbook workbook = new HSSFWorkbook(); ByteArrayOutputStream out = new ByteArrayOutputStream();) {
@@ -180,7 +180,7 @@ public class ExcelHelperPayableRawData {
 			cellt.setCellStyle(cs);
 			CellUtil.setAlignment(cellt, HorizontalAlignment.CENTER);
 			CellUtil.setVerticalAlignment(cellt, VerticalAlignment.CENTER);
-			cellt.setCellValue("AWASH BANK R.M.S");
+			cellt.setCellValue(" R.M.S");
 
 //			Cell cell23 = titleRow.createCell(2);
 //			cell23.setCellValue("hollaa");
@@ -229,7 +229,7 @@ public class ExcelHelperPayableRawData {
 //			int counter = 1;
 			System.out.println("beginning balanceeeeeeeeeeeeeee" + Payable_raw_data_all.size());
 
-			for (File_rtgs_awb_core data_payable : Payable_raw_data_all) {
+			for (File_rtgs__ data_payable : Payable_raw_data_all) {
 				Row row = sheet.createRow(rowIdx++);
 				row.setHeight((short) (row.getHeight()));
 
@@ -298,7 +298,7 @@ public class ExcelHelperPayableRawData {
 //				Cell c5 = row.createCell(4);
 //				c5.setCellStyle(style2);
 //				CellUtil.setVerticalAlignment(c5, VerticalAlignment.CENTER);
-				// c5.setCellValue(data_core.getID());
+				// c5.setCellValue(data_.getID());
 //				c5.setCellValue("");
 			}
 
@@ -334,7 +334,7 @@ public class ExcelHelperPayableRawData {
 //			int rowIdx = 4;
 //			int rowNo = 1;
 
-//			for (File_rtgs_awb_core data_core :Payable_credit_data) {
+//			for (File_rtgs__ data_ :Payable_credit_data) {
 //				Row row = sheet.createRow(rowIdx++);
 //				row.setHeight((short) (row.getHeight()));
 //				
@@ -347,23 +347,23 @@ public class ExcelHelperPayableRawData {
 //				Cell c2 = row.createCell(1);
 //				c2.setCellStyle(style2);
 //				CellUtil.setVerticalAlignment(c2, VerticalAlignment.CENTER);
-//				c2.setCellValue(data_core.getValue_date());
+//				c2.setCellValue(data_.getValue_date());
 //				
 //				Cell c3 = row.createCell(2);
 //				c3.setCellStyle(style2);
 //				CellUtil.setVerticalAlignment(c3, VerticalAlignment.CENTER);
-//				c3.setCellValue(data_core.getAdditional_information());
+//				c3.setCellValue(data_.getAdditional_information());
 //				
 //				Cell c4 = row.createCell(3);
 //				c4.setCellStyle(style2);
 //				CellUtil.setVerticalAlignment(c4, VerticalAlignment.CENTER);
-//				c4.setCellValue(data_core.getAmount());
+//				c4.setCellValue(data_.getAmount());
 //				
 //				rowNo++;
 ////				Cell c5 = row.createCell(4);
 ////				c5.setCellStyle(style2);
 ////				CellUtil.setVerticalAlignment(c5, VerticalAlignment.CENTER);
-////				// c5.setCellValue(data_core.getID());
+////				// c5.setCellValue(data_.getID());
 ////				c5.setCellValue("");
 //			}
 
@@ -392,7 +392,7 @@ public class ExcelHelperPayableRawData {
 //				if (col == 0) {
 //					cell.setCellValue("Total Debit Balance");
 //				} else if (col == 4) {
-//					cell.setCellValue(NumberFormat.getCurrencyInstance().format(ats_ending_balance + total_core_debit)
+//					cell.setCellValue(NumberFormat.getCurrencyInstance().format(ats_ending_balance + total__debit)
 //							.replace("$", ""));
 //				}
 //				cell.setCellStyle(style);
@@ -416,7 +416,7 @@ public class ExcelHelperPayableRawData {
 
 //			rowIdx++;
 //			int counter = 1;
-//			for (File_rtgs_awb_core data_core : Payable_raw_data) {
+//			for (File_rtgs__ data_ : Payable_raw_data) {
 //				Row row = sheet.createRow(rowIdx++);
 //				row.setHeight((short) (row.getHeight()));
 //
@@ -429,21 +429,21 @@ public class ExcelHelperPayableRawData {
 //				Cell c2 = row.createCell(1);
 //				c2.setCellStyle(style2);
 //				CellUtil.setVerticalAlignment(c2, VerticalAlignment.CENTER);
-//				c2.setCellValue(data_core.getValue_date());
+//				c2.setCellValue(data_.getValue_date());
 //				Cell c3 = row.createCell(2);
 //				c3.setCellStyle(style2);
 //				CellUtil.setVerticalAlignment(c3, VerticalAlignment.CENTER);
-//				c3.setCellValue(data_core.getAdditional_information());
+//				c3.setCellValue(data_.getAdditional_information());
 //				Cell c4 = row.createCell(3);
 //				c4.setCellStyle(style2);
 //				CellUtil.setVerticalAlignment(c4, VerticalAlignment.CENTER);
-//				c4.setCellValue(data_core.getAmount());
+//				c4.setCellValue(data_.getAmount());
 //
 //				counter++;
 ////				Cell c5 = row.createCell(4);
 ////				c5.setCellStyle(style2);
 ////				CellUtil.setVerticalAlignment(c5, VerticalAlignment.CENTER);
-//				// c5.setCellValue(data_core.getID());
+//				// c5.setCellValue(data_.getID());
 ////				c5.setCellValue("");
 //			}
 
@@ -566,7 +566,7 @@ public class ExcelHelperPayableRawData {
 //			}
 //
 //			rowIdx++;
-//			for (File_rtgs_nbe_ats data_ats : ats_credit_data) {
+//			for (File_rtgs__ats data_ats : ats_credit_data) {
 //				Row row = sheet.createRow(rowIdx++);
 //				row.setHeight((short) (row.getHeight()));
 //				Cell c1 = row.createCell(0);
@@ -589,7 +589,7 @@ public class ExcelHelperPayableRawData {
 //				Cell c5 = row.createCell(4);
 //				c5.setCellStyle(style2);
 //				CellUtil.setVerticalAlignment(c5, VerticalAlignment.CENTER);
-//				// c5.setCellValue(data_core.getID());
+//				// c5.setCellValue(data_.getID());
 //				c5.setCellValue("");
 //			}
 //
@@ -614,7 +614,7 @@ public class ExcelHelperPayableRawData {
 //			for (int col = 0; col < HEADERs.length; col++) {
 //				Cell cell = row_12.createCell(col);
 //				if (col == 0) {
-//					cell.setCellValue("Less: Debit Entries in NBE");
+//					cell.setCellValue("Less: Debit Entries in ");
 //				} else if (col == 4) {
 //					cell.setCellValue(NumberFormat.getCurrencyInstance()
 //							.format(conventional_ending_balance + ifb_ending_balance + total_ats_credit)
@@ -627,7 +627,7 @@ public class ExcelHelperPayableRawData {
 //			}
 //
 //			rowIdx++;
-//			for (File_rtgs_nbe_ats data_ats : ats_debit_data) {
+//			for (File_rtgs__ats data_ats : ats_debit_data) {
 //				Row row = sheet.createRow(rowIdx++);
 //				row.setHeight((short) (row.getHeight()));
 //				Cell c1 = row.createCell(0);
@@ -650,7 +650,7 @@ public class ExcelHelperPayableRawData {
 //				Cell c5 = row.createCell(4);
 //				c5.setCellStyle(style2);
 //				CellUtil.setVerticalAlignment(c5, VerticalAlignment.CENTER);
-//				// c5.setCellValue(data_core.getID());
+//				// c5.setCellValue(data_.getID());
 //				c5.setCellValue("");
 //			}
 //
@@ -659,7 +659,7 @@ public class ExcelHelperPayableRawData {
 //			for (int col = 0; col < HEADERs.length; col++) {
 //				Cell cell = row_13.createCell(col);
 //				if (col == 0) {
-//					cell.setCellValue("Total Debit on NBE");
+//					cell.setCellValue("Total Debit on ");
 //				} else if (col == 3) {
 //					cell.setCellValue(NumberFormat.getCurrencyInstance().format(total_ats_debit).replace("$", ""));
 //				}

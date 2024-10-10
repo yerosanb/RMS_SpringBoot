@@ -1,13 +1,13 @@
 package com.example.demo.abebayehu.entity;
 
-public class Fixed_core_report {
+public class Fixed__report {
 	private Long id;
     private String transaction_date;
 	private String account_description;
 	private String naration;
 	private String account_name;
 	private String amount;
-	Fixed_core_report(Long id, String transaction_date, String account_description, String naration,
+	Fixed__report(Long id, String transaction_date, String account_description, String naration,
 			String account_name, String amount) {
 		super();
 		this.id = id;

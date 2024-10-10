@@ -21,18 +21,18 @@ import org.springframework.stereotype.Service;
 //import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.demo.user.model.File_rtgs_awb_core;
+import com.example.demo.user.model.File_rtgs__;
 import com.example.demo.utils.ExcelUtils;
 import com.example.demo.utils.Utils;
 
 @Service
-public class UploadExcelService_rtgs_awb_core {
+public class UploadExcelService_rtgs__ {
 
 	@Autowired
 	private Utils util;
 
 	// sheet name
-	static String sheet_name = "CORE";
+	static String sheet_name = "";
 	// public static String TYPE =
 	// "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 	public static String TYPE = "text/csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
@@ -51,7 +51,7 @@ public class UploadExcelService_rtgs_awb_core {
 		df.setMaximumFractionDigits(24);
 
 		Map<String, Object> resp = new HashMap<>();
-		List<File_rtgs_awb_core> awb_core_all = new ArrayList<>();
+		List<File_rtgs__> __all = new ArrayList<>();
 		Double beginningBallance_ifbb = 0d;
 		Double beginningBallance_con = 0d;
 		Double beginningBallance_ifb = 0d;
@@ -99,7 +99,7 @@ public class UploadExcelService_rtgs_awb_core {
 				} else {
 					Iterator<Cell> cellIterator = row.iterator();
 					int cellIndex = 0;
-					File_rtgs_awb_core awb_core = new File_rtgs_awb_core();
+					File_rtgs__ _ = new File_rtgs__();
 					boolean checker = true;
 					boolean last = true;
 					while (cellIterator.hasNext()) {
@@ -116,7 +116,7 @@ public class UploadExcelService_rtgs_awb_core {
 								last = false;
 							} else {
 								LocalDateTime datetime = LocalDateTime.parse(ExcelUtils.toValue(cell));
-								awb_core.setPosting_date(datetime.getYear()
+								_.setPosting_date(datetime.getYear()
 										+ (String.valueOf(datetime.getMonthValue()).length() == 1
 												? "0" + datetime.getMonthValue()
 												: String.valueOf(datetime.getMonthValue()))
@@ -134,7 +134,7 @@ public class UploadExcelService_rtgs_awb_core {
 							}
 							LocalDateTime datetime = LocalDateTime.parse(ExcelUtils.toValue(cell));
 
-							awb_core.setValue_date(datetime.getYear()
+							_.setValue_date(datetime.getYear()
 									+ (String.valueOf(datetime.getMonthValue()).length() == 1
 											? "0" + datetime.getMonthValue()
 											: String.valueOf(datetime.getMonthValue()))
@@ -145,19 +145,19 @@ public class UploadExcelService_rtgs_awb_core {
 						case 2 -> {
 							if (!checker)
 								continue;
-							awb_core.setAdditional_information(
+							_.setAdditional_information(
 									ExcelUtils.toValue(cell) == null ? "null" : ExcelUtils.toValue(cell).trim());
 						}
 						case 3 -> {
 							if (!checker)
 								continue;
-							awb_core.setTransaction_reference(
+							_.setTransaction_reference(
 									ExcelUtils.toValue(cell) == null ? "null" : ExcelUtils.toValue(cell).trim());
 						}
 						case 4 -> {
 							if (!checker)
 								continue;
-							awb_core.setBranch_code(
+							_.setBranch_code(
 									ExcelUtils.toValue(cell) == null ? "null" : ExcelUtils.toValue(cell).trim());
 						}
 						case 5 -> {
@@ -182,8 +182,8 @@ public class UploadExcelService_rtgs_awb_core {
 											.parseLong(df.format(cell.getNumericCellValue()).replace(".", "").trim())
 											/ Math.pow(10, (df.format(cell.getNumericCellValue()).length() - 1
 													- df.format(cell.getNumericCellValue()).indexOf("."))));
-								awb_core.setDr_cr("DR".trim());
-								awb_core.setAmount(Double.parseDouble(String.valueOf(cell.getNumericCellValue())));
+								_.setDr_cr("DR".trim());
+								_.setAmount(Double.parseDouble(String.valueOf(cell.getNumericCellValue())));
 							}
 						}
 						case 6 -> {
@@ -208,8 +208,8 @@ public class UploadExcelService_rtgs_awb_core {
 											.parseLong(df.format(cell.getNumericCellValue()).replace(".", "").trim())
 											/ Math.pow(10, (df.format(cell.getNumericCellValue()).length() - 1
 													- df.format(cell.getNumericCellValue()).indexOf("."))));
-								awb_core.setDr_cr("CR".trim());
-								awb_core.setAmount(Double.parseDouble(String.valueOf(cell.getNumericCellValue())));
+								_.setDr_cr("CR".trim());
+								_.setAmount(Double.parseDouble(String.valueOf(cell.getNumericCellValue())));
 							}
 						}
 						case 7 -> {
@@ -217,7 +217,7 @@ public class UploadExcelService_rtgs_awb_core {
 								continue;
 							// System.out.println("type: " + cell.getCellTypeEnum());
 							// System.out.println("value: " + ExcelUtils.toValue(cell));
-							awb_core.setBalance(Float.valueOf(String.valueOf(cell.getNumericCellValue())));
+							_.setBalance(Float.valueOf(String.valueOf(cell.getNumericCellValue())));
 							if (con)
 
 								endingBallance_con = Math.abs(cell.getNumericCellValue());
@@ -229,11 +229,11 @@ public class UploadExcelService_rtgs_awb_core {
 							else {
 								if(rowIndex == 1) {
 									if(beginningBallance_ifbb==0)
-									System.out.println("core-ifb-beginning  balance is equal to : " + cell.getCellType());
+									System.out.println("-ifb-beginning  balance is equal to : " + cell.getCellType());
 								}
-								System.out.println("core-ifb-beginning type: " + cell.getCellType());
-								System.out.println("core-ifb-beginning balance: " + ExcelUtils.toValue(cell));
-								// System.out.println("core-ifb-beginning balance: " +
+								System.out.println("-ifb-beginning type: " + cell.getCellType());
+								System.out.println("-ifb-beginning balance: " + ExcelUtils.toValue(cell));
+								// System.out.println("-ifb-beginning balance: " +
 								// cell.getNumericCellValue());
 								endingBallance_ifb = Math.abs(cell.getNumericCellValue());
 								// endingBallance_ifb = (Long
@@ -258,16 +258,16 @@ public class UploadExcelService_rtgs_awb_core {
 						}
 						cellIndex++;
 					}
-					awb_core.setAvailability("1".trim());
-					awb_core.setMatch_status("0".trim());
-					awb_core.setStatus("1".trim());
-					awb_core.setUpload_date(date);
+					_.setAvailability("1".trim());
+					_.setMatch_status("0".trim());
+					_.setStatus("1".trim());
+					_.setUpload_date(date);
 
-					//awb_core.setFile_id(file_id);
+					//_.setFile_id(file_id);
 
 
 					if (checker)
-						awb_core_all.add(awb_core);
+						__all.add(_);
 					checker = true;
 					last = true;
 				}
@@ -290,7 +290,7 @@ public class UploadExcelService_rtgs_awb_core {
 
 			// resp.put("businessDate", businessDate);
 			// resp.put("accountNumber", accountNumber);
-			resp.put("data", awb_core_all);
+			resp.put("data", __all);
 			resp.put("beginningBallance_con", beginningBallance_con);
 			resp.put("beginningBallance_ifb: ", beginningBallance_ifb);
 			resp.put("endingBallance_con", endingBallance_con);

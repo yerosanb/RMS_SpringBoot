@@ -29,24 +29,24 @@ public class FixedAssetController {
 
 	private FixedAssetService fixedAssetService;
 
-	@RequestMapping(value = "get_raw_fixed_core_for_recon_computer", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Object> get_raw_fixed_core_for_recon(HttpServletRequest request) {
-		return APIResponse.response(fixedAssetService.get_raw_fixed_core_for_recon_computer(request));
+	@RequestMapping(value = "get_raw_fixed__for_recon_computer", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Object> get_raw_fixed__for_recon(HttpServletRequest request) {
+		return APIResponse.response(fixedAssetService.get_raw_fixed__for_recon_computer(request));
 	}
 	
-	@RequestMapping(value = "get_raw_fixed_core_for_recon_equipment", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Object> get_raw_fixed_core_for_recon_equipment(HttpServletRequest request) {
-		return APIResponse.response(fixedAssetService.get_raw_fixed_core_for_recon_equipment(request));
+	@RequestMapping(value = "get_raw_fixed__for_recon_equipment", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Object> get_raw_fixed__for_recon_equipment(HttpServletRequest request) {
+		return APIResponse.response(fixedAssetService.get_raw_fixed__for_recon_equipment(request));
 	}
     
-	@RequestMapping(value = "get_raw_fixed_core_for_recon_vehicle", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Object> get_raw_fixed_core_for_recon_vehicle(HttpServletRequest request) {
-		return APIResponse.response(fixedAssetService.get_raw_fixed_core_for_recon_vehicle(request));
+	@RequestMapping(value = "get_raw_fixed__for_recon_vehicle", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Object> get_raw_fixed__for_recon_vehicle(HttpServletRequest request) {
+		return APIResponse.response(fixedAssetService.get_raw_fixed__for_recon_vehicle(request));
 	}
     	
-	@RequestMapping(value = "get_raw_fixed_core_for_recon_furniture", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Object> get_raw_fixed_core_for_recon_furniture(HttpServletRequest request) {
-		return APIResponse.response(fixedAssetService.get_raw_fixed_core_for_recon_furniture(request));
+	@RequestMapping(value = "get_raw_fixed__for_recon_furniture", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Object> get_raw_fixed__for_recon_furniture(HttpServletRequest request) {
+		return APIResponse.response(fixedAssetService.get_raw_fixed__for_recon_furniture(request));
 	}
     
 	@RequestMapping(value = "get_raw_fixed_mms_for_recon_computer/{transaction_date}", method = RequestMethod.GET, produces = "application/json")
@@ -95,14 +95,14 @@ public class FixedAssetController {
 		return APIResponse.response(fixedAssetService.delete_transactions(request, datas));
 	}
 	
-	@RequestMapping(value = "get-deleted-fixed-core", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Object> get_edited_fixed_core(HttpServletRequest request) {
-		return APIResponse.response(fixedAssetService.get_edited_fixed_core(request));
+	@RequestMapping(value = "get-deleted-fixed-", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Object> get_edited_fixed_(HttpServletRequest request) {
+		return APIResponse.response(fixedAssetService.get_edited_fixed_(request));
 	}
 	
-	@RequestMapping(value = "get-edited-detail-fixed-core/{id}", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Object> get_edited_detail_fixed_core(HttpServletRequest request, @PathVariable("id") Long id) {
-		return APIResponse.response(fixedAssetService.get_edited_detail_fixed_core(request, id));
+	@RequestMapping(value = "get-edited-detail-fixed-/{id}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Object> get_edited_detail_fixed_(HttpServletRequest request, @PathVariable("id") Long id) {
+		return APIResponse.response(fixedAssetService.get_edited_detail_fixed_(request, id));
 	}
 	
 	@RequestMapping(value = "get-deleted-fixed-mms", method = RequestMethod.GET, produces = "application/json")

@@ -5,28 +5,28 @@ import java.util.List;
 import org.apache.ibatis.annotations.*;
 
 import com.example.demo.abebayehu.entity.Mms_trial_balance;
-import com.example.demo.abebayehu.entity.Raw_fixed_core;
+import com.example.demo.abebayehu.entity.Raw_fixed_;
 import com.example.demo.abebayehu.entity.Raw_fixed_mms;
-import com.example.demo.abebayehu.entity.core_detail_deleted;
+import com.example.demo.abebayehu.entity._detail_deleted;
 import com.example.demo.abebayehu.entity.mms_detail_deleted;
-//import com.example.demo.user.model.File_rtgs_awb_core;
-import com.example.demo.abebayehu.entity.view_fixed_core_deleted;
+//import com.example.demo.user.model.File_rtgs__;
+import com.example.demo.abebayehu.entity.view_fixed__deleted;
 import com.example.demo.abebayehu.entity.view_fixed_mms_deleted;
 
 @Mapper
 public interface MapperFixedAsset {
 
-	@Select("select * from data_fixed_core where (account_number LIKE '01197%' OR account_number like '01A97%') and status = 1 and availability = 1  ")
-	List<Raw_fixed_core> get_raw_fixed_core_for_recon_computer();
+	@Select("select * from data_fixed_ where (account_number LIKE '01197%' OR account_number like '01A97%') and status = 1 and availability = 1  ")
+	List<Raw_fixed_> get_raw_fixed__for_recon_computer();
 
-	@Select("select * from data_fixed_core where (account_number LIKE '01196%' OR account_number like '01A96%') and status = 1 and availability = 1  ")
-	List<Raw_fixed_core> get_raw_fixed_core_for_recon_equipment();
+	@Select("select * from data_fixed_ where (account_number LIKE '01196%' OR account_number like '01A96%') and status = 1 and availability = 1  ")
+	List<Raw_fixed_> get_raw_fixed__for_recon_equipment();
 
-	@Select("select * from data_fixed_core where  (account_number LIKE '01198%' OR account_number like '01A98%') and status = 1 and availability = 1  ")
-	List<Raw_fixed_core> get_raw_fixed_core_for_recon_vehicle();
+	@Select("select * from data_fixed_ where  (account_number LIKE '01198%' OR account_number like '01A98%') and status = 1 and availability = 1  ")
+	List<Raw_fixed_> get_raw_fixed__for_recon_vehicle();
 
-	@Select("select * from data_fixed_core where  (account_number LIKE '01195%' OR account_number like '01A95%') and status = 1 and availability = 1  ")
-	List<Raw_fixed_core> get_raw_fixed_core_for_recon_furniture();
+	@Select("select * from data_fixed_ where  (account_number LIKE '01195%' OR account_number like '01A95%') and status = 1 and availability = 1  ")
+	List<Raw_fixed_> get_raw_fixed__for_recon_furniture();
 
 	@Select("select *  from data_fixed_mms where main_pg= 'AB' and status = 1 and availability = 1 and created_date<=#{transaction_date} ")
 	List<Raw_fixed_mms> get_raw_fixed_mms_for_recon_computer(@Param("transaction_date") String transaction_date);
@@ -45,17 +45,17 @@ public interface MapperFixedAsset {
 			+ "where id = #{id}; delete from data_fixed_mms where id = #{id};")
 	Long moveFixedAssetMmsData(@Param("id") Long long1);
 
-	@Select("INSERT INTO fixed_core(account_number, transaction_date, posting_date, value_date, credit, debit, branch_code, REFERENCE, naration, account_description, account_name, "
+	@Select("INSERT INTO fixed_(account_number, transaction_date, posting_date, value_date, credit, debit, branch_code, REFERENCE, naration, account_description, account_name, "
 			+ "match_status, match_id, status, availability) OUTPUT Inserted.id SELECT account_number, transaction_date, posting_date, "
-			+ "value_date, credit, debit, branch_code, REFERENCE, naration, account_description, account_name, '1',  #{match_id}, status, availability FROM data_fixed_core "
-			+ "where id = #{id}; delete from data_fixed_core where id = #{id};")
-	Long moveFixedAssetCoreData(@Param("id") Long long1, @Param("match_id") String match_id);
+			+ "value_date, credit, debit, branch_code, REFERENCE, naration, account_description, account_name, '1',  #{match_id}, status, availability FROM data_fixed_ "
+			+ "where id = #{id}; delete from data_fixed_ where id = #{id};")
+	Long moveFixedAssetData(@Param("id") Long long1, @Param("match_id") String match_id);
 
-	@Select("INSERT INTO reversal_fixed_core(account_number, transaction_date, posting_date, value_date, credit, debit, branch_code, REFERENCE, naration, account_description, account_name, "
+	@Select("INSERT INTO reversal_fixed_(account_number, transaction_date, posting_date, value_date, credit, debit, branch_code, REFERENCE, naration, account_description, account_name, "
 			+ " match_id,match_date,firstname, status, availability) OUTPUT Inserted.id SELECT account_number, transaction_date, posting_date, "
-			+ "value_date, credit, debit, branch_code, REFERENCE, naration, account_description, account_name,  #{match_id}, #{match_date}, #{match_by}, status, availability FROM data_fixed_core "
-			+ "where id = #{id}; delete from data_fixed_core where id = #{id};")
-	Long moveFixedAssetCoreReversalData(@Param("id") Long long1, @Param("match_id") String match_id,
+			+ "value_date, credit, debit, branch_code, REFERENCE, naration, account_description, account_name,  #{match_id}, #{match_date}, #{match_by}, status, availability FROM data_fixed_ "
+			+ "where id = #{id}; delete from data_fixed_ where id = #{id};")
+	Long moveFixedAssetReversalData(@Param("id") Long long1, @Param("match_id") String match_id,
 			@Param("match_date") Long match_date, @Param("match_by") String match_by);
 
 	@Select(" select  CONCAT(firstname, ' ', middlename) as fullname from users where id=#{id} ")
@@ -97,11 +97,11 @@ public interface MapperFixedAsset {
 			+ "where id = #{id};")
 	Long moveDeletedMmsWaitingData(@Param("id") Long id, @Param("reason_id") Long reason_id);
 
-	@Select("INSERT INTO fixed_core_edit_history(account_number, transaction_date, posting_date, value_date, credit, debit, branch_code, REFERENCE, naration, account_description, account_name, "
+	@Select("INSERT INTO fixed__edit_history(account_number, transaction_date, posting_date, value_date, credit, debit, branch_code, REFERENCE, naration, account_description, account_name, "
 			+ "match_status, status, availability, edit_reason_id, new_old) OUTPUT Inserted.id SELECT account_number, transaction_date, posting_date, "
-			+ "value_date, credit, debit, branch_code, REFERENCE, naration, account_description, account_name, '1', status, availability, #{reason_id}, 'deleted' FROM data_fixed_core "
+			+ "value_date, credit, debit, branch_code, REFERENCE, naration, account_description, account_name, '1', status, availability, #{reason_id}, 'deleted' FROM data_fixed_ "
 			+ "where id = #{id};")
-	Long moveDeletedFixedCoreData(@Param("id") Long id, @Param("reason_id") Long reason_id);
+	Long moveDeletedFixedData(@Param("id") Long id, @Param("reason_id") Long reason_id);
 
 	@Update("update data_fixed_mms set availability = '0' where id = #{id}")
 	void deleteTransaction(@Param("id") Long id);
@@ -109,15 +109,15 @@ public interface MapperFixedAsset {
 	@Update("update data_fixed_mms_waiting set availability = '0' where id = #{id}")
 	void deleteWaitingTransaction(@Param("id") Long id);
 
-	@Update("update data_fixed_core set availability = '0' where id = #{id}")
-	void deleteFixedCoreTransaction(@Param("id") Long id);
+	@Update("update data_fixed_ set availability = '0' where id = #{id}")
+	void deleteFixedTransaction(@Param("id") Long id);
 
-	@Select("select distinct dna.id, dna.value_date, dna.credit, dna.debit, dna.branch_code, dna.naration,  dna.account_name , er.edit_delete from data_fixed_core dna, edit_reason er where dna.id=er.current_id and er.type='data_fixed_core' "
-			+ "union select distinct rna.id, rna.value_date, rna.credit, rna.debit, rna.branch_code, rna.naration,  rna.account_name , er.edit_delete from fixed_core rna, edit_reason er where rna.id=er.current_id and er.type='fixed_core' and er.edit_delete='1' ")
-	List<view_fixed_core_deleted> get_edited_fixed_core();
+	@Select("select distinct dna.id, dna.value_date, dna.credit, dna.debit, dna.branch_code, dna.naration,  dna.account_name , er.edit_delete from data_fixed_ dna, edit_reason er where dna.id=er.current_id and er.type='data_fixed_' "
+			+ "union select distinct rna.id, rna.value_date, rna.credit, rna.debit, rna.branch_code, rna.naration,  rna.account_name , er.edit_delete from fixed_ rna, edit_reason er where rna.id=er.current_id and er.type='fixed_' and er.edit_delete='1' ")
+	List<view_fixed__deleted> get_edited_fixed_();
 
-	@Select("select distinct dna.id, dna.new_old,  dna.value_date, dna.credit, dna.debit, dna.branch_code,  dna.naration,  dna.account_name, er.reason, u.firstname, u.lastname, er.DATE, er.edit_delete , dna.edit_reason_id from fixed_core_edit_history dna, edit_reason er, users u where er.current_id=#{id} and er.id=dna.edit_reason_id and u.id=er.user_id")
-	List<core_detail_deleted> get_edited_detail_fixed_core(Long id);
+	@Select("select distinct dna.id, dna.new_old,  dna.value_date, dna.credit, dna.debit, dna.branch_code,  dna.naration,  dna.account_name, er.reason, u.firstname, u.lastname, er.DATE, er.edit_delete , dna.edit_reason_id from fixed__edit_history dna, edit_reason er, users u where er.current_id=#{id} and er.id=dna.edit_reason_id and u.id=er.user_id")
+	List<_detail_deleted> get_edited_detail_fixed_(Long id);
 
 	@Select("select distinct dna.id, dna.giv_number, dna.grv_number, dna.original_cost, dna.created_date, dna.tag_number, er.edit_delete from data_fixed_mms dna, edit_reason er where dna.id=er.current_id and er.type='data_fixed_mms' "
 			+ "union select distinct rna.id, rna.giv_number, rna.grv_number, rna.original_cost, rna.created_date, rna.tag_number, er.edit_delete from fixed_mms rna, edit_reason er where rna.id=er.current_id and er.type='fixed_mms' and er.edit_delete='1' "

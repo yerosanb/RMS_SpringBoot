@@ -35,10 +35,10 @@ import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.CellUtil;
 import org.apache.poi.util.IOUtils;
 
-import com.example.demo.abebayehu.entity.Fixed_core_report;
+import com.example.demo.abebayehu.entity.Fixed__report;
 import com.example.demo.abebayehu.entity.Fixed_mms_report;
-import com.example.demo.user.model.File_rtgs_awb_core;
-import com.example.demo.user.model.File_rtgs_nbe_ats;
+import com.example.demo.user.model.File_rtgs__;
+import com.example.demo.user.model.File_rtgs__ats;
 import com.google.zxing.WriterException;
 
 public class ExcelHelperFixed {
@@ -49,7 +49,7 @@ public class ExcelHelperFixed {
 			throws IOException, WriterException, ParseException {
 
 //		final String DIRECTORY_logo = System.getProperty("user.dir")
-//				+ "/src/main/resources/static/awash_logo/awash_logo_002.png";
+//				+ "/src/main/resources/static//_002.png";
 //		File file_path = new File(StringUtils.join(DIRECTORY_logo));
 //		if (!file_path.exists()) {
 //			file_path.mkdirs();
@@ -61,7 +61,7 @@ public class ExcelHelperFixed {
 		cal.setTime(date2);
 		String monthName = new SimpleDateFormat("MMMM").format(cal.getTime());
 		
-		String signature = "AWASH BANK RECONCCILIATION SYSTEM " + "fixed asset report " + monthName + " " + date2.getDate() + ", " + date2.toString().split(" ")[5];
+		String signature = " RECONCCILIATION SYSTEM " + "fixed asset report " + monthName + " " + date2.getDate() + ", " + date2.toString().split(" ")[5];
 		byte[] image = new byte[0];
 		image = QRCodeGenerator.getQRCodeImage(signature, 300, 300);
 
@@ -83,7 +83,7 @@ public class ExcelHelperFixed {
 	private static void insertLogoToCell(Workbook workbook, int rowNum, Drawing drawing) throws IOException {
 
 		final String DIRECTORY_logo = System.getProperty("user.dir")
-				+ "/src/main/resources/static/awash_logo/awash_logo_002.png";
+				+ "/src/main/resources/static//_002.png";
 		File file_path = new File(StringUtils.join(DIRECTORY_logo));
 		if (!file_path.exists()) {
 			file_path.mkdirs();
@@ -103,8 +103,8 @@ public class ExcelHelperFixed {
 
 	}
 
-	public static ByteArrayInputStream GenerateExcelFixed(String date, String type,  List<Fixed_core_report> core_debit_data,
-			List<Fixed_core_report> core_credit_data, Double total_core, 
+	public static ByteArrayInputStream GenerateExcelFixed(String date, String type,  List<Fixed__report> _debit_data,
+			List<Fixed__report> _credit_data, Double total_, 
 			List<Fixed_mms_report> mms_data, Double total_mms,  Double conv, Double ifb, 
 			Double waiting, Double disposed, Double removed, Double mms_balance) 
 					throws ParseException, WriterException {
@@ -200,7 +200,7 @@ public class ExcelHelperFixed {
 			cellt.setCellStyle(cs);
 			CellUtil.setAlignment(cellt, HorizontalAlignment.CENTER);
 			CellUtil.setVerticalAlignment(cellt, VerticalAlignment.CENTER);
-			cellt.setCellValue("AWASH BANK R.M.S");
+			cellt.setCellValue(" R.M.S");
 			
 //			Cell cell23 = titleRow.createCell(2);
 //			cell23.setCellValue("hollaa");
@@ -291,7 +291,7 @@ public class ExcelHelperFixed {
 					CellUtil.setAlignment(cell, HorizontalAlignment.RIGHT);
 			}
 			int rowIdx = 6;
-			for (Fixed_core_report data_core : core_debit_data) {
+			for (Fixed__report data_ : _debit_data) {
 				Row row = sheet.createRow(rowIdx++);
 				row.setHeight((short) (row.getHeight()));
 				
@@ -299,37 +299,37 @@ public class ExcelHelperFixed {
 				c1.setCellStyle(style2);
 				CellUtil.setVerticalAlignment(c1, VerticalAlignment.CENTER);
 				CellUtil.setAlignment(c1, HorizontalAlignment.RIGHT);
-				c1.setCellValue(data_core.getTransaction_date());
+				c1.setCellValue(data_.getTransaction_date());
 				
 				Cell c2 = row.createCell(1);
 				c2.setCellStyle(style2);
 				CellUtil.setVerticalAlignment(c2, VerticalAlignment.CENTER);
-				c2.setCellValue(data_core.getAccount_description());
+				c2.setCellValue(data_.getAccount_description());
 				
 				Cell c3 = row.createCell(2);
 				c3.setCellStyle(style2);
 				CellUtil.setVerticalAlignment(c3, VerticalAlignment.CENTER);
-				c3.setCellValue(data_core.getNaration());
+				c3.setCellValue(data_.getNaration());
 				
 				Cell c4 = row.createCell(3);
 				c4.setCellStyle(style2);
 				CellUtil.setVerticalAlignment(c4, VerticalAlignment.CENTER);
-				c4.setCellValue(data_core.getAccount_name());
+				c4.setCellValue(data_.getAccount_name());
 				
 				Cell c5 = row.createCell(4);
 				c5.setCellStyle(style2);
 				CellUtil.setVerticalAlignment(c5, VerticalAlignment.CENTER);
 				CellUtil.setAlignment(c5, HorizontalAlignment.RIGHT);
-				c5.setCellValue(data_core.getAmount());
+				c5.setCellValue(data_.getAmount());
 				
 				Cell c6 = row.createCell(5);
 				c6.setCellStyle(style2);
 				CellUtil.setVerticalAlignment(c6, VerticalAlignment.CENTER);
-				// c5.setCellValue(data_core.getID());
+				// c5.setCellValue(data_.getID());
 				c6.setCellValue("");
 			}
 			
-			for (Fixed_core_report data_core : core_credit_data) {
+			for (Fixed__report data_ : _credit_data) {
 				Row row = sheet.createRow(rowIdx++);
 				row.setHeight((short) (row.getHeight()));
 				
@@ -337,33 +337,33 @@ public class ExcelHelperFixed {
 				c1.setCellStyle(style2);
 				CellUtil.setVerticalAlignment(c1, VerticalAlignment.CENTER);
 				CellUtil.setAlignment(c1, HorizontalAlignment.RIGHT);
-				c1.setCellValue(data_core.getTransaction_date());
+				c1.setCellValue(data_.getTransaction_date());
 				
 				Cell c2 = row.createCell(1);
 				c2.setCellStyle(style2);
 				CellUtil.setVerticalAlignment(c2, VerticalAlignment.CENTER);
-				c2.setCellValue(data_core.getAccount_description());
+				c2.setCellValue(data_.getAccount_description());
 				
 				Cell c3 = row.createCell(2);
 				c3.setCellStyle(style2);
 				CellUtil.setVerticalAlignment(c3, VerticalAlignment.CENTER);
-				c3.setCellValue(data_core.getNaration());
+				c3.setCellValue(data_.getNaration());
 				
 				Cell c4 = row.createCell(3);
 				c4.setCellStyle(style2);
 				CellUtil.setVerticalAlignment(c4, VerticalAlignment.CENTER);
-				c4.setCellValue(data_core.getAccount_name());
+				c4.setCellValue(data_.getAccount_name());
 				
 				Cell c5 = row.createCell(4);
 				c5.setCellStyle(style2);
 				CellUtil.setVerticalAlignment(c5, VerticalAlignment.CENTER);
 				CellUtil.setAlignment(c5, HorizontalAlignment.RIGHT);
-				c5.setCellValue(data_core.getAmount());
+				c5.setCellValue(data_.getAmount());
 				
 				Cell c6 = row.createCell(5);
 				c6.setCellStyle(style2);
 				CellUtil.setVerticalAlignment(c6, VerticalAlignment.CENTER);
-				// c5.setCellValue(data_core.getID());
+				// c5.setCellValue(data_.getID());
 				c6.setCellValue("");
 			}
 
@@ -372,7 +372,7 @@ public class ExcelHelperFixed {
 			for (int col = 0; col < HEADERs.length; col++) {
 				Cell cell = row_3.createCell(col);
 			  if (col == 5) {
-					cell.setCellValue(NumberFormat.getCurrencyInstance().format(total_core).replace("$", ""));
+					cell.setCellValue(NumberFormat.getCurrencyInstance().format(total_).replace("$", ""));
 				}
 				cell.setCellStyle(style);
 				CellUtil.setVerticalAlignment(cell, VerticalAlignment.CENTER);
@@ -428,7 +428,7 @@ public class ExcelHelperFixed {
 				Cell c6 = row.createCell(5);
 				c6.setCellStyle(style2);
 				CellUtil.setVerticalAlignment(c6, VerticalAlignment.CENTER);
-				// c5.setCellValue(data_core.getID());
+				// c5.setCellValue(data_.getID());
 				c6.setCellValue("");
 			}
 			
@@ -466,7 +466,7 @@ public class ExcelHelperFixed {
 //				Cell c6 = row.createCell(5);
 //				c6.setCellStyle(style2);
 //				CellUtil.setVerticalAlignment(c6, VerticalAlignment.CENTER);
-//				// c5.setCellValue(data_core.getID());
+//				// c5.setCellValue(data_.getID());
 //				c6.setCellValue("");
 //			}
 			
@@ -492,7 +492,7 @@ public class ExcelHelperFixed {
 					cell.setCellValue( "Adjusted BFUB Balance ");
 				}
 				if (col == 5) {
-					cell.setCellValue(NumberFormat.getCurrencyInstance().format((conv+ifb+total_mms)-total_core).replace("$", ""));
+					cell.setCellValue(NumberFormat.getCurrencyInstance().format((conv+ifb+total_mms)-total_).replace("$", ""));
 					}
 				cell.setCellStyle(style);
 				CellUtil.setVerticalAlignment(cell, VerticalAlignment.CENTER);
@@ -602,7 +602,7 @@ public class ExcelHelperFixed {
 				} 
 				else if (col == 5) {
 					cell.setCellValue(
-							NumberFormat.getCurrencyInstance().format(((conv+ifb+total_mms)-total_core)-(mms_balance+waiting+disposed+removed)).replace("$", ""));
+							NumberFormat.getCurrencyInstance().format(((conv+ifb+total_mms)-total_)-(mms_balance+waiting+disposed+removed)).replace("$", ""));
 				}
 				cell.setCellStyle(style);
 				CellUtil.setVerticalAlignment(cell, VerticalAlignment.CENTER);

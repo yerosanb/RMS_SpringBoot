@@ -1,9 +1,9 @@
 package com.example.demo.user.model;
 
-public class File_rtgs_nbe_ats {
+public class File_rtgs__ats {
 
 	private Long id;
-	private Long core_id;
+	private Long _id;
 	private String value_date_type;
 	private String reference;
 	private String sender;
@@ -30,20 +30,20 @@ public class File_rtgs_nbe_ats {
 	private String type;
 	private String setteled_date;
 
-	public File_rtgs_nbe_ats() {
+	public File_rtgs__ats() {
 
 	}
 
 
 
-	File_rtgs_nbe_ats(Long id, Long core_id, String value_date_type, String reference, String sender, String receiver,
+	File_rtgs__ats(Long id, Long _id, String value_date_type, String reference, String sender, String receiver,
 			String additional_information, Double amount, String dr_cr, Long upload_date, String match_status,
 			String status, String availability, Long file_id, String match_id, String reason, Long match_date,
 			String firstname, String lastname, String new_old, String dATE, String edit_delete, Long edit_reason_id,
 			float amount_difference, String description, String type, String setteled_date) {
 		super();
 		this.id = id;
-		this.core_id = core_id;
+		this._id = _id;
 		this.value_date_type = value_date_type;
 		this.reference = reference;
 		this.sender = sender;
@@ -81,12 +81,12 @@ public class File_rtgs_nbe_ats {
 		this.id = id;
 	}
 
-	public Long getCore_id() {
-		return core_id;
+	public Long get_id() {
+		return _id;
 	}
 
-	public void setCore_id(Long core_id) {
-		this.core_id = core_id;
+	public void set_id(Long _id) {
+		this._id = _id;
 	}
 
 	public String getValue_date_type() {
@@ -297,7 +297,7 @@ public class File_rtgs_nbe_ats {
 
 	@Override
 	public String toString() {
-		return "File_rtgs_nbe_ats [id=" + id + ", core_id=" + core_id + ", value_date_type=" + value_date_type
+		return "File_rtgs__ats [id=" + id + ", _id=" + _id + ", value_date_type=" + value_date_type
 				+ ", reference=" + reference + ", sender=" + sender + ", receiver=" + receiver
 				+ ", additional_information=" + additional_information + ", amount=" + amount + ", dr_cr=" + dr_cr
 				+ ", upload_date=" + upload_date + ", match_status=" + match_status + ", status=" + status

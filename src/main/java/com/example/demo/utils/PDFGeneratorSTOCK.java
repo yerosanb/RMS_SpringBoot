@@ -16,8 +16,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.util.IOUtils;
 
 import com.example.demo.Stock.Model.StockReport;
-import com.example.demo.user.model.File_rtgs_awb_core;
-import com.example.demo.user.model.File_rtgs_nbe_ats;
+import com.example.demo.user.model.File_rtgs__;
+import com.example.demo.user.model.File_rtgs__ats;
 import com.google.zxing.WriterException;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
@@ -36,8 +36,8 @@ public class PDFGeneratorSTOCK {
 	// List to hold all Students
 //		private List<Student> studentList;
 
-	public String generate(String date, String type, List<StockReport> data_stock_core,
-			List<StockReport> data_stock_mms, Double total_stock_core, Double total_stock_mms)
+	public String generate(String date, String type, List<StockReport> data_stock_,
+			List<StockReport> data_stock_mms, Double total_stock_, Double total_stock_mms)
 			throws DocumentException, IOException, ParseException, WriterException {
 
 //		DecimalFormat df = new DecimalFormat("#.##");
@@ -49,7 +49,7 @@ public class PDFGeneratorSTOCK {
 		String monthName = new SimpleDateFormat("MMMM").format(cal.getTime());
 
 		final String DIRECTORY_logo = System.getProperty("user.dir")
-				+ "/src/main/resources/static/awash_logo/awash_logo_002.png";
+				+ "/src/main/resources/static//_002.png";
 
 		final String DIRECTORY2 = System.getProperty("user.dir") + "/src/main/resources/static/generated_reports/"
 				+ date.substring(0, 7) + "/";
@@ -135,7 +135,7 @@ public class PDFGeneratorSTOCK {
 		cellt2.setPhrase(pt);
 		tablet.addCell(cellt2);
 
-		String signature = "AWASH BANK RECONCCILIATION SYSTEM " + "STOCK report " + monthName + " " + date2.getDate()
+		String signature = " RECONCCILIATION SYSTEM " + "STOCK report " + monthName + " " + date2.getDate()
 				+ ", " + date2.toString().split(" ")[5];
 		PdfPCell celly = new PdfPCell();
 		celly.setFixedHeight(60.5f);
@@ -155,7 +155,7 @@ public class PDFGeneratorSTOCK {
 		cell13.setBorder(0);
 		tablet.addCell(cell13);
 		PdfPCell cell14 = new PdfPCell();
-		cell14.setPhrase(new Phrase("AWAH BANK R.M.S", fo7));
+		cell14.setPhrase(new Phrase("AWAH  R.M.S", fo7));
 		cell14.setBorder(0);
 		tablet.addCell(cell14);
 		document.add(tablet);
@@ -206,34 +206,34 @@ public class PDFGeneratorSTOCK {
 				"BFUB BALANCE As of " + monthName + " " + date2.getDate() + ", " + date2.toString().split(" ")[5], fo));
 		cellk.setColspan(5);
 		table.addCell(cellk);
-		cell2.setPhrase(new Phrase(NumberFormat.getCurrencyInstance().format(total_stock_core).replace("$", ""), fo));
+		cell2.setPhrase(new Phrase(NumberFormat.getCurrencyInstance().format(total_stock_).replace("$", ""), fo));
 		table.addCell(cell2);
 
-		double total_core_credit = 0d;
-		double total_core_debit = 0d;
-		for (StockReport data_core : data_stock_core) {
+		double total__credit = 0d;
+		double total__debit = 0d;
+		for (StockReport data_ : data_stock_) {
 
-			cell2.setPhrase(new Phrase(data_core.getPosting_date(), fo2));
+			cell2.setPhrase(new Phrase(data_.getPosting_date(), fo2));
 			table.addCell(cell2);
 			cell2.setPhrase(new Phrase("-", fo2));
 			table.addCell(cell2);
-			cell.setPhrase(new Phrase(data_core.getReference(), fo2));
+			cell.setPhrase(new Phrase(data_.getReference(), fo2));
 			table.addCell(cell);
-			if (data_core.getDr_cr().equalsIgnoreCase("dr")) {
-				total_core_debit = total_core_debit + data_core.getAmount();
-				cell2.setPhrase(new Phrase("" + data_core.getAmount(), fo2));
+			if (data_.getDr_cr().equalsIgnoreCase("dr")) {
+				total__debit = total__debit + data_.getAmount();
+				cell2.setPhrase(new Phrase("" + data_.getAmount(), fo2));
 				table.addCell(cell2);
 				cell2.setPhrase(new Phrase("0.00", fo2));
 				table.addCell(cell2);
 			} else {
-				total_core_credit = total_core_credit + data_core.getAmount();
+				total__credit = total__credit + data_.getAmount();
 				cell2.setPhrase(new Phrase("0.00", fo2));
 				table.addCell(cell2);
-				cell2.setPhrase(new Phrase("" + data_core.getAmount(), fo2));
+				cell2.setPhrase(new Phrase("" + data_.getAmount(), fo2));
 				table.addCell(cell2);
 			}
 			cell.setPhrase(new Phrase(
-					NumberFormat.getCurrencyInstance().format(data_core.getBalance()).replace("$", ""), fo2));
+					NumberFormat.getCurrencyInstance().format(data_.getBalance()).replace("$", ""), fo2));
 			table.addCell(cell);
 		}
 
@@ -243,14 +243,14 @@ public class PDFGeneratorSTOCK {
 		table.addCell(cell);
 		cell.setPhrase(new Phrase("", fo));
 		table.addCell(cell);
-		cell2.setPhrase(new Phrase(NumberFormat.getCurrencyInstance().format(total_core_debit).replace("$", ""), fo));
+		cell2.setPhrase(new Phrase(NumberFormat.getCurrencyInstance().format(total__debit).replace("$", ""), fo));
 		table.addCell(cell2);
-		cell2.setPhrase(new Phrase(NumberFormat.getCurrencyInstance().format(total_core_credit).replace("$", ""), fo));
+		cell2.setPhrase(new Phrase(NumberFormat.getCurrencyInstance().format(total__credit).replace("$", ""), fo));
 		table.addCell(cell2);
 		cell.setPhrase(new Phrase("", fo));
 		table.addCell(cell);
 
-		cell.setPhrase(new Phrase("Adjusted Balance Core", fo));
+		cell.setPhrase(new Phrase("Adjusted Balance ", fo));
 		table.addCell(cell);
 		cell.setPhrase(new Phrase("", fo));
 		table.addCell(cell);
@@ -261,7 +261,7 @@ public class PDFGeneratorSTOCK {
 		cell.setPhrase(new Phrase("", fo));
 		table.addCell(cell);
 		cell2.setPhrase(new Phrase(NumberFormat.getCurrencyInstance()
-				.format(total_stock_core - total_core_debit + total_core_credit).replace("$", ""), fo));
+				.format(total_stock_ - total__debit + total__credit).replace("$", ""), fo));
 		table.addCell(cell2);
 
 		double total_mms_credit = 0d;
@@ -315,7 +315,7 @@ public class PDFGeneratorSTOCK {
 		cell.setPhrase(new Phrase("", fo));
 		table.addCell(cell);
 		cell2.setPhrase(new Phrase(NumberFormat.getCurrencyInstance()
-				.format((total_stock_core - total_core_debit + total_core_credit) + total_mms_debit - total_mms_credit)
+				.format((total_stock_ - total__debit + total__credit) + total_mms_debit - total_mms_credit)
 				.replace("$", ""), fo));
 		table.addCell(cell2);
 
@@ -343,7 +343,7 @@ public class PDFGeneratorSTOCK {
 		cell.setPhrase(new Phrase("", fo));
 		table.addCell(cell);
 		cell2.setPhrase(new Phrase(
-				NumberFormat.getCurrencyInstance().format((total_stock_core - total_core_debit + total_core_credit)
+				NumberFormat.getCurrencyInstance().format((total_stock_ - total__debit + total__credit)
 						+ total_mms_debit - total_mms_credit - total_stock_mms).replace("$", ""),
 				fo));
 		table.addCell(cell2);

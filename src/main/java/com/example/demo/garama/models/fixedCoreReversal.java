@@ -1,6 +1,6 @@
 package com.example.demo.garama.models;
 
-public class fixedCoreReversal {
+public class fixedReversal {
 	private Long id;
     private String account_number;
     private String transaction_date;
@@ -16,7 +16,7 @@ public class fixedCoreReversal {
     private String match_id;
     private String match_date;
     private String firstname;
-	public fixedCoreReversal(Long id, String account_number, String transaction_date, String posting_date,
+	public fixedReversal(Long id, String account_number, String transaction_date, String posting_date,
 			String value_date, float credit, float debit, String branch_code, String reference, String naration,
 			String account_description, String account_name, String match_id, String match_date, String firstname) {
 		super();

@@ -1,7 +1,7 @@
 package com.example.demo.user.model;
 
  
-public class File_rtgs_awb_core {
+public class File_rtgs__ {
 	
   	private Long id;
   	private String posting_date;
@@ -30,23 +30,23 @@ public class File_rtgs_awb_core {
   	private Long edit_reason_id;
 	private float amount_difference;
 	private String description;
-	private Long core_id;
+	private Long _id;
 	private String setteled_date;
  	private String branch_name;
  	private String ctr;
   	
 
  	
- 	public File_rtgs_awb_core() {
+ 	public File_rtgs__() {
  		
  	}
 
-	public File_rtgs_awb_core(Long id, String posting_date, String value_date, String transaction_reference,
+	public File_rtgs__(Long id, String posting_date, String value_date, String transaction_reference,
 			String additional_information, String branch_code, String branch, double amount, String dr_cr,
 			double balance, Long upload_date, String match_status, String status, String availability, Long file_id,
 			String match_id, String type, Long match_date, String firstname, String lastname, String new_old,
 			String reason, String dATE, String edit_delete, Long edit_reason_id, float amount_difference,
-			String description, Long core_id, String setteled_date, String branch_name, String ctr) {
+			String description, Long _id, String setteled_date, String branch_name, String ctr) {
 		super();
 		this.id = id;
 		this.posting_date = posting_date;
@@ -75,7 +75,7 @@ public class File_rtgs_awb_core {
 		this.edit_reason_id = edit_reason_id;
 		this.amount_difference = amount_difference;
 		this.description = description;
-		this.core_id = core_id;
+		this._id = _id;
 		this.setteled_date = setteled_date;
 		this.branch_name = branch_name;
 		this.ctr = ctr;
@@ -401,14 +401,14 @@ public class File_rtgs_awb_core {
 
 
 
-	public Long getCore_id() {
-		return core_id;
+	public Long get_id() {
+		return _id;
 	}
 
 
 
-	public void setCore_id(Long core_id) {
-		this.core_id = core_id;
+	public void set_id(Long _id) {
+		this._id = _id;
 	}
 
 
@@ -438,7 +438,7 @@ public class File_rtgs_awb_core {
 
 	@Override
 	public String toString() {
-		return "File_rtgs_awb_core [id=" + id + ", posting_date=" + posting_date + ", value_date=" + value_date
+		return "File_rtgs__ [id=" + id + ", posting_date=" + posting_date + ", value_date=" + value_date
 				+ ", transaction_reference=" + transaction_reference + ", additional_information="
 				+ additional_information + ", branch_code=" + branch_code + ", branch=" + branch + ", amount=" + amount
 				+ ", dr_cr=" + dr_cr + ", balance=" + balance + ", upload_date=" + upload_date + ", match_status="
@@ -446,7 +446,7 @@ public class File_rtgs_awb_core {
 				+ ", match_id=" + match_id + ", type=" + type + ", match_date=" + match_date + ", firstname="
 				+ firstname + ", lastname=" + lastname + ", new_old=" + new_old + ", reason=" + reason + ", DATE="
 				+ DATE + ", edit_delete=" + edit_delete + ", edit_reason_id=" + edit_reason_id + ", amount_difference="
-				+ amount_difference + ", description=" + description + ", core_id=" + core_id + ", setteled_date="
+				+ amount_difference + ", description=" + description + ", _id=" + _id + ", setteled_date="
 				+ setteled_date + ", branch_name=" + branch_name + ", ctr=" + ctr + "]";
 	}
 }

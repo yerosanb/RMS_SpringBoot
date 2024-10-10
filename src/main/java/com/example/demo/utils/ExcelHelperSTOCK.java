@@ -36,10 +36,10 @@ import org.apache.poi.ss.util.CellUtil;
 import org.apache.poi.util.IOUtils;
 
 import com.example.demo.Stock.Model.StockReport;
-import com.example.demo.abebayehu.entity.Fixed_core_report;
+import com.example.demo.abebayehu.entity.Fixed__report;
 import com.example.demo.abebayehu.entity.Fixed_mms_report;
-import com.example.demo.user.model.File_rtgs_awb_core;
-import com.example.demo.user.model.File_rtgs_nbe_ats;
+import com.example.demo.user.model.File_rtgs__;
+import com.example.demo.user.model.File_rtgs__ats;
 import com.google.zxing.WriterException;
 import com.lowagie.text.Phrase;
 
@@ -51,7 +51,7 @@ public class ExcelHelperSTOCK {
 			throws IOException, WriterException, ParseException {
 
 //		final String DIRECTORY_logo = System.getProperty("user.dir")
-//				+ "/src/main/resources/static/awash_logo/awash_logo_002.png";
+//				+ "/src/main/resources/static//_002.png";
 //		File file_path = new File(StringUtils.join(DIRECTORY_logo));
 //		if (!file_path.exists()) {
 //			file_path.mkdirs();
@@ -63,7 +63,7 @@ public class ExcelHelperSTOCK {
 		cal.setTime(date2);
 		String monthName = new SimpleDateFormat("MMMM").format(cal.getTime());
 
-		String signature = "AWASH BANK RECONCCILIATION SYSTEM " + "fixed asset report " + monthName + " "
+		String signature = " RECONCCILIATION SYSTEM " + "fixed asset report " + monthName + " "
 				+ date2.getDate() + ", " + date2.toString().split(" ")[5];
 		byte[] image = new byte[0];
 		image = QRCodeGenerator.getQRCodeImage(signature, 300, 300);
@@ -86,7 +86,7 @@ public class ExcelHelperSTOCK {
 	private static void insertLogoToCell(Workbook workbook, int rowNum, Drawing drawing) throws IOException {
 
 		final String DIRECTORY_logo = System.getProperty("user.dir")
-				+ "/src/main/resources/static/awash_logo/awash_logo_002.png";
+				+ "/src/main/resources/static//_002.png";
 		File file_path = new File(StringUtils.join(DIRECTORY_logo));
 		if (!file_path.exists()) {
 			file_path.mkdirs();
@@ -110,8 +110,8 @@ public class ExcelHelperSTOCK {
 
 	}
 
-	public static ByteArrayInputStream GenerateExcelStock(String date, String type, List<StockReport> data_stock_core,
-			List<StockReport> data_stock_mms, Double total_stock_core, Double total_stock_mms)
+	public static ByteArrayInputStream GenerateExcelStock(String date, String type, List<StockReport> data_stock_,
+			List<StockReport> data_stock_mms, Double total_stock_, Double total_stock_mms)
 			throws ParseException, WriterException {
 
 		try (Workbook workbook = new HSSFWorkbook(); ByteArrayOutputStream out = new ByteArrayOutputStream();) {
@@ -263,7 +263,7 @@ public class ExcelHelperSTOCK {
 			cellt.setCellStyle(cs);
 			CellUtil.setAlignment(cellt, HorizontalAlignment.CENTER);
 			CellUtil.setVerticalAlignment(cellt, VerticalAlignment.CENTER);
-			cellt.setCellValue("AWASH BANK R.M.S");
+			cellt.setCellValue(" R.M.S");
 
 			Drawing drawing2 = sheet.createDrawingPatriarch();
 			insertQrCodeToCell(workbook, 1, drawing2, sheet, date);
@@ -285,14 +285,14 @@ public class ExcelHelperSTOCK {
 					"BFUB BALANCE As of " + monthName + " " + date2.getDate() + ", " + date2.toString().split(" ")[5]);
 			Cell cellkk = row_1.createCell(5);
 			cellkk.setCellStyle(style2);
-			cellkk.setCellValue(String.format("%,.2f", total_stock_core));
+			cellkk.setCellValue(String.format("%,.2f", total_stock_));
 			CellUtil.setAlignment(cellz, HorizontalAlignment.CENTER);
 
-			double total_core_credit = 0d;
-			double total_core_debit = 0d;
+			double total__credit = 0d;
+			double total__debit = 0d;
 
 			int rowIdx = 4;
-			for (StockReport data_core : data_stock_core) {
+			for (StockReport data_ : data_stock_) {
 				Row row = sheet.createRow(rowIdx++);
 				row.setHeight((short) (row.getHeight()));
 
@@ -300,7 +300,7 @@ public class ExcelHelperSTOCK {
 				c1.setCellStyle(style2);
 				CellUtil.setVerticalAlignment(c1, VerticalAlignment.CENTER);
 				CellUtil.setAlignment(c1, HorizontalAlignment.RIGHT);
-				c1.setCellValue(data_core.getPosting_date().substring(0, 10));
+				c1.setCellValue(data_.getPosting_date().substring(0, 10));
 
 				Cell c2 = row.createCell(1);
 				c2.setCellStyle(style2);
@@ -310,15 +310,15 @@ public class ExcelHelperSTOCK {
 				Cell c3 = row.createCell(2);
 				c3.setCellStyle(style2);
 				CellUtil.setVerticalAlignment(c3, VerticalAlignment.CENTER);
-				c3.setCellValue(data_core.getReference());
+				c3.setCellValue(data_.getReference());
 
-				if (data_core.getDr_cr().equalsIgnoreCase("dr")) {
-					total_core_debit = total_core_debit + data_core.getAmount();
+				if (data_.getDr_cr().equalsIgnoreCase("dr")) {
+					total__debit = total__debit + data_.getAmount();
 					Cell c4 = row.createCell(3);
 					c4.setCellStyle(style2);
 					CellUtil.setVerticalAlignment(c4, VerticalAlignment.CENTER);
 					CellUtil.setAlignment(c4, HorizontalAlignment.RIGHT);
-					c4.setCellValue(String.format("%,.2f", data_core.getAmount()));
+					c4.setCellValue(String.format("%,.2f", data_.getAmount()));
 
 					Cell c5 = row.createCell(4);
 					c5.setCellStyle(style2);
@@ -327,7 +327,7 @@ public class ExcelHelperSTOCK {
 					c5.setCellValue("0.00");
 				} else {
 
-					total_core_credit = total_core_credit + data_core.getAmount();
+					total__credit = total__credit + data_.getAmount();
 					Cell c5 = row.createCell(3);
 					c5.setCellStyle(style2);
 					CellUtil.setVerticalAlignment(c5, VerticalAlignment.CENTER);
@@ -338,13 +338,13 @@ public class ExcelHelperSTOCK {
 					c4.setCellStyle(style2);
 					CellUtil.setVerticalAlignment(c4, VerticalAlignment.CENTER);
 					CellUtil.setAlignment(c4, HorizontalAlignment.RIGHT);
-					c4.setCellValue(String.format("%,.2f", data_core.getAmount()));
+					c4.setCellValue(String.format("%,.2f", data_.getAmount()));
 				}
 
 				Cell c6 = row.createCell(5);
 				c6.setCellStyle(style2);
 				CellUtil.setVerticalAlignment(c6, VerticalAlignment.CENTER);
-				c6.setCellValue(String.format("%,.2f", data_core.getBalance()));
+				c6.setCellValue(String.format("%,.2f", data_.getBalance()));
 			}
 
 			Row row_22 = sheet.createRow(rowIdx++);
@@ -354,10 +354,10 @@ public class ExcelHelperSTOCK {
 				if (col == 0) {
 					cell.setCellValue("Total Debit and Credit Balance");
 				} else if (col == 3) {
-					cell.setCellValue(NumberFormat.getCurrencyInstance().format(total_core_debit).replace("$", ""));
+					cell.setCellValue(NumberFormat.getCurrencyInstance().format(total__debit).replace("$", ""));
 					// cell.setCellValue(String.format("%,.2f", ats_ending_balance));
 				} else if (col == 4) {
-					cell.setCellValue(NumberFormat.getCurrencyInstance().format(total_core_credit).replace("$", ""));
+					cell.setCellValue(NumberFormat.getCurrencyInstance().format(total__credit).replace("$", ""));
 					// cell.setCellValue(String.format("%,.2f", ats_ending_balance));
 				}
 				cell.setCellStyle(style);
@@ -372,10 +372,10 @@ public class ExcelHelperSTOCK {
 				Cell cell = row_33.createCell(col);
 				cell.setCellStyle(cs);
 				if (col == 0) {
-					cell.setCellValue("Adjusted Balance Core");
+					cell.setCellValue("Adjusted Balance ");
 				} else if (col == 5) {
 					cell.setCellValue(NumberFormat.getCurrencyInstance()
-							.format(total_stock_core - total_core_debit + total_core_credit).replace("$", ""));
+							.format(total_stock_ - total__debit + total__credit).replace("$", ""));
 				}
 				cell.setCellStyle(style);
 				CellUtil.setVerticalAlignment(cell, VerticalAlignment.CENTER);
@@ -466,7 +466,7 @@ public class ExcelHelperSTOCK {
 					cell.setCellValue("ADJUSTED BALANCE");
 				} else if (col == 5) {
 					cell.setCellValue(NumberFormat.getCurrencyInstance()
-							.format((total_stock_core - total_core_debit + total_core_credit) + total_mms_debit
+							.format((total_stock_ - total__debit + total__credit) + total_mms_debit
 									- total_mms_credit)
 							.replace("$", ""));
 				}
@@ -497,7 +497,7 @@ public class ExcelHelperSTOCK {
 					cell.setCellValue("");
 				} else if (col == 5) {
 					cell.setCellValue(NumberFormat.getCurrencyInstance()
-							.format((total_stock_core - total_core_debit + total_core_credit) + total_mms_debit
+							.format((total_stock_ - total__debit + total__credit) + total_mms_debit
 									- total_mms_credit - total_stock_mms)
 							.replace("$", ""));
 				}

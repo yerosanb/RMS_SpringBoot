@@ -16,16 +16,16 @@ import org.springframework.stereotype.Service;
 import com.example.demo.Exception.CustomAllException;
 import com.example.demo.Exception.ExceptionsList;
 import com.example.demo.model.Comment;
-import com.example.demo.user.mapper.FixedAssetCoreMapper;
+import com.example.demo.user.mapper.FixedAssetMapper;
 import com.example.demo.user.mapper.FixedAssetMMSMapper;
 import com.example.demo.user.mapper.MapperAccount;
 import com.example.demo.user.mapper.MapperRTGS;
 import com.example.demo.user.mapper.SearchMapper;
-import com.example.demo.user.model.File_rtgs_awb_core;
-import com.example.demo.user.model.File_rtgs_nbe_ats;
+import com.example.demo.user.model.File_rtgs__;
+import com.example.demo.user.model.File_rtgs__ats;
 import com.example.demo.user.model.GeneralTransactionHistory;
 import com.example.demo.user.model.MatchDetailAts;
-import com.example.demo.user.model.MatchDetailCore;
+import com.example.demo.user.model.MatchDetail;
 import com.example.demo.user.model.Transactionhistory;
 import com.example.demo.utils.Utils;
 import com.google.gson.JsonObject;
@@ -38,7 +38,7 @@ public class RTGSService {
 	private Utils util;
 	
 	@Autowired
-	private FixedAssetCoreMapper fixedAssetCoreMapper;
+	private FixedAssetMapper fixedAssetMapper;
 	
 	@Autowired
 	private FixedAssetMMSMapper fixedAssetMapper;
@@ -54,7 +54,7 @@ public class RTGSService {
 
 	// This functionality is
 	// get_all_rgts_ats_for_recon_auto=========================
-	public List<File_rtgs_nbe_ats> get_ats_for_recon_auto(HttpServletRequest request, String recon_date) {
+	public List<File_rtgs__ats> get_ats_for_recon_auto(HttpServletRequest request, String recon_date) {
 		try {
 			if (util.isPermitted(request, "User", "get_all_ats_transaction_for_recon_auto")) {
 
@@ -62,10 +62,10 @@ public class RTGSService {
 						"Get all ATS transactions to match automatically");
 				System.out.println("the date: " + recon_date.replace("-", ""));
 
-				List<File_rtgs_nbe_ats> cc = rtgsMapper.get_ats_for_recon_auto(
+				List<File_rtgs__ats> cc = rtgsMapper.get_ats_for_recon_auto(
 						Integer.parseInt(recon_date.replace("-", "")),
 						accountMapper.getUserAccountId(util.get_user_id(request)));
-				for (File_rtgs_nbe_ats c : cc) {
+				for (File_rtgs__ats c : cc) {
 					System.out.println("amount:----------> " + c.getAmount());
 				}
 				// exportExcelFile();
@@ -82,7 +82,7 @@ public class RTGSService {
 
 	}
 
-	public List<File_rtgs_nbe_ats> get_ats_for_recon_partial_auto(HttpServletRequest request, String recon_date) {
+	public List<File_rtgs__ats> get_ats_for_recon_partial_auto(HttpServletRequest request, String recon_date) {
 		try {
 			if (util.isPermitted(request, "User", "get_all_partial_ats_for_recon_auto")) {
 
@@ -90,10 +90,10 @@ public class RTGSService {
 						"Get all ATS transactions to match automatically-partial");
 				System.out.println("the date: " + recon_date.replace("-", ""));
 
-				List<File_rtgs_nbe_ats> cc = rtgsMapper.get_ats_for_recon_partial_auto(
+				List<File_rtgs__ats> cc = rtgsMapper.get_ats_for_recon_partial_auto(
 						Integer.parseInt(recon_date.replace("-", "")),
 						accountMapper.getUserAccountId(util.get_user_id(request)));
-				for (File_rtgs_nbe_ats c : cc) {
+				for (File_rtgs__ats c : cc) {
 					System.out.println("amount:----------> " + c.getAmount());
 				}
 				System.out.println("sizeeeeeeeeeeeeeee: " + cc.size());
@@ -111,7 +111,7 @@ public class RTGSService {
 
 	// This functionality is
 	// get_all_rgts_ats_for_recon=========================
-	public List<File_rtgs_nbe_ats> get_ats_for_recon(HttpServletRequest request, String recon_date) {
+	public List<File_rtgs__ats> get_ats_for_recon(HttpServletRequest request, String recon_date) {
 
 		try {
 			if (util.isPermitted(request, "User", "get_all_ats_transaction_for_recon_manual")) {
@@ -119,11 +119,11 @@ public class RTGSService {
 				util.registerActivity(request, "Get all Ats tranzactions", "Get all ATS transactions to match manualy");
 				System.out.println("the date: " + recon_date.replace("-", ""));
 
-				List<File_rtgs_nbe_ats> atsList = rtgsMapper.get_ats_for_recon(
+				List<File_rtgs__ats> atsList = rtgsMapper.get_ats_for_recon(
 						Integer.parseInt(recon_date.replace("-", "")),
 						accountMapper.getUserAccountId(util.get_user_id(request)));
 
-				for (File_rtgs_nbe_ats aa : atsList) {
+				for (File_rtgs__ats aa : atsList) {
 					if (aa.getReference().equalsIgnoreCase("0011677063")) {
 						System.out.println("amount:::::::::::::::::::::: " + aa.getAmount());
 						System.out.println("reference:::::::::::::::::::::: " + aa.getReference());
@@ -139,7 +139,7 @@ public class RTGSService {
 		}
 	}
 
-	public List<File_rtgs_nbe_ats> get_rtgs_ats_for_view(HttpServletRequest request, String recon_date) {
+	public List<File_rtgs__ats> get_rtgs_ats_for_view(HttpServletRequest request, String recon_date) {
 		try {
 			if (util.isPermitted(request, "User", "get_rtg_ats_matched")) {
 				util.registerActivity(request, "Get rtgs ats matched", "-");
@@ -156,12 +156,12 @@ public class RTGSService {
 	}
 
 	// This functionality is
-	// get_all_rtgs_core_for_recon=========================
-	public List<File_rtgs_awb_core> get_rtgs_core_for_view(HttpServletRequest request, String matched_date) {
+	// get_all_rtgs__for_recon=========================
+	public List<File_rtgs__> get_rtgs__for_view(HttpServletRequest request, String matched_date) {
 		try {
-			if (util.isPermitted(request, "User", "get_rtgs_core_matched")) {
-				util.registerActivity(request, "Get rtgs core matched trnsaction", "-");
-				return rtgsMapper.get_rtgs_core_for_view(matched_date.replace("-", ""),
+			if (util.isPermitted(request, "User", "get_rtgs__matched")) {
+				util.registerActivity(request, "Get rtgs  matched trnsaction", "-");
+				return rtgsMapper.get_rtgs__for_view(matched_date.replace("-", ""),
 						accountMapper.getUserAccountId(util.get_user_id(request)));
 			} else {
 				System.out.println("No user does not have permission.");
@@ -172,11 +172,11 @@ public class RTGSService {
 		}
 	}
 
-	public List<File_rtgs_awb_core> get_coreReversal_for_view(HttpServletRequest request, String matched_date) {
+	public List<File_rtgs__> get_Reversal_for_view(HttpServletRequest request, String matched_date) {
 		try {
-			if (util.isPermitted(request, "User", "get_rtgs_core_matched")) {
-				util.registerActivity(request, "Get rtgs core matched trnsaction", "-");
-				return rtgsMapper.get_coreReversal_for_view(matched_date.replace("-", ""));
+			if (util.isPermitted(request, "User", "get_rtgs__matched")) {
+				util.registerActivity(request, "Get rtgs  matched trnsaction", "-");
+				return rtgsMapper.get_Reversal_for_view(matched_date.replace("-", ""));
 			} else {
 				System.out.println("No user does not have permission.");
 				return null;
@@ -185,14 +185,14 @@ public class RTGSService {
 			throw new ExceptionsList(e);
 		}
 	}
-	public List<File_rtgs_awb_core> get_core_for_recon(HttpServletRequest request) {
+	public List<File_rtgs__> get__for_recon(HttpServletRequest request) {
 		try {
-			if (util.isPermitted(request, "User", "get_all_core_transaction_for_recon_manual")) {
-				util.registerActivity(request, "Get all core transactions for manual transaction",
-						"Get all core transactions for matching manually");
-				return rtgsMapper.get_core_for_recon(accountMapper.getUserAccountId(util.get_user_id(request)));
+			if (util.isPermitted(request, "User", "get_all__transaction_for_recon_manual")) {
+				util.registerActivity(request, "Get all  transactions for manual transaction",
+						"Get all  transactions for matching manually");
+				return rtgsMapper.get__for_recon(accountMapper.getUserAccountId(util.get_user_id(request)));
 			} else {
-				System.out.println("No user does not have permission. in: get_core_for_recon");
+				System.out.println("No user does not have permission. in: get__for_recon");
 				return null;
 			}
 		} catch (Exception e) {
@@ -201,13 +201,13 @@ public class RTGSService {
 	}
 
 	// This functionality is
-	// get_all_rgts_core_for_recon_auto=========================
-	public List<File_rtgs_awb_core> get_core_for_recon_auto(HttpServletRequest request, String recon_date) {
+	// get_all_rgts__for_recon_auto=========================
+	public List<File_rtgs__> get__for_recon_auto(HttpServletRequest request, String recon_date) {
 		try {
-			if (util.isPermitted(request, "User", "get_all_core_transaction_for_recon_auto")) {
-				util.registerActivity(request, "Get all Core transactions",
-						"Get Core transactions to match automatically");
-				return rtgsMapper.get_core_for_recon_auto(accountMapper.getUserAccountId(util.get_user_id(request)),
+			if (util.isPermitted(request, "User", "get_all__transaction_for_recon_auto")) {
+				util.registerActivity(request, "Get all  transactions",
+						"Get  transactions to match automatically");
+				return rtgsMapper.get__for_recon_auto(accountMapper.getUserAccountId(util.get_user_id(request)),
 						Integer.parseInt(recon_date.replace("-", "")));
 			} else {
 				System.out.println("No user does not have permission.");
@@ -218,12 +218,12 @@ public class RTGSService {
 		}
 	}
 
-	public List<File_rtgs_awb_core> get_core_for_recon_partial_auto(HttpServletRequest request, String recon_date) {
+	public List<File_rtgs__> get__for_recon_partial_auto(HttpServletRequest request, String recon_date) {
 		try {
-			if (util.isPermitted(request, "User", "get_all_partial_core_for_recon_auto")) {
-				util.registerActivity(request, "Get all Core partial automatic transactions",
-						"Get Core transactions to match automatically-partial");
-				return rtgsMapper.get_core_for_recon_partial_auto(
+			if (util.isPermitted(request, "User", "get_all_partial__for_recon_auto")) {
+				util.registerActivity(request, "Get all  partial automatic transactions",
+						"Get  transactions to match automatically-partial");
+				return rtgsMapper.get__for_recon_partial_auto(
 
 						accountMapper.getUserAccountId(util.get_user_id(request)),
 						Integer.parseInt(recon_date.replace("-", "")));
@@ -244,12 +244,12 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 				util.registerActivity(request, "match all transactions", "match all transactions automatically");
 				JsonObject id_data_object = JsonParser.parseString(data_ids).getAsJsonObject();
 				String[] type = id_data_object.get("type").getAsString().split(",");
-				String[] core_id = id_data_object.get("core_id").getAsString().split(",");
+				String[] _id = id_data_object.get("_id").getAsString().split(",");
 				String[] id_1_string = id_data_object.get("id_1").getAsString().split(",");
 				String[] id_2_string = id_data_object.get("id_2").getAsString().split(",");
 //				Long[] id_1 = new Long[id_1_string.length];
 			      List<Long> id_1List = new ArrayList<>();
-			        List<String> coreIdList = new ArrayList<>();
+			        List<String> IdList = new ArrayList<>();
 			        HashSet<Long> idSet = new HashSet<>();
 				for (int i = 0; i < id_1_string.length; i++) {
 					Long currentId = Long.parseLong(id_1_string[i]);
@@ -259,9 +259,9 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 		                // Duplicate found, remove the corresponding elements
 		                System.out.println("Duplicate ID found: " + currentId);
 
-		                // Remove the duplicate id_1 and corresponding core_id
+		                // Remove the duplicate id_1 and corresponding _id
 //		                id_1List.remove(i);
-//		                coreIdList.remove(i);
+//		                IdList.remove(i);
 
 		                // If you want to continue processing the next iteration
 //		                continue;
@@ -269,13 +269,13 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 		            else {
 			            // If no duplicate, add to the lists
 			            id_1List.add(currentId);
-			            coreIdList.add(core_id[i]);
+			            IdList.add(_id[i]);
 		            }
 				}
 				
 		        // Convert the ArrayLists back to arrays if needed
 		        Long[] id_1 = id_1List.toArray(new Long[0]);
-		        String[] core_idResult = coreIdList.toArray(new String[0]);
+		        String[] _idResult = IdList.toArray(new String[0]);
 
 				Long[] id_2 = new Long[id_2_string.length];
 				for (int i = 0; i < id_2_string.length; i++) {
@@ -289,21 +289,21 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 					String match_id = generateUniqueMatchId();
 
 					if (type[i].endsWith("103")) {
-						if(rtgsMapper.coreIdExist(Long.parseLong(core_idResult[i]))) {
+						if(rtgsMapper.IdExist(Long.parseLong(_idResult[i]))) {
 						
 						current_id = rtgsMapper.moveRtgsAtsData(id_1[i]);
-						typee = "rtgs_nbe_ats";
+						typee = "rtgs__ats";
 						matched_data_id = rtgsMapper.addRtgsMatched(current_id, match_id, date_now, "1",
 								id_1.length > 1 && id_2.length > 1 ? "1".toString() : "0".toString(), "1", "1");
 						rtgsMapper.addUserRtgsMatched(util.get_user_id(request), matched_data_id, date_now, "1", "1",
 								"1");
 						rtgsMapper.updateEditReason(current_id, matched_data_id, typee, id_1[i]);
 
-						current_id = rtgsMapper.moveRtgsCoreData(Long.parseLong(core_idResult[i]), match_id);
-						typee = "rtgs_awb_core";
-						rtgsMapper.updateEditReason(current_id, matched_data_id, typee, Long.parseLong(core_idResult[i]));
+						current_id = rtgsMapper.moveRtgsData(Long.parseLong(_idResult[i]), match_id);
+						typee = "rtgs__";
+						rtgsMapper.updateEditReason(current_id, matched_data_id, typee, Long.parseLong(_idResult[i]));
 
-						//// Long id_2_2 = rtgsMapper.getMatchedIdsFromCoreByAtsId(id_1[i],
+						//// Long id_2_2 = rtgsMapper.getMatchedIdsFromByAtsId(id_1[i],
 						//// recon_date.replace("-", ""));
 						}
 						else
@@ -311,18 +311,18 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 					}
 
 					else if (type[i].endsWith("202")) {
-						if(rtgsMapper.coreIdExist(Long.parseLong(core_idResult[i]))) {
+						if(rtgsMapper.IdExist(Long.parseLong(_idResult[i]))) {
 						current_id = rtgsMapper.moveB2bAtsData(id_1[i]);
-						typee = "b2b_nbe_ats";
+						typee = "b2b__ats";
 						matched_data_id = rtgsMapper.addB2bMatched(current_id, match_id, date_now, "1",
 								id_1.length > 1 && id_2.length > 1 ? "1".toString() : "0".toString(), "1", "1");
 						rtgsMapper.addUserB2bMatched(util.get_user_id(request), matched_data_id, date_now, "1", "1",
 								"1");
 						rtgsMapper.updateEditReason(current_id, matched_data_id, typee, id_1[i]);
 
-						current_id = rtgsMapper.moveB2bCoreData(Long.parseLong(core_idResult[i]), match_id);
-						typee = "b2b_awb_core";
-						rtgsMapper.updateEditReason(current_id, matched_data_id, typee, Long.parseLong(core_idResult[i]));
+						current_id = rtgsMapper.moveB2bData(Long.parseLong(_idResult[i]), match_id);
+						typee = "b2b__";
+						rtgsMapper.updateEditReason(current_id, matched_data_id, typee, Long.parseLong(_idResult[i]));
 						
 						}
 						else
@@ -330,12 +330,12 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 					}
 
 					else if (type[i].endsWith("204")) {
-						if(rtgsMapper.coreIdExist(Long.parseLong(core_idResult[i]))) {
+						if(rtgsMapper.IdExist(Long.parseLong(_idResult[i]))) {
 						rtgsMapper.addUserErcaMatched(util.get_user_id(request),
 								rtgsMapper.addErcaMatched(rtgsMapper.moveErcaAtsData(id_1[i]), match_id, date_now, "1",
 										id_1.length > 1 && id_2.length > 1 ? "1".toString() : "0".toString(), "1", "1"),
 								date_now, "1", "1", "1");
-						rtgsMapper.moveErcaCoreData(Long.parseLong(core_idResult[i]), match_id);
+						rtgsMapper.moveErcaData(Long.parseLong(_idResult[i]), match_id);
 						
 						}
 						else
@@ -344,12 +344,12 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 					}
 
 					else if (type[i].endsWith("298smt201") || type[i].endsWith("205")) {
-						if(rtgsMapper.coreIdExist(Long.parseLong(core_idResult[i]))) {
+						if(rtgsMapper.IdExist(Long.parseLong(_idResult[i]))) {
 						rtgsMapper.addUserSosMatched(util.get_user_id(request),
 								rtgsMapper.addSosMatched(rtgsMapper.moveSosAtsData(id_1[i]), match_id, date_now, "1",
 										id_1.length > 1 && id_2.length > 1 ? "1".toString() : "0".toString(), "1", "1"),
 								date_now, "1", "1", "1");
-						rtgsMapper.moveSosCoreData(Long.parseLong(core_idResult[i]), match_id);
+						rtgsMapper.moveSosData(Long.parseLong(_idResult[i]), match_id);
 					}
 					else
 						continue;
@@ -374,7 +374,7 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 						"match all transactions automatically to partial");
 				JsonObject id_data_object = JsonParser.parseString(data_ids).getAsJsonObject();
 				// String[] type = id_data_object.get("type").getAsString().split(",");
-				String[] core_id = id_data_object.get("core_id").getAsString().split(",");
+				String[] _id = id_data_object.get("_id").getAsString().split(",");
 				String[] id_1_string = id_data_object.get("id_1").getAsString().split(",");
 				String[] id_2_string = id_data_object.get("id_2").getAsString().split(",");
 				Long[] id_1 = new Long[id_1_string.length];
@@ -390,15 +390,15 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 
 				for (int i = 0; i < id_1.length; i++) {
 					Double ats_amount = rtgsMapper.getAtsAmount(id_1[i]);
-					Double core_amount = rtgsMapper.getCoreAmount(core_id[i]);
+					Double _amount = rtgsMapper.getAmount(_id[i]);
 					String reference = rtgsMapper.getReference(id_1[i]);
-					Double diff = (ats_amount - core_amount);
+					Double diff = (ats_amount - _amount);
 
 					Comment comment = new Comment();
 					comment.setTitle("partial match");
 					comment.setAmount_difference(diff);
 					comment.setDescription("Transaction is matched partially because total ammount at ATS is "
-							+ ats_amount + " and total amount at core is " + core_amount + " with the same reference "
+							+ ats_amount + " and total amount at  is " + _amount + " with the same reference "
 							+ reference);
 					Long comment_id = rtgsMapper.addReason(comment);
 					String match_id = generateUniqueMatchId();
@@ -411,9 +411,9 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 					rtgsMapper.addUserPartialMatched(util.get_user_id(request), matched_data_id, "1", "1");
 					rtgsMapper.updateEditReason(current_id, matched_data_id, type, id_1[i]);
 
-					current_id = rtgsMapper.moveCorePartiallyMatched(Long.parseLong(core_id[i]), match_id);
-					type = "core_partialy_matched";
-					rtgsMapper.updateEditReason(current_id, matched_data_id, type, Long.parseLong(core_id[i]));
+					current_id = rtgsMapper.movePartiallyMatched(Long.parseLong(_id[i]), match_id);
+					type = "_partialy_matched";
+					rtgsMapper.updateEditReason(current_id, matched_data_id, type, Long.parseLong(_id[i]));
 
 				}
 
@@ -460,8 +460,8 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 					rtgsMapper.updateEditReason(current_id, matched_data_id, type, id_1.get(i));
 				}
 				for (int i = 0; i < id_2.size(); i++) {
-					current_id = rtgsMapper.moveCorePartiallyMatched(id_2.get(i), match_id);
-					type = "core_partialy_matched";
+					current_id = rtgsMapper.movePartiallyMatched(id_2.get(i), match_id);
+					type = "_partialy_matched";
 					rtgsMapper.updateEditReason(current_id, matched_data_id, type, id_2.get(i));
 				}
 				return true;
@@ -506,7 +506,7 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 
 					for (int i = 0; i < id_1.length; i++) {
 						current_id = rtgsMapper.moveRtgsAtsData(id_1[i]);
-						type = "rtgs_nbe_ats";
+						type = "rtgs__ats";
 						matched_data_id = rtgsMapper.addRtgsMatched(current_id, match_id, date_now, "1",
 								id_1.length > 1 && id_2.length > 1 ? "1".toString() : "0".toString(), "1", "1");
 						rtgsMapper.addUserRtgsMatched(util.get_user_id(request), matched_data_id, date_now, "1", "1",
@@ -514,14 +514,14 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 						rtgsMapper.updateEditReason(current_id, matched_data_id, type, id_1[i]);
 					}
 					for (int i = 0; i < id_2.length; i++) {
-						type = "rtgs_awb_core";
-						current_id = rtgsMapper.moveRtgsCoreData(id_2[i], match_id);
+						type = "rtgs__";
+						current_id = rtgsMapper.moveRtgsData(id_2[i], match_id);
 						rtgsMapper.updateEditReason(current_id, matched_data_id, type, id_2[i]);
 					}
 				} else if (id_1[0] != null && 1 == rtgsMapper.isErca(id_1[0])) {
 					for (int i = 0; i < id_1.length; i++) {
 						current_id = rtgsMapper.moveErcaAtsData(id_1[i]);
-						type = "erca_nbe_ats";
+						type = "erca__ats";
 						matched_data_id = rtgsMapper.addErcaMatched(current_id, match_id, date_now, "1",
 								id_1.length > 1 && id_2.length > 1 ? "1".toString() : "0".toString(), "1", "1");
 						rtgsMapper.addUserErcaMatched(util.get_user_id(request), matched_data_id, date_now, "1", "1",
@@ -529,8 +529,8 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 						rtgsMapper.updateEditReason(current_id, matched_data_id, type, id_1[i]);
 					}
 					for (int i = 0; i < id_2.length; i++) {
-						type = "erca_awb_core";
-						current_id = rtgsMapper.moveErcaCoreData(id_2[i], match_id);
+						type = "erca__";
+						current_id = rtgsMapper.moveErcaData(id_2[i], match_id);
 						rtgsMapper.updateEditReason(current_id, matched_data_id, type, id_2[i]);
 					}
 
@@ -538,7 +538,7 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 					System.out.println("it is sos");
 					for (int i = 0; i < id_1.length; i++) {
 						current_id = rtgsMapper.moveSosAtsData(id_1[i]);
-						type = "sos_nbe_ats";
+						type = "sos__ats";
 						matched_data_id = rtgsMapper.addSosMatched(current_id, match_id, date_now, "1",
 								id_1.length > 1 && id_2.length > 1 ? "1".toString() : "0".toString(), "1", "1");
 						rtgsMapper.addUserSosMatched(util.get_user_id(request), matched_data_id, date_now, "1", "1",
@@ -546,8 +546,8 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 						rtgsMapper.updateEditReason(current_id, matched_data_id, type, id_1[i]);
 					}
 					for (int i = 0; i < id_2.length; i++) {
-						type = "sos_awb_core";
-						current_id = rtgsMapper.moveSosCoreData(id_2[i], match_id);
+						type = "sos__";
+						current_id = rtgsMapper.moveSosData(id_2[i], match_id);
 						rtgsMapper.updateEditReason(current_id, matched_data_id, type, id_2[i]);
 					}
 
@@ -557,7 +557,7 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 					System.out.println(id_2[0]);
 					for (int i = 0; i < id_1.length; i++) {
 						current_id = rtgsMapper.moveB2bAtsData(id_1[i]);
-						type = "b2b_nbe_ats";
+						type = "b2b__ats";
 						matched_data_id = rtgsMapper.addB2bMatched(current_id, match_id, date_now, "1",
 								id_1.length > 1 && id_2.length > 1 ? "1".toString() : "0".toString(), "1", "1");
 						rtgsMapper.addUserB2bMatched(util.get_user_id(request), matched_data_id, date_now, "1", "1",
@@ -565,8 +565,8 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 						rtgsMapper.updateEditReason(current_id, matched_data_id, type, id_1[i]);
 					}
 					for (int i = 0; i < id_2.length; i++) {
-						type = "b2b_awb_core";
-						current_id = rtgsMapper.moveB2bCoreData(id_2[i], match_id);
+						type = "b2b__";
+						current_id = rtgsMapper.moveB2bData(id_2[i], match_id);
 						rtgsMapper.updateEditReason(current_id, matched_data_id, type, id_2[i]);
 					}
 				} else {
@@ -603,8 +603,8 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
              for(int i=0;i<id_2.length;i++)
              {
             System.out.println("this is matched by "+rtgsMapper.fullName(util.getUserId(request)));
-            	 rtgsMapper.moveCoreReversalData(id_2[i], match_id,date_now,rtgsMapper.fullName(util.getUserId(request))); 
-            		type = "awb_core_reversal";
+            	 rtgsMapper.moveReversalData(id_2[i], match_id,date_now,rtgsMapper.fullName(util.getUserId(request))); 
+            		type = "__reversal";
 //					rtgsMapper.updateEditReason(current_id, matched_data_id, type, id_2[i]);
              }
 
@@ -648,7 +648,7 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 				if (id_1[0] != null && 1 == rtgsMapper.isRtgs(id_1[0])) {
 					for (int i = 0; i < id_1.length; i++) {
 						current_id = rtgsMapper.moveRtgsAtsData(id_1[i]);
-						typee = "rtgs_nbe_ats";
+						typee = "rtgs__ats";
 						matched_data_id = rtgsMapper.addRtgsMatched(current_id, match_id, date_now, "1",
 								id_1.length > 1 && id_2.length > 1 ? "1".toString() : "0".toString(), "1", "1");
 						rtgsMapper.addUserRtgsMatched(util.get_user_id(request), matched_data_id, date_now, "1", "1",
@@ -656,8 +656,8 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 						rtgsMapper.updateEditReason(current_id, matched_data_id, typee, id_1[i]);
 					}
 					for (int i = 0; i < id_2.length; i++) {
-						typee = "rtgs_awb_core";
-						current_id = rtgsMapper.moveRtgsCoreData(id_2[i], match_id);
+						typee = "rtgs__";
+						current_id = rtgsMapper.moveRtgsData(id_2[i], match_id);
 						rtgsMapper.updateEditReason(current_id, matched_data_id, typee, id_2[i]);
 					}
 					if (type.equalsIgnoreCase("reference")) {
@@ -671,7 +671,7 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 				} else if (id_1[0] != null && 1 == rtgsMapper.isErca(id_1[0])) {
 					for (int i = 0; i < id_1.length; i++) {
 						current_id = rtgsMapper.moveErcaAtsData(id_1[i]);
-						typee = "erca_nbe_ats";
+						typee = "erca__ats";
 						matched_data_id = rtgsMapper.addErcaMatched(current_id, match_id, date_now, "1",
 								id_1.length > 1 && id_2.length > 1 ? "1".toString() : "0".toString(), "1", "1");
 						rtgsMapper.addUserErcaMatched(util.get_user_id(request), matched_data_id, date_now, "1", "1",
@@ -679,8 +679,8 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 						rtgsMapper.updateEditReason(current_id, matched_data_id, typee, id_1[i]);
 					}
 					for (int i = 0; i < id_2.length; i++) {
-						typee = "erca_awb_core";
-						current_id = rtgsMapper.moveErcaCoreData(id_2[i], match_id);
+						typee = "erca__";
+						current_id = rtgsMapper.moveErcaData(id_2[i], match_id);
 						rtgsMapper.updateEditReason(current_id, matched_data_id, typee, id_2[i]);
 					}
 
@@ -696,7 +696,7 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 					System.out.println("it is sos");
 					for (int i = 0; i < id_1.length; i++) {
 						current_id = rtgsMapper.moveSosAtsData(id_1[i]);
-						typee = "sos_nbe_ats";
+						typee = "sos__ats";
 						matched_data_id = rtgsMapper.addSosMatched(current_id, match_id, date_now, "1",
 								id_1.length > 1 && id_2.length > 1 ? "1".toString() : "0".toString(), "1", "1");
 						rtgsMapper.addUserSosMatched(util.get_user_id(request), matched_data_id, date_now, "1", "1",
@@ -704,8 +704,8 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 						rtgsMapper.updateEditReason(current_id, matched_data_id, typee, id_1[i]);
 					}
 					for (int i = 0; i < id_2.length; i++) {
-						typee = "sos_awb_core";
-						current_id = rtgsMapper.moveSosCoreData(id_2[i], match_id);
+						typee = "sos__";
+						current_id = rtgsMapper.moveSosData(id_2[i], match_id);
 						rtgsMapper.updateEditReason(current_id, matched_data_id, typee, id_2[i]);
 					}
 
@@ -721,7 +721,7 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 
 					for (int i = 0; i < id_1.length; i++) {
 						current_id = rtgsMapper.moveB2bAtsData(id_1[i]);
-						typee = "b2b_nbe_ats";
+						typee = "b2b__ats";
 						matched_data_id = rtgsMapper.addB2bMatched(current_id, match_id, date_now, "1",
 								id_1.length > 1 && id_2.length > 1 ? "1".toString() : "0".toString(), "1", "1");
 						rtgsMapper.addUserB2bMatched(util.get_user_id(request), matched_data_id, date_now, "1", "1",
@@ -729,8 +729,8 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 						rtgsMapper.updateEditReason(current_id, matched_data_id, typee, id_1[i]);
 					}
 					for (int i = 0; i < id_2.length; i++) {
-						typee = "b2b_awb_core";
-						current_id = rtgsMapper.moveB2bCoreData(id_2[i], match_id);
+						typee = "b2b__";
+						current_id = rtgsMapper.moveB2bData(id_2[i], match_id);
 						rtgsMapper.updateEditReason(current_id, matched_data_id, typee, id_2[i]);
 					}
 					if (type.equalsIgnoreCase("reference")) {
@@ -779,15 +779,15 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 				String type = "";
 				Long matched_data_id = null;
 				for (int i = 0; i < id_2.length; i++) {
-					System.out.println("Core id=" + id_2[i]);
-					current_id = rtgsMapper.moveRtgsCoreMatched(id_2[i]);
-					type = "data_awb_core";
+					System.out.println(" id=" + id_2[i]);
+					current_id = rtgsMapper.moveRtgsMatched(id_2[i]);
+					type = "data__";
 					rtgsMapper.updateEditReason(current_id, matched_data_id, type, id_2[i]);
 					System.out.println("edite reason updated after unmatche id----->" + id_2[i]);
 
 					// matched_id = rtgsMapper.findMatchedId(id_2[i]);
 					// rtgsMapper.deleteMatchTransaction(matched_id);
-					// rtgsMapper.updateUnMatchStatus_core(id_2[i]);
+					// rtgsMapper.updateUnMatchStatus_(id_2[i]);
 				}
 
 				for (int i = 0; i < id_1.length; i++) {
@@ -795,7 +795,7 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 					rtgsMapper.deleteRtgsMatched(id_1[i]);
 
 					current_id = rtgsMapper.moveRtgsAtsMatchedToData(id_1[i]);
-					type = "data_nbe_ats";
+					type = "data__ats";
 					rtgsMapper.updateEditReason(current_id, matched_data_id, type, id_1[i]);
 					System.out.println("edite reason updated after unmatche id----->" + id_1[i]);
 					// rtgsMapper.deleteUserRtgsMatched(id_1[i]);
@@ -821,7 +821,7 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 		}
 	}
 
-	public Boolean unmatch_core_reversal_transactions(HttpServletRequest request, String data_ids) {
+	public Boolean unmatch__reversal_transactions(HttpServletRequest request, String data_ids) {
 		try {
 			if (util.isPermitted(request, "User", "unmatch_transactions_rgts")) {
 				util.registerActivity(request, "unmatch transactions rgts", "-");
@@ -840,7 +840,7 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 				String type = "";
 				Long matched_data_id = null;
 				for (int i = 0; i < id_2.length; i++) {
-				 rtgsMapper.moveCoreReversalMatched(id_2[i]);
+				 rtgsMapper.moveReversalMatched(id_2[i]);
 				}
 
 				return true;
@@ -864,7 +864,7 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 
 	}
 
-	public List<File_rtgs_nbe_ats> get_ats_for_recon_partial(HttpServletRequest request) {
+	public List<File_rtgs__ats> get_ats_for_recon_partial(HttpServletRequest request) {
 		try {
 			if (util.isPermitted(request, "User", "get_ats_for_recon_partial")) {
 
@@ -880,11 +880,11 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 		}
 	}
 
-	public List<File_rtgs_awb_core> get_core_for_recon_partial(HttpServletRequest request) {
+	public List<File_rtgs__> get__for_recon_partial(HttpServletRequest request) {
 		try {
-			if (util.isPermitted(request, "User", "get_core_for_recon_partial")) {
-				util.registerActivity(request, "Get all Rtgs Core For Recon - partial", "-");
-				return rtgsMapper.get_core_for_recon_partial(accountMapper.getUserAccountId(util.get_user_id(request)));
+			if (util.isPermitted(request, "User", "get__for_recon_partial")) {
+				util.registerActivity(request, "Get all Rtgs  For Recon - partial", "-");
+				return rtgsMapper.get__for_recon_partial(accountMapper.getUserAccountId(util.get_user_id(request)));
 			} else {
 				System.out.println("No user does not have permission.");
 				return null;
@@ -894,7 +894,7 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 		}
 	}
 
-	public Boolean update_transaction(HttpServletRequest request, File_rtgs_nbe_ats edit_data) {
+	public Boolean update_transaction(HttpServletRequest request, File_rtgs__ats edit_data) {
 		try {
 			if (util.isPermitted(request, "User", "update_transaction")) {
 				util.registerActivity(request, "Update transaction", "-");
@@ -902,17 +902,17 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 				System.out.println("type:-------------------> " + edit_data.getType());
 				System.out.println("reference:-------------------> " + edit_data.getReference());
 				String type = "";
-				if (edit_data.getType().equalsIgnoreCase("CORE")) {
-					type = "data_awb_core";
-					Long edit_reason_id = rtgsMapper.addReasonForEditCore(edit_data.getId(), user_id, type,
+				if (edit_data.getType().equalsIgnoreCase("")) {
+					type = "data__";
+					Long edit_reason_id = rtgsMapper.addReasonForEdit(edit_data.getId(), user_id, type,
 							edit_data.getReason(), new Date().toString(), "1", "1", "1");
-					rtgsMapper.moveOldCoreData(edit_data.getId(), edit_reason_id);
+					rtgsMapper.moveOldData(edit_data.getId(), edit_reason_id);
 
-					rtgsMapper.updateTransactionCore(edit_data);
-					rtgsMapper.moveEditedCoreData(edit_data.getId(), edit_reason_id);
+					rtgsMapper.updateTransaction(edit_data);
+					rtgsMapper.moveEditedData(edit_data.getId(), edit_reason_id);
 				} else if (edit_data.getType().equalsIgnoreCase("payable")) {
 					type = "data_payable";
-					Long edit_reason_id = rtgsMapper.addReasonForEditCore(edit_data.getId(), user_id, type,
+					Long edit_reason_id = rtgsMapper.addReasonForEdit(edit_data.getId(), user_id, type,
 							edit_data.getReason(), new Date().toString(), "1", "1", "1");
 					rtgsMapper.moveOldPayableData(edit_data.getId(), edit_reason_id);
 
@@ -921,7 +921,7 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 
 				} else if (edit_data.getType().equalsIgnoreCase("ATS")) {
 
-					type = "data_nbe_ats";
+					type = "data__ats";
 
 					Long edit_reason_id = rtgsMapper.addReasonForEdit(edit_data.getId(), user_id, type,
 							edit_data.getReason(), new Date().toString(), "1", "1", "1");
@@ -958,22 +958,22 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 				for (int i = 0; i < ids.length; i++) {
 					System.out.println("hello world");
 					if (type != null && type.equalsIgnoreCase("ats")) {
-						type1 = "data_nbe_ats";
+						type1 = "data__ats";
 						Long reason_id = rtgsMapper.addReasonForEdit(ids[i], user_id, type1, reason,
 								new Date().toString(), "1", "1", "2");
 						rtgsMapper.moveDeletedAtsData(ids[i], reason_id);
 						rtgsMapper.deleteTransaction(ids[i]);
-					} else if (type != null && type.equalsIgnoreCase("core")) {
-						type1 = "data_awb_core";
-						System.out.println("it is core and the id is: " + ids[i]);
-						Long reason_id = rtgsMapper.addReasonForEditCore(ids[i], user_id, type1, reason,
+					} else if (type != null && type.equalsIgnoreCase("")) {
+						type1 = "data__";
+						System.out.println("it is  and the id is: " + ids[i]);
+						Long reason_id = rtgsMapper.addReasonForEdit(ids[i], user_id, type1, reason,
 								new Date().toString(), "1", "1", "2");
-						rtgsMapper.moveDeletedCoreData(ids[i], reason_id);
-						rtgsMapper.deleteTransactionCore(ids[i]);
+						rtgsMapper.moveDeletedData(ids[i], reason_id);
+						rtgsMapper.deleteTransaction(ids[i]);
 					} else if (type != null && type.equalsIgnoreCase("payable")) {
 						type1 = "data_payable";
-						System.out.println("it is core and the id is: " + ids[i]);
-						Long reason_id = rtgsMapper.addReasonForEditCore(ids[i], user_id, type1, reason,
+						System.out.println("it is  and the id is: " + ids[i]);
+						Long reason_id = rtgsMapper.addReasonForEdit(ids[i], user_id, type1, reason,
 								new Date().toString(), "1", "1", "2");
 						rtgsMapper.moveDeletedPayableData(ids[i], reason_id);
 						rtgsMapper.deleteTransactionpayable(ids[i]);
@@ -997,13 +997,13 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 				JsonObject id_data_object = JsonParser.parseString(data_ids).getAsJsonObject();
 				String[] b2b_new_ids_ats_string = id_data_object.get("b2b_new_ids_ats").getAsString().split(",");
 				String[] b2b_old_ids_ats_string = id_data_object.get("b2b_old_ids_ats").getAsString().split(",");
-				String[] b2b_new_ids_core_string = id_data_object.get("b2b_new_ids_core").getAsString().split(",");
-				String[] b2b_old_ids_core_string = id_data_object.get("b2b_old_ids_core").getAsString().split(",");
+				String[] b2b_new_ids__string = id_data_object.get("b2b_new_ids_").getAsString().split(",");
+				String[] b2b_old_ids__string = id_data_object.get("b2b_old_ids_").getAsString().split(",");
 
 				System.out.println("d: " + b2b_new_ids_ats_string[0]);
 				System.out.println("d: " + b2b_old_ids_ats_string[0]);
-				System.out.println("d: " + b2b_new_ids_core_string[0]);
-				System.out.println("d: " + b2b_old_ids_core_string[0]);
+				System.out.println("d: " + b2b_new_ids__string[0]);
+				System.out.println("d: " + b2b_old_ids__string[0]);
 
 				Long[] b2b_new_ids_ats = new Long[b2b_new_ids_ats_string.length];
 				if (!b2b_new_ids_ats_string[0].equals(""))
@@ -1015,15 +1015,15 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 					for (int i = 0; i < b2b_old_ids_ats_string.length; i++) {
 						b2b_old_ids_ats[i] = Long.parseLong(b2b_old_ids_ats_string[i]);
 					}
-				Long[] b2b_new_ids_core = new Long[b2b_new_ids_core_string.length];
-				if (!b2b_new_ids_core_string[0].equals(""))
-					for (int i = 0; i < b2b_new_ids_core_string.length; i++) {
-						b2b_new_ids_core[i] = Long.parseLong(b2b_new_ids_core_string[i]);
+				Long[] b2b_new_ids_ = new Long[b2b_new_ids__string.length];
+				if (!b2b_new_ids__string[0].equals(""))
+					for (int i = 0; i < b2b_new_ids__string.length; i++) {
+						b2b_new_ids_[i] = Long.parseLong(b2b_new_ids__string[i]);
 					}
-				Long[] b2b_old_ids_core = new Long[b2b_old_ids_core_string.length];
-				if (!b2b_old_ids_core_string[0].equals(""))
-					for (int i = 0; i < b2b_old_ids_core_string.length; i++) {
-						b2b_old_ids_core[i] = Long.parseLong(b2b_old_ids_core_string[i]);
+				Long[] b2b_old_ids_ = new Long[b2b_old_ids__string.length];
+				if (!b2b_old_ids__string[0].equals(""))
+					for (int i = 0; i < b2b_old_ids__string.length; i++) {
+						b2b_old_ids_[i] = Long.parseLong(b2b_old_ids__string[i]);
 					}
 				String match_id = generateUniqueMatchId();
 				Long date_now = Long.parseLong(DateTimeFormatter.ofPattern("yyyyMMdd").format(LocalDateTime.now()));
@@ -1034,7 +1034,7 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 
 					for (int i = 0; i < b2b_new_ids_ats.length; i++) {
 						current_id = rtgsMapper.moveB2bAtsData(b2b_new_ids_ats[i]);
-						type = "b2b_nbe_ats";
+						type = "b2b__ats";
 						matched_data_id = rtgsMapper.addB2bMatched(current_id, match_id, date_now, "1", "0", "1", "1");
 						rtgsMapper.addUserB2bMatched(util.get_user_id(request), matched_data_id, date_now, "1", "1",
 								"1");
@@ -1043,11 +1043,11 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 
 				}
 
-				if (b2b_new_ids_core[0] != null) {
-					for (int i = 0; i < b2b_new_ids_core.length; i++) {
-						current_id = rtgsMapper.moveB2bCoreData(b2b_new_ids_core[i], match_id);
-						type = "b2b_awb_core";
-						rtgsMapper.updateEditReason(current_id, matched_data_id, type, b2b_new_ids_core[i]);
+				if (b2b_new_ids_[0] != null) {
+					for (int i = 0; i < b2b_new_ids_.length; i++) {
+						current_id = rtgsMapper.moveB2bData(b2b_new_ids_[i], match_id);
+						type = "b2b__";
+						rtgsMapper.updateEditReason(current_id, matched_data_id, type, b2b_new_ids_[i]);
 
 					}
 				}
@@ -1056,7 +1056,7 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 
 					for (int i = 0; i < b2b_old_ids_ats.length; i++) {
 						current_id = rtgsMapper.moveB2bAtsDataFromPartial(b2b_old_ids_ats[i]);
-						type = "b2b_nbe_ats";
+						type = "b2b__ats";
 						matched_data_id = rtgsMapper.addB2bMatched(current_id, match_id, date_now, "1", "0", "1", "1");
 						rtgsMapper.addUserB2bMatched(util.get_user_id(request), matched_data_id, date_now, "1", "1",
 								"1");
@@ -1065,11 +1065,11 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 
 				}
 
-				if (b2b_old_ids_core[0] != null) {
-					for (int i = 0; i < b2b_old_ids_core.length; i++) {
-						current_id = rtgsMapper.moveB2bCoreDataFromPartial(b2b_old_ids_core[i], match_id);
-						type = "b2b_awb_core";
-						rtgsMapper.updateEditReason(current_id, matched_data_id, type, b2b_old_ids_core[i]);
+				if (b2b_old_ids_[0] != null) {
+					for (int i = 0; i < b2b_old_ids_.length; i++) {
+						current_id = rtgsMapper.moveB2bDataFromPartial(b2b_old_ids_[i], match_id);
+						type = "b2b__";
+						rtgsMapper.updateEditReason(current_id, matched_data_id, type, b2b_old_ids_[i]);
 					}
 				}
 				return true;
@@ -1082,7 +1082,7 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 		}
 	}
 
-	public List<File_rtgs_nbe_ats> get_edited_ats(HttpServletRequest request) {
+	public List<File_rtgs__ats> get_edited_ats(HttpServletRequest request) {
 		try {
 			if (util.isPermitted(request, "User", "get_edited_ats_transaction")) {
 				util.registerActivity(request, "Get all edited ats transaction", "-");
@@ -1096,11 +1096,11 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 		}
 	}
 
-	public List<File_rtgs_awb_core> get_edited_core(HttpServletRequest request) {
+	public List<File_rtgs__> get_edited_(HttpServletRequest request) {
 		try {
-			if (util.isPermitted(request, "User", "get_edited_core_transaction")) {
-				util.registerActivity(request, "Get all edited core transaction", "-");
-				return rtgsMapper.get_edited_core();
+			if (util.isPermitted(request, "User", "get_edited__transaction")) {
+				util.registerActivity(request, "Get all edited  transaction", "-");
+				return rtgsMapper.get_edited_();
 			} else {
 				System.out.println("No user does not have permission.");
 				return null;
@@ -1110,7 +1110,7 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 		}
 	}
 
-	public List<File_rtgs_nbe_ats> get_edited_detail_ats(HttpServletRequest request, Long id) {
+	public List<File_rtgs__ats> get_edited_detail_ats(HttpServletRequest request, Long id) {
 		try {
 			if (util.isPermitted(request, "User", "get_detail_edited_ats_transaction")) {
 				util.registerActivity(request, "Get detail edited ats transaction", "-");
@@ -1125,12 +1125,12 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 		}
 	}
 
-	public List<File_rtgs_awb_core> get_edited_detail_core(HttpServletRequest request, Long id) {
+	public List<File_rtgs__> get_edited_detail_(HttpServletRequest request, Long id) {
 		try {
-			if (util.isPermitted(request, "User", "get_detail_edited_core_transaction")) {
-				util.registerActivity(request, "Get detail edited core transaction", "-");
-				System.out.println("id-------->" + rtgsMapper.get_edited_detail_core(id));
-				return rtgsMapper.get_edited_detail_core(id);
+			if (util.isPermitted(request, "User", "get_detail_edited__transaction")) {
+				util.registerActivity(request, "Get detail edited  transaction", "-");
+				System.out.println("id-------->" + rtgsMapper.get_edited_detail_(id));
+				return rtgsMapper.get_edited_detail_(id);
 			} else {
 				System.out.println("No user does not have permission.");
 				return null;
@@ -1165,7 +1165,7 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 			System.out.println("-------------------Tag nuber=" + search.getTag_number());
 			System.out.println("-------------------categoryyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy=" + search.getCategory());
 			
-			System.out.println("-------------------categoryyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy=" + search.getCategoryStockCore());
+			System.out.println("-------------------categoryyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy=" + search.getCategoryStock());
 			System.out.println("-------------------categoryyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy=" + search.getCategoryStockMMs());
 
 
@@ -1411,12 +1411,12 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 								min_match_date, max_match_date, reference, value_date);
 					}
 
-				} else if (search.getType().equalsIgnoreCase("CORE")) {
+				} else if (search.getType().equalsIgnoreCase("")) {
 
 					if (min_upload_date == 0 && max_upload_date == 0 && search.getMin_amount() != ""
 							&& search.getMax_amount() != "" && min_match_date == 0 && max_match_date == 0) {
 
-						general = rtgsMapper.searchWithAmountCore(Float.parseFloat(search.getMin_amount()),
+						general = rtgsMapper.searchWithAmount(Float.parseFloat(search.getMin_amount()),
 								Float.parseFloat(search.getMax_amount()), reference, value_date, branch_code);
 
 					}
@@ -1424,7 +1424,7 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 					else if (min_upload_date == 0 && max_upload_date == 0 && search.getMin_amount() != ""
 							&& search.getMax_amount() == "" && min_match_date == 0 && max_match_date == 0) {
 
-						general = rtgsMapper.searchWithMinAmountCore(Float.parseFloat(search.getMin_amount()),
+						general = rtgsMapper.searchWithMinAmount(Float.parseFloat(search.getMin_amount()),
 								reference, value_date, branch_code);
 
 					}
@@ -1433,7 +1433,7 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 					else if (min_upload_date == 0 && max_upload_date == 0 && search.getMin_amount() == ""
 							&& search.getMax_amount() != "" && min_match_date == 0 && max_match_date == 0) {
 
-						general = rtgsMapper.searchWithMaxAmountCore(Float.parseFloat(search.getMax_amount()),
+						general = rtgsMapper.searchWithMaxAmount(Float.parseFloat(search.getMax_amount()),
 								reference, value_date, branch_code);
 
 					}
@@ -1442,13 +1442,13 @@ public Boolean match_all_transactions(HttpServletRequest request, String data_id
 							&& search.getMax_amount() == "" && min_match_date == 0 && max_match_date == 0
 							&& reference != "" && value_date == "" && branch_code == "") {
 
-						general = rtgsMapper.searchWithReferenceCore(reference);
+						general = rtgsMapper.searchWithReference(reference);
 
 					} else if (min_upload_date == 0 && max_upload_date == 0 && search.getMin_amount() == ""
 							&& search.getMax_amount() == "" && min_match_date == 0 && max_match_date == 0
 							&& value_date != "" && reference == "" && branch_code == "") {
 System.out.println("111111111111111111111111111111111");
-						general = rtgsMapper.searchWithValueDateCore(value_date);
+						general = rtgsMapper.searchWithValueDate(value_date);
 
 					}
 
@@ -1456,7 +1456,7 @@ System.out.println("111111111111111111111111111111111");
 							&& search.getMax_amount() == "" && min_match_date == 0 && max_match_date == 0
 							&& branch_code != "" && reference == "" && value_date == "") {
 						System.out.println("2222222222222222222222222222222222");
-						general = rtgsMapper.searchWithBranchCodeCore(branch_code);
+						general = rtgsMapper.searchWithBranchCode(branch_code);
 
 					}
 
@@ -1464,13 +1464,13 @@ System.out.println("111111111111111111111111111111111");
 							&& search.getMax_amount() == "" && min_match_date == 0 && max_match_date == 0
 							&& value_date != "" && reference != "" && branch_code == "") {
 						System.out.println("33333333333333333333333333");
-						general = rtgsMapper.searchWithValueDateAndReferenceCore(value_date, reference);
+						general = rtgsMapper.searchWithValueDateAndReference(value_date, reference);
 
 					} else if (min_upload_date == 0 && max_upload_date == 0 && search.getMin_amount() == ""
 							&& search.getMax_amount() == "" && min_match_date == 0 && max_match_date == 0
 							&& value_date != "" && branch_code != "" && reference == "") {
 						System.out.println("4444444444444444444444444444444444444444");
-						general = rtgsMapper.searchWithValueDateAndBranchCodeCore(value_date, branch_code);
+						general = rtgsMapper.searchWithValueDateAndBranchCode(value_date, branch_code);
 
 					} else if (min_upload_date == 0 && max_upload_date == 0 && search.getMin_amount() == ""
 							&& search.getMax_amount() == "" && min_match_date == 0 && max_match_date == 0
@@ -1484,14 +1484,14 @@ System.out.println("111111111111111111111111111111111");
 							&& search.getMax_amount() == "" && min_match_date == 0 && max_match_date == 0
 							&& reference != "" && branch_code != "" && value_date == "") {
 						System.out.println("666666666666666666666666666666666666666666");
-						general = rtgsMapper.searchWithReferenceAndBranchCodeCore(reference, branch_code);
+						general = rtgsMapper.searchWithReferenceAndBranchCode(reference, branch_code);
 
 					}
 
 					else if (min_upload_date != 0 && max_upload_date != 0 && search.getMax_amount() == ""
 							&& search.getMin_amount() == "" && min_match_date == 0 && max_match_date == 0) {
 						System.out.println("7777777777777777777777777777777");
-						general = rtgsMapper.searchWithUploadDateCore(min_upload_date, max_upload_date, reference,
+						general = rtgsMapper.searchWithUploadDate(min_upload_date, max_upload_date, reference,
 								value_date, branch_code);
 
 					}
@@ -1499,7 +1499,7 @@ System.out.println("111111111111111111111111111111111");
 					else if (min_upload_date == 0 && max_upload_date == 0 && search.getMax_amount() == ""
 							&& search.getMin_amount() == "" && min_match_date != 0 && max_match_date != 0) {
 						System.out.println("8888888888888888888888888888888888888");
-						general = rtgsMapper.searchWithMatchDateCore(min_match_date, max_match_date, reference,
+						general = rtgsMapper.searchWithMatchDate(min_match_date, max_match_date, reference,
 								value_date, branch_code);
 
 					}
@@ -1507,20 +1507,20 @@ System.out.println("111111111111111111111111111111111");
 					else if (min_upload_date != 0 && max_upload_date != 0 && search.getMin_amount() != ""
 							&& search.getMax_amount() != "" && min_match_date == 0 && max_match_date == 0) {
 
-						general = rtgsMapper.searchWithAmountAndUploadDateCore(Float.parseFloat(search.getMin_amount()),
+						general = rtgsMapper.searchWithAmountAndUploadDate(Float.parseFloat(search.getMin_amount()),
 								Float.parseFloat(search.getMax_amount()), min_upload_date, max_upload_date, reference,
 								value_date, branch_code);
 
 					} else if (min_upload_date != 0 && max_upload_date != 0 && search.getMin_amount() != ""
 							&& search.getMax_amount() == "" && min_match_date == 0 && max_match_date == 0) {
 
-						general = rtgsMapper.searchWithMinAmountAndUploadDateCore(
+						general = rtgsMapper.searchWithMinAmountAndUploadDate(
 								Float.parseFloat(search.getMin_amount()), min_upload_date, max_upload_date, reference,
 								value_date, branch_code);
 
 					} else if (min_upload_date != 0 && max_upload_date != 0 && search.getMin_amount() == ""
 							&& search.getMax_amount() != "" && min_match_date == 0 && max_match_date == 0) {
-						general = rtgsMapper.searchWithMaxAmountAndUploadDateCore(
+						general = rtgsMapper.searchWithMaxAmountAndUploadDate(
 								Float.parseFloat(search.getMax_amount()), min_upload_date, max_upload_date, reference,
 								value_date, branch_code);
 
@@ -1529,20 +1529,20 @@ System.out.println("111111111111111111111111111111111");
 					else if (min_upload_date != 0 && max_upload_date != 0 && search.getMax_amount() != ""
 							&& search.getMin_amount() != "" && min_match_date != 0 && max_match_date != 0) {
 
-						general = rtgsMapper.searchWithAmountUploadDateAndMatchDateCore(
+						general = rtgsMapper.searchWithAmountUploadDateAndMatchDate(
 								Float.parseFloat(search.getMin_amount()), Float.parseFloat(search.getMax_amount()),
 								min_upload_date, max_upload_date, min_match_date, max_match_date, reference, value_date,
 								branch_code);
 					} else if (min_upload_date != 0 && max_upload_date != 0 && search.getMax_amount() == ""
 							&& search.getMin_amount() != "" && min_match_date != 0 && max_match_date != 0) {
 
-						general = rtgsMapper.searchWithMinAmountUploadDateAndMatchDateCore(
+						general = rtgsMapper.searchWithMinAmountUploadDateAndMatchDate(
 								Float.parseFloat(search.getMin_amount()), min_upload_date, max_upload_date,
 								min_match_date, max_match_date, reference, value_date, branch_code);
 					} else if (min_upload_date != 0 && max_upload_date != 0 && search.getMax_amount() != ""
 							&& search.getMin_amount() == "" && min_match_date != 0 && max_match_date != 0) {
 
-						general = rtgsMapper.searchWithMaxAmountUploadDateAndMatchDateCore(
+						general = rtgsMapper.searchWithMaxAmountUploadDateAndMatchDate(
 								Float.parseFloat(search.getMax_amount()), min_upload_date, max_upload_date,
 								min_match_date, max_match_date, reference, value_date, branch_code);
 					}
@@ -1550,26 +1550,26 @@ System.out.println("111111111111111111111111111111111");
 					else if (min_upload_date != 0 && max_upload_date != 0 && search.getMax_amount() == ""
 							&& search.getMin_amount() == "" && min_match_date != 0 && max_match_date != 0) {
                                 System.out.println("99999999999999999999999999999999999999");
-						general = rtgsMapper.searchWithUploadDateAndMatchDateCore(min_match_date, max_match_date,
+						general = rtgsMapper.searchWithUploadDateAndMatchDate(min_match_date, max_match_date,
 								min_upload_date, max_upload_date, reference, value_date, branch_code);
 					}
 
 					else if (min_upload_date == 0 && max_upload_date == 0 && search.getMax_amount() != ""
 							&& search.getMin_amount() != "" && min_match_date != 0 && max_match_date != 0) {
 
-						general = rtgsMapper.searchWithAmountAndMatchDateCore(Float.parseFloat(search.getMin_amount()),
+						general = rtgsMapper.searchWithAmountAndMatchDate(Float.parseFloat(search.getMin_amount()),
 								Float.parseFloat(search.getMax_amount()), min_match_date, max_match_date, reference,
 								value_date, branch_code);
 					} else if (min_upload_date == 0 && max_upload_date == 0 && search.getMax_amount() == ""
 							&& search.getMin_amount() != "" && min_match_date != 0 && max_match_date != 0) {
 
-						general = rtgsMapper.searchWithMinAmountAndMatchDateCore(
+						general = rtgsMapper.searchWithMinAmountAndMatchDate(
 								Float.parseFloat(search.getMin_amount()), min_match_date, max_match_date, reference,
 								value_date, branch_code);
 					} else if (min_upload_date == 0 && max_upload_date == 0 && search.getMax_amount() != ""
 							&& search.getMin_amount() == "" && min_match_date != 0 && max_match_date != 0) {
 
-						general = rtgsMapper.searchWithMaxAmountAndMatchDateCore(
+						general = rtgsMapper.searchWithMaxAmountAndMatchDate(
 								Float.parseFloat(search.getMax_amount()), min_match_date, max_match_date, reference,
 								value_date, branch_code);
 					}
@@ -1939,7 +1939,7 @@ System.out.println("111111111111111111111111111111111");
 				} 
 				
 				
-				else if (search.getType().equalsIgnoreCase("stockCore")) {
+				else if (search.getType().equalsIgnoreCase("stock")) {
 					System.out.println("min_upload_date: " + min_upload_date);
 					System.out.println("max_upload_date: " + max_upload_date);
 					System.out.println("search.getMin_amount(): " + search.getMin_amount());
@@ -1950,11 +1950,11 @@ System.out.println("111111111111111111111111111111111");
 					System.out.println("value_date: " + value_date);
 					System.out.println("branch_code: " + branch_code);
 					
-					general = searchMapper.getStockCoreSearch(
+					general = searchMapper.getStockSearch(
 							search.getMin_amount(), 
 							search.getMax_amount(), 
 							reference,
-							search.getCategoryStockCore(),
+							search.getCategoryStock(),
 							search.getSource_branch(),
  							branch_code, 
 							min_upload_date, 
@@ -2152,19 +2152,19 @@ System.out.println("111111111111111111111111111111111");
 								Float.parseFloat(search.getMax_amount()), min_match_date, max_match_date, reference,
 								value_date, branch_code);
 					}
-				} else if (search.getType().equalsIgnoreCase("IssueCore")) {
+				} else if (search.getType().equalsIgnoreCase("Issue")) {
 
 					if (min_upload_date == 0 && max_upload_date == 0 && search.getMin_amount() != ""
 							&& search.getMax_amount() != "" && min_match_date == 0 && max_match_date == 0) {
 
-						general = rtgsMapper.searchWithAmountIssueCore(Float.parseFloat(search.getMin_amount()),
+						general = rtgsMapper.searchWithAmountIssue(Float.parseFloat(search.getMin_amount()),
 								Float.parseFloat(search.getMax_amount()), reference, value_date, branch_code);
 					}
 					// min
 					else if (min_upload_date == 0 && max_upload_date == 0 && search.getMin_amount() != ""
 							&& search.getMax_amount() == "" && min_match_date == 0 && max_match_date == 0) {
 
-						general = rtgsMapper.searchWithMinAmountIssueCore(Float.parseFloat(search.getMin_amount()),
+						general = rtgsMapper.searchWithMinAmountIssue(Float.parseFloat(search.getMin_amount()),
 								reference, value_date, branch_code);
 
 						System.out.println("-----------" + general);
@@ -2174,7 +2174,7 @@ System.out.println("111111111111111111111111111111111");
 					else if (min_upload_date == 0 && max_upload_date == 0 && search.getMin_amount() == ""
 							&& search.getMax_amount() != "" && min_match_date == 0 && max_match_date == 0) {
 
-						general = rtgsMapper.searchWithMaxAmountIssueCore(Float.parseFloat(search.getMax_amount()),
+						general = rtgsMapper.searchWithMaxAmountIssue(Float.parseFloat(search.getMax_amount()),
 								reference, value_date, branch_code);
 
 					}
@@ -2183,13 +2183,13 @@ System.out.println("111111111111111111111111111111111");
 							&& search.getMax_amount() == "" && min_match_date == 0 && max_match_date == 0
 							&& reference != "" && value_date == "" && branch_code == "") {
 
-						general = rtgsMapper.searchWithReferenceIssueCore(reference);
+						general = rtgsMapper.searchWithReferenceIssue(reference);
 
 					} else if (min_upload_date == 0 && max_upload_date == 0 && search.getMin_amount() == ""
 							&& search.getMax_amount() == "" && min_match_date == 0 && max_match_date == 0
 							&& value_date != "" && reference == "" && branch_code == "") {
 
-						general = rtgsMapper.searchWithValueDateIssueCore(value_date);
+						general = rtgsMapper.searchWithValueDateIssue(value_date);
 
 					}
 
@@ -2197,7 +2197,7 @@ System.out.println("111111111111111111111111111111111");
 							&& search.getMax_amount() == "" && min_match_date == 0 && max_match_date == 0
 							&& branch_code != "" && reference == "" && value_date == "") {
 
-						general = rtgsMapper.searchWithBranchCodeIssueCore(branch_code);
+						general = rtgsMapper.searchWithBranchCodeIssue(branch_code);
 
 					}
 
@@ -2205,19 +2205,19 @@ System.out.println("111111111111111111111111111111111");
 							&& search.getMax_amount() == "" && min_match_date == 0 && max_match_date == 0
 							&& value_date != "" && reference != "" && branch_code == "") {
 
-						general = rtgsMapper.searchWithValueDateAndReferenceIssueCore(value_date, reference);
+						general = rtgsMapper.searchWithValueDateAndReferenceIssue(value_date, reference);
 
 					} else if (min_upload_date == 0 && max_upload_date == 0 && search.getMin_amount() == ""
 							&& search.getMax_amount() == "" && min_match_date == 0 && max_match_date == 0
 							&& value_date != "" && branch_code != "" && reference == "") {
 
-						general = rtgsMapper.searchWithValueDateAndBranchCodeIssueCore(value_date, branch_code);
+						general = rtgsMapper.searchWithValueDateAndBranchCodeIssue(value_date, branch_code);
 
 					} else if (min_upload_date == 0 && max_upload_date == 0 && search.getMin_amount() == ""
 							&& search.getMax_amount() == "" && min_match_date == 0 && max_match_date == 0
 							&& value_date != "" && branch_code != "" && reference != "") {
 
-						general = rtgsMapper.searchWithRefValueDateBranchCodeIssueCore(reference, value_date,
+						general = rtgsMapper.searchWithRefValueDateBranchCodeIssue(reference, value_date,
 								branch_code);
 
 					}
@@ -2226,14 +2226,14 @@ System.out.println("111111111111111111111111111111111");
 							&& search.getMax_amount() == "" && min_match_date == 0 && max_match_date == 0
 							&& reference != "" && branch_code != "" && value_date == "") {
 
-						general = rtgsMapper.searchWithReferenceAndBranchCodeIssueCore(reference, branch_code);
+						general = rtgsMapper.searchWithReferenceAndBranchCodeIssue(reference, branch_code);
 
 					}
 
 					else if (min_upload_date != 0 && max_upload_date != 0 && search.getMax_amount() == ""
 							&& search.getMin_amount() == "" && min_match_date == 0 && max_match_date == 0) {
 
-						general = rtgsMapper.searchWithUploadDateIssueCore(min_upload_date, max_upload_date, reference,
+						general = rtgsMapper.searchWithUploadDateIssue(min_upload_date, max_upload_date, reference,
 								value_date, branch_code);
 
 					}
@@ -2241,7 +2241,7 @@ System.out.println("111111111111111111111111111111111");
 					else if (min_upload_date == 0 && max_upload_date == 0 && search.getMax_amount() == ""
 							&& search.getMin_amount() == "" && min_match_date != 0 && max_match_date != 0) {
 
-						general = rtgsMapper.searchWithMatchDateIssueCore(min_match_date, max_match_date, reference,
+						general = rtgsMapper.searchWithMatchDateIssue(min_match_date, max_match_date, reference,
 								value_date, branch_code);
 
 					}
@@ -2249,20 +2249,20 @@ System.out.println("111111111111111111111111111111111");
 					else if (min_upload_date != 0 && max_upload_date != 0 && search.getMin_amount() != ""
 							&& search.getMax_amount() != "" && min_match_date == 0 && max_match_date == 0) {
 
-						general = rtgsMapper.searchWithAmountAndUploadDateIssueCore(
+						general = rtgsMapper.searchWithAmountAndUploadDateIssue(
 								Float.parseFloat(search.getMin_amount()), Float.parseFloat(search.getMax_amount()),
 								min_upload_date, max_upload_date, reference, value_date, branch_code);
 
 					} else if (min_upload_date != 0 && max_upload_date != 0 && search.getMin_amount() != ""
 							&& search.getMax_amount() == "" && min_match_date == 0 && max_match_date == 0) {
 
-						general = rtgsMapper.searchWithMinAmountAndUploadDateIssueCore(
+						general = rtgsMapper.searchWithMinAmountAndUploadDateIssue(
 								Float.parseFloat(search.getMin_amount()), min_upload_date, max_upload_date, reference,
 								value_date, branch_code);
 
 					} else if (min_upload_date != 0 && max_upload_date != 0 && search.getMin_amount() == ""
 							&& search.getMax_amount() != "" && min_match_date == 0 && max_match_date == 0) {
-						general = rtgsMapper.searchWithMaxAmountAndUploadDateIssueCore(
+						general = rtgsMapper.searchWithMaxAmountAndUploadDateIssue(
 								Float.parseFloat(search.getMax_amount()), min_upload_date, max_upload_date, reference,
 								value_date, branch_code);
 
@@ -2271,20 +2271,20 @@ System.out.println("111111111111111111111111111111111");
 					else if (min_upload_date != 0 && max_upload_date != 0 && search.getMax_amount() != ""
 							&& search.getMin_amount() != "" && min_match_date != 0 && max_match_date != 0) {
 
-						general = rtgsMapper.searchWithAmountUploadDateAndMatchDateIssueCore(
+						general = rtgsMapper.searchWithAmountUploadDateAndMatchDateIssue(
 								Float.parseFloat(search.getMin_amount()), Float.parseFloat(search.getMax_amount()),
 								min_upload_date, max_upload_date, min_match_date, max_match_date, reference, value_date,
 								branch_code);
 					} else if (min_upload_date != 0 && max_upload_date != 0 && search.getMax_amount() == ""
 							&& search.getMin_amount() != "" && min_match_date != 0 && max_match_date != 0) {
 
-						general = rtgsMapper.searchWithMinAmountUploadDateAndMatchDateIssueCore(
+						general = rtgsMapper.searchWithMinAmountUploadDateAndMatchDateIssue(
 								Float.parseFloat(search.getMin_amount()), min_upload_date, max_upload_date,
 								min_match_date, max_match_date, reference, value_date, branch_code);
 					} else if (min_upload_date != 0 && max_upload_date != 0 && search.getMax_amount() != ""
 							&& search.getMin_amount() == "" && min_match_date != 0 && max_match_date != 0) {
 
-						general = rtgsMapper.searchWithMaxAmountUploadDateAndMatchDateIssueCore(
+						general = rtgsMapper.searchWithMaxAmountUploadDateAndMatchDateIssue(
 								Float.parseFloat(search.getMax_amount()), min_upload_date, max_upload_date,
 								min_match_date, max_match_date, reference, value_date, branch_code);
 					}
@@ -2292,7 +2292,7 @@ System.out.println("111111111111111111111111111111111");
 					else if (min_upload_date != 0 && max_upload_date != 0 && search.getMax_amount() == ""
 							&& search.getMin_amount() == "" && min_match_date != 0 && max_match_date != 0) {
 
-						general = rtgsMapper.searchWithUploadDateAndMatchDateIssueCore(min_upload_date, max_upload_date,
+						general = rtgsMapper.searchWithUploadDateAndMatchDateIssue(min_upload_date, max_upload_date,
 								min_match_date, max_match_date, reference, value_date, branch_code);
 						System.out.println(general);
 						System.out.println("----------------------------");
@@ -2301,19 +2301,19 @@ System.out.println("111111111111111111111111111111111");
 					else if (min_upload_date == 0 && max_upload_date == 0 && search.getMax_amount() != ""
 							&& search.getMin_amount() != "" && min_match_date != 0 && max_match_date != 0) {
 
-						general = rtgsMapper.searchWithAmountAndMatchDateIssueCore(
+						general = rtgsMapper.searchWithAmountAndMatchDateIssue(
 								Float.parseFloat(search.getMin_amount()), Float.parseFloat(search.getMax_amount()),
 								min_match_date, max_match_date, reference, value_date, branch_code);
 					} else if (min_upload_date == 0 && max_upload_date == 0 && search.getMax_amount() == ""
 							&& search.getMin_amount() != "" && min_match_date != 0 && max_match_date != 0) {
 
-						general = rtgsMapper.searchWithMinAmountAndMatchDateIssueCore(
+						general = rtgsMapper.searchWithMinAmountAndMatchDateIssue(
 								Float.parseFloat(search.getMin_amount()), min_match_date, max_match_date, reference,
 								value_date, branch_code);
 					} else if (min_upload_date == 0 && max_upload_date == 0 && search.getMax_amount() != ""
 							&& search.getMin_amount() == "" && min_match_date != 0 && max_match_date != 0) {
 
-						general = rtgsMapper.searchWithMaxAmountAndMatchDateIssueCore(
+						general = rtgsMapper.searchWithMaxAmountAndMatchDateIssue(
 								Float.parseFloat(search.getMax_amount()), min_match_date, max_match_date, reference,
 								value_date, branch_code);
 					}
@@ -2589,55 +2589,55 @@ System.out.println("111111111111111111111111111111111");
 
 				}
 
-				else if (search.getType().equalsIgnoreCase("FixedAssetCore")) {
+				else if (search.getType().equalsIgnoreCase("FixedAsset")) {
 
 					if (search.getReference() == "" && search.getTransaction_date() == "" && search.getDebit() != 0.0
 							&& search.getCredit() != 0.0 && search.getMatch_date() == "") {
 
-						general = fixedAssetCoreMapper.searchWithDebitCreditMMS(search);
+						general = fixedAssetMapper.searchWithDebitCreditMMS(search);
 
 					}
 					// min
 					else if (search.getReference() == "" && search.getTransaction_date() == ""
 							&& search.getDebit() != 0.0 && search.getCredit() == 0.0 && search.getMatch_date() == "") {
 
-						general = fixedAssetCoreMapper.searchWithDebitMMS(search);
+						general = fixedAssetMapper.searchWithDebitMMS(search);
 
 					} else if (search.getReference() == "" && search.getTransaction_date() == ""
 							&& search.getDebit() == 0.0 && search.getCredit() == 0.0 && search.getMatch_date() == ""
 							&& search.getTag_number() == "" && search.getBranch_code() == ""
 							&& search.getCategory() != "") {
-						general = fixedAssetCoreMapper.searchWithCategoryMMS(search);
+						general = fixedAssetMapper.searchWithCategoryMMS(search);
 
 					} else if (search.getReference() == "" && search.getTransaction_date() == ""
 							&& search.getDebit() == 0.0 && search.getCredit() == 0.0 && search.getMatch_date() == ""
 							&& search.getTag_number() == "" && search.getBranch_code() != ""
 							&& search.getCategory() == "") {
-						general = fixedAssetCoreMapper.searchWithBranchMMS(search);
+						general = fixedAssetMapper.searchWithBranchMMS(search);
 
 					} else if (search.getReference() == "" && search.getTransaction_date() == ""
 							&& search.getDebit() == 0.0 && search.getCredit() == 0.0 && search.getMatch_date() == ""
 							&& search.getTag_number() != "" && search.getBranch_code() == ""
 							&& search.getCategory() == "") {
-						general = fixedAssetCoreMapper.searchWithTaghMMS(search);
+						general = fixedAssetMapper.searchWithTaghMMS(search);
 
 					} else if (search.getReference() == "" && search.getTransaction_date() == ""
 							&& search.getDebit() == 0.0 && search.getCredit() == 0.0 && search.getMatch_date() == ""
 							&& search.getTag_number() != "" && search.getBranch_code() != ""
 							&& search.getCategory() == "") {
-						general = fixedAssetCoreMapper.searchWithTagbranchMMS(search);
+						general = fixedAssetMapper.searchWithTagbranchMMS(search);
 
 					} else if (search.getReference() == "" && search.getTransaction_date() == ""
 							&& search.getDebit() == 0.0 && search.getCredit() == 0.0 && search.getMatch_date() == ""
 							&& search.getTag_number() != "" && search.getBranch_code() == ""
 							&& search.getCategory() != "") {
-						general = fixedAssetCoreMapper.searchCatagoryWithTagMMS(search);
+						general = fixedAssetMapper.searchCatagoryWithTagMMS(search);
 
 					} else if (search.getReference() != "" && search.getTransaction_date() == ""
 							&& search.getDebit() == 0.0 && search.getCredit() == 0.0 && search.getMatch_date() == ""
 							&& search.getTag_number() != "" && search.getBranch_code() == ""
 							&& search.getCategory() == "") {
-						general = fixedAssetCoreMapper.searchWithReferenceTagMMS(search);
+						general = fixedAssetMapper.searchWithReferenceTagMMS(search);
 
 					}
 
@@ -2646,43 +2646,43 @@ System.out.println("111111111111111111111111111111111");
 							&& search.getTag_number() == "" && search.getBranch_code() != ""
 							&& search.getCategory() == "") {
 
-						general = fixedAssetCoreMapper.searchWithReferenceBranchMMS(search);
+						general = fixedAssetMapper.searchWithReferenceBranchMMS(search);
 
 					} else if (search.getReference() != "" && search.getTransaction_date() == ""
 							&& search.getDebit() == 0.0 && search.getCredit() == 0.0 && search.getMatch_date() == ""
 							&& search.getTag_number() == "" && search.getBranch_code() == ""
 							&& search.getCategory() != "") {
-						general = fixedAssetCoreMapper.searchWithReferenceCategoryMMS(search);
+						general = fixedAssetMapper.searchWithReferenceCategoryMMS(search);
 
 					} else if (search.getReference() == "" && search.getTransaction_date() == ""
 							&& search.getDebit() == 0.0 && search.getCredit() == 0.0 && search.getMatch_date() == ""
 							&& search.getTag_number() == "" && search.getBranch_code() != ""
 							&& search.getCategory() != "") {
-						general = fixedAssetCoreMapper.searchWithBranchCategoryMMS(search);
+						general = fixedAssetMapper.searchWithBranchCategoryMMS(search);
 
 					} else if (search.getReference() != "" && search.getTransaction_date() == ""
 							&& search.getDebit() == 0.0 && search.getCredit() == 0.0 && search.getMatch_date() == ""
 							&& search.getTag_number() != "" && search.getBranch_code() != ""
 							&& search.getCategory() != "") {
-						general = fixedAssetCoreMapper.searchWithBranchCategoryReferenceTagMMS(search);
+						general = fixedAssetMapper.searchWithBranchCategoryReferenceTagMMS(search);
 
 					} else if (search.getReference() != "" && search.getTransaction_date() == ""
 							&& search.getDebit() == 0.0 && search.getCredit() == 0.0 && search.getMatch_date() == ""
 							&& search.getTag_number() != "" && search.getBranch_code() == ""
 							&& search.getCategory() != "") {
-						general = fixedAssetCoreMapper.searchWithCategoryReferenceTagMMS(search);
+						general = fixedAssetMapper.searchWithCategoryReferenceTagMMS(search);
 
 					} else if (search.getReference() != "" && search.getTransaction_date() == ""
 							&& search.getDebit() == 0.0 && search.getCredit() == 0.0 && search.getMatch_date() == ""
 							&& search.getTag_number() != "" && search.getBranch_code() != ""
 							&& search.getCategory() == "") {
-						general = fixedAssetCoreMapper.searchWithBranchReferenceTagMMS(search);
+						general = fixedAssetMapper.searchWithBranchReferenceTagMMS(search);
 
 					} else if (search.getReference() != "" && search.getTransaction_date() == ""
 							&& search.getDebit() == 0.0 && search.getCredit() == 0.0 && search.getMatch_date() == ""
 							&& search.getTag_number() == "" && search.getBranch_code() != ""
 							&& search.getCategory() != "") {
-						general = fixedAssetCoreMapper.searchWithBranchReferenceCategoryMMS(search);
+						general = fixedAssetMapper.searchWithBranchReferenceCategoryMMS(search);
 
 					} else if (search.getReference() == "" && search.getTransaction_date() == ""
 							&& search.getDebit() == 0.0 && search.getCredit() == 0.0 && search.getMatch_date() == ""
@@ -2690,130 +2690,130 @@ System.out.println("111111111111111111111111111111111");
 							&& search.getCategory() != "") {
 						System.out.println("--------------------------++");
 
-						general = fixedAssetCoreMapper.searchWithBranchTagCategoryMMS(search);
+						general = fixedAssetMapper.searchWithBranchTagCategoryMMS(search);
 
 					} else if (search.getReference() == "" && search.getTransaction_date() == ""
 							&& search.getDebit() == 0.0 && search.getCredit() != 0.0 && search.getMatch_date() == "") {
 
-						general = fixedAssetCoreMapper.searchWithCreditMMS(search);
+						general = fixedAssetMapper.searchWithCreditMMS(search);
 
 					}
 					// max
 					else if (search.getReference() != "" && search.getTransaction_date() == ""
 							&& search.getDebit() == 0.0 && search.getCredit() == 0.0 && search.getMatch_date() == "") {
 
-						general = fixedAssetCoreMapper.searchWithReferenceMMS(search);
+						general = fixedAssetMapper.searchWithReferenceMMS(search);
 
 					} else if (search.getReference() == "" && search.getTransaction_date() != ""
 							&& search.getDebit() == 0.0 && search.getCredit() == 0.0 && search.getMatch_date() == "") {
 
-						general = fixedAssetCoreMapper.searchWithTransactionDateMMS(search);
+						general = fixedAssetMapper.searchWithTransactionDateMMS(search);
 
 					} else if (search.getReference() == "" && search.getTransaction_date() == ""
 							&& search.getDebit() == 0.0 && search.getCredit() == 0.0 && search.getMatch_date() != "") {
 
-						general = fixedAssetCoreMapper.searchWithMatchDateMMS(search);
+						general = fixedAssetMapper.searchWithMatchDateMMS(search);
 
 					}
 
 					else if (search.getReference() != "" && search.getTransaction_date() != ""
 							&& search.getDebit() == 0.0 && search.getCredit() == 0.0 && search.getMatch_date() != "") {
 
-						general = fixedAssetCoreMapper.searchWithReference_TransactionDate_MatchDateMMS(search);
+						general = fixedAssetMapper.searchWithReference_TransactionDate_MatchDateMMS(search);
 
 					} else if (search.getReference() != "" && search.getTransaction_date() != ""
 							&& search.getDebit() == 0.0 && search.getCredit() == 0.0 && search.getMatch_date() == "") {
 
-						general = fixedAssetCoreMapper.searchWithReferenceAndTransactionDate(search);
+						general = fixedAssetMapper.searchWithReferenceAndTransactionDate(search);
 
 					} else if (search.getReference() != "" && search.getTransaction_date() == ""
 							&& search.getDebit() == 0.0 && search.getCredit() == 0.0 && search.getMatch_date() != "") {
 
-						general = fixedAssetCoreMapper.searchWithReferenceAndMatchDate(search);
+						general = fixedAssetMapper.searchWithReferenceAndMatchDate(search);
 
 					} else if (search.getReference() != "" && search.getTransaction_date() == ""
 							&& search.getDebit() != 0.0 && search.getCredit() == 0.0 && search.getMatch_date() == "") {
 
-						general = fixedAssetCoreMapper.searchWithReferenceAndDebit(search);
+						general = fixedAssetMapper.searchWithReferenceAndDebit(search);
 
 					} else if (search.getReference() != "" && search.getTransaction_date() == ""
 							&& search.getDebit() == 0.0 && search.getCredit() != 0.0 && search.getMatch_date() == "") {
 
-						general = fixedAssetCoreMapper.searchWithReferenceAndCredit(search);
+						general = fixedAssetMapper.searchWithReferenceAndCredit(search);
 
 					}
 
 					else if (search.getReference() == "" && search.getTransaction_date() != ""
 							&& search.getDebit() == 0.0 && search.getCredit() != 0.0 && search.getMatch_date() == "") {
 
-						general = fixedAssetCoreMapper.searchWithTransactionDateAndCredit(search);
+						general = fixedAssetMapper.searchWithTransactionDateAndCredit(search);
 
 					} else if (search.getReference() == "" && search.getTransaction_date() != ""
 							&& search.getDebit() != 0.0 && search.getCredit() == 0.0 && search.getMatch_date() == "") {
 
-						general = fixedAssetCoreMapper.searchWithTransactionDateAndDebit(search);
+						general = fixedAssetMapper.searchWithTransactionDateAndDebit(search);
 
 					} else if (search.getReference() == "" && search.getTransaction_date() != ""
 							&& search.getDebit() != 0.0 && search.getCredit() == 0.0 && search.getMatch_date() != "") {
 
-						general = fixedAssetCoreMapper.searchWithTransactionDateAndMatchDateAndDebit(search);
+						general = fixedAssetMapper.searchWithTransactionDateAndMatchDateAndDebit(search);
 
 					} else if (search.getReference() == "" && search.getTransaction_date() != ""
 							&& search.getDebit() == 0.0 && search.getCredit() != 0.0 && search.getMatch_date() != "") {
 
-						general = fixedAssetCoreMapper.searchWithTransactionDateAndMatchDateAndCredit(search);
+						general = fixedAssetMapper.searchWithTransactionDateAndMatchDateAndCredit(search);
 
 					} else if (search.getReference() != "" && search.getTransaction_date() == ""
 							&& search.getDebit() != 0.0 && search.getCredit() == 0.0 && search.getMatch_date() != "") {
 
-						general = fixedAssetCoreMapper.searchWithDebitAndMatchDateAndReference(search);
+						general = fixedAssetMapper.searchWithDebitAndMatchDateAndReference(search);
 
 					}
 
 					else if (search.getReference() != "" && search.getTransaction_date() == ""
 							&& search.getDebit() != 0.0 && search.getCredit() != 0.0 && search.getMatch_date() != "") {
 
-						general = fixedAssetCoreMapper.searchWithDebitAndCreditAndMatchDateAndReference(search);
+						general = fixedAssetMapper.searchWithDebitAndCreditAndMatchDateAndReference(search);
 
 					}
 
 					else if (search.getReference() != "" && search.getTransaction_date() == ""
 							&& search.getDebit() == 0.0 && search.getCredit() != 0.0 && search.getMatch_date() != "") {
 
-						general = fixedAssetCoreMapper.searchWithCreditAndMatchDateAndReference(search);
+						general = fixedAssetMapper.searchWithCreditAndMatchDateAndReference(search);
 
 					} else if (search.getReference() != "" && search.getTransaction_date() != ""
 							&& search.getDebit() != 0.0 && search.getCredit() == 0.0 && search.getMatch_date() == "") {
 
-						general = fixedAssetCoreMapper.searchWithDebitAndTransactionDateAndReference(search);
+						general = fixedAssetMapper.searchWithDebitAndTransactionDateAndReference(search);
 
 					} else if (search.getReference() != "" && search.getTransaction_date() != ""
 							&& search.getDebit() == 0.0 && search.getCredit() != 0.0 && search.getMatch_date() == "") {
 
-						general = fixedAssetCoreMapper.searchWithCreditAndTransactionDateAndReference(search);
+						general = fixedAssetMapper.searchWithCreditAndTransactionDateAndReference(search);
 
 					}
 
 					else if (search.getReference() == "" && search.getTransaction_date() == ""
 							&& search.getDebit() == 0.0 && search.getCredit() != 0.0 && search.getMatch_date() != "") {
 
-						general = fixedAssetCoreMapper.searchWithMatchDateAndCredit(search);
+						general = fixedAssetMapper.searchWithMatchDateAndCredit(search);
 
 					} else if (search.getReference() == "" && search.getTransaction_date() == ""
 							&& search.getDebit() != 0.0 && search.getCredit() == 0.0 && search.getMatch_date() != "") {
 
-						general = fixedAssetCoreMapper.searchWithMatchDateAndDebit(search);
+						general = fixedAssetMapper.searchWithMatchDateAndDebit(search);
 
 					} else if (search.getReference() != "" && search.getTransaction_date() != ""
 							&& search.getDebit() != 0.0 && search.getCredit() != 0.0 && search.getMatch_date() != "") {
 
-						general = fixedAssetCoreMapper.searchWithAllCriteriaMMS(search);
+						general = fixedAssetMapper.searchWithAllCriteriaMMS(search);
 
 					} else if (search.getReference() == "" && search.getTransaction_date() != ""
 							&& search.getDebit() == 0.0 && search.getCredit() == 0.0 && search.getMatch_date() != "") {
 						System.out.println("________________________________");
 
-						general = fixedAssetCoreMapper.searchWithTransactionDateMatchDateMMS(search);
+						general = fixedAssetMapper.searchWithTransactionDateMatchDateMMS(search);
 
 					}
 
@@ -2821,38 +2821,38 @@ System.out.println("111111111111111111111111111111111");
 							&& search.getDebit() != 0.0 && search.getCredit() != 0.0 && search.getMatch_date() != "") {
 						System.out.println("___________________________ffff");
 
-						general = fixedAssetCoreMapper.searchWithDebitMatchDateCredit(search);
+						general = fixedAssetMapper.searchWithDebitMatchDateCredit(search);
 
 					}
 
 					else if (search.getReference() != "" && search.getTransaction_date() != ""
 							&& search.getDebit() != 0.0 && search.getCredit() == 0.0 && search.getMatch_date() != "") {
-						general = fixedAssetCoreMapper.searchWithReferenceAndTransactionDateMatchDateDebit(search);
+						general = fixedAssetMapper.searchWithReferenceAndTransactionDateMatchDateDebit(search);
 					} else if (search.getReference() != "" && search.getTransaction_date() != ""
 							&& search.getDebit() == 0.0 && search.getCredit() != 0.0 && search.getMatch_date() != "") {
 
-						general = fixedAssetCoreMapper.searchWithReferenceAndTransactionDateMatchDateCredit(search);
+						general = fixedAssetMapper.searchWithReferenceAndTransactionDateMatchDateCredit(search);
 
 					}
 
 					else if (search.getReference() == "" && search.getTransaction_date() != ""
 							&& search.getDebit() != 0.0 && search.getCredit() != 0.0 && search.getMatch_date() != "") {
 
-						general = fixedAssetCoreMapper.searchWithDebitCreditAndTransactionDateMatchDate(search);
+						general = fixedAssetMapper.searchWithDebitCreditAndTransactionDateMatchDate(search);
 
 					}
 
 					else if (search.getReference() == "" && search.getTransaction_date() != ""
 							&& search.getDebit() != 0.0 && search.getCredit() != 0.0 && search.getMatch_date() == "") {
 
-						general = fixedAssetCoreMapper.searchWithDebitCreditAndTransactionDate(search);
+						general = fixedAssetMapper.searchWithDebitCreditAndTransactionDate(search);
 
 					}
 
 					else if (search.getReference() != "" && search.getTransaction_date() == ""
 							&& search.getDebit() != 0.0 && search.getCredit() != 0.0 && search.getMatch_date() == "") {
 
-						general = fixedAssetCoreMapper.searchWithDebitCreditAndReference(search);
+						general = fixedAssetMapper.searchWithDebitCreditAndReference(search);
 
 					}
 
@@ -2907,14 +2907,14 @@ System.out.println("111111111111111111111111111111111");
 		// return null;
 	}
 
-	// public MatchDetailCore MatchDetailCore(HttpServletRequest request, Long id) {
+	// public MatchDetail MatchDetail(HttpServletRequest request, Long id) {
 	// // TODO Auto-generated method stub
 	// return null;
 
-	public MatchDetailCore MatchDetailCore(HttpServletRequest request, Long id, String type, String dr_cr,String reference) {
+	public MatchDetail MatchDetail(HttpServletRequest request, Long id, String type, String dr_cr,String reference) {
 		try {
 
-			MatchDetailCore result = null;
+			MatchDetail result = null;
 			if (type.equalsIgnoreCase("Payable")) {
 				if (dr_cr.equalsIgnoreCase("CR"))
 
@@ -2939,13 +2939,13 @@ System.out.println("111111111111111111111111111111111");
 
 				result = rtgsMapper.matchDetailIssueQBS(id);
 
-			} else if (type.equalsIgnoreCase("IssueCore")) {
+			} else if (type.equalsIgnoreCase("Issue")) {
 
-				result = rtgsMapper.matchDetailIssueCore(id);
+				result = rtgsMapper.matchDetailIssue(id);
 			}
 
 			else {
-				result = rtgsMapper.matchDetailCore(id,reference);
+				result = rtgsMapper.matchDetail(id,reference);
 			}
 
 			return result;
@@ -2957,16 +2957,16 @@ System.out.println("111111111111111111111111111111111");
 		// return null;
 	}
 
-	public List<File_rtgs_nbe_ats> get_all_ats_matched_with_reason(HttpServletRequest request, String recon_date) {
+	public List<File_rtgs__ats> get_all_ats_matched_with_reason(HttpServletRequest request, String recon_date) {
 
 		try {
 			if (util.isPermitted(request, "User", "get_all_ats_transaction_matched_with_reason")) {
 				util.registerActivity(request, "Get all  Ats transactions matched  with reason ", "-");
 				System.out.println("the date: " + recon_date.replace("-", ""));
-				// List<File_rtgs_nbe_ats> atsList =
+				// List<File_rtgs__ats> atsList =
 				// rtgsMapper.get_ats_for_recon(recon_date.replace("-", ""),
 				// accountMapper.getUserAccountId(util.get_user_id(request)));
-				// for(File_rtgs_nbe_ats aa : atsList) {
+				// for(File_rtgs__ats aa : atsList) {
 				// if(aa.getId() == 98473l){
 				// System.out.println("amount:::::::::::::::::::::: " + aa.getAmount());
 				// }
@@ -2983,21 +2983,21 @@ System.out.println("111111111111111111111111111111111");
 		}
 	}
 
-	public List<File_rtgs_awb_core> get_all_core_matched_with_reason(HttpServletRequest request, String recon_date) {
+	public List<File_rtgs__> get_all__matched_with_reason(HttpServletRequest request, String recon_date) {
 
 		try {
-			if (util.isPermitted(request, "User", "get_all_core_transaction_matched_with_reason")) {
-				util.registerActivity(request, "Get all core matched with reason  transactions", "-");
+			if (util.isPermitted(request, "User", "get_all__transaction_matched_with_reason")) {
+				util.registerActivity(request, "Get all  matched with reason  transactions", "-");
 				System.out.println("the date: " + recon_date.replace("-", ""));
-				// List<File_rtgs_nbe_ats> atsList =
+				// List<File_rtgs__ats> atsList =
 				// rtgsMapper.get_ats_for_recon(recon_date.replace("-", ""),
 				// accountMapper.getUserAccountId(util.get_user_id(request)));
-				// for(File_rtgs_nbe_ats aa : atsList) {
+				// for(File_rtgs__ats aa : atsList) {
 				// if(aa.getId() == 98473l){
 				// System.out.println("amount:::::::::::::::::::::: " + aa.getAmount());
 				// }
 				// }
-				return rtgsMapper.get_all_core_matched_with_reason(recon_date.replace("-", ""),
+				return rtgsMapper.get_all__matched_with_reason(recon_date.replace("-", ""),
 						accountMapper.getUserAccountId(util.get_user_id(request)));
 
 			} else {
@@ -3009,7 +3009,7 @@ System.out.println("111111111111111111111111111111111");
 		}
 	}
 
-	public List<File_rtgs_awb_core> get_payable_credit_for_reconcilation(HttpServletRequest request) {
+	public List<File_rtgs__> get_payable_credit_for_reconcilation(HttpServletRequest request) {
 		try {
 			if (util.isPermitted(request, "User", "get_payable_credit_for_reconciliation")) {
 				util.registerActivity(request, "Get all credit transactions", "Get credit transactions to reconcile");
@@ -3025,7 +3025,7 @@ System.out.println("111111111111111111111111111111111");
 		}
 	}
 
-	public List<File_rtgs_awb_core> get_payable_debit_for_reconcilation(HttpServletRequest request) {
+	public List<File_rtgs__> get_payable_debit_for_reconcilation(HttpServletRequest request) {
 		try {
 			if (util.isPermitted(request, "User", "get_payable_debit_for_reconciliation")) {
 				util.registerActivity(request, "Get all debit transactions", "Get debit transactions to reconcile");
@@ -3093,7 +3093,7 @@ System.out.println("111111111111111111111111111111111");
 		}
 	}
 
-	public List<File_rtgs_awb_core> get_payable_credit_for_recon_auto(HttpServletRequest request) {
+	public List<File_rtgs__> get_payable_credit_for_recon_auto(HttpServletRequest request) {
 		try {
 			if (util.isPermitted(request, "User", "get_all_payable_credit_transaction_for_recon_auto")) {
 				util.registerActivity(request, "Get all payable credit transactions",
@@ -3114,7 +3114,7 @@ System.out.println("111111111111111111111111111111111");
 	}
 	
 	
-	public List<File_rtgs_awb_core> get_payable_debit_for_recon_auto(HttpServletRequest request) {
+	public List<File_rtgs__> get_payable_debit_for_recon_auto(HttpServletRequest request) {
 		try {
 			if (util.isPermitted(request, "User", "get_all_payable_debit_transaction_for_recon_auto")) {
 				util.registerActivity(request, "Get all payable debit transactions",
@@ -3132,7 +3132,7 @@ System.out.println("111111111111111111111111111111111");
 		}
 	}
 
-	public List<File_rtgs_awb_core> get_payable_credit_for_view(HttpServletRequest request, String matched_date) {
+	public List<File_rtgs__> get_payable_credit_for_view(HttpServletRequest request, String matched_date) {
 		try {
 			if (util.isPermitted(request, "User", "get_payable_credit_matched")) {
 				util.registerActivity(request, "Get payable credit matched trnsaction", "-");
@@ -3150,7 +3150,7 @@ System.out.println("111111111111111111111111111111111");
 		}
 	}
 
-	public List<File_rtgs_awb_core> get_payable_debit_for_view(HttpServletRequest request, String matched_date) {
+	public List<File_rtgs__> get_payable_debit_for_view(HttpServletRequest request, String matched_date) {
 		try {
 			if (util.isPermitted(request, "User", "get_payable_debit_matched")) {
 				util.registerActivity(request, "Get payable debit matched trnsaction", "-");
@@ -3194,7 +3194,7 @@ System.out.println("111111111111111111111111111111111");
 				String type = "";
 				Long matched_data_id = null;
 				for (int i = 0; i < id_2.length; i++) {
-					System.out.println("Core id=" + id_2[i]);
+					System.out.println(" id=" + id_2[i]);
 					current_id = rtgsMapper.movepayableDebitMatched(id_2[i]);
 					type = "data_payable_debit";
 					rtgsMapper.updateEditReason(current_id, matched_data_id, type, id_2[i]);
@@ -3202,7 +3202,7 @@ System.out.println("111111111111111111111111111111111");
 
 					// matched_id = rtgsMapper.findMatchedId(id_2[i]);
 					// rtgsMapper.deleteMatchTransaction(matched_id);
-					// rtgsMapper.updateUnMatchStatus_core(id_2[i]);
+					// rtgsMapper.updateUnMatchStatus_(id_2[i]);
 				}
 
 				for (int i = 0; i < id_1.length; i++) {
@@ -3242,7 +3242,7 @@ System.out.println("111111111111111111111111111111111");
 				util.registerActivity(request, "match all  payable transactions",
 						"match all  payable transactions automatically");
 				JsonObject id_data_object = JsonParser.parseString(data_ids).getAsJsonObject();
-				String[] core_id = id_data_object.get("core_id").getAsString().split(",");
+				String[] _id = id_data_object.get("_id").getAsString().split(",");
 				String[] id_1_string = id_data_object.get("id_1").getAsString().split(",");
 				String[] id_2_string = id_data_object.get("id_2").getAsString().split(",");
 				Long[] id_1 = new Long[id_1_string.length];
@@ -3336,7 +3336,7 @@ System.out.println("111111111111111111111111111111111");
 		}
 	}
 
-	public List<File_rtgs_awb_core> get_edited_payable(HttpServletRequest request) {
+	public List<File_rtgs__> get_edited_payable(HttpServletRequest request) {
 		try {
 			if (util.isPermitted(request, "User", "get_edited_payable_transaction")) {
 				util.registerActivity(request, "Get all edited payable transaction", "-");
@@ -3351,11 +3351,11 @@ System.out.println("111111111111111111111111111111111");
 		}
 	}
 
-	public List<File_rtgs_awb_core> get_edited_detail_payable(HttpServletRequest request, Long id) {
+	public List<File_rtgs__> get_edited_detail_payable(HttpServletRequest request, Long id) {
 		try {
 			if (util.isPermitted(request, "User", "get_detail_edited_payable_transaction")) {
 				util.registerActivity(request, "Get detail edited payable transaction", "-");
-				System.out.println("id-------->" + rtgsMapper.get_edited_detail_core(id));
+				System.out.println("id-------->" + rtgsMapper.get_edited_detail_(id));
 				return rtgsMapper.get_edited_detail_payable(id);
 			} else {
 				System.out.println("No user does not have permission.");
@@ -3367,10 +3367,10 @@ System.out.println("111111111111111111111111111111111");
 
 	}
 
-	public List<File_rtgs_awb_core> get_payable_credit_matched_with_reason(HttpServletRequest request) {
+	public List<File_rtgs__> get_payable_credit_matched_with_reason(HttpServletRequest request) {
 		try {
-			if (util.isPermitted(request, "User", "get_all_core_transaction_matched_with_reason")) {
-				util.registerActivity(request, "Get all core matched with reason  transactions", "-");
+			if (util.isPermitted(request, "User", "get_all__transaction_matched_with_reason")) {
+				util.registerActivity(request, "Get all  matched with reason  transactions", "-");
 				return rtgsMapper.get_payable_creditmatched_with_reason();
 
 			} else {
@@ -3382,15 +3382,15 @@ System.out.println("111111111111111111111111111111111");
 		}
 	}
 
-	public List<File_rtgs_awb_core> get_payable_debit_matched_with_reason(HttpServletRequest request) {
+	public List<File_rtgs__> get_payable_debit_matched_with_reason(HttpServletRequest request) {
 		try {
-			if (util.isPermitted(request, "User", "get_all_core_transaction_matched_with_reason")) {
-				util.registerActivity(request, "Get all core matched with reason  transactions", "-");
+			if (util.isPermitted(request, "User", "get_all__transaction_matched_with_reason")) {
+				util.registerActivity(request, "Get all  matched with reason  transactions", "-");
 
-				// List<File_rtgs_nbe_ats> atsList =
+				// List<File_rtgs__ats> atsList =
 				// rtgsMapper.get_ats_for_recon(recon_date.replace("-", ""),
 				// accountMapper.getUserAccountId(util.get_user_id(request)));
-				// for(File_rtgs_nbe_ats aa : atsList) {
+				// for(File_rtgs__ats aa : atsList) {
 				// if(aa.getId() == 98473l){
 				// System.out.println("amount:::::::::::::::::::::: " + aa.getAmount());
 				// }
@@ -3406,12 +3406,12 @@ System.out.println("111111111111111111111111111111111");
 		}
 	}
 
-	public Transactionhistory matchDetailFixedCore(HttpServletRequest request, Long id) {
+	public Transactionhistory matchDetailFixed(HttpServletRequest request, Long id) {
 		try {
 
 			Transactionhistory result = null;
 
-			result = fixedAssetCoreMapper.matchDetailFixedCore(id);
+			result = fixedAssetMapper.matchDetailFixed(id);
 
 			return result;
 			// }
@@ -3421,12 +3421,12 @@ System.out.println("111111111111111111111111111111111");
 		}
 	}
 	
-	public Transactionhistory matchDetailStockCore(HttpServletRequest request, Long id) {
+	public Transactionhistory matchDetailStock(HttpServletRequest request, Long id) {
 		try {
 
 			Transactionhistory result = null;
 
-			result = fixedAssetCoreMapper.matchDetailStockCore(id);
+			result = fixedAssetMapper.matchDetailStock(id);
 
 			return result;
 			// }

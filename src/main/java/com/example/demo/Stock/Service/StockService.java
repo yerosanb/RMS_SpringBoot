@@ -16,19 +16,19 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.Exception.ExceptionsList;
 import com.example.demo.Stock.Mapper.StockMapper;
-import com.example.demo.Stock.Model.RawStockCoreModel;
+import com.example.demo.Stock.Model.RawStockModel;
 import com.example.demo.Stock.Model.RawStockMMSModel;
-import com.example.demo.Stock.Model.StockCoreDeleted;
-import com.example.demo.Stock.Model.stockCoreDetail;
+import com.example.demo.Stock.Model.StockDeleted;
+import com.example.demo.Stock.Model.stockDetail;
 import com.example.demo.abebayehu.entity.Raw_fixed_mms;
-import com.example.demo.abebayehu.entity.core_detail_deleted;
+import com.example.demo.abebayehu.entity._detail_deleted;
 import com.example.demo.abebayehu.entity.mms_detail_deleted;
-import com.example.demo.abebayehu.entity.view_fixed_core_deleted;
+import com.example.demo.abebayehu.entity.view_fixed__deleted;
 import com.example.demo.abebayehu.entity.view_fixed_mms_deleted;
 import com.example.demo.garama.mapper.FixedAutReconMapper;
-import com.example.demo.garama.models.RawFixedCoreModel;
+import com.example.demo.garama.models.RawFixedModel;
 import com.example.demo.garama.models.RawFixedMMSModel;
-import com.example.demo.garama.models.UnMatchFixedCoreModel;
+import com.example.demo.garama.models.UnMatchFixedModel;
 import com.example.demo.user.mapper.MapperAccount;
 import com.example.demo.user.mapper.MapperRTGS;
 import com.example.demo.utils.Utils;
@@ -90,21 +90,21 @@ public class StockService {
 
 	}
 
-	public List<RawStockCoreModel> get_fixed_core_for_recon_auto(HttpServletRequest request, String datas) {
+	public List<RawStockModel> get_fixed__for_recon_auto(HttpServletRequest request, String datas) {
 		try {
-			if (util.isPermitted(request, "FixedAsset", "get_stock_core_for_recon_auto")) {
-				util.registerActivity(request, "Get all Core transactions",
-						"Get Core transactions to match automatically");
+			if (util.isPermitted(request, "FixedAsset", "get_stock__for_recon_auto")) {
+				util.registerActivity(request, "Get all  transactions",
+						"Get  transactions to match automatically");
 				JsonObject id_data_object = JsonParser.parseString(datas).getAsJsonObject();
 				String recon_date = id_data_object.get("c_date").getAsString();
 				String type = id_data_object.get("type").getAsString();
 //					String[] ids_string = id_data_object.get("ids").getAsString().split(",");
 				System.out.println("Type=" + type);
-				List<RawStockCoreModel> a = null;
+				List<RawStockModel> a = null;
 				if (type.equalsIgnoreCase("all")) {
-					a = stockMapper.get_stock_core_for_recon_auto("", recon_date);
+					a = stockMapper.get_stock__for_recon_auto("", recon_date);
 				} else {
-					a = stockMapper.get_stock_core_for_recon_auto(type, recon_date);
+					a = stockMapper.get_stock__for_recon_auto(type, recon_date);
 				}
 				System.out.println("size: " + a.size());
 				return a;
@@ -157,9 +157,9 @@ public class StockService {
 						rtgsMapper.updateEditReason(current_id, matched_data_id, type, id_1[i]);
 					}
 					for (int i = 0; i < id_2.length; i++) {
-						type = "stock_core";
+						type = "stock_";
 						System.out.println(id_2[i]);
-						current_id = stockMapper.moveCoreStockData(id_2[i], match_id);
+						current_id = stockMapper.moveStockData(id_2[i], match_id);
 						rtgsMapper.updateEditReason(current_id, matched_data_id, type, id_2[i]);
 					}
 
@@ -258,8 +258,8 @@ public class StockService {
 
 							rtgsMapper.updateEditReason(current_id, matched_data_id, typee, id_1[i]);
 
-							current_id = stockMapper.moveCoreStockData(id_2[j], match_id);
-							typee = "stock_core";
+							current_id = stockMapper.moveStockData(id_2[j], match_id);
+							typee = "stock_";
 							rtgsMapper.updateEditReason(current_id, matched_data_id, typee, id_2[j]);
 							break;
 						}else {
@@ -306,24 +306,24 @@ public class StockService {
 		}
 	}
 
-	public List<RawStockCoreModel> get_stock_core_matched_for_view(HttpServletRequest request, String datas) {
+	public List<RawStockModel> get_stock__matched_for_view(HttpServletRequest request, String datas) {
 
 		try {
-			if (util.isPermitted(request, "FixedAsset", "get_core_stock_matched")) {
-				util.registerActivity(request, "Getstock core core match transaction ", "-");
+			if (util.isPermitted(request, "FixedAsset", "get__stock_matched")) {
+				util.registerActivity(request, "Getstock   match transaction ", "-");
 				JsonObject id_data_object = JsonParser.parseString(datas).getAsJsonObject();
 				String recon_date = id_data_object.get("c_date").getAsString();
 				String type = id_data_object.get("type").getAsString();
 				System.out.println("the date: " + recon_date.replace("-", ""));
-				List<RawStockCoreModel> core = null;
+				List<RawStockModel>  = null;
 				if (type.equalsIgnoreCase("all00")) { 
-					core = stockMapper
-							.get_stock_core_matched_for_viewAll(Integer.parseInt(recon_date.replace("-", "")));
+					 = stockMapper
+							.get_stock__matched_for_viewAll(Integer.parseInt(recon_date.replace("-", "")));
 				} else {
-					core = stockMapper.get_stock_core_matched_for_view(Integer.parseInt(recon_date.replace("-", "")),
+					 = stockMapper.get_stock__matched_for_view(Integer.parseInt(recon_date.replace("-", "")),
 							type);
 				}
-				return core;
+				return ;
 			} else {
 				System.out.println("No user does not have permission.");
 				return null;
@@ -333,18 +333,18 @@ public class StockService {
 		}
 	}
 
-	public List<RawStockCoreModel> get_stock_core_reversal(HttpServletRequest request, String recon_date) {
+	public List<RawStockModel> get_stock__reversal(HttpServletRequest request, String recon_date) {
 
 		try {
 			if (util.isPermitted(request, "FixedAsset", "get_stock_matched_reversal")) {
-				util.registerActivity(request, "Getstock core reversal matched ", "-");
+				util.registerActivity(request, "Getstock  reversal matched ", "-");
 //				JsonObject id_data_object = JsonParser.parseString(datas).getAsJsonObject();
 //				String recon_date = id_data_object.get("c_date").getAsString();
 //				String type = id_data_object.get("type").getAsString();
 				System.out.println("the date: " + recon_date.replace("-", ""));
-				List<RawStockCoreModel> core = stockMapper
+				List<RawStockModel>  = stockMapper
 						.get_stock_reversal(Integer.parseInt(recon_date.replace("-", "")));
-				return core;
+				return ;
 			} else {
 				System.out.println("No user does not have permission.");
 				return null;
@@ -379,22 +379,22 @@ public class StockService {
 		}
 	}
 
-	public List<RawStockCoreModel> get_stock_core_unmatched_for_view(HttpServletRequest request, String datas) {
+	public List<RawStockModel> get_stock__unmatched_for_view(HttpServletRequest request, String datas) {
 
 		try {
-			if (util.isPermitted(request, "FixedAsset", "get_stock_core_unmatched_for_view")) {
-				util.registerActivity(request, "Getstock core  unmatch transaction ", "-");
+			if (util.isPermitted(request, "FixedAsset", "get_stock__unmatched_for_view")) {
+				util.registerActivity(request, "Getstock   unmatch transaction ", "-");
 				JsonObject id_data_object = JsonParser.parseString(datas).getAsJsonObject();
 				String recon_date = id_data_object.get("c_date").getAsString();
 				String type = id_data_object.get("type").getAsString();
 				System.out.println("the date: " + recon_date.replace("-", ""));
-				List<RawStockCoreModel> core = null;
+				List<RawStockModel>  = null;
 				if (type.equalsIgnoreCase("all00")) {
-					core = stockMapper.get_stock_core_unmatched_for_viewAll(recon_date);
+					 = stockMapper.get_stock__unmatched_for_viewAll(recon_date);
 				} else {
-					core = stockMapper.get_stock_core_unmatched_for_view(recon_date, type);
+					 = stockMapper.get_stock__unmatched_for_view(recon_date, type);
 				}
-				return core;
+				return ;
 			} else {
 				System.out.println("No user does not have permission.");
 				return null;
@@ -429,9 +429,9 @@ public class StockService {
 				String type = "";
 				Long matched_data_id = null;
 				for (int i = 0; i < id_2.length; i++) {
-					System.out.println("Core id=" + id_2[i]);
-					current_id = stockMapper.moveStockCoreMatched(id_2[i]);
-					type = "data_fixed_core";
+					System.out.println(" id=" + id_2[i]);
+					current_id = stockMapper.moveStockMatched(id_2[i]);
+					type = "data_fixed_";
 					rtgsMapper.updateEditReason(current_id, matched_data_id, type, id_2[i]);
 					System.out.println("edite reason updated after unmatche id----->" + id_2[i]);
 				}
@@ -477,9 +477,9 @@ public class StockService {
 				String type = "";
 				Long matched_data_id = null;
 				for (int i = 0; i < id_2.length; i++) {
-					System.out.println("Core id=" + id_2[i]);
-					current_id = stockMapper.moveStockCoreMatchedReversal(id_2[i]);
-					type = "stock__core_reversal";
+					System.out.println(" id=" + id_2[i]);
+					current_id = stockMapper.moveStockMatchedReversal(id_2[i]);
+					type = "stock___reversal";
 					rtgsMapper.updateEditReason(current_id, matched_data_id, type, id_2[i]);
 					System.out.println("edite reason updated after unmatche id----->" + id_2[i]);
 				}
@@ -521,24 +521,24 @@ public class StockService {
 		}
 	}
 
-	public List<RawStockCoreModel> get_stock_core_matched_with_reason(HttpServletRequest request, String datas) {
+	public List<RawStockModel> get_stock__matched_with_reason(HttpServletRequest request, String datas) {
 
 		try {
-			if (util.isPermitted(request, "FixedAsset", "get_stock_core_matched_with_reason")) {
-				util.registerActivity(request, "Getstock core  matched with reason transaction ", "-");
+			if (util.isPermitted(request, "FixedAsset", "get_stock__matched_with_reason")) {
+				util.registerActivity(request, "Getstock   matched with reason transaction ", "-");
 				JsonObject id_data_object = JsonParser.parseString(datas).getAsJsonObject();
 				String recon_date = id_data_object.get("c_date").getAsString();
 				String type = id_data_object.get("type").getAsString();
 				System.out.println("the date: " + recon_date.replace("-", ""));
-				List<RawStockCoreModel> core = null;
+				List<RawStockModel>  = null;
 				if (type.equalsIgnoreCase("all00")) {
-					core = stockMapper
-							.get_stock_core_matched_with_reasonAll(Integer.parseInt(recon_date.replace("-", "")));
+					 = stockMapper
+							.get_stock__matched_with_reasonAll(Integer.parseInt(recon_date.replace("-", "")));
 				} else {
-					core = stockMapper.get_stock_core_matched_with_reason(Integer.parseInt(recon_date.replace("-", "")),
+					 = stockMapper.get_stock__matched_with_reason(Integer.parseInt(recon_date.replace("-", "")),
 							type);
 				}
-				return core;
+				return ;
 			} else {
 				System.out.println("No user does not have permission.");
 				return null;
@@ -580,22 +580,22 @@ public class StockService {
 
 	}
 
-	public List<RawStockCoreModel> get_stock_core_for_recon_manual(HttpServletRequest request, String datas) {
+	public List<RawStockModel> get_stock__for_recon_manual(HttpServletRequest request, String datas) {
 		try {
-			if (util.isPermitted(request, "FixedAsset", "get_stock_core_for_recon_manual")) {
-				util.registerActivity(request, "Get all Core transactions", "Get Core transactions to match manualy");
+			if (util.isPermitted(request, "FixedAsset", "get_stock__for_recon_manual")) {
+				util.registerActivity(request, "Get all  transactions", "Get  transactions to match manualy");
 				JsonObject id_data_object = JsonParser.parseString(datas).getAsJsonObject();
 				String recon_date = id_data_object.get("c_date").getAsString();
 				String type = id_data_object.get("type").getAsString();
 //					String[] ids_string = id_data_object.get("ids").getAsString().split(",");
-				System.out.println("core Type=" + type);
-				List<RawStockCoreModel> a = null;
+				System.out.println(" Type=" + type);
+				List<RawStockModel> a = null;
 				if (type.equalsIgnoreCase("all00")) {
-					a = stockMapper.get_all_stock_core_for_recon_manual(recon_date);
+					a = stockMapper.get_all_stock__for_recon_manual(recon_date);
 				} else {
-					a = stockMapper.get_stock_core_for_recon_manual(type, recon_date);
+					a = stockMapper.get_stock__for_recon_manual(type, recon_date);
 				}
-				System.out.println("core  size: " + a.size());
+				System.out.println("  size: " + a.size());
 				return a;
 			} else {
 				System.out.println("No user does not have permission.");
@@ -615,7 +615,7 @@ public class StockService {
 				Long current_id = null;
 				Long matched_data_id = null;
 				int mms_length = matched_ids.get(0).size();
-				int core_length = matched_ids.get(1).size();
+				int _length = matched_ids.get(1).size();
 				String typee;
 				int count = 0;
 				for (List<Long> matched_ids_list : matched_ids) {
@@ -623,17 +623,17 @@ public class StockService {
 						for (Long mms_id : matched_ids_list) {
 							current_id = stockMapper.moveMMSStockData(mms_id);
 							matched_data_id = stockMapper.addStockMatched(current_id, match_id, date_now, "1",
-									mms_length > 1 && core_length > 1 ? "1".toString() : "0".toString(), "1", "1");
+									mms_length > 1 && _length > 1 ? "1".toString() : "0".toString(), "1", "1");
 							stockMapper.addUserStockMatched(util.get_user_id(request), matched_data_id, date_now, "1",
 									"1", "1");
 							typee = "stock_mms";
 							rtgsMapper.updateEditReason(current_id, matched_data_id, typee, mms_id);
 						}
 					else {
-						for (Long core_id : matched_ids_list) {
-							typee = "stock_core";
-							current_id = stockMapper.moveCoreStockData(core_id, match_id);
-							rtgsMapper.updateEditReason(current_id, matched_data_id, typee, core_id);
+						for (Long _id : matched_ids_list) {
+							typee = "stock_";
+							current_id = stockMapper.moveStockData(_id, match_id);
+							rtgsMapper.updateEditReason(current_id, matched_data_id, typee, _id);
 						}
 					}
 					count++;
@@ -653,11 +653,11 @@ public class StockService {
 			if (util.isPermitted(request, "FixedAsset", "match_stock_transactions_with_reason")) {
 				util.registerActivity(request, "match stock transactions with reason", "-");
 
-				List<Integer> core_ids = matched_ids.get(0);
+				List<Integer> _ids = matched_ids.get(0);
 				List<Integer> mms_ids = matched_ids.get(1);
 
 				int mms_length = mms_ids.size();
-				int core_length = core_ids.size();
+				int _length = _ids.size();
 
 				String reason = matched_ids.get(2).get(0).toString();
 				String type = matched_ids.get(2).get(1).toString();
@@ -671,17 +671,17 @@ public class StockService {
 				for (int mms_id : mms_ids) {
 					current_id = stockMapper.moveMMSStockData((long) mms_id);
 					matched_data_id = stockMapper.addStockMatched(current_id, match_id, date_now, "1",
-							mms_length > 1 && core_length > 1 ? "1".toString() : "0".toString(), "1", "1");
+							mms_length > 1 && _length > 1 ? "1".toString() : "0".toString(), "1", "1");
 					stockMapper.addUserStockMatched(util.get_user_id(request), matched_data_id, date_now, "1", "1",
 							"1");
 					typee = "stock_mms";
 					rtgsMapper.updateEditReason(current_id, matched_data_id, typee, (long) mms_id);
 				}
 
-				for (int core_id : core_ids) {
-					typee = "stock_core";
-					current_id = stockMapper.moveCoreStockData((long) core_id, match_id);
-					rtgsMapper.updateEditReason(current_id, matched_data_id, typee, (long) core_id);
+				for (int _id : _ids) {
+					typee = "stock_";
+					current_id = stockMapper.moveStockData((long) _id, match_id);
+					rtgsMapper.updateEditReason(current_id, matched_data_id, typee, (long) _id);
 				}
 
 				if (type.equalsIgnoreCase("reference")) {
@@ -726,12 +726,12 @@ public class StockService {
 
 					}
 
-					else if (type != null && type.equalsIgnoreCase("core_stock")) {
-						type1 = "data_stock_core";
+					else if (type != null && type.equalsIgnoreCase("_stock")) {
+						type1 = "data_stock_";
 						Long reason_id = stockMapper.addReasonForEdit(ids[i], user_id, type1, reason,
 								new Date().toString(), "1", "1", "2");
-						stockMapper.moveDeletedStockCoreData(ids[i], reason_id);
-						stockMapper.deleteFixedCoreTransaction(ids[i]);
+						stockMapper.moveDeletedStockData(ids[i], reason_id);
+						stockMapper.deleteFixedTransaction(ids[i]);
 					}
 				}
 				return true;
@@ -753,9 +753,9 @@ public class StockService {
 
 				for (List<Long> matched_stock_ids_list : matched_stock_ids) {
 
-					for (Long core_id : matched_stock_ids_list) {
-						System.out.println("stock-core-id=" + core_id);
-						stockMapper.moveStockCoreReversalData(core_id, match_id, date_now,
+					for (Long _id : matched_stock_ids_list) {
+						System.out.println("stock--id=" + _id);
+						stockMapper.moveStockReversalData(_id, match_id, date_now,
 								stockMapper.fullName(util.get_user_id(request)));
 					}
 
@@ -770,12 +770,12 @@ public class StockService {
 		}
 	}
 
-	public List<StockCoreDeleted> get_edited_stock_core(HttpServletRequest request) {
+	public List<StockDeleted> get_edited_stock_(HttpServletRequest request) {
 		try {
-			if (util.isPermitted(request, "FixedAsset", "get_deleted_stock_core_transaction")) {
-				util.registerActivity(request, "Get all deleted stock core transaction", "-");
-				System.out.println("nothing special==============>" + stockMapper.get_edited_stock_core());
-				return stockMapper.get_edited_stock_core();
+			if (util.isPermitted(request, "FixedAsset", "get_deleted_stock__transaction")) {
+				util.registerActivity(request, "Get all deleted stock  transaction", "-");
+				System.out.println("nothing special==============>" + stockMapper.get_edited_stock_());
+				return stockMapper.get_edited_stock_();
 			} else {
 				System.out.println("No user does not have permission.");
 				return null;
@@ -785,11 +785,11 @@ public class StockService {
 		}
 	}
 
-	public List<stockCoreDetail> get_edited_detail_stock_core(HttpServletRequest request, Long id) {
+	public List<stockDetail> get_edited_detail_stock_(HttpServletRequest request, Long id) {
 		try {
-			if (util.isPermitted(request, "FixedAsset", "get_edited_detail_stock_core")) {
-				util.registerActivity(request, "Get detail deleted stock core transaction", "-");
-				return stockMapper.get_edited_detail_stock_core(id);
+			if (util.isPermitted(request, "FixedAsset", "get_edited_detail_stock_")) {
+				util.registerActivity(request, "Get detail deleted stock  transaction", "-");
+				return stockMapper.get_edited_detail_stock_(id);
 			} else {
 				System.out.println("No user does not have permission.");
 				return null;
@@ -817,7 +817,7 @@ public class StockService {
 	public List<RawStockMMSModel> get_edited_detail_stock_mms(HttpServletRequest request, Long id) {
 		try {
 			if (util.isPermitted(request, "FixedAsset", "get_edited_detail_stock_mms")) {
-				util.registerActivity(request, "Get detail edited stock core transaction", "-");
+				util.registerActivity(request, "Get detail edited stock  transaction", "-");
 				System.out.println("menchachat =,,,,,,,,,,,,,,,,,,,,>" + stockMapper.get_edited_detail_stock_mms(id));
 
 				return stockMapper.get_edited_detail_stock_mms(id);

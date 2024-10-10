@@ -13,7 +13,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security..userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -111,7 +111,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      	//configuration.setAllowedOrigins(Arrays.asList("https://localhost:8080"));
 //		configuration.setAllowedOrigins(Arrays.asList("https://10.10.13.152:8080"));
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
-//		 configuration.setAllowedOrigins(Arrays.asList("https://rms.awashbank.com:443"));
+//		 configuration.setAllowedOrigins(Arrays.asList("https://rms..com:443"));
 //		configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
 		configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
 		configuration.setAllowedHeaders(Collections.singletonList("*"));

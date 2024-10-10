@@ -1,11 +1,11 @@
 package com.example.demo.user.model;
 
-public class CoreBeginningEnding {
+public class BeginningEnding {
 	Double beginning_balance_con;
 	Double beginning_balance_ifb;
 	Double ending_balance_con;
 	Double ending_balance_ifb;
-	public CoreBeginningEnding(Double beginning_balance_con, Double beginning_balance_ifb, Double ending_balance_con,
+	public BeginningEnding(Double beginning_balance_con, Double beginning_balance_ifb, Double ending_balance_con,
 			Double ending_balance_ifb) {
 		super();
 		this.beginning_balance_con = beginning_balance_con;
@@ -39,7 +39,7 @@ public class CoreBeginningEnding {
 	}
 	@Override
 	public String toString() {
-		return "CoreBeginningEnding [beginning_balance_con=" + beginning_balance_con + ", beginning_balance_ifb="
+		return "BeginningEnding [beginning_balance_con=" + beginning_balance_con + ", beginning_balance_ifb="
 				+ beginning_balance_ifb + ", ending_balance_con=" + ending_balance_con + ", ending_balance_ifb="
 				+ ending_balance_ifb + "]";
 	}

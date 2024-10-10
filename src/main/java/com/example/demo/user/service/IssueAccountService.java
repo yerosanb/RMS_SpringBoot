@@ -17,8 +17,8 @@ import org.springframework.stereotype.Service;
 import com.example.demo.Exception.ExceptionsList;
 import com.example.demo.user.mapper.MapperIssueAccount;
 import com.example.demo.user.mapper.MapperRTGS;
-import com.example.demo.user.model.File_rtgs_awb_core;
-import com.example.demo.user.model.File_rtgs_nbe_ats;
+import com.example.demo.user.model.File_rtgs__;
+import com.example.demo.user.model.File_rtgs__ats;
 import com.example.demo.utils.Utils;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -33,20 +33,20 @@ public class IssueAccountService {
 	@Autowired
 	private Utils util;
 
-	public List<File_rtgs_awb_core> get_core_issue_for_recon(HttpServletRequest request) {
+	public List<File_rtgs__> get__issue_for_recon(HttpServletRequest request) {
 
 		try {
-			if (util.isPermitted(request, "IssueAccount", "get_issue_account_core_transactions_for_recon_manual")) {
-				util.registerActivity(request, "Get all core transactions for issue account",
-						"Get issue account core transactions for recon manual");
-				List<File_rtgs_awb_core> coreList = iaMapper.get_core_issue_for_recon();
-				for (File_rtgs_awb_core aa : coreList) {
+			if (util.isPermitted(request, "IssueAccount", "get_issue_account__transactions_for_recon_manual")) {
+				util.registerActivity(request, "Get all  transactions for issue account",
+						"Get issue account  transactions for recon manual");
+				List<File_rtgs__> List = iaMapper.get__issue_for_recon();
+				for (File_rtgs__ aa : List) {
 					System.out.println("amount:::::::::::::::::::::: " + aa.getAmount());
 				}
-				return coreList;
+				return List;
 			} else {
 				System.out.println(
-						"No user does not have permission in get_issue_account_core_transactions_for_recon_manual");
+						"No user does not have permission in get_issue_account__transactions_for_recon_manual");
 				return null;
 			}
 		} catch (Exception e) {
@@ -54,15 +54,15 @@ public class IssueAccountService {
 		}
 	}
 
-	public List<File_rtgs_awb_core> get_qbs_issue_for_recon(HttpServletRequest request) {
+	public List<File_rtgs__> get_qbs_issue_for_recon(HttpServletRequest request) {
 		try {
 
 			if (util.isPermitted(request, "IssueAccount", "get_issue_account_qbs_transactions_for_recon_manual")) {
-				util.registerActivity(request, "Get all core transactions for issue account",
+				util.registerActivity(request, "Get all  transactions for issue account",
 						"Get issue account qbs transactions for recon manual");
 
-				List<File_rtgs_awb_core> qbsList = iaMapper.get_qbs_issue_for_recon();
-				for (File_rtgs_awb_core aa : qbsList) {
+				List<File_rtgs__> qbsList = iaMapper.get_qbs_issue_for_recon();
+				for (File_rtgs__ aa : qbsList) {
 					System.out.println("amount:::::::::::::::::::::: " + aa.getAmount());
 				}
 				return qbsList;
@@ -102,8 +102,8 @@ public class IssueAccountService {
 
 				if (id_1[0] != null) {
 					for (int i = 0; i < id_1.length; i++) {
-						current_id = iaMapper.moveIssueCoreData(id_1[i]);
-						type = "issue_core";
+						current_id = iaMapper.moveIssueData(id_1[i]);
+						type = "issue_";
 						matched_data_id = iaMapper.addIssueMatched(current_id, match_id, date_now, "1",
 								id_1.length > 1 && id_2.length > 1 ? "1".toString() : "0".toString(), "1", "1");
 						iaMapper.addUserIssueMatched(util.get_user_id(request), matched_data_id, date_now, "1", "1",
@@ -152,9 +152,9 @@ public class IssueAccountService {
 					id_2[i] = Long.parseLong(id_2_string[i]);
 				}
 
-				double[] amount_core = new double[amount_1.length];
+				double[] amount_ = new double[amount_1.length];
 				for (int i = 0; i < amount_1.length; i++) {
-					amount_core[i] = Double.parseDouble(amount_1[i]);
+					amount_[i] = Double.parseDouble(amount_1[i]);
 				}
 
 				double[] amount_qbs = new double[amount_2.length];
@@ -170,11 +170,11 @@ public class IssueAccountService {
 
 					for (int j = 0; j < id_2.length; j++) {
 
-						if (amount_core[i] == amount_qbs[j] && iaMapper.existsbranchInAdditionalInformation(branch_1[i],iaMapper.additional_information(id_2[j]))==true) {
+						if (amount_[i] == amount_qbs[j] && iaMapper.existsbranchInAdditionalInformation(branch_1[i],iaMapper.additional_information(id_2[j]))==true) {
 							// System.out.println("qbs_id-------------->" + qbs_id[i]);
 							String match_id = generateUniqueMatchId();
-							current_id = iaMapper.moveIssueCoreData(id_1[i]);
-							type = "issue_core";
+							current_id = iaMapper.moveIssueData(id_1[i]);
+							type = "issue_";
 							matched_data_id = iaMapper.addIssueMatched(current_id, match_id, date_now, "1",
 									id_1.length > 1 && id_2.length > 1 ? "1".toString() : "0".toString(), "1", "1");
 							iaMapper.addUserIssueMatched(util.get_user_id(request), matched_data_id, date_now, "1", "1",
@@ -233,8 +233,8 @@ public class IssueAccountService {
 
 				if (id_1[0] != null) {
 					for (int i = 0; i < id_1.length; i++) {
-						current_id = iaMapper.moveIssueCoreData(id_1[i]);
-						type = "issue_core";
+						current_id = iaMapper.moveIssueData(id_1[i]);
+						type = "issue_";
 						matched_data_id = iaMapper.addIssueMatched(current_id, match_id, date_now, "1",
 								id_1.length > 1 && id_2.length > 1 ? "1".toString() : "0".toString(), "1", "1");
 						iaMapper.addUserIssueMatched(util.get_user_id(request), matched_data_id, date_now, "1", "1",
@@ -275,23 +275,23 @@ public class IssueAccountService {
 
 	}
 
-	public List<File_rtgs_awb_core> get_core_issue_for_view_matched(HttpServletRequest request, String match_dates) {
+	public List<File_rtgs__> get__issue_for_view_matched(HttpServletRequest request, String match_dates) {
 		try {
-			if (util.isPermitted(request, "IssueAccount", "get_issue_account_core_transactions_for_view_matched")) {
-				util.registerActivity(request, "Get all core matched  transactions for issue account",
-						"Get issue account core  transactions for view matched ");
+			if (util.isPermitted(request, "IssueAccount", "get_issue_account__transactions_for_view_matched")) {
+				util.registerActivity(request, "Get all  matched  transactions for issue account",
+						"Get issue account   transactions for view matched ");
 				JsonObject date_data_object = JsonParser.parseString(match_dates).getAsJsonObject();
 				String[] minDate = date_data_object.get("minDate").getAsString().split(",");
 				String[] maxDate = date_data_object.get("maxDate").getAsString().split(",");
-				List<File_rtgs_awb_core> coreList = iaMapper.get_core_issue_for_view_matched(
+				List<File_rtgs__> List = iaMapper.get__issue_for_view_matched(
 						Integer.parseInt(minDate[0].replace("-", "")), Integer.parseInt(maxDate[0].replace("-", "")));
-				for (File_rtgs_awb_core aa : coreList) {
+				for (File_rtgs__ aa : List) {
 					System.out.println("amount:::::::::::::::::::::: " + aa.getAmount());
 				}
-				return coreList;
+				return List;
 			} else {
 				System.out.println(
-						"No user does not have permission in get_issue_account_core_transactions_for_view_matched");
+						"No user does not have permission in get_issue_account__transactions_for_view_matched");
 				return null;
 			}
 		} catch (Exception e) {
@@ -299,19 +299,19 @@ public class IssueAccountService {
 		}
 	}
 
-	public List<File_rtgs_awb_core> get_qbs_issue_for_view_matched(HttpServletRequest request, String match_dates) {
+	public List<File_rtgs__> get_qbs_issue_for_view_matched(HttpServletRequest request, String match_dates) {
 		try {
 
 			if (util.isPermitted(request, "IssueAccount", "get_issue_account_qbs_transactions_for_view_matched")) {
-				util.registerActivity(request, "Get all core matchedd transactions for issue account",
+				util.registerActivity(request, "Get all  matchedd transactions for issue account",
 						"Get issue account qbs transactions for view matched");
 				JsonObject date_data_object = JsonParser.parseString(match_dates).getAsJsonObject();
 				String[] minDate = date_data_object.get("minDate").getAsString().split(",");
 				String[] maxDate = date_data_object.get("maxDate").getAsString().split(",");
 
-				List<File_rtgs_awb_core> qbsList = iaMapper.get_qbs_issue_for_view_matched(
+				List<File_rtgs__> qbsList = iaMapper.get_qbs_issue_for_view_matched(
 						Integer.parseInt(minDate[0].replace("-", "")), Integer.parseInt(maxDate[0].replace("-", "")));
-				for (File_rtgs_awb_core aa : qbsList) {
+				for (File_rtgs__ aa : qbsList) {
 					System.out.println("amount:::::::::::::::::::::: " + aa.getAmount());
 				}
 				return qbsList;
@@ -358,15 +358,15 @@ public class IssueAccountService {
 
 //					matched_id = rtgsMapper.findMatchedId(id_2[i]);
 //					rtgsMapper.deleteMatchTransaction(matched_id);
-//					rtgsMapper.updateUnMatchStatus_core(id_2[i]);
+//					rtgsMapper.updateUnMatchStatus_(id_2[i]);
 				}
 
 				for (int i = 0; i < id_1.length; i++) {
-					System.out.println("core id=" + id_1[i]);
+					System.out.println(" id=" + id_1[i]);
 					iaMapper.deleteIssueMatched(id_1[i]);
 
-					current_id = iaMapper.moveIssueCoreMatched(id_1[i]);
-					type = "data_issue_core";
+					current_id = iaMapper.moveIssueMatched(id_1[i]);
+					type = "data_issue_";
 					rtgsMapper.updateEditReason(current_id, matched_data_id, type, id_1[i]);
 					System.out.println("edite reason updated after unmatche id----->" + id_1[i]);
 					// rtgsMapper.deleteUserRtgsMatched(id_1[i]);
@@ -390,19 +390,19 @@ public class IssueAccountService {
 		}
 	}
 
-	public List<File_rtgs_awb_core> get_core_issue_for_view_unmatched(HttpServletRequest request) {
+	public List<File_rtgs__> get__issue_for_view_unmatched(HttpServletRequest request) {
 		try {
-			if (util.isPermitted(request, "IssueAccount", "get_issue_account_core_transactions_for_view_unmatched")) {
-				util.registerActivity(request, "Get all core unmatched  transactions for issue account",
-						"Get issue account core  transactions for view unmatched ");
-				List<File_rtgs_awb_core> coreList = iaMapper.get_core_issue_for_view_unmatched();
-				for (File_rtgs_awb_core aa : coreList) {
+			if (util.isPermitted(request, "IssueAccount", "get_issue_account__transactions_for_view_unmatched")) {
+				util.registerActivity(request, "Get all  unmatched  transactions for issue account",
+						"Get issue account   transactions for view unmatched ");
+				List<File_rtgs__> List = iaMapper.get__issue_for_view_unmatched();
+				for (File_rtgs__ aa : List) {
 					System.out.println("amount:::::::::::::::::::::: " + aa.getAmount());
 				}
-				return coreList;
+				return List;
 			} else {
 				System.out.println(
-						"No user does not have permission in get_issue_account_core_transactions_for_view_unmatched");
+						"No user does not have permission in get_issue_account__transactions_for_view_unmatched");
 				return null;
 			}
 		} catch (Exception e) {
@@ -410,15 +410,15 @@ public class IssueAccountService {
 		}
 	}
 
-	public List<File_rtgs_awb_core> get_qbs_issue_for_view_unmatched(HttpServletRequest request) {
+	public List<File_rtgs__> get_qbs_issue_for_view_unmatched(HttpServletRequest request) {
 		try {
 
 			if (util.isPermitted(request, "IssueAccount", "get_issue_account_qbs_transactions_for_view_unmatched")) {
-				util.registerActivity(request, "Get all core unmatchedd transactions for issue account",
+				util.registerActivity(request, "Get all  unmatchedd transactions for issue account",
 						"Get issue account qbs transactions for view unmatched");
 
-				List<File_rtgs_awb_core> qbsList = iaMapper.get_qbs_issue_for_view_unmatched();
-				for (File_rtgs_awb_core aa : qbsList) {
+				List<File_rtgs__> qbsList = iaMapper.get_qbs_issue_for_view_unmatched();
+				for (File_rtgs__ aa : qbsList) {
 					System.out.println("amount:::::::::::::::::::::: " + aa.getAmount());
 				}
 				return qbsList;
@@ -432,11 +432,11 @@ public class IssueAccountService {
 		}
 	}
 
-	public List<File_rtgs_awb_core> get_issue_core_matched_with_reason(HttpServletRequest request) {
+	public List<File_rtgs__> get_issue__matched_with_reason(HttpServletRequest request) {
 		try {
-			if (util.isPermitted(request, "IssueAccount", "get_all_issue_core_transaction_matched_with_reason")) {
-				util.registerActivity(request, "Get all issue core matched with reason  transactions", "-");
-				return iaMapper.get_issue_core_matched_with_reason();
+			if (util.isPermitted(request, "IssueAccount", "get_all_issue__transaction_matched_with_reason")) {
+				util.registerActivity(request, "Get all issue  matched with reason  transactions", "-");
+				return iaMapper.get_issue__matched_with_reason();
 
 			} else {
 				System.out.println("No user does not have permission.");
@@ -447,7 +447,7 @@ public class IssueAccountService {
 		}
 	}
 
-	public List<File_rtgs_awb_core> get_issue_qbs_matched_with_reason(HttpServletRequest request) {
+	public List<File_rtgs__> get_issue_qbs_matched_with_reason(HttpServletRequest request) {
 		try {
 			if (util.isPermitted(request, "IssueAccount", "get_all_issue_qbs_transaction_matched_with_reason")) {
 				util.registerActivity(request, "Get all issue QBS matched with reason  transactions", "-");
@@ -462,11 +462,11 @@ public class IssueAccountService {
 		}
 	}
 
-	public List<File_rtgs_awb_core> get_edited_issue_core(HttpServletRequest request) {
+	public List<File_rtgs__> get_edited_issue_(HttpServletRequest request) {
 		try {
-			if (util.isPermitted(request, "IssueAccount", "get_edited_issue_core_transaction")) {
-				util.registerActivity(request, "Get all edited issue core transaction", "-");
-				return iaMapper.get_edited_issue_core();
+			if (util.isPermitted(request, "IssueAccount", "get_edited_issue__transaction")) {
+				util.registerActivity(request, "Get all edited issue  transaction", "-");
+				return iaMapper.get_edited_issue_();
 			} else {
 				System.out.println("No user does not have permission.");
 				return null;
@@ -476,7 +476,7 @@ public class IssueAccountService {
 		}
 	}
 
-	public List<File_rtgs_awb_core> get_edited_issue_qbs(HttpServletRequest request) {
+	public List<File_rtgs__> get_edited_issue_qbs(HttpServletRequest request) {
 		try {
 			if (util.isPermitted(request, "IssueAccount", "get_edited_issue_qbs_transaction")) {
 				util.registerActivity(request, "Get all edited issue QBS transaction", "-");
@@ -490,11 +490,11 @@ public class IssueAccountService {
 		}
 	}
 
-	public List<File_rtgs_awb_core> get_edited_detail_issue_core(HttpServletRequest request, Long id) {
+	public List<File_rtgs__> get_edited_detail_issue_(HttpServletRequest request, Long id) {
 		try {
-			if (util.isPermitted(request, "IssueAccount", "get_detail_edited_issue_core_transaction")) {
-				util.registerActivity(request, "Get detail edited issue core transaction", "-");
-				return iaMapper.get_edited_detail_issue_core(id);
+			if (util.isPermitted(request, "IssueAccount", "get_detail_edited_issue__transaction")) {
+				util.registerActivity(request, "Get detail edited issue  transaction", "-");
+				return iaMapper.get_edited_detail_issue_(id);
 			} else {
 				System.out.println("No user does not have permission.");
 				return null;
@@ -504,7 +504,7 @@ public class IssueAccountService {
 		}
 	}
 
-	public List<File_rtgs_awb_core> get_edited_detail_issue_qbs(HttpServletRequest request, Long id) {
+	public List<File_rtgs__> get_edited_detail_issue_qbs(HttpServletRequest request, Long id) {
 		try {
 			if (util.isPermitted(request, "IssueAccount", "get_detail_edited_issue_qbs_transaction")) {
 				util.registerActivity(request, "Get detail edited issue QBS transaction", "-");
@@ -518,18 +518,18 @@ public class IssueAccountService {
 		}
 	}
 
-	public List<File_rtgs_awb_core> get_core_issue_for_recon_auto(HttpServletRequest request) {
+	public List<File_rtgs__> get__issue_for_recon_auto(HttpServletRequest request) {
 		try {
-			if (util.isPermitted(request, "IssueAccount", "get_core_issue_for_recon_auto")) {
-				util.registerActivity(request, "Get all core transactions for issue account",
-						"Get issue account core  transactions for reconcile automaticaly ");
-				List<File_rtgs_awb_core> coreList = iaMapper.get_core_issue_for_recon_auto();
-				for (File_rtgs_awb_core aa : coreList) {
+			if (util.isPermitted(request, "IssueAccount", "get__issue_for_recon_auto")) {
+				util.registerActivity(request, "Get all  transactions for issue account",
+						"Get issue account   transactions for reconcile automaticaly ");
+				List<File_rtgs__> List = iaMapper.get__issue_for_recon_auto();
+				for (File_rtgs__ aa : List) {
 					System.out.println("amount:::::::::::::::::::::: " + aa.getAmount());
 				}
-				return coreList;
+				return List;
 			} else {
-				System.out.println("No user does not have permission in. get_core_issue_for_recon_auto");
+				System.out.println("No user does not have permission in. get__issue_for_recon_auto");
 				return null;
 			}
 		} catch (Exception e) {
@@ -537,7 +537,7 @@ public class IssueAccountService {
 		}
 	}
 
-	public boolean update_transaction_issue(HttpServletRequest request, File_rtgs_nbe_ats edit_data) {
+	public boolean update_transaction_issue(HttpServletRequest request, File_rtgs__ats edit_data) {
 		try {
 			if (util.isPermitted(request, "IssueAccount", "update_transaction_issuee")) {
 				util.registerActivity(request, "Update transaction", "-");
@@ -545,20 +545,20 @@ public class IssueAccountService {
 				String type = "";
 				if (edit_data.getType().equalsIgnoreCase("Issue_QBS")) {
 					type = "data_issue_QBS";
-					Long edit_reason_id = rtgsMapper.addReasonForEditCore(edit_data.getId(), user_id, type,
+					Long edit_reason_id = rtgsMapper.addReasonForEdit(edit_data.getId(), user_id, type,
 							edit_data.getReason(), new Date().toString(), "1", "1", "1");
 					iaMapper.moveOldIssueQBSData(edit_data.getId(), edit_reason_id);
 
 					iaMapper.updateTransactionQBS(edit_data);
 					iaMapper.moveEditedIssueQBSeData(edit_data.getId(), edit_reason_id);
-				} else if (edit_data.getType().equalsIgnoreCase("Issue_core")) {
-					type = "data_issue_core";
-					Long edit_reason_id = rtgsMapper.addReasonForEditCore(edit_data.getId(), user_id, type,
+				} else if (edit_data.getType().equalsIgnoreCase("Issue_")) {
+					type = "data_issue_";
+					Long edit_reason_id = rtgsMapper.addReasonForEdit(edit_data.getId(), user_id, type,
 							edit_data.getReason(), new Date().toString(), "1", "1", "1");
-					iaMapper.moveOldIssueCoreData(edit_data.getId(), edit_reason_id);
+					iaMapper.moveOldIssueData(edit_data.getId(), edit_reason_id);
 
-					iaMapper.updateTransactionCore(edit_data);
-					iaMapper.moveEditedIssueCoreeData(edit_data.getId(), edit_reason_id);
+					iaMapper.updateTransaction(edit_data);
+					iaMapper.moveEditedIssueeData(edit_data.getId(), edit_reason_id);
 
 				}
 				return true;
@@ -593,11 +593,11 @@ public class IssueAccountService {
 								new Date().toString(), "1", "1", "2");
 						iaMapper.moveDeletedIssueQBSData(ids[i], reason_id);
 						iaMapper.deleteTransactionissueQBS(ids[i]);
-					} else if (type != null && type.equalsIgnoreCase("Issue_core")) {
-						type1 = "data_issue_core";
-						Long reason_id = rtgsMapper.addReasonForEditCore(ids[i], user_id, type1, reason,
+					} else if (type != null && type.equalsIgnoreCase("Issue_")) {
+						type1 = "data_issue_";
+						Long reason_id = rtgsMapper.addReasonForEdit(ids[i], user_id, type1, reason,
 								new Date().toString(), "1", "1", "2");
-						iaMapper.moveDeletedIssueCoreData(ids[i], reason_id);
+						iaMapper.moveDeletedIssueData(ids[i], reason_id);
 						iaMapper.deleteTransactionissueore(ids[i]);
 					}
 				}
@@ -611,15 +611,15 @@ public class IssueAccountService {
 		}
 	}
 
-	public List<File_rtgs_awb_core> get_qbs_issue_for_recon_auto(HttpServletRequest request) {
+	public List<File_rtgs__> get_qbs_issue_for_recon_auto(HttpServletRequest request) {
 		try {
 
 			if (util.isPermitted(request, "IssueAccount", "get_qbs_issue_for_recon_auto")) {
 				util.registerActivity(request, "Get all qbs transactions of issue account",
 						"Get issue account qbs transactions for reconcile automaticaly");
 
-				List<File_rtgs_awb_core> qbsList = iaMapper.get_qbs_issue_for_recon_auto();
-				for (File_rtgs_awb_core aa : qbsList) {
+				List<File_rtgs__> qbsList = iaMapper.get_qbs_issue_for_recon_auto();
+				for (File_rtgs__ aa : qbsList) {
 					System.out.println("amount:::::::::::::::::::::: " + aa.getAmount());
 				}
 				return qbsList;
@@ -633,10 +633,10 @@ public class IssueAccountService {
 		}
 	}
 
-	public boolean match_issue_core_reversal_transactions(HttpServletRequest request, String data_ids) {
+	public boolean match_issue__reversal_transactions(HttpServletRequest request, String data_ids) {
 		try {
 			System.out.println("here it comes: " + data_ids);
-			if (util.isPermitted(request, "IssueAccount", "match_issue_account_transactions_core_reversal")) {
+			if (util.isPermitted(request, "IssueAccount", "match_issue_account_transactions__reversal")) {
 
 				JsonObject id_data_object = JsonParser.parseString(data_ids).getAsJsonObject();
 				String[] id_1_string = id_data_object.get("id_1").getAsString().split(",");
@@ -654,8 +654,8 @@ public class IssueAccountService {
 
 				if (id_1[0] != null) {
 					for (int i = 0; i < id_1.length; i++) {
-						current_id = iaMapper.moveIssueCoreReversalData(id_1[i], match_id, date_now);
-//						type = "issue_core_reversal";
+						current_id = iaMapper.moveIssueReversalData(id_1[i], match_id, date_now);
+//						type = "issue__reversal";
 //						matched_data_id = iaMapper.addIssueMatched(current_id, match_id, date_now, "1",
 //								id_1.length > 1 ? "1".toString() : "0".toString(), "1", "1");
 //						iaMapper.addUserIssueMatched(util.get_user_id(request), matched_data_id, date_now, "1", "1",
@@ -666,7 +666,7 @@ public class IssueAccountService {
 					System.out.println("it is not issue");
 				}
 				util.registerActivity(request, "Issue account match",
-						util.getUserName(request) + ": match_issue_account_transactions_core_reversal.");
+						util.getUserName(request) + ": match_issue_account_transactions__reversal.");
 				return true;
 			} else {
 				System.out.println("No user does not have permission.");
@@ -699,7 +699,7 @@ public class IssueAccountService {
 				if (id_1[0] != null) {
 					for (int i = 0; i < id_1.length; i++) {
 						current_id = iaMapper.moveIssueQBSeReversalData(id_1[i], match_id, date_now);
-//						type = "issue_core_reversal";
+//						type = "issue__reversal";
 //						matched_data_id = iaMapper.addIssueMatched(current_id, match_id, date_now, "1",
 //								id_1.length > 1 ? "1".toString() : "0".toString(), "1", "1");
 //						iaMapper.addUserIssueMatched(util.get_user_id(request), matched_data_id, date_now, "1", "1",
@@ -721,24 +721,24 @@ public class IssueAccountService {
 		}
 	}
 
-	public List<File_rtgs_awb_core> get_core_issue_for_view_matchedreversal(HttpServletRequest request,
+	public List<File_rtgs__> get__issue_for_view_matchedreversal(HttpServletRequest request,
 			String match_dates) {
 		try {
-			if (util.isPermitted(request, "IssueAccount", "get_issue_account_core_transactions_for_view_matched")) {
-				util.registerActivity(request, "Get all core reversal matched  transactions for issue account",
-						"Get issue account core  transactions for view matched ");
+			if (util.isPermitted(request, "IssueAccount", "get_issue_account__transactions_for_view_matched")) {
+				util.registerActivity(request, "Get all  reversal matched  transactions for issue account",
+						"Get issue account   transactions for view matched ");
 				JsonObject date_data_object = JsonParser.parseString(match_dates).getAsJsonObject();
 				String[] minDate = date_data_object.get("minDate").getAsString().split(",");
 				String[] maxDate = date_data_object.get("maxDate").getAsString().split(",");
-				List<File_rtgs_awb_core> coreList = iaMapper.get_core_issue_reversal_matched(
+				List<File_rtgs__> List = iaMapper.get__issue_reversal_matched(
 						Integer.parseInt(minDate[0].replace("-", "")), Integer.parseInt(maxDate[0].replace("-", "")));
-				for (File_rtgs_awb_core aa : coreList) {
+				for (File_rtgs__ aa : List) {
 					System.out.println("amount:::::::::::::::::::::: " + aa.getAmount());
 				}
-				return coreList;
+				return List;
 			} else {
 				System.out.println(
-						"No user does not have permission in get_issue_account_core_transactions_for_view_matched");
+						"No user does not have permission in get_issue_account__transactions_for_view_matched");
 				return null;
 			}
 		} catch (Exception e) {
@@ -746,24 +746,24 @@ public class IssueAccountService {
 		}
 	}
 
-	public List<File_rtgs_awb_core> get_qbs_issue_for_view_matchedreversal(HttpServletRequest request,
+	public List<File_rtgs__> get_qbs_issue_for_view_matchedreversal(HttpServletRequest request,
 			String match_dates) {
 		try {
-			if (util.isPermitted(request, "IssueAccount", "get_issue_account_core_transactions_for_view_matched")) {
+			if (util.isPermitted(request, "IssueAccount", "get_issue_account__transactions_for_view_matched")) {
 				util.registerActivity(request, "Get all ABS reversal matched  transactions for issue account",
-						"Get issue account core  transactions for view matched ");
+						"Get issue account   transactions for view matched ");
 				JsonObject date_data_object = JsonParser.parseString(match_dates).getAsJsonObject();
 				String[] minDate = date_data_object.get("minDate").getAsString().split(",");
 				String[] maxDate = date_data_object.get("maxDate").getAsString().split(",");
-				List<File_rtgs_awb_core> coreList = iaMapper.get_qbs_issue_reversal_matched(
+				List<File_rtgs__> List = iaMapper.get_qbs_issue_reversal_matched(
 						Integer.parseInt(minDate[0].replace("-", "")), Integer.parseInt(maxDate[0].replace("-", "")));
-				for (File_rtgs_awb_core aa : coreList) {
+				for (File_rtgs__ aa : List) {
 					System.out.println("amount:::::::::::::::::::::: " + aa.getAmount());
 				}
-				return coreList;
+				return List;
 			} else {
 				System.out.println(
-						"No user does not have permission in get_issue_account_core_transactions_for_view_matched");
+						"No user does not have permission in get_issue_account__transactions_for_view_matched");
 				return null;
 			}
 		} catch (Exception e) {
@@ -771,10 +771,10 @@ public class IssueAccountService {
 		}
 	}
 
-	public boolean unmatch_issue_transactions_core_reversal(HttpServletRequest request, String data_ids) {
+	public boolean unmatch_issue_transactions__reversal(HttpServletRequest request, String data_ids) {
 		try {
 			if (util.isPermitted(request, "IssueAccount", "unmatch_issue_account_transactions")) {
-				util.registerActivity(request, "unmatch transactions issue core reversal ", "-");
+				util.registerActivity(request, "unmatch transactions issue  reversal ", "-");
 				JsonObject id_data_object = JsonParser.parseString(data_ids).getAsJsonObject();
 				String[] id_1_string = id_data_object.get("id_1").getAsString().split(",");
 				Long[] id_1 = new Long[id_1_string.length];
@@ -784,7 +784,7 @@ public class IssueAccountService {
 
 				for (int i = 0; i < id_1.length; i++) {
 					System.out.println("id=" + id_1[i]);
-					iaMapper.moveIssueCoreMatchedReveersal(id_1[i]);
+					iaMapper.moveIssueMatchedReveersal(id_1[i]);
 				}
 
 				return true;

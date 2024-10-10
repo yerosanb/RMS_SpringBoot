@@ -23,7 +23,7 @@ import org.springframework.stereotype.Service;
 //import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.demo.user.model.File_rtgs_awb_core;
+import com.example.demo.user.model.File_rtgs__;
 import com.example.demo.utils.ExcelUtils;
 import com.example.demo.utils.Utils;
 
@@ -54,7 +54,7 @@ public class UploadExcelService_issue_qbs {
 		df.setMaximumFractionDigits(24);
 
 		Map<String, Object> resp = new HashMap<>();
-		List<File_rtgs_awb_core> issue_core_all = new ArrayList<>();
+		List<File_rtgs__> issue__all = new ArrayList<>();
 		Double beginningBallance_ifb = 0d;
 		Double endingBallance_ifb = 0d;
 		int totalCredit_ifb = 0;
@@ -88,7 +88,7 @@ public class UploadExcelService_issue_qbs {
 				} else {
 					Iterator<Cell> cellIterator = row.iterator();
 					int cellIndex = 0;
-					File_rtgs_awb_core issue_core = new File_rtgs_awb_core();
+					File_rtgs__ issue_ = new File_rtgs__();
 					boolean last = false;
 					while (cellIterator.hasNext()) {
 						Cell cell = cellIterator.next();
@@ -98,7 +98,7 @@ public class UploadExcelService_issue_qbs {
 							if (ExcelUtils.toValue(cell) != null && ExcelUtils.toValue(cell).trim() != "" && !ExcelUtils.toValue(cell).isBlank()) {
 								if (String.valueOf(ExcelUtils.toValue(cell)).contains("T")) {
 									LocalDateTime datetime = LocalDateTime.parse(ExcelUtils.toValue(cell));
-									issue_core.setPosting_date(datetime.getYear()
+									issue_.setPosting_date(datetime.getYear()
 											+ (String.valueOf(datetime.getMonthValue()).length() == 1
 													? "0" + datetime.getMonthValue()
 													: String.valueOf(datetime.getMonthValue()))
@@ -108,7 +108,7 @@ public class UploadExcelService_issue_qbs {
 								} else {
 									DateTimeFormatter dTF = DateTimeFormatter.ofPattern("dd-MMM-uuuu");
 									LocalDate datetime = LocalDate.parse(ExcelUtils.toValue(cell), dTF);
-									issue_core.setPosting_date(datetime.getYear()
+									issue_.setPosting_date(datetime.getYear()
 											+ (String.valueOf(datetime.getMonthValue()).length() == 1
 													? "0" + datetime.getMonthValue()
 													: String.valueOf(datetime.getMonthValue()))
@@ -128,7 +128,7 @@ public class UploadExcelService_issue_qbs {
 							if (ExcelUtils.toValue(cell) != null && ExcelUtils.toValue(cell).trim() != "" && !ExcelUtils.toValue(cell).isBlank()) {
 								if (String.valueOf(ExcelUtils.toValue(cell)).contains("T")) {
 									LocalDateTime datetime = LocalDateTime.parse(ExcelUtils.toValue(cell));
-									issue_core.setValue_date(datetime.getYear()
+									issue_.setValue_date(datetime.getYear()
 											+ (String.valueOf(datetime.getMonthValue()).length() == 1
 													? "0" + datetime.getMonthValue()
 													: String.valueOf(datetime.getMonthValue()))
@@ -138,7 +138,7 @@ public class UploadExcelService_issue_qbs {
 								} else {
 									DateTimeFormatter dTF = DateTimeFormatter.ofPattern("dd-MMM-uuuu");
 									LocalDate datetime = LocalDate.parse(ExcelUtils.toValue(cell), dTF);
-									issue_core.setValue_date(datetime.getYear()
+									issue_.setValue_date(datetime.getYear()
 											+ (String.valueOf(datetime.getMonthValue()).length() == 1
 													? "0" + datetime.getMonthValue()
 													: String.valueOf(datetime.getMonthValue()))
@@ -152,7 +152,7 @@ public class UploadExcelService_issue_qbs {
 							if (last)
 								break;
 							if (ExcelUtils.toValue(cell) != null && ExcelUtils.toValue(cell).trim() != "" && !ExcelUtils.toValue(cell).isBlank()) {
-								issue_core.setBranch(
+								issue_.setBranch(
 										ExcelUtils.toValue(cell) == null ? "null" : ExcelUtils.toValue(cell).trim());
 							}
 						}
@@ -161,7 +161,7 @@ public class UploadExcelService_issue_qbs {
 							if (last)
 								break;
 							if (ExcelUtils.toValue(cell) != null && ExcelUtils.toValue(cell).trim() != "" && !ExcelUtils.toValue(cell).isBlank()) {
-								issue_core.setAdditional_information(
+								issue_.setAdditional_information(
 										ExcelUtils.toValue(cell) == null ? "null" : ExcelUtils.toValue(cell).trim());
 							}
 						}
@@ -172,8 +172,8 @@ public class UploadExcelService_issue_qbs {
 								if (Float.parseFloat(ExcelUtils.toValue(cell)) != 0.00) {
 									totalDebit_ifb++;
 									totalDebitAmount_ifb += cell.getNumericCellValue();
-									issue_core.setDr_cr("DR".trim());
-									issue_core
+									issue_.setDr_cr("DR".trim());
+									issue_
 											.setAmount(Double.parseDouble(String.valueOf(cell.getNumericCellValue())));
 								}
 							}
@@ -185,8 +185,8 @@ public class UploadExcelService_issue_qbs {
 								if (Float.parseFloat(String.valueOf(cell.getNumericCellValue())) != 0.00) {
 									totalCredit_ifb++;
 									totalCreditAmount_ifb += cell.getNumericCellValue();
-									issue_core.setDr_cr("CR".trim());
-									issue_core
+									issue_.setDr_cr("CR".trim());
+									issue_
 											.setAmount(Double.parseDouble(String.valueOf(cell.getNumericCellValue())));
 								}
 							}
@@ -195,7 +195,7 @@ public class UploadExcelService_issue_qbs {
 							if (last)
 								break;
 							if (ExcelUtils.toValue(cell) != null && ExcelUtils.toValue(cell).trim() != "" && !ExcelUtils.toValue(cell).isBlank()) {
-								issue_core.setBalance(Float.valueOf(String.valueOf(cell.getNumericCellValue())));
+								issue_.setBalance(Float.valueOf(String.valueOf(cell.getNumericCellValue())));
 								endingBallance_ifb = cell.getNumericCellValue();
 							}
 						}
@@ -207,13 +207,13 @@ public class UploadExcelService_issue_qbs {
 							break;
 						cellIndex++;
 					}
-					issue_core.setAvailability("1".trim());
-					issue_core.setMatch_status("0".trim());
-					issue_core.setStatus("1".trim());
-					issue_core.setUpload_date(date);
+					issue_.setAvailability("1".trim());
+					issue_.setMatch_status("0".trim());
+					issue_.setStatus("1".trim());
+					issue_.setUpload_date(date);
 
 					if (!last)
-						issue_core_all.add(issue_core);
+						issue__all.add(issue_);
 				}
 				rowIndex++;
 			}
@@ -228,7 +228,7 @@ public class UploadExcelService_issue_qbs {
 
 			// resp.put("businessDate", businessDate);
 			// resp.put("accountNumber", accountNumber);
-			resp.put("data", issue_core_all);
+			resp.put("data", issue__all);
 			resp.put("beginningBallance_ifb: ", beginningBallance_ifb);
 			resp.put("endingBallance_ifb", endingBallance_ifb);
 			resp.put("totalCredit_ifb", totalCredit_ifb);

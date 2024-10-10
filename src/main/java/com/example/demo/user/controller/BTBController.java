@@ -25,9 +25,9 @@ public class BTBController {
 		return APIResponse.response(btbService.get_ats_for_btb_recon(request, recon_date));
 	}
 
-	@RequestMapping(value = "get_core_for_btb_recon", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Object> get_core_for_btb_recon(HttpServletRequest request) {
-		return APIResponse.response(btbService.get_core_for_btb_recon(request));
+	@RequestMapping(value = "get__for_btb_recon", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Object> get__for_btb_recon(HttpServletRequest request) {
+		return APIResponse.response(btbService.get__for_btb_recon(request));
 	}
 //	
 //	@RequestMapping(value = "get_ats_for_recon_auto/{recon_date}", method = RequestMethod.GET, produces = "application/json")

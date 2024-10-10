@@ -3,7 +3,7 @@ package com.example.demo.user.model;
 public class Transactionhistory {
 
 	private Long id;
-	private Long core_id;
+	private Long _id;
 	private String value_date_type;
 	private String reference;
 	private String sender;
@@ -52,7 +52,7 @@ public class Transactionhistory {
 
 	}
 
-	public Transactionhistory(Long id, Long core_id, String value_date_type, String reference, String sender,
+	public Transactionhistory(Long id, Long _id, String value_date_type, String reference, String sender,
 			String receiver, String additional_information, Double amount, String dr_cr, Long upload_date,
 			String match_status, String status, String availability, Long file_id, String match_id, Long match_date,
 			String firstname, String middlename, String lastname, String posting_date, String value_date,
@@ -63,7 +63,7 @@ public class Transactionhistory {
 			String stock_date, String account_description, String reason, String bbf, String main_pg) {
 		super();
 		this.id = id;
-		this.core_id = core_id;
+		this._id = _id;
 		this.value_date_type = value_date_type;
 		this.reference = reference;
 		this.sender = sender;
@@ -116,12 +116,12 @@ public class Transactionhistory {
 		this.id = id;
 	}
 
-	public Long getCore_id() {
-		return core_id;
+	public Long get_id() {
+		return _id;
 	}
 
-	public void setCore_id(Long core_id) {
-		this.core_id = core_id;
+	public void set_id(Long _id) {
+		this._id = _id;
 	}
 
 	public String getValue_date_type() {

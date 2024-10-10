@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.Exception.ExceptionsList;
 import com.example.demo.user.mapper.MapperDashboard;
 import com.example.demo.user.model.AtsBeginningEnding;
-import com.example.demo.user.model.CoreBeginningEnding;
+import com.example.demo.user.model.BeginningEnding;
 import com.example.demo.utils.Utils;
 
 @Service
@@ -41,27 +41,27 @@ public class DashboardService {
 						+ "_of_currencies", mapperDashboard.getTotalNumberOfCurrencies());
 				response.put("total_number_of_files", mapperDashboard.getTotalNumberOfFiles());
 				response.put("total_number_of_transactions_ats", mapperDashboard.getTotalNumberOfTransactionsAts());
-				response.put("total_number_of_transactions_core", mapperDashboard.getTotalNumberOfTransactionsCore());
+				response.put("total_number_of_transactions_", mapperDashboard.getTotalNumberOfTransactions());
 
-				response.put("outstanding_transactions_on_core_credit",
-						mapperDashboard.getOutstandingTransactionsOnCoreCredit());
-				response.put("outstanding_transactions_on_core_debit",
-						mapperDashboard.getOutstandingTransactionsOnCoreDebit());
+				response.put("outstanding_transactions_on__credit",
+						mapperDashboard.getOutstandingTransactionsOnCredit());
+				response.put("outstanding_transactions_on__debit",
+						mapperDashboard.getOutstandingTransactionsOnDebit());
 				response.put("outstanding_transactions_on_ats_credit",
 						mapperDashboard.getOutstandingTransactionsOnAtsCredit());
 				response.put("outstanding_transactions_on_ats_debit",
 						mapperDashboard.getOutstandingTransactionsOnAtsDebit());
 
 				response.put("beginning_balance_ats", mapperDashboard.getBeginningBalanceAts());
-				response.put("beginning_balance_core_ifb", mapperDashboard.getBeginningBalanceCoreIfb());
-				response.put("beginning_balance_core_conv", mapperDashboard.getBeginningBalanceCoreConv());
+				response.put("beginning_balance__ifb", mapperDashboard.getBeginningBalanceIfb());
+				response.put("beginning_balance__conv", mapperDashboard.getBeginningBalanceConv());
 
 				response.put("ending_balance_ats", mapperDashboard.getEndingBalanceAts());
-				response.put("ending_balance_core_ifb", mapperDashboard.getEndingBalanceCoreIfb());
-				response.put("ending_balance_core_conv", mapperDashboard.getEndingBalanceCoreConv());
+				response.put("ending_balance__ifb", mapperDashboard.getEndingBalanceIfb());
+				response.put("ending_balance__conv", mapperDashboard.getEndingBalanceConv());
 
-				response.put("outstanding_balance_on_core_credit", mapperDashboard.getOutstandingBalanceOnCoreCredit());
-				response.put("outstanding_balance_on_core_debit", mapperDashboard.getOutstandingBalanceOnCoreDebit());
+				response.put("outstanding_balance_on__credit", mapperDashboard.getOutstandingBalanceOnCredit());
+				response.put("outstanding_balance_on__debit", mapperDashboard.getOutstandingBalanceOnDebit());
 				response.put("outstanding_balance_on_ats_credit", mapperDashboard.getOutstandingBalanceOnAtsCredit());
 				response.put("outstanding_balance_on_ats_debit", mapperDashboard.getOutstandingBalanceOnAtsDebit());
 
@@ -76,14 +76,14 @@ public class DashboardService {
 						mapperDashboard.getNumberOfMatchedTransactionsAtsB2B());
 				response.put("number_of_matched_transactions_ats_erca",
 						mapperDashboard.getNumberOfMatchedTransactionsAtsERCA());
-				response.put("number_of_matched_transactions_core_rtgs",
-						mapperDashboard.getNumberOfMatchedTransactionsCoreRTGS());
-				response.put("number_of_matched_transactions_core_sos",
-						mapperDashboard.getNumberOfMatchedTransactionsCoreSOS());
-				response.put("number_of_matched_transactions_core_b2b",
-						mapperDashboard.getNumberOfMatchedTransactionsCoreB2B());
-				response.put("number_of_matched_transactions_core_erca",
-						mapperDashboard.getNumberOfMatchedTransactionsCoreERCA());
+				response.put("number_of_matched_transactions__rtgs",
+						mapperDashboard.getNumberOfMatchedTransactionsRTGS());
+				response.put("number_of_matched_transactions__sos",
+						mapperDashboard.getNumberOfMatchedTransactionsSOS());
+				response.put("number_of_matched_transactions__b2b",
+						mapperDashboard.getNumberOfMatchedTransactionsB2B());
+				response.put("number_of_matched_transactions__erca",
+						mapperDashboard.getNumberOfMatchedTransactionsERCA());
 
 				LocalDateTime current_date = LocalDateTime.now();
 				String current_date_string = current_date.getYear() + "-"
@@ -95,7 +95,7 @@ public class DashboardService {
 								? "0" + current_date.getDayOfMonth()
 								: current_date.getDayOfMonth());
 				String lastDate_ats_string = mapperDashboard.getAtsFileLastDate();
-				String lastDate_core_string = mapperDashboard.getCoreFileLastDate();
+				String lastDate__string = mapperDashboard.getFileLastDate();
 
 				int lastDate_ats; 
 				if (lastDate_ats_string == null) {
@@ -104,16 +104,16 @@ public class DashboardService {
 					lastDate_ats = Integer.parseInt(lastDate_ats_string.replace("-", ""));
 				}
 
-				int lastDate_core;
-				if (lastDate_core_string == null) {
-					lastDate_core = Integer.parseInt(current_date_string.replace("-", ""));
+				int lastDate_;
+				if (lastDate__string == null) {
+					lastDate_ = Integer.parseInt(current_date_string.replace("-", ""));
 				} else {
-					lastDate_core = Integer.parseInt(lastDate_ats_string.replace("-", ""));
+					lastDate_ = Integer.parseInt(lastDate_ats_string.replace("-", ""));
 				}
 
 				Date date_7 = Date
 						.from(LocalDate
-								.parse(String.valueOf(lastDate_ats >= lastDate_core ? lastDate_core : lastDate_ats),
+								.parse(String.valueOf(lastDate_ats >= lastDate_ ? lastDate_ : lastDate_ats),
 										DateTimeFormatter.BASIC_ISO_DATE)
 								.atStartOfDay(ZoneId.systemDefault()).toInstant());
 				String date_7_string = (date_7.getYear() + "-"
@@ -199,59 +199,59 @@ public class DashboardService {
 //				System.out.println("day7: " + new SimpleDateFormat("yyyy-MM-dd").format(date_7).toString() + " : " + 
 //				response.get("date_7_total_upload_ats") + " : " + response.get("date_7_matched_ats") + " : "+ response.get("date_7_outstanding_ats"));
 
-				// CORE
-				response.put("date_1_total_upload_core", mapperDashboard.getTotalUploadedTransactionsCore(
+				// 
+				response.put("date_1_total_upload_", mapperDashboard.getTotalUploadedTransactions(
 						new SimpleDateFormat("yyyy-MM-dd").format(date_1).toString()));
-				response.put("date_1_matched_core", mapperDashboard
-						.getMatchedTransactionsCore(new SimpleDateFormat("yyyyMMdd").format(date_1).toString()));
-				response.put("date_1_outstanding_core", mapperDashboard
-						.getOutstandingTransactionsCore(new SimpleDateFormat("yyyyMMdd").format(date_1).toString()));
+				response.put("date_1_matched_", mapperDashboard
+						.getMatchedTransactions(new SimpleDateFormat("yyyyMMdd").format(date_1).toString()));
+				response.put("date_1_outstanding_", mapperDashboard
+						.getOutstandingTransactions(new SimpleDateFormat("yyyyMMdd").format(date_1).toString()));
 //				System.out.println("\nday1: " + new SimpleDateFormat("yyyy-MM-dd").format(date_1).toString() + " : " + 
-//						response.get("date_1_total_upload_core") + " : " + response.get("date_1_matched_core") + " : "+ response.get("date_1_matched_core"));
+//						response.get("date_1_total_upload_") + " : " + response.get("date_1_matched_") + " : "+ response.get("date_1_matched_"));
 
-				response.put("date_2_total_upload_core", mapperDashboard.getTotalUploadedTransactionsCore(
+				response.put("date_2_total_upload_", mapperDashboard.getTotalUploadedTransactions(
 						new SimpleDateFormat("yyyy-MM-dd").format(date_2).toString()));
-				response.put("date_2_matched_core", mapperDashboard
-						.getMatchedTransactionsCore(new SimpleDateFormat("yyyyMMdd").format(date_2).toString()));
-				response.put("date_2_outstanding_core", mapperDashboard
-						.getOutstandingTransactionsCore(new SimpleDateFormat("yyyyMMdd").format(date_2).toString()));
+				response.put("date_2_matched_", mapperDashboard
+						.getMatchedTransactions(new SimpleDateFormat("yyyyMMdd").format(date_2).toString()));
+				response.put("date_2_outstanding_", mapperDashboard
+						.getOutstandingTransactions(new SimpleDateFormat("yyyyMMdd").format(date_2).toString()));
 
-				response.put("date_3_total_upload_core", mapperDashboard.getTotalUploadedTransactionsCore(
+				response.put("date_3_total_upload_", mapperDashboard.getTotalUploadedTransactions(
 						new SimpleDateFormat("yyyy-MM-dd").format(date_3).toString()));
-				response.put("date_3_matched_core", mapperDashboard
-						.getMatchedTransactionsCore(new SimpleDateFormat("yyyyMMdd").format(date_3).toString()));
-				response.put("date_3_outstanding_core", mapperDashboard
-						.getOutstandingTransactionsCore(new SimpleDateFormat("yyyyMMdd").format(date_3).toString()));
+				response.put("date_3_matched_", mapperDashboard
+						.getMatchedTransactions(new SimpleDateFormat("yyyyMMdd").format(date_3).toString()));
+				response.put("date_3_outstanding_", mapperDashboard
+						.getOutstandingTransactions(new SimpleDateFormat("yyyyMMdd").format(date_3).toString()));
 
-				response.put("date_4_total_upload_core", mapperDashboard.getTotalUploadedTransactionsCore(
+				response.put("date_4_total_upload_", mapperDashboard.getTotalUploadedTransactions(
 						new SimpleDateFormat("yyyy-MM-dd").format(date_4).toString()));
-				response.put("date_4_matched_core", mapperDashboard
-						.getMatchedTransactionsCore(new SimpleDateFormat("yyyyMMdd").format(date_4).toString()));
-				response.put("date_4_outstanding_core", mapperDashboard
-						.getOutstandingTransactionsCore(new SimpleDateFormat("yyyyMMdd").format(date_4).toString()));
+				response.put("date_4_matched_", mapperDashboard
+						.getMatchedTransactions(new SimpleDateFormat("yyyyMMdd").format(date_4).toString()));
+				response.put("date_4_outstanding_", mapperDashboard
+						.getOutstandingTransactions(new SimpleDateFormat("yyyyMMdd").format(date_4).toString()));
 
-				response.put("date_5_total_upload_core", mapperDashboard.getTotalUploadedTransactionsCore(
+				response.put("date_5_total_upload_", mapperDashboard.getTotalUploadedTransactions(
 						new SimpleDateFormat("yyyy-MM-dd").format(date_5).toString()));
-				response.put("date_5_matched_core", mapperDashboard
-						.getMatchedTransactionsCore(new SimpleDateFormat("yyyyMMdd").format(date_5).toString()));
-				response.put("date_5_outstanding_core", mapperDashboard
-						.getOutstandingTransactionsCore(new SimpleDateFormat("yyyyMMdd").format(date_5).toString()));
+				response.put("date_5_matched_", mapperDashboard
+						.getMatchedTransactions(new SimpleDateFormat("yyyyMMdd").format(date_5).toString()));
+				response.put("date_5_outstanding_", mapperDashboard
+						.getOutstandingTransactions(new SimpleDateFormat("yyyyMMdd").format(date_5).toString()));
 
-				response.put("date_6_total_upload_core", mapperDashboard.getTotalUploadedTransactionsCore(
+				response.put("date_6_total_upload_", mapperDashboard.getTotalUploadedTransactions(
 						new SimpleDateFormat("yyyy-MM-dd").format(date_6).toString()));
-				response.put("date_6_matched_core", mapperDashboard
-						.getMatchedTransactionsCore(new SimpleDateFormat("yyyyMMdd").format(date_6).toString()));
-				response.put("date_6_outstanding_core", mapperDashboard
-						.getOutstandingTransactionsCore(new SimpleDateFormat("yyyyMMdd").format(date_6).toString()));
+				response.put("date_6_matched_", mapperDashboard
+						.getMatchedTransactions(new SimpleDateFormat("yyyyMMdd").format(date_6).toString()));
+				response.put("date_6_outstanding_", mapperDashboard
+						.getOutstandingTransactions(new SimpleDateFormat("yyyyMMdd").format(date_6).toString()));
 
-				response.put("date_7_total_upload_core", mapperDashboard.getTotalUploadedTransactionsCore(
+				response.put("date_7_total_upload_", mapperDashboard.getTotalUploadedTransactions(
 						new SimpleDateFormat("yyyy-MM-dd").format(date_7).toString()));
-				response.put("date_7_matched_core", mapperDashboard
-						.getMatchedTransactionsCore(new SimpleDateFormat("yyyyMMdd").format(date_7).toString()));
-				response.put("date_7_outstanding_core", mapperDashboard
-						.getOutstandingTransactionsCore(new SimpleDateFormat("yyyyMMdd").format(date_7).toString()));
+				response.put("date_7_matched_", mapperDashboard
+						.getMatchedTransactions(new SimpleDateFormat("yyyyMMdd").format(date_7).toString()));
+				response.put("date_7_outstanding_", mapperDashboard
+						.getOutstandingTransactions(new SimpleDateFormat("yyyyMMdd").format(date_7).toString()));
 //				System.out.println("\nday7: " + new SimpleDateFormat("yyyy-MM-dd").format(date_7).toString() + " : " + 
-//						response.get("date_7_total_upload_core") + " : " + response.get("date_7_matched_core") + " : "+ response.get("date_7_matched_core"));
+//						response.get("date_7_total_upload_") + " : " + response.get("date_7_matched_") + " : "+ response.get("date_7_matched_"));
 
 				// Beginning and Ending
 				// ATS
@@ -312,89 +312,89 @@ public class DashboardService {
 //				System.out.println("date_7: " + ats_beg_end7 + " : "+ response.get("date_7_beginning_balance_ats") + " : " + response.get("date_7_ending_balance_ats"));
 //				System.out.println("from database: " + new SimpleDateFormat("yyyy-MM-dd").format(date_7).toString() + 
 //						" : " + mapperDashboard.getBeginningEndingBalanceAts(new SimpleDateFormat("yyyy-MM-dd").format(date_7).toString()));
-				// CORE
-				CoreBeginningEnding core_beg_end1 = mapperDashboard
-						.getBeginningEndingBalanceCore(new SimpleDateFormat("yyyy-MM-dd").format(date_1).toString());
+				// 
+				BeginningEnding _beg_end1 = mapperDashboard
+						.getBeginningEndingBalance(new SimpleDateFormat("yyyy-MM-dd").format(date_1).toString());
 				response.put("date_1_beginning_balance_conv",
-						core_beg_end1 == null ? 0 : core_beg_end1.getBeginning_balance_con());
+						_beg_end1 == null ? 0 : _beg_end1.getBeginning_balance_con());
 				response.put("date_1_beginning_balance_ifb",
-						core_beg_end1 == null ? 0 : core_beg_end1.getBeginning_balance_ifb());
+						_beg_end1 == null ? 0 : _beg_end1.getBeginning_balance_ifb());
 				response.put("date_1_ending_balance_conv",
-						core_beg_end1 == null ? 0 : core_beg_end1.getEnding_balance_con());
+						_beg_end1 == null ? 0 : _beg_end1.getEnding_balance_con());
 				response.put("date_1_ending_balance_ifb",
-						core_beg_end1 == null ? 0 : core_beg_end1.getEnding_balance_ifb());
+						_beg_end1 == null ? 0 : _beg_end1.getEnding_balance_ifb());
 
-				// CORE
-				CoreBeginningEnding core_beg_end2 = mapperDashboard
-						.getBeginningEndingBalanceCore(new SimpleDateFormat("yyyy-MM-dd").format(date_2).toString());
+				// 
+				BeginningEnding _beg_end2 = mapperDashboard
+						.getBeginningEndingBalance(new SimpleDateFormat("yyyy-MM-dd").format(date_2).toString());
 				response.put("date_2_beginning_balance_conv",
-						core_beg_end2 == null ? 0 : core_beg_end2.getBeginning_balance_con());
+						_beg_end2 == null ? 0 : _beg_end2.getBeginning_balance_con());
 				response.put("date_2_beginning_balance_ifb",
-						core_beg_end2 == null ? 0 : core_beg_end2.getBeginning_balance_ifb());
+						_beg_end2 == null ? 0 : _beg_end2.getBeginning_balance_ifb());
 				response.put("date_2_ending_balance_conv",
-						core_beg_end2 == null ? 0 : core_beg_end2.getEnding_balance_con());
+						_beg_end2 == null ? 0 : _beg_end2.getEnding_balance_con());
 				response.put("date_2_ending_balance_ifb",
-						core_beg_end2 == null ? 0 : core_beg_end2.getEnding_balance_ifb());
+						_beg_end2 == null ? 0 : _beg_end2.getEnding_balance_ifb());
 
-				// CORE
-				CoreBeginningEnding core_beg_end3 = mapperDashboard
-						.getBeginningEndingBalanceCore(new SimpleDateFormat("yyyy-MM-dd").format(date_3).toString());
+				// 
+				BeginningEnding _beg_end3 = mapperDashboard
+						.getBeginningEndingBalance(new SimpleDateFormat("yyyy-MM-dd").format(date_3).toString());
 				response.put("date_3_beginning_balance_conv",
-						core_beg_end3 == null ? 0 : core_beg_end3.getBeginning_balance_con());
+						_beg_end3 == null ? 0 : _beg_end3.getBeginning_balance_con());
 				response.put("date_3_beginning_balance_ifb",
-						core_beg_end3 == null ? 0 : core_beg_end3.getBeginning_balance_ifb());
+						_beg_end3 == null ? 0 : _beg_end3.getBeginning_balance_ifb());
 				response.put("date_3_ending_balance_conv",
-						core_beg_end3 == null ? 0 : core_beg_end3.getEnding_balance_con());
+						_beg_end3 == null ? 0 : _beg_end3.getEnding_balance_con());
 				response.put("date_3_ending_balance_ifb",
-						core_beg_end3 == null ? 0 : core_beg_end3.getEnding_balance_ifb());
+						_beg_end3 == null ? 0 : _beg_end3.getEnding_balance_ifb());
 
-				// CORE
-				CoreBeginningEnding core_beg_end4 = mapperDashboard
-						.getBeginningEndingBalanceCore(new SimpleDateFormat("yyyy-MM-dd").format(date_4).toString());
+				// 
+				BeginningEnding _beg_end4 = mapperDashboard
+						.getBeginningEndingBalance(new SimpleDateFormat("yyyy-MM-dd").format(date_4).toString());
 				response.put("date_4_beginning_balance_conv",
-						core_beg_end4 == null ? 0 : core_beg_end4.getBeginning_balance_con());
+						_beg_end4 == null ? 0 : _beg_end4.getBeginning_balance_con());
 				response.put("date_4_beginning_balance_ifb",
-						core_beg_end4 == null ? 0 : core_beg_end4.getBeginning_balance_ifb());
+						_beg_end4 == null ? 0 : _beg_end4.getBeginning_balance_ifb());
 				response.put("date_4_ending_balance_conv",
-						core_beg_end4 == null ? 0 : core_beg_end4.getEnding_balance_con());
+						_beg_end4 == null ? 0 : _beg_end4.getEnding_balance_con());
 				response.put("date_4_ending_balance_ifb",
-						core_beg_end4 == null ? 0 : core_beg_end4.getEnding_balance_ifb());
+						_beg_end4 == null ? 0 : _beg_end4.getEnding_balance_ifb());
 
-				// CORE
-				CoreBeginningEnding core_beg_end5 = mapperDashboard
-						.getBeginningEndingBalanceCore(new SimpleDateFormat("yyyy-MM-dd").format(date_5).toString());
+				// 
+				BeginningEnding _beg_end5 = mapperDashboard
+						.getBeginningEndingBalance(new SimpleDateFormat("yyyy-MM-dd").format(date_5).toString());
 				response.put("date_5_beginning_balance_conv",
-						core_beg_end5 == null ? 0 : core_beg_end5.getBeginning_balance_con());
+						_beg_end5 == null ? 0 : _beg_end5.getBeginning_balance_con());
 				response.put("date_5_beginning_balance_ifb",
-						core_beg_end5 == null ? 0 : core_beg_end5.getBeginning_balance_ifb());
+						_beg_end5 == null ? 0 : _beg_end5.getBeginning_balance_ifb());
 				response.put("date_5_ending_balance_conv",
-						core_beg_end5 == null ? 0 : core_beg_end5.getEnding_balance_con());
+						_beg_end5 == null ? 0 : _beg_end5.getEnding_balance_con());
 				response.put("date_5_ending_balance_ifb",
-						core_beg_end5 == null ? 0 : core_beg_end5.getEnding_balance_ifb());
+						_beg_end5 == null ? 0 : _beg_end5.getEnding_balance_ifb());
 
-				// CORE
-				CoreBeginningEnding core_beg_end6 = mapperDashboard
-						.getBeginningEndingBalanceCore(new SimpleDateFormat("yyyy-MM-dd").format(date_6).toString());
+				// 
+				BeginningEnding _beg_end6 = mapperDashboard
+						.getBeginningEndingBalance(new SimpleDateFormat("yyyy-MM-dd").format(date_6).toString());
 				response.put("date_6_beginning_balance_conv",
-						core_beg_end6 == null ? 0 : core_beg_end6.getBeginning_balance_con());
+						_beg_end6 == null ? 0 : _beg_end6.getBeginning_balance_con());
 				response.put("date_6_beginning_balance_ifb",
-						core_beg_end6 == null ? 0 : core_beg_end6.getBeginning_balance_ifb());
+						_beg_end6 == null ? 0 : _beg_end6.getBeginning_balance_ifb());
 				response.put("date_6_ending_balance_conv",
-						core_beg_end6 == null ? 0 : core_beg_end6.getEnding_balance_con());
+						_beg_end6 == null ? 0 : _beg_end6.getEnding_balance_con());
 				response.put("date_6_ending_balance_ifb",
-						core_beg_end6 == null ? 0 : core_beg_end6.getEnding_balance_ifb());
+						_beg_end6 == null ? 0 : _beg_end6.getEnding_balance_ifb());
 
-				// CORE
-				CoreBeginningEnding core_beg_end7 = mapperDashboard
-						.getBeginningEndingBalanceCore(new SimpleDateFormat("yyyy-MM-dd").format(date_7).toString());
+				// 
+				BeginningEnding _beg_end7 = mapperDashboard
+						.getBeginningEndingBalance(new SimpleDateFormat("yyyy-MM-dd").format(date_7).toString());
 				response.put("date_7_beginning_balance_conv",
-						core_beg_end7 == null ? 0 : core_beg_end7.getBeginning_balance_con());
+						_beg_end7 == null ? 0 : _beg_end7.getBeginning_balance_con());
 				response.put("date_7_beginning_balance_ifb",
-						core_beg_end7 == null ? 0 : core_beg_end7.getBeginning_balance_ifb());
+						_beg_end7 == null ? 0 : _beg_end7.getBeginning_balance_ifb());
 				response.put("date_7_ending_balance_conv",
-						core_beg_end7 == null ? 0 : core_beg_end7.getEnding_balance_con());
+						_beg_end7 == null ? 0 : _beg_end7.getEnding_balance_con());
 				response.put("date_7_ending_balance_ifb",
-						core_beg_end7 == null ? 0 : core_beg_end7.getEnding_balance_ifb());
+						_beg_end7 == null ? 0 : _beg_end7.getEnding_balance_ifb());
 				
 				System.out.println("it is here here: " + response);
 				return response;

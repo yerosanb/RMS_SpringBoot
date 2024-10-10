@@ -18,7 +18,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.demo.user.model.File_rtgs_awb_core;
+import com.example.demo.user.model.File_rtgs__;
 import com.example.demo.utils.ExcelUtils;
 import com.example.demo.utils.Utils;
 
@@ -46,7 +46,7 @@ public class UploadExcelService_receivable {
 		df.setMaximumFractionDigits(24);
 
 		Map<String, Object> resp = new HashMap<>();
-		List<File_rtgs_awb_core> awb_core_all = new ArrayList<>();
+		List<File_rtgs__> __all = new ArrayList<>();
 		Double beginningBallance = 0d;
 		Double endingBallance= 0d;
 		int totalCredit = 0;
@@ -87,7 +87,7 @@ public class UploadExcelService_receivable {
 				} else {
 					Iterator<Cell> cellIterator = row.iterator();
 					int cellIndex = 0;
-					File_rtgs_awb_core awb_core = new File_rtgs_awb_core();
+					File_rtgs__ _ = new File_rtgs__();
 					boolean checker = true;
 					boolean last = true;
 					while (cellIterator.hasNext()) {
@@ -104,7 +104,7 @@ public class UploadExcelService_receivable {
 								last = false;
 							} else {
 								LocalDateTime datetime = LocalDateTime.parse(ExcelUtils.toValue(cell));
-								awb_core.setPosting_date(datetime.getYear()
+								_.setPosting_date(datetime.getYear()
 										+ (String.valueOf(datetime.getMonthValue()).length() == 1
 												? "0" + datetime.getMonthValue()
 												: String.valueOf(datetime.getMonthValue()))
@@ -122,7 +122,7 @@ public class UploadExcelService_receivable {
 							}
 							LocalDateTime datetime = LocalDateTime.parse(ExcelUtils.toValue(cell));
 
-							awb_core.setValue_date(datetime.getYear()
+							_.setValue_date(datetime.getYear()
 									+ (String.valueOf(datetime.getMonthValue()).length() == 1
 											? "0" + datetime.getMonthValue()
 											: String.valueOf(datetime.getMonthValue()))
@@ -133,19 +133,19 @@ public class UploadExcelService_receivable {
 						case 2 -> {
 							if (!checker)
 								continue;
-							awb_core.setAdditional_information(
+							_.setAdditional_information(
 									ExcelUtils.toValue(cell) == null ? "null" : ExcelUtils.toValue(cell).trim());
 						}
 						case 3 -> {
 							if (!checker)
 								continue;
-							awb_core.setTransaction_reference(
+							_.setTransaction_reference(
 									ExcelUtils.toValue(cell) == null ? "null" : ExcelUtils.toValue(cell).trim());
 						}
 						case 4 -> {
 							if (!checker)
 								continue;
-							awb_core.setBranch_code(
+							_.setBranch_code(
 									ExcelUtils.toValue(cell) == null ? "null" : ExcelUtils.toValue(cell).trim());
 						}
 						case 5 -> {
@@ -164,8 +164,8 @@ public class UploadExcelService_receivable {
 											.parseLong(df.format(cell.getNumericCellValue()).replace(".", "").trim())
 											/ Math.pow(10, (df.format(cell.getNumericCellValue()).length() - 1
 													- df.format(cell.getNumericCellValue()).indexOf("."))));
-								awb_core.setDr_cr("DR".trim());
-								awb_core.setAmount(Double.parseDouble(String.valueOf(cell.getNumericCellValue())));
+								_.setDr_cr("DR".trim());
+								_.setAmount(Double.parseDouble(String.valueOf(cell.getNumericCellValue())));
 							}
 						}
 						case 6 -> {
@@ -183,8 +183,8 @@ public class UploadExcelService_receivable {
 											.parseLong(df.format(cell.getNumericCellValue()).replace(".", "").trim())
 											/ Math.pow(10, (df.format(cell.getNumericCellValue()).length() - 1
 													- df.format(cell.getNumericCellValue()).indexOf("."))));
-								awb_core.setDr_cr("CR".trim());
-								awb_core.setAmount(Double.parseDouble(String.valueOf(cell.getNumericCellValue())));
+								_.setDr_cr("CR".trim());
+								_.setAmount(Double.parseDouble(String.valueOf(cell.getNumericCellValue())));
 							}
 						}
 						case 7 -> {
@@ -192,7 +192,7 @@ public class UploadExcelService_receivable {
 								continue;
 							// System.out.println("type: " + cell.getCellTypeEnum());
 							// System.out.println("value: " + ExcelUtils.toValue(cell));
-							awb_core.setBalance(Float.valueOf(String.valueOf(cell.getNumericCellValue())));
+							_.setBalance(Float.valueOf(String.valueOf(cell.getNumericCellValue())));
 							if (con)
 
 								endingBallance = cell.getNumericCellValue();
@@ -209,16 +209,16 @@ public class UploadExcelService_receivable {
 						}
 						cellIndex++;
 					}
-					awb_core.setAvailability("1".trim());
-					awb_core.setMatch_status("0".trim());
-					awb_core.setStatus("1".trim());
-					awb_core.setUpload_date(date);
+					_.setAvailability("1".trim());
+					_.setMatch_status("0".trim());
+					_.setStatus("1".trim());
+					_.setUpload_date(date);
 
-					//awb_core.setFile_id(file_id);
+					//_.setFile_id(file_id);
 
 
 					if (checker)
-						awb_core_all.add(awb_core);
+						__all.add(_);
 					checker = true;
 					last = true;
 				}
@@ -236,7 +236,7 @@ public class UploadExcelService_receivable {
 
 			// resp.put("businessDate", businessDate);
 			// resp.put("accountNumber", accountNumber);
-			resp.put("data", awb_core_all);
+			resp.put("data", __all);
 			resp.put("beginningBallance", beginningBallance);
 			resp.put("endingBallance", endingBallance);
 			resp.put("totalCredit", totalCredit);

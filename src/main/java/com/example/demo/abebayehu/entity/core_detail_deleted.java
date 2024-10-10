@@ -1,6 +1,6 @@
 package com.example.demo.abebayehu.entity;
 
-public class core_detail_deleted {
+public class _detail_deleted {
 	private Long id;
 	private String new_old;
     private String value_date;
@@ -15,7 +15,7 @@ public class core_detail_deleted {
     private String  DATE;
     private String  edit_delete;
     private String edit_reason_id;
-	core_detail_deleted(Long id, String new_old, String value_date, double credit, double debit, String branch_code,
+	_detail_deleted(Long id, String new_old, String value_date, double credit, double debit, String branch_code,
 			String naration, String account_name, String reason, String firstname, String lastname, String dATE,
 			String edit_delete, String edit_reason_id) {
 		super();

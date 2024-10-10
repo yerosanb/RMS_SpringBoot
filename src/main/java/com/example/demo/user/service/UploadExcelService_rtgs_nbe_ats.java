@@ -19,11 +19,11 @@ import org.springframework.stereotype.Service;
 //import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.demo.user.model.File_rtgs_nbe_ats;
+import com.example.demo.user.model.File_rtgs__ats;
 import com.example.demo.utils.ExcelUtils;
 
 @Service
-public class UploadExcelService_rtgs_nbe_ats {
+public class UploadExcelService_rtgs__ats {
 	// sheet name
 	static String sheet_name = "ATS";
 	// public static String TYPE =
@@ -45,7 +45,7 @@ public class UploadExcelService_rtgs_nbe_ats {
 		df.setMaximumFractionDigits(24);
 		
 		Map<String, Object> resp = new HashMap<>();
-		List<File_rtgs_nbe_ats> ats = new ArrayList<>();
+		List<File_rtgs__ats> ats = new ArrayList<>();
 		Double beginningBallance = 0d;
 		Double endingBallance = 0d;
 		int totalCredit = 0;
@@ -219,7 +219,7 @@ public class UploadExcelService_rtgs_nbe_ats {
 				} else {
 					Iterator<Cell> cellIterator = row.iterator();
 					int cellIndex = 0;
-					File_rtgs_nbe_ats Ats = new File_rtgs_nbe_ats();
+					File_rtgs__ats Ats = new File_rtgs__ats();
 					boolean checker = true;
 					while (cellIterator.hasNext()) {
 						Cell cell = cellIterator.next();

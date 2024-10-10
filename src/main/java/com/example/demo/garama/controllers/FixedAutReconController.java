@@ -45,27 +45,27 @@ public class FixedAutReconController {
 		return APIResponse.response(fixedService.get_fixed_mms_for_recon_auto_vehicle(request, recon_date));
 	}
 	
-	@RequestMapping(value = "get_core_for_recon_auto_computer/{recon_date}", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Object> get_fixed_core_for_recon_auto_computer(HttpServletRequest request,
+	@RequestMapping(value = "get__for_recon_auto_computer/{recon_date}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Object> get_fixed__for_recon_auto_computer(HttpServletRequest request,
 			@PathVariable("recon_date") String recon_date) {
-		return APIResponse.response(fixedService.get_fixed_core_for_recon_auto_computer(request, recon_date));
+		return APIResponse.response(fixedService.get_fixed__for_recon_auto_computer(request, recon_date));
 	}
-	@RequestMapping(value = "get_core_for_recon_auto_equipment/{recon_date}", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Object> get_fixed_core_for_recon_auto_equipment(HttpServletRequest request,
+	@RequestMapping(value = "get__for_recon_auto_equipment/{recon_date}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Object> get_fixed__for_recon_auto_equipment(HttpServletRequest request,
 			@PathVariable("recon_date") String recon_date) {
-		return APIResponse.response(fixedService.get_fixed_core_for_recon_auto_equipment(request, recon_date));
-	}
-	
-	@RequestMapping(value = "get_core_for_recon_auto_vehicle/{recon_date}", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Object> get_fixed_core_for_recon_auto_vehicle(HttpServletRequest request,
-			@PathVariable("recon_date") String recon_date) {
-		return APIResponse.response(fixedService.get_fixed_core_for_recon_auto_vehicle(request, recon_date));
+		return APIResponse.response(fixedService.get_fixed__for_recon_auto_equipment(request, recon_date));
 	}
 	
-	@RequestMapping(value = "get_core_for_recon_auto_furniture/{recon_date}", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Object> get_fixed_core_for_recon_auto_furniture(HttpServletRequest request,
+	@RequestMapping(value = "get__for_recon_auto_vehicle/{recon_date}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Object> get_fixed__for_recon_auto_vehicle(HttpServletRequest request,
 			@PathVariable("recon_date") String recon_date) {
-		return APIResponse.response(fixedService.get_fixed_core_for_recon_auto_furniture(request, recon_date));
+		return APIResponse.response(fixedService.get_fixed__for_recon_auto_vehicle(request, recon_date));
+	}
+	
+	@RequestMapping(value = "get__for_recon_auto_furniture/{recon_date}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Object> get_fixed__for_recon_auto_furniture(HttpServletRequest request,
+			@PathVariable("recon_date") String recon_date) {
+		return APIResponse.response(fixedService.get_fixed__for_recon_auto_furniture(request, recon_date));
 	}
 
 	@RequestMapping(value = "match_single_transaction", method = RequestMethod.POST, produces = "application/json")
@@ -87,11 +87,11 @@ public class FixedAutReconController {
 		return APIResponse.response(fixedService.get_fixed_mms_for_view(request, recon_date));
 	}
 
-	@RequestMapping(value = "get_fixed_core_for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "get_fixed__for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
 
-	public ResponseEntity<Object> get_fixed_core_for_view(HttpServletRequest request,
+	public ResponseEntity<Object> get_fixed__for_view(HttpServletRequest request,
 			@PathVariable("recon_date") String recon_date) {
-		return APIResponse.response(fixedService.get_fixed_core_for_view(request, recon_date));
+		return APIResponse.response(fixedService.get_fixed__for_view(request, recon_date));
 	}
 
 	@RequestMapping(value = "unmatch_transactions", method = RequestMethod.POST, produces = "application/json")
@@ -105,15 +105,15 @@ public class FixedAutReconController {
 		return APIResponse.response(fixedService.get_unmatched_fixed_mms_for_view(request, recon_date));
 	}
 
-	@RequestMapping(value = "get_unmatched_fixed_core_for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Object> get_unmatched_fixed_core_for_view(HttpServletRequest request,
+	@RequestMapping(value = "get_unmatched_fixed__for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Object> get_unmatched_fixed__for_view(HttpServletRequest request,
 			@PathVariable("recon_date") String recon_date) {
-		return APIResponse.response(fixedService.get_unmatched_fixed_core_for_view(request, recon_date));
+		return APIResponse.response(fixedService.get_unmatched_fixed__for_view(request, recon_date));
 	}
 
-//	public ResponseEntity<Object> get_fixed_core_for_view(HttpServletRequest request,
+//	public ResponseEntity<Object> get_fixed__for_view(HttpServletRequest request,
 //			@PathVariable("recon_date") String recon_date) {
-//		return APIResponse.response(fixedService.get_fixed_core_for_view(request, recon_date));
+//		return APIResponse.response(fixedService.get_fixed__for_view(request, recon_date));
 //	}
 
 	@RequestMapping(value = "get_fixed_mms_for_view_reason/{recon_date}", method = RequestMethod.GET, produces = "application/json")
@@ -123,11 +123,11 @@ public class FixedAutReconController {
 		return APIResponse.response(fixedService.get_fixed_mms_for_view_reason(request, recon_date));
 	}
 
-	@RequestMapping(value = "get_fixed_core_for_view_reason/{recon_date}", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Object> get_fixed_core_for_view_reason(HttpServletRequest request,
+	@RequestMapping(value = "get_fixed__for_view_reason/{recon_date}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Object> get_fixed__for_view_reason(HttpServletRequest request,
 			@PathVariable("recon_date") String recon_date) {
-		System.out.println("__________________=recon_datecore" + recon_date);
-		return APIResponse.response(fixedService.get_fixed_core_for_view_reason(request, recon_date));
+		System.out.println("__________________=recon_date" + recon_date);
+		return APIResponse.response(fixedService.get_fixed__for_view_reason(request, recon_date));
 	}
 
 //	@RequestMapping(value = "unmatch_transactions", method = RequestMethod.POST, produces = "application/json")
@@ -144,10 +144,10 @@ public class FixedAutReconController {
 		return APIResponse.response(fixedService.get_computer_mms_unmatched_for_view(request, recon_date));
 	}
 
-	@RequestMapping(value = "get_computer_core_unmatched_for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Object> get_computer_core_unmatched_for_view(HttpServletRequest request,
+	@RequestMapping(value = "get_computer__unmatched_for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Object> get_computer__unmatched_for_view(HttpServletRequest request,
 			@PathVariable("recon_date") String recon_date) {
-		return APIResponse.response(fixedService.get_computer_core_unmatched_for_view(request, recon_date));
+		return APIResponse.response(fixedService.get_computer__unmatched_for_view(request, recon_date));
 	}
 	@RequestMapping(value = "get_furniture_mms_unmatched_for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<Object> get_furniture_mms_unmatched_for_view(HttpServletRequest request,
@@ -155,10 +155,10 @@ public class FixedAutReconController {
 		return APIResponse.response(fixedService.get_furniture_mms_unmatched_for_view(request, recon_date));
 	}
 
-	@RequestMapping(value = "get_furniture_core_unmatched_for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Object> get_furniture_core_unmatched_for_view(HttpServletRequest request,
+	@RequestMapping(value = "get_furniture__unmatched_for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Object> get_furniture__unmatched_for_view(HttpServletRequest request,
 			@PathVariable("recon_date") String recon_date) {
-		return APIResponse.response(fixedService.get_furniture_core_unmatched_for_view(request, recon_date));
+		return APIResponse.response(fixedService.get_furniture__unmatched_for_view(request, recon_date));
 	}
 	@RequestMapping(value = "get_equipment_mms_unmatched_for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<Object> get_equipment_mms_unmatched_for_view(HttpServletRequest request,
@@ -166,10 +166,10 @@ public class FixedAutReconController {
 		return APIResponse.response(fixedService.get_equipment_mms_unmatched_for_view(request, recon_date));
 	}
 
-	@RequestMapping(value = "get_equipment_core_unmatched_for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Object> get_equipment_core_unmatched_for_view(HttpServletRequest request,
+	@RequestMapping(value = "get_equipment__unmatched_for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Object> get_equipment__unmatched_for_view(HttpServletRequest request,
 			@PathVariable("recon_date") String recon_date) {
-		return APIResponse.response(fixedService.get_equipment_core_unmatched_for_view(request, recon_date));
+		return APIResponse.response(fixedService.get_equipment__unmatched_for_view(request, recon_date));
 	}
 	@RequestMapping(value = "get_vehicle_mms_unmatched_for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<Object> get_vehicle_mms_unmatched_for_view(HttpServletRequest request,
@@ -177,10 +177,10 @@ public class FixedAutReconController {
 		return APIResponse.response(fixedService.get_vehicle_mms_unmatched_for_view(request, recon_date));
 	}
 
-	@RequestMapping(value = "get_vehicle_core_unmatched_for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Object> get_vehicle_core_unmatched_for_view(HttpServletRequest request,
+	@RequestMapping(value = "get_vehicle__unmatched_for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Object> get_vehicle__unmatched_for_view(HttpServletRequest request,
 			@PathVariable("recon_date") String recon_date) {
-		return APIResponse.response(fixedService.get_vehicle_core_unmatched_for_view(request, recon_date));
+		return APIResponse.response(fixedService.get_vehicle__unmatched_for_view(request, recon_date));
 	}
 	@RequestMapping(value = "get_computer_mms_matched_for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<Object> get_computer_mms_matched_for_view(HttpServletRequest request,
@@ -188,10 +188,10 @@ public class FixedAutReconController {
 		return APIResponse.response(fixedService.get_computer_mms_matched_for_view(request, recon_date));
 	}
 
-	@RequestMapping(value = "get_computer_core_matched_for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Object> get_computer_core_matched_for_view(HttpServletRequest request,
+	@RequestMapping(value = "get_computer__matched_for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Object> get_computer__matched_for_view(HttpServletRequest request,
 			@PathVariable("recon_date") String recon_date) {
-		return APIResponse.response(fixedService.get_computer_core_matched_for_view(request, recon_date));
+		return APIResponse.response(fixedService.get_computer__matched_for_view(request, recon_date));
 	}
 	@RequestMapping(value = "get_furniture_mms_matched_for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<Object> get_furniture_mms_matched_for_view(HttpServletRequest request,
@@ -199,10 +199,10 @@ public class FixedAutReconController {
 		return APIResponse.response(fixedService.get_furniture_mms_matched_for_view(request, recon_date));
 	}
 
-	@RequestMapping(value = "get_furniture_core_matched_for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Object> get_furniture_core_matched_for_view(HttpServletRequest request,
+	@RequestMapping(value = "get_furniture__matched_for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Object> get_furniture__matched_for_view(HttpServletRequest request,
 			@PathVariable("recon_date") String recon_date) {
-		return APIResponse.response(fixedService.get_furniture_core_matched_for_view(request, recon_date));
+		return APIResponse.response(fixedService.get_furniture__matched_for_view(request, recon_date));
 	}
 	@RequestMapping(value = "get_equipment_mms_matched_for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<Object> get_equipment_mms_matched_for_view(HttpServletRequest request,
@@ -210,10 +210,10 @@ public class FixedAutReconController {
 		return APIResponse.response(fixedService.get_equipment_mms_matched_for_view(request, recon_date));
 	}
 
-	@RequestMapping(value = "get_equipment_core_matched_for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Object> get_equipment_core_matched_for_view(HttpServletRequest request,
+	@RequestMapping(value = "get_equipment__matched_for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Object> get_equipment__matched_for_view(HttpServletRequest request,
 			@PathVariable("recon_date") String recon_date) {
-		return APIResponse.response(fixedService.get_equipment_core_matched_for_view(request, recon_date));
+		return APIResponse.response(fixedService.get_equipment__matched_for_view(request, recon_date));
 	}
 	@RequestMapping(value = "get_vehicle_mms_matched_for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<Object> get_vehicle_mms_matched_for_view(HttpServletRequest request,
@@ -221,10 +221,10 @@ public class FixedAutReconController {
 		return APIResponse.response(fixedService.get_vehicle_mms_matched_for_view(request, recon_date));
 	}
 
-	@RequestMapping(value = "get_vehicle_core_matched_for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Object> get_vehicle_core_matched_for_view(HttpServletRequest request,
+	@RequestMapping(value = "get_vehicle__matched_for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Object> get_vehicle__matched_for_view(HttpServletRequest request,
 			@PathVariable("recon_date") String recon_date) {
-		return APIResponse.response(fixedService.get_vehicle_core_matched_for_view(request, recon_date));
+		return APIResponse.response(fixedService.get_vehicle__matched_for_view(request, recon_date));
 	}
 	@RequestMapping(value = "view_mms_waiting", method = RequestMethod.POST, produces = "application/json")
 	public ResponseEntity<Object> View_mms_wating(HttpServletRequest request, @RequestBody() String dates) {
@@ -244,15 +244,15 @@ public class FixedAutReconController {
 		return APIResponse.response(fixedService.View_mms_removed(request, dates));
 	}
 	
-	@RequestMapping(value = "get_core_reversal_for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Object> get_core_reversal_for_view(HttpServletRequest request,
+	@RequestMapping(value = "get__reversal_for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Object> get__reversal_for_view(HttpServletRequest request,
 			@PathVariable("recon_date") String recon_date) {
-		return APIResponse.response(fixedService.get_coreReversal_for_view(request, recon_date));
+		return APIResponse.response(fixedService.get_Reversal_for_view(request, recon_date));
 	}
 	
-	@RequestMapping(value = "unmatch_core_reversaltransactions", method = RequestMethod.POST, produces = "application/json")
-	public ResponseEntity<Boolean> unmatch_core_reversal_transactions(HttpServletRequest request, @RequestBody() String data_ids) {
-		return APIResponse.response(fixedService.unmatch_core_reversal_transactions(request, data_ids));
+	@RequestMapping(value = "unmatch__reversaltransactions", method = RequestMethod.POST, produces = "application/json")
+	public ResponseEntity<Boolean> unmatch__reversal_transactions(HttpServletRequest request, @RequestBody() String data_ids) {
+		return APIResponse.response(fixedService.unmatch__reversal_transactions(request, data_ids));
 	}
 	
 }

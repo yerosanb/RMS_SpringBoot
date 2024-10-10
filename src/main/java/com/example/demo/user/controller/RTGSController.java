@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.response.APIResponse;
-import com.example.demo.user.model.File_rtgs_nbe_ats;
+import com.example.demo.user.model.File_rtgs__ats;
 import com.example.demo.user.model.GeneralTransactionHistory;
 import com.example.demo.user.model.MatchDetailAts;
-import com.example.demo.user.model.MatchDetailCore;
+import com.example.demo.user.model.MatchDetail;
 import com.example.demo.user.model.Transactionhistory;
 import com.example.demo.user.service.RTGSService;
 
@@ -59,10 +59,10 @@ public class RTGSController {
 		return APIResponse.response(rtgsService.get_rtgs_ats_for_view(request, recon_date));
 	}
 
-	@RequestMapping(value = "rtgs/get_rtgs_core_for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Object> get_rtgs_core_for_view(HttpServletRequest request,
+	@RequestMapping(value = "rtgs/get_rtgs__for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Object> get_rtgs__for_view(HttpServletRequest request,
 			@PathVariable("recon_date") String recon_date) {
-		return APIResponse.response(rtgsService.get_rtgs_core_for_view(request, recon_date));
+		return APIResponse.response(rtgsService.get_rtgs__for_view(request, recon_date));
 	}
 
 	//======================================================= view payable matched  start ====================================
@@ -79,15 +79,15 @@ public class RTGSController {
 	}
 	//======================================================= view payable matched  end ====================================
 
-	@RequestMapping(value = "get_core_for_recon", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Object> get_core_for_recon(HttpServletRequest request) {
-		return APIResponse.response(rtgsService.get_core_for_recon(request));
+	@RequestMapping(value = "get__for_recon", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Object> get__for_recon(HttpServletRequest request) {
+		return APIResponse.response(rtgsService.get__for_recon(request));
 	}
 
-	@RequestMapping(value = "get_core_for_recon_auto/{recon_date}", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Object> get_core_for_recon_auto(HttpServletRequest request,
+	@RequestMapping(value = "get__for_recon_auto/{recon_date}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Object> get__for_recon_auto(HttpServletRequest request,
 			@PathVariable("recon_date") String recon_date) {
-		return APIResponse.response(rtgsService.get_core_for_recon_auto(request, recon_date));
+		return APIResponse.response(rtgsService.get__for_recon_auto(request, recon_date));
 	}
 	//=======================================================  get payable transaction for auto match starting ==============================
 	@RequestMapping(value = "get_payable_credit_for_recon_auto", method = RequestMethod.GET, produces = "application/json")
@@ -107,15 +107,15 @@ public class RTGSController {
 	public ResponseEntity<Object> get_payable_debit_for_reconcilation(HttpServletRequest request) {
 		return APIResponse.response(rtgsService.get_payable_debit_for_reconcilation(request));
 	}
-	@RequestMapping(value = "get_core_for_recon_partial_auto/{recon_date}", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Object> get_core_for_recon_partial_auto(HttpServletRequest request,
+	@RequestMapping(value = "get__for_recon_partial_auto/{recon_date}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Object> get__for_recon_partial_auto(HttpServletRequest request,
 			@PathVariable("recon_date") String recon_date) {
-		return APIResponse.response(rtgsService.get_core_for_recon_partial_auto(request, recon_date));
+		return APIResponse.response(rtgsService.get__for_recon_partial_auto(request, recon_date));
 	}
 
-	@RequestMapping(value = "get_core_for_recon_partial", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Object> get_core_for_recon_partial(HttpServletRequest request) {
-		return APIResponse.response(rtgsService.get_core_for_recon_partial(request));
+	@RequestMapping(value = "get__for_recon_partial", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Object> get__for_recon_partial(HttpServletRequest request) {
+		return APIResponse.response(rtgsService.get__for_recon_partial(request));
 	}
 
 	@RequestMapping(value = "match_transactions", method = RequestMethod.POST, produces = "application/json")
@@ -126,10 +126,10 @@ public class RTGSController {
 	public ResponseEntity<Boolean> match_transactionsReversal(HttpServletRequest request, @RequestBody() String data_ids) {
 		return APIResponse.response(rtgsService.match_transactionsReversal(request, data_ids));
 	}
-	@RequestMapping(value = "rtgs/get_core_reversal_for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Object> get_core_reversal_for_view(HttpServletRequest request,
+	@RequestMapping(value = "rtgs/get__reversal_for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Object> get__reversal_for_view(HttpServletRequest request,
 			@PathVariable("recon_date") String recon_date) {
-		return APIResponse.response(rtgsService.get_coreReversal_for_view(request, recon_date));
+		return APIResponse.response(rtgsService.get_Reversal_for_view(request, recon_date));
 	}
 	//////////   match payable transaction begin /////////////////
 
@@ -160,9 +160,9 @@ public class RTGSController {
 		return APIResponse.response(rtgsService.unmatch_transactions(request, data_ids));
 	}
 	
-	@RequestMapping(value = "rtgs/unmatch_core_reversaltransactions", method = RequestMethod.POST, produces = "application/json")
-	public ResponseEntity<Boolean> unmatch_core_reversal_transactions(HttpServletRequest request, @RequestBody() String data_ids) {
-		return APIResponse.response(rtgsService.unmatch_core_reversal_transactions(request, data_ids));
+	@RequestMapping(value = "rtgs/unmatch__reversaltransactions", method = RequestMethod.POST, produces = "application/json")
+	public ResponseEntity<Boolean> unmatch__reversal_transactions(HttpServletRequest request, @RequestBody() String data_ids) {
+		return APIResponse.response(rtgsService.unmatch__reversal_transactions(request, data_ids));
 	}
 	//================================================ unmatch payable transaction starting ======================================
 	@RequestMapping(value = "rtgs/unmatch_payable_transactions", method = RequestMethod.POST, produces = "application/json")
@@ -207,7 +207,7 @@ public class RTGSController {
 
 	@RequestMapping(value = "update_transaction", method = RequestMethod.POST, produces = "application/json")
 	public ResponseEntity<Boolean> update_transaction(HttpServletRequest request,
-			@RequestBody() File_rtgs_nbe_ats edit_data) {
+			@RequestBody() File_rtgs__ats edit_data) {
 		return APIResponse.response(rtgsService.update_transaction(request, edit_data));
 	}
 
@@ -221,9 +221,9 @@ public class RTGSController {
 		return APIResponse.response(rtgsService.get_edited_ats(request));
 	}
 
-	@RequestMapping(value = "get-edited-core", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Object> get_edited_core(HttpServletRequest request) {
-		return APIResponse.response(rtgsService.get_edited_core(request));
+	@RequestMapping(value = "get-edited-", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Object> get_edited_(HttpServletRequest request) {
+		return APIResponse.response(rtgsService.get_edited_(request));
 	}
 	//======================================= payable edited transaction start =================================
 	@RequestMapping(value = "get-edited-payable", method = RequestMethod.GET, produces = "application/json")
@@ -242,9 +242,9 @@ public class RTGSController {
 		return APIResponse.response(rtgsService.get_edited_detail_ats(request, id));
 	}
 
-	@RequestMapping(value = "get-edited-detail-core/{id}", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Object> get_edited_detail_core(HttpServletRequest request, @PathVariable("id") Long id) {
-		return APIResponse.response(rtgsService.get_edited_detail_core(request, id));
+	@RequestMapping(value = "get-edited-detail-/{id}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Object> get_edited_detail_(HttpServletRequest request, @PathVariable("id") Long id) {
+		return APIResponse.response(rtgsService.get_edited_detail_(request, id));
 	}
 
 	@RequestMapping(value = "rtgs/search-general", method = RequestMethod.POST, produces = "application/json")
@@ -264,13 +264,13 @@ public class RTGSController {
 		MatchDetailAts detail = rtgsService.matchDetailAts(request, id);
 		return ResponseEntity.ok(detail);
 	}
-	@RequestMapping(value = "/rtgs/matched-detail-core/{id}", method = RequestMethod.POST)
-	public ResponseEntity<Object> matchDetailCore(HttpServletRequest request, @PathVariable Long id,@RequestParam("type") String type,
+	@RequestMapping(value = "/rtgs/matched-detail-/{id}", method = RequestMethod.POST)
+	public ResponseEntity<Object> matchDetail(HttpServletRequest request, @PathVariable Long id,@RequestParam("type") String type,
 			@RequestParam("dr_cr") String dr_cr,@RequestParam("reference") String reference) {
 		System.out.println("type="+type);
 		System.out.println("dr_cr="+dr_cr);
 		System.out.println("addional_information="+reference	);
-				MatchDetailCore detail = rtgsService.MatchDetailCore(request, id,type,dr_cr,reference);
+				MatchDetail detail = rtgsService.MatchDetail(request, id,type,dr_cr,reference);
 		return ResponseEntity.ok(detail);
 
 	}
@@ -282,10 +282,10 @@ public class RTGSController {
 
 	}
 
-	@RequestMapping(value = "get_all_core_matched_with_reason/{recon_date}", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Object> get_all_core_matched_with_reason(HttpServletRequest request,
+	@RequestMapping(value = "get_all__matched_with_reason/{recon_date}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Object> get_all__matched_with_reason(HttpServletRequest request,
 			@PathVariable("recon_date") String recon_date) {
-		return APIResponse.response(rtgsService.get_all_core_matched_with_reason(request, recon_date));
+		return APIResponse.response(rtgsService.get_all__matched_with_reason(request, recon_date));
 
 	}
 	@RequestMapping(value = "get_payable_credit_matched_with_reason", method = RequestMethod.GET, produces = "application/json")
@@ -301,15 +301,15 @@ public class RTGSController {
 	///////////////////////////////////
 
 
-	@RequestMapping(value = "/rtgs/match_detail_fixed_core/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Transactionhistory> matchDetailFixedCore(HttpServletRequest request, @PathVariable Long id) {
-		Transactionhistory detail = rtgsService.matchDetailFixedCore(request, id);
+	@RequestMapping(value = "/rtgs/match_detail_fixed_/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Transactionhistory> matchDetailFixed(HttpServletRequest request, @PathVariable Long id) {
+		Transactionhistory detail = rtgsService.matchDetailFixed(request, id);
 		return ResponseEntity.ok(detail);
 			}
 
-	@RequestMapping(value = "/rtgs/match_detail_stock_core/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Transactionhistory> matchDetailStockCore(HttpServletRequest request, @PathVariable Long id) {
-		Transactionhistory detail = rtgsService.matchDetailStockCore(request, id);
+	@RequestMapping(value = "/rtgs/match_detail_stock_/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Transactionhistory> matchDetailStock(HttpServletRequest request, @PathVariable Long id) {
+		Transactionhistory detail = rtgsService.matchDetailStock(request, id);
 		return ResponseEntity.ok(detail);
 			}
 	

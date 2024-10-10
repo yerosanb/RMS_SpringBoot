@@ -1,6 +1,6 @@
 package com.example.demo.Stock.Model;
 
-public class RawStockCoreModel {
+public class RawStockModel {
 	private Long id;
 	private String transaction_reference;
 	private String transaction_date;
@@ -21,7 +21,7 @@ public class RawStockCoreModel {
 	private String firstname;
 	private String lastname;
 	private String reason;
-	public RawStockCoreModel() {
+	public RawStockModel() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -34,7 +34,7 @@ public class RawStockCoreModel {
 		this.reason = reason;
 	}
 
-	public RawStockCoreModel(Long id, String transaction_reference, String transaction_date, String posting_date,
+	public RawStockModel(Long id, String transaction_reference, String transaction_date, String posting_date,
 			String value_date, float amount, float balance, String source_branch, String branch_name,
 			String description, String dr_cr, String account, String status, String availability, Long file_id,
 			String match_id, String match_date, String firstname, String lastname, String reason) {

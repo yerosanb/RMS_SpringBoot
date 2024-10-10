@@ -4,7 +4,7 @@ import com.example.demo.Exception.CustomAllException;
 import com.example.demo.Exception.ExceptionsList;
 import com.example.demo.Stock.Mapper.StockMapperReport;
 import com.example.demo.Stock.Model.StockReport;
-import com.example.demo.abebayehu.entity.Fixed_core_report;
+import com.example.demo.abebayehu.entity.Fixed__report;
 import com.example.demo.abebayehu.entity.Fixed_mms_report;
 import com.example.demo.abebayehu.mapper.MapperFixedAsset;
 import com.example.demo.model.Files_;
@@ -15,8 +15,8 @@ import com.example.demo.user.mapper.MapperRTGS;
 import com.example.demo.user.mapper.MapperReceivable;
 import com.example.demo.user.mapper.RolebackMapper;
 import com.example.demo.user.model.FileUpload;
-import com.example.demo.user.model.File_rtgs_awb_core;
-import com.example.demo.user.model.File_rtgs_nbe_ats;
+import com.example.demo.user.model.File_rtgs__;
+import com.example.demo.user.model.File_rtgs__ats;
 import com.example.demo.utils.ExcelHelper;
 import com.example.demo.utils.ExcelHelperFixed;
 import com.example.demo.utils.ExcelHelperIssue;
@@ -63,9 +63,9 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
+import org.springframework..io.InputStreamResource;
+import org.springframework..io.Resource;
+import org.springframework..io.UrlResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -116,7 +116,7 @@ public class FileService {
   double last_uploded_closing_balance = 0d;
   double last_uploded_closing_balance_con = 0d;
   double last_uploded_closing_balance_ifb = 0d;
-  double last_uploded_closing_balance_issue_core = 0d;
+  double last_uploded_closing_balance_issue_ = 0d;
   double last_uploded_closing_balance_issue_qbs = 0d;
   double last_uploded_closing_balance_receivable = 0d;
   double last_uploded_closing_balance_payable = 0d;
@@ -195,7 +195,7 @@ public class FileService {
         if (recon_left_right.equalsIgnoreCase("1")) {
           newfile.setType("ATS");
 
-          extractExcellData_nbe_ats(
+          extractExcellData__ats(
             file,
             transaction_date,
             recon_left_right,
@@ -204,8 +204,8 @@ public class FileService {
           );
           // return true;
         } else if (recon_left_right.equalsIgnoreCase("2")) {
-          newfile.setType("CORE");
-          extractExcellData_awb_core(
+          newfile.setType("");
+          extractExcellData__(
             file,
             transaction_date,
             recon_left_right,
@@ -224,8 +224,8 @@ public class FileService {
             user_account_id
           );
         } else if (recon_left_right.equalsIgnoreCase("126")) {
-          newfile.setType("ISSUE_CORE");
-          extractExcellData_issue_core(
+          newfile.setType("ISSUE_");
+          extractExcellData_issue_(
             file,
             transaction_date,
             recon_left_right,
@@ -269,7 +269,7 @@ public class FileService {
     }
   }
 
-  private boolean extractExcellData_nbe_ats(
+  private boolean extractExcellData__ats(
     MultipartFile file,
     String date,
     String recon_left_right,
@@ -333,7 +333,7 @@ public class FileService {
           }
         }
       }
-      Map<String, Object> resp = UploadExcelService_rtgs_nbe_ats.getAtsDataFromExcel(
+      Map<String, Object> resp = UploadExcelService_rtgs__ats.getAtsDataFromExcel(
         file.getInputStream(),
         Long.parseLong(date.replace("-", ""))
       );
@@ -373,19 +373,19 @@ public class FileService {
         // System.out.println("============================"+last_uploded_closing_balance);
         for (
           int i = 0;
-          i < ((List<File_rtgs_nbe_ats>) resp.get("data")).size();
+          i < ((List<File_rtgs__ats>) resp.get("data")).size();
           i++
         ) {
-          ((List<File_rtgs_nbe_ats>) resp.get("data")).get(i)
+          ((List<File_rtgs__ats>) resp.get("data")).get(i)
             .setFile_id(file_id);
-          mapper.uploadData_nbe_ats(
-            ((List<File_rtgs_nbe_ats>) resp.get("data")).get(i)
+          mapper.uploadData__ats(
+            ((List<File_rtgs__ats>) resp.get("data")).get(i)
           );
         }
         util.registerActivity(
           request,
           "upload Ats data",
-          "upload NBE ATS transaction of date " + date
+          "upload  ATS transaction of date " + date
         );
         // System.out.println("------------------------**********: " + user_account);
         return true;
@@ -399,7 +399,7 @@ public class FileService {
     }
   }
 
-  ///////////////////////// issue account core begin ////////////
+  ///////////////////////// issue account  begin ////////////
 
   @SuppressWarnings("unchecked")
   private boolean extractExcellData_issue_qbs(
@@ -523,24 +523,24 @@ public class FileService {
 
         for (
           int i = 0;
-          i < ((List<File_rtgs_awb_core>) resp.get("data")).size();
+          i < ((List<File_rtgs__>) resp.get("data")).size();
           i++
         ) {
           System.out.println(
             "branches: " +
-            ((List<File_rtgs_awb_core>) resp.get("data")).get(i).getBranch()
+            ((List<File_rtgs__>) resp.get("data")).get(i).getBranch()
           );
-          ((List<File_rtgs_awb_core>) resp.get("data")).get(i)
+          ((List<File_rtgs__>) resp.get("data")).get(i)
             .setFile_id(file_id);
           mapper.uploadData_issue_qbs(
-            ((List<File_rtgs_awb_core>) resp.get("data")).get(i)
+            ((List<File_rtgs__>) resp.get("data")).get(i)
           );
         }
 
         util.registerActivity(
           request,
-          "upload Issue Core data",
-          "upload ISSUE Core transaction of date " + date
+          "upload Issue  data",
+          "upload ISSUE  transaction of date " + date
         );
 
         return true;
@@ -555,46 +555,46 @@ public class FileService {
   }
 
   //	@SuppressWarnings("unchecked")
-  //	private boolean extractExcellData_issue_core(MultipartFile file, String date, String recon_left_right,
+  //	private boolean extractExcellData_issue_(MultipartFile file, String date, String recon_left_right,
   //			HttpServletRequest request, long user_account_id) {
   //		try {
   //			try {
   //
-  //				last_uploded_closing_balance_issue_core = Double
-  //						.parseDouble(atsMaper.check_openig_with_closing_balance_issue_core(
+  //				last_uploded_closing_balance_issue_ = Double
+  //						.parseDouble(atsMaper.check_openig_with_closing_balance_issue_(
   //								findPrevDay(LocalDate.parse(date), 1).toString()));
   //			} catch (Exception ex) {
   //				try {
-  //					last_uploded_closing_balance_issue_core = 0;
-  //					last_uploded_closing_balance_issue_core = Double
-  //							.parseDouble(atsMaper.check_openig_with_closing_balance_issue_core(
+  //					last_uploded_closing_balance_issue_ = 0;
+  //					last_uploded_closing_balance_issue_ = Double
+  //							.parseDouble(atsMaper.check_openig_with_closing_balance_issue_(
   //									findPrevDay(LocalDate.parse(date), 2).toString()));
   //				} catch (Exception exx) {
   //					try {
-  //						last_uploded_closing_balance_issue_core = 0;
-  //						last_uploded_closing_balance_issue_core = Double
-  //								.parseDouble(atsMaper.check_openig_with_closing_balance_issue_core(
+  //						last_uploded_closing_balance_issue_ = 0;
+  //						last_uploded_closing_balance_issue_ = Double
+  //								.parseDouble(atsMaper.check_openig_with_closing_balance_issue_(
   //										findPrevDay(LocalDate.parse(date), 3).toString()));
   //					} catch (Exception exxx) {
   //						try {
-  //							last_uploded_closing_balance_issue_core = 0;
-  //							last_uploded_closing_balance_issue_core = Double
-  //									.parseDouble(atsMaper.check_openig_with_closing_balance_issue_core(
+  //							last_uploded_closing_balance_issue_ = 0;
+  //							last_uploded_closing_balance_issue_ = Double
+  //									.parseDouble(atsMaper.check_openig_with_closing_balance_issue_(
   //											findPrevDay(LocalDate.parse(date), 4).toString()));
   //						} catch (Exception exxxx) {
   //							try {
-  //								last_uploded_closing_balance_issue_core = 0;
-  //								last_uploded_closing_balance_issue_core = Double
-  //										.parseDouble(atsMaper.check_openig_with_closing_balance_issue_core(
+  //								last_uploded_closing_balance_issue_ = 0;
+  //								last_uploded_closing_balance_issue_ = Double
+  //										.parseDouble(atsMaper.check_openig_with_closing_balance_issue_(
   //												findPrevDay(LocalDate.parse(date), 5).toString()));
   //							} catch (Exception exxxxx) {
-  //								last_uploded_closing_balance_issue_core = 0;
+  //								last_uploded_closing_balance_issue_ = 0;
   //							}
   //						}
   //					}
   //				}
   //			}
-  //			Map<String, Object> resp = UploadExcelService_issue_core.getAtsDataFromExcel(file.getInputStream(),
+  //			Map<String, Object> resp = UploadExcelService_issue_.getAtsDataFromExcel(file.getInputStream(),
   //					Long.parseLong(date.replace("-", "")));
   //			System.out.println("size: " + resp.size());
   //			System.out.println("for update: " + resp.get("beginningBallance_con") + " \n: "
@@ -604,8 +604,8 @@ public class FileService {
   //					+ resp.get("totalDebit_ifb") + " \n: " + resp.get("totalCreditAmount_con") + " \n: "
   //					+ resp.get("totalCreditAmount_ifb") + " \n: " + resp.get("totalDebitAmount_con") + " \n: "
   //					+ "this is the new: " + resp.get("the_new_b_b_ifb") + " \n: " + resp.get("totalDebitAmount_ifb"));
-  //			if (last_uploded_closing_balance_issue_core == ((Double) resp.get("the_new_b_b_ifb")).doubleValue()
-  //					|| atsMaper.check_issue_core_for_firstly() == 0) {
+  //			if (last_uploded_closing_balance_issue_ == ((Double) resp.get("the_new_b_b_ifb")).doubleValue()
+  //					|| atsMaper.check_issue__for_firstly() == 0) {
   //
   ////				Long file_id = 0l;
   //				Long file_id = mapper.addFile(newfile);
@@ -618,14 +618,14 @@ public class FileService {
   //
   ////				System.out.println("toLong custom1: " + resp.get("beginningBallance_con"));
   //
-  //				for (int i = 0; i < ((List<File_rtgs_awb_core>) resp.get("data")).size(); i++) {
-  //					System.out.println("branches: " + ((List<File_rtgs_awb_core>) resp.get("data")).get(i).getBranch());
-  //					((List<File_rtgs_awb_core>) resp.get("data")).get(i).setFile_id(file_id);
-  //					mapper.uploadData_issue_core(((List<File_rtgs_awb_core>) resp.get("data")).get(i));
+  //				for (int i = 0; i < ((List<File_rtgs__>) resp.get("data")).size(); i++) {
+  //					System.out.println("branches: " + ((List<File_rtgs__>) resp.get("data")).get(i).getBranch());
+  //					((List<File_rtgs__>) resp.get("data")).get(i).setFile_id(file_id);
+  //					mapper.uploadData_issue_(((List<File_rtgs__>) resp.get("data")).get(i));
   //				}
   //
-  //				util.registerActivity(request, "upload Issue Core data",
-  //						"upload ISSUE Core transaction of date " + date);
+  //				util.registerActivity(request, "upload Issue  data",
+  //						"upload ISSUE  transaction of date " + date);
   //
   //				return true;
   //			} else {
@@ -639,7 +639,7 @@ public class FileService {
   //	}
 
   @SuppressWarnings("unchecked")
-  private boolean extractExcellData_issue_core(
+  private boolean extractExcellData_issue_(
     MultipartFile file,
     String date,
     String recon_left_right,
@@ -648,56 +648,56 @@ public class FileService {
   ) {
     try {
       try {
-        last_uploded_closing_balance_issue_core =
+        last_uploded_closing_balance_issue_ =
           Double.parseDouble(
-            atsMaper.check_openig_with_closing_balance_issue_core(
+            atsMaper.check_openig_with_closing_balance_issue_(
               findPrevDay(LocalDate.parse(date), 1).toString()
             )
           );
       } catch (Exception ex) {
         try {
-          last_uploded_closing_balance_issue_core = 0;
-          last_uploded_closing_balance_issue_core =
+          last_uploded_closing_balance_issue_ = 0;
+          last_uploded_closing_balance_issue_ =
             Double.parseDouble(
-              atsMaper.check_openig_with_closing_balance_issue_core(
+              atsMaper.check_openig_with_closing_balance_issue_(
                 findPrevDay(LocalDate.parse(date), 2).toString()
               )
             );
         } catch (Exception exx) {
           try {
-            last_uploded_closing_balance_issue_core = 0;
-            last_uploded_closing_balance_issue_core =
+            last_uploded_closing_balance_issue_ = 0;
+            last_uploded_closing_balance_issue_ =
               Double.parseDouble(
-                atsMaper.check_openig_with_closing_balance_issue_core(
+                atsMaper.check_openig_with_closing_balance_issue_(
                   findPrevDay(LocalDate.parse(date), 3).toString()
                 )
               );
           } catch (Exception exxx) {
             try {
-              last_uploded_closing_balance_issue_core = 0;
-              last_uploded_closing_balance_issue_core =
+              last_uploded_closing_balance_issue_ = 0;
+              last_uploded_closing_balance_issue_ =
                 Double.parseDouble(
-                  atsMaper.check_openig_with_closing_balance_issue_core(
+                  atsMaper.check_openig_with_closing_balance_issue_(
                     findPrevDay(LocalDate.parse(date), 4).toString()
                   )
                 );
             } catch (Exception exxxx) {
               try {
-                last_uploded_closing_balance_issue_core = 0;
-                last_uploded_closing_balance_issue_core =
+                last_uploded_closing_balance_issue_ = 0;
+                last_uploded_closing_balance_issue_ =
                   Double.parseDouble(
-                    atsMaper.check_openig_with_closing_balance_issue_core(
+                    atsMaper.check_openig_with_closing_balance_issue_(
                       findPrevDay(LocalDate.parse(date), 5).toString()
                     )
                   );
               } catch (Exception exxxxx) {
-                last_uploded_closing_balance_issue_core = 0;
+                last_uploded_closing_balance_issue_ = 0;
               }
             }
           }
         }
       }
-      Map<String, Object> resp = UploadExcelService_issue_core.getAtsDataFromExcel(
+      Map<String, Object> resp = UploadExcelService_issue_.getAtsDataFromExcel(
         file.getInputStream(),
         Long.parseLong(date.replace("-", ""))
       );
@@ -732,9 +732,9 @@ public class FileService {
         resp.get("totalDebitAmount_ifb")
       );
       if (
-        last_uploded_closing_balance_issue_core ==
+        last_uploded_closing_balance_issue_ ==
         ((Double) resp.get("the_new_b_b_ifb")).doubleValue() ||
-        atsMaper.check_issue_core_for_firstly() == 0
+        atsMaper.check_issue__for_firstly() == 0
       ) {
         //				Long file_id = 0l;
         Long file_id = mapper.addFile(newfile);
@@ -761,24 +761,24 @@ public class FileService {
 
         for (
           int i = 0;
-          i < ((List<File_rtgs_awb_core>) resp.get("data")).size();
+          i < ((List<File_rtgs__>) resp.get("data")).size();
           i++
         ) {
           System.out.println(
             "branches: " +
-            ((List<File_rtgs_awb_core>) resp.get("data")).get(i).getBranch()
+            ((List<File_rtgs__>) resp.get("data")).get(i).getBranch()
           );
-          ((List<File_rtgs_awb_core>) resp.get("data")).get(i)
+          ((List<File_rtgs__>) resp.get("data")).get(i)
             .setFile_id(file_id);
-          mapper.uploadData_issue_core(
-            ((List<File_rtgs_awb_core>) resp.get("data")).get(i)
+          mapper.uploadData_issue_(
+            ((List<File_rtgs__>) resp.get("data")).get(i)
           );
         }
 
         util.registerActivity(
           request,
-          "upload Issue Core data",
-          "upload ISSUE Core transaction of date " + date
+          "upload Issue  data",
+          "upload ISSUE  transaction of date " + date
         );
 
         return true;
@@ -792,7 +792,7 @@ public class FileService {
     }
   }
 
-  private boolean extractExcellData_awb_core(
+  private boolean extractExcellData__(
     MultipartFile file,
     String date,
     String recon_left_right,
@@ -803,13 +803,13 @@ public class FileService {
       try {
         last_uploded_closing_balance_ifb =
           Double.parseDouble(
-            atsMaper.check_openig_with_closing_balance_core_ifb(
+            atsMaper.check_openig_with_closing_balance__ifb(
               findPrevDay(LocalDate.parse(date), 1).toString()
             )
           );
         last_uploded_closing_balance_con =
           Double.parseDouble(
-            atsMaper.check_openig_with_closing_balance_core_con(
+            atsMaper.check_openig_with_closing_balance__con(
               findPrevDay(LocalDate.parse(date), 1).toString()
             )
           );
@@ -824,13 +824,13 @@ public class FileService {
           ) {
             last_uploded_closing_balance_ifb =
               Double.parseDouble(
-                atsMaper.check_openig_with_closing_balance_core_ifb(
+                atsMaper.check_openig_with_closing_balance__ifb(
                   findPrevDay(LocalDate.parse(date), 2).toString()
                 )
               );
             last_uploded_closing_balance_con =
               Double.parseDouble(
-                atsMaper.check_openig_with_closing_balance_core_con(
+                atsMaper.check_openig_with_closing_balance__con(
                   findPrevDay(LocalDate.parse(date), 2).toString()
                 )
               );
@@ -845,13 +845,13 @@ public class FileService {
             ) {
               last_uploded_closing_balance_ifb =
                 Double.parseDouble(
-                  atsMaper.check_openig_with_closing_balance_core_ifb(
+                  atsMaper.check_openig_with_closing_balance__ifb(
                     findPrevDay(LocalDate.parse(date), 3).toString()
                   )
                 );
               last_uploded_closing_balance_con =
                 Double.parseDouble(
-                  atsMaper.check_openig_with_closing_balance_core_con(
+                  atsMaper.check_openig_with_closing_balance__con(
                     findPrevDay(LocalDate.parse(date), 3).toString()
                   )
                 );
@@ -866,13 +866,13 @@ public class FileService {
               ) {
                 last_uploded_closing_balance_ifb =
                   Double.parseDouble(
-                    atsMaper.check_openig_with_closing_balance_core_ifb(
+                    atsMaper.check_openig_with_closing_balance__ifb(
                       findPrevDay(LocalDate.parse(date), 4).toString()
                     )
                   );
                 last_uploded_closing_balance_con =
                   Double.parseDouble(
-                    atsMaper.check_openig_with_closing_balance_core_con(
+                    atsMaper.check_openig_with_closing_balance__con(
                       findPrevDay(LocalDate.parse(date), 4).toString()
                     )
                   );
@@ -887,13 +887,13 @@ public class FileService {
                 ) {
                   last_uploded_closing_balance_ifb =
                     Double.parseDouble(
-                      atsMaper.check_openig_with_closing_balance_core_ifb(
+                      atsMaper.check_openig_with_closing_balance__ifb(
                         findPrevDay(LocalDate.parse(date), 5).toString()
                       )
                     );
                   last_uploded_closing_balance_con =
                     Double.parseDouble(
-                      atsMaper.check_openig_with_closing_balance_core_con(
+                      atsMaper.check_openig_with_closing_balance__con(
                         findPrevDay(LocalDate.parse(date), 5).toString()
                       )
                     );
@@ -906,7 +906,7 @@ public class FileService {
           }
         }
       }
-      Map<String, Object> resp = UploadExcelService_rtgs_awb_core.getAtsDataFromExcel(
+      Map<String, Object> resp = UploadExcelService_rtgs__.getAtsDataFromExcel(
         file.getInputStream(),
         Long.parseLong(date.replace("-", ""))
       );
@@ -955,7 +955,7 @@ public class FileService {
         Math.abs(((Double) resp.get("beginningBallance_con")).doubleValue()) &&
         last_uploded_closing_balance_ifb ==
         Math.abs(((Double) resp.get("the_new_b_b_ifb")).doubleValue()) ||
-        atsMaper.check_core_for_firstly() == 0
+        atsMaper.check__for_firstly() == 0
       ) {
         Long file_id = mapper.addFile(newfile);
         mapper.addAccountFile(user_account_id, file_id, "1", "1");
@@ -967,7 +967,7 @@ public class FileService {
           util.get_user_id(request),
           recon_left_right
         );
-        mapper.updateAdditionalFileInfoCore(
+        mapper.updateAdditionalFileInfo(
           (Double) resp.get("beginningBallance_con"),
           (Double) resp.get("the_new_b_b_ifb"),
           (Double) resp.get("endingBallance_con"),
@@ -985,19 +985,19 @@ public class FileService {
 
         for (
           int i = 0;
-          i < ((List<File_rtgs_awb_core>) resp.get("data")).size();
+          i < ((List<File_rtgs__>) resp.get("data")).size();
           i++
         ) {
-          ((List<File_rtgs_awb_core>) resp.get("data")).get(i)
+          ((List<File_rtgs__>) resp.get("data")).get(i)
             .setFile_id(file_id);
-          mapper.uploadData_awb_core(
-            ((List<File_rtgs_awb_core>) resp.get("data")).get(i)
+          mapper.uploadData__(
+            ((List<File_rtgs__>) resp.get("data")).get(i)
           );
         }
         util.registerActivity(
           request,
-          "upload Core data",
-          "upload AWB Core transaction of date " + date
+          "upload  data",
+          "upload   transaction of date " + date
         );
 
         return true;
@@ -1122,19 +1122,19 @@ public class FileService {
 
         for (
           int i = 0;
-          i < ((List<File_rtgs_awb_core>) resp.get("data")).size();
+          i < ((List<File_rtgs__>) resp.get("data")).size();
           i++
         ) {
-          ((List<File_rtgs_awb_core>) resp.get("data")).get(i)
+          ((List<File_rtgs__>) resp.get("data")).get(i)
             .setFile_id(file_id);
           mapper.uploadDataPayable(
-            ((List<File_rtgs_awb_core>) resp.get("data")).get(i)
+            ((List<File_rtgs__>) resp.get("data")).get(i)
           );
         }
         util.registerActivity(
           request,
-          "upload Core data",
-          "upload AWB Core transaction of date " + date
+          "upload  data",
+          "upload   transaction of date " + date
         );
 
         System.out.println(
@@ -1275,19 +1275,19 @@ public class FileService {
 
         for (
           int i = 0;
-          i < ((List<File_rtgs_awb_core>) resp.get("data")).size();
+          i < ((List<File_rtgs__>) resp.get("data")).size();
           i++
         ) {
-          ((List<File_rtgs_awb_core>) resp.get("data")).get(i)
+          ((List<File_rtgs__>) resp.get("data")).get(i)
             .setFile_id(file_id);
           mapper.uploadData_receivable(
-            ((List<File_rtgs_awb_core>) resp.get("data")).get(i)
+            ((List<File_rtgs__>) resp.get("data")).get(i)
           );
         }
         util.registerActivity(
           request,
-          "upload Core data",
-          "upload AWB receivable transaction of date " + date
+          "upload  data",
+          "upload  receivable transaction of date " + date
         );
 
         System.out.println(
@@ -1444,7 +1444,7 @@ public class FileService {
         String path = "";
         String date = mapperReceivable.getUploadDate(id);
         System.out.println("the date is hereee" + date);
-        //				List<File_rtgs_awb_core> xx = mapperReceivable.getPayableRawData(id);
+        //				List<File_rtgs__> xx = mapperReceivable.getPayableRawData(id);
         if (file_type.equalsIgnoreCase("Payable")) {
           path = exportExcelFilePayableRaw(date);
           // path = cc.tutorialsToExcelPayable(date, xx);
@@ -1547,7 +1547,7 @@ public class FileService {
             roleMapper.payableDebit(id.get(i)) == 0 &&
             roleMapper.receivableCredit(id.get(i)) == 0 &&
             roleMapper.receivableDebit(id.get(i)) == 0 &&
-            roleMapper.issue_core(id.get(i)) == 0 &&
+            roleMapper.issue_(id.get(i)) == 0 &&
             roleMapper.issue_qbs(id.get(i)) == 0 &&
             roleMapper.rtgsam(id.get(i)) == 0 &&
             roleMapper.rtgcm(id.get(i)) == 0 &&
@@ -1566,7 +1566,7 @@ public class FileService {
               return true;
             } else if (type.get(i).equalsIgnoreCase("2")) {
               roleMapper.roleback_file(id.get(i));
-              roleMapper.roleback_core_file(id.get(i));
+              roleMapper.roleback__file(id.get(i));
               return true;
             } else if (type.get(i).equalsIgnoreCase("3")) {
               roleMapper.roleback_file(id.get(i));
@@ -1582,7 +1582,7 @@ public class FileService {
               return true;
             } else if (type.get(i).equalsIgnoreCase("126")) {
               roleMapper.roleback_file(id.get(i));
-              roleMapper.roleback_issue_core_file(id.get(i));
+              roleMapper.roleback_issue__file(id.get(i));
               return true;
             }
           }
@@ -2044,70 +2044,70 @@ public class FileService {
 
   public String exportExcel121_stationary(String date, String type)
     throws IOException, ParseException, WriterException {
-    List<StockReport> data_stock_core = null;
+    List<StockReport> data_stock_ = null;
     List<StockReport> data_stock_mms = null;
-    Double stock_core_total = 0d;
+    Double stock__total = 0d;
     Double stock_mms_total = 0d;
 
     if (type.equalsIgnoreCase("121_stationary_excel")) {
-      data_stock_core = stockMapperReport.reportCoreStationary(date);
+      data_stock_ = stockMapperReport.reportStationary(date);
       data_stock_mms = stockMapperReport.reportMmsStationary(date);
-      stock_core_total =
-        stockMapperReport.getEndingBalanceCore121_stationary(date);
+      stock__total =
+        stockMapperReport.getEndingBalance121_stationary(date);
       stock_mms_total =
         stockMapperReport.getEndingBalanceMms121_stationary(date);
     } else if (type.equalsIgnoreCase("111_tools_excel")) {
-      data_stock_core = stockMapperReport.reportCoreTools(date);
+      data_stock_ = stockMapperReport.reportTools(date);
       data_stock_mms = stockMapperReport.reportMmsTools(date);
-      stock_core_total = stockMapperReport.getEndingBalanceCore111_tools(date);
+      stock__total = stockMapperReport.getEndingBalance111_tools(date);
       stock_mms_total = stockMapperReport.getEndingBalanceMms111_tools(date);
     } else if (type.equalsIgnoreCase("113_spares_excel")) {
-      data_stock_core = stockMapperReport.reportCoreSpares(date);
+      data_stock_ = stockMapperReport.reportSpares(date);
       data_stock_mms = stockMapperReport.reportMmsSpares(date);
-      stock_core_total = stockMapperReport.getEndingBalanceCore113_spares(date);
+      stock__total = stockMapperReport.getEndingBalance113_spares(date);
       stock_mms_total = stockMapperReport.getEndingBalanceMms113_spares(date);
     } else if (type.equalsIgnoreCase("105_uniform_excel")) {
-      data_stock_core = stockMapperReport.reportCoreUniform(date);
+      data_stock_ = stockMapperReport.reportUniform(date);
       data_stock_mms = stockMapperReport.reportMmsUniform(date);
-      stock_core_total =
-        stockMapperReport.getEndingBalanceCore105_uniform(date);
+      stock__total =
+        stockMapperReport.getEndingBalance105_uniform(date);
       stock_mms_total = stockMapperReport.getEndingBalanceMms105_uniform(date);
     } else if (type.equalsIgnoreCase("119_accessory_excel")) {
-      data_stock_core = stockMapperReport.reportCoreAccessory(date);
+      data_stock_ = stockMapperReport.reportAccessory(date);
       data_stock_mms = stockMapperReport.reportMmsAccessory(date);
-      stock_core_total =
-        stockMapperReport.getEndingBalanceCore119_accessory(date);
+      stock__total =
+        stockMapperReport.getEndingBalance119_accessory(date);
       stock_mms_total =
         stockMapperReport.getEndingBalanceMms119_accessory(date);
     } else if (type.equalsIgnoreCase("120_check_excel")) {
-      data_stock_core = stockMapperReport.reportCoreCheck(date);
+      data_stock_ = stockMapperReport.reportCheck(date);
       data_stock_mms = stockMapperReport.reportMmsCheck(date);
-      stock_core_total = stockMapperReport.getEndingBalanceCore120_check(date);
+      stock__total = stockMapperReport.getEndingBalance120_check(date);
       stock_mms_total = stockMapperReport.getEndingBalanceMms120_check(date);
     } else if (type.equalsIgnoreCase("112_sanitory_excel")) {
-      data_stock_core = stockMapperReport.reportCoreSanitory(date);
+      data_stock_ = stockMapperReport.reportSanitory(date);
       data_stock_mms = stockMapperReport.reportMmsSanitory(date);
-      stock_core_total =
-        stockMapperReport.getEndingBalanceCore112_sanitory(date);
+      stock__total =
+        stockMapperReport.getEndingBalance112_sanitory(date);
       stock_mms_total = stockMapperReport.getEndingBalanceMms112_sanitory(date);
     } else if (type.equalsIgnoreCase("106_computer_excel")) {
-      data_stock_core = stockMapperReport.reportCoreComputer(date);
+      data_stock_ = stockMapperReport.reportComputer(date);
       data_stock_mms = stockMapperReport.reportMmsComputer(date);
-      stock_core_total =
-        stockMapperReport.getEndingBalanceCore106_computer(date);
+      stock__total =
+        stockMapperReport.getEndingBalance106_computer(date);
       stock_mms_total = stockMapperReport.getEndingBalanceMms106_computer(date);
     } else if (type.equalsIgnoreCase("107_furniture_excel")) {
-      data_stock_core = stockMapperReport.reportCoreFurniture(date);
+      data_stock_ = stockMapperReport.reportFurniture(date);
       data_stock_mms = stockMapperReport.reportMmsFurniture(date);
-      stock_core_total =
-        stockMapperReport.getEndingBalanceCore107_furniture(date);
+      stock__total =
+        stockMapperReport.getEndingBalance107_furniture(date);
       stock_mms_total =
         stockMapperReport.getEndingBalanceMms107_furniture(date);
     } else if (type.equalsIgnoreCase("104_office_equipment_excel")) {
-      data_stock_core = stockMapperReport.reportCoreOfficeEquipment(date);
+      data_stock_ = stockMapperReport.reportOfficeEquipment(date);
       data_stock_mms = stockMapperReport.reportMmsOfficeEquipment(date);
-      stock_core_total =
-        stockMapperReport.getEndingBalanceCore104_office_equipment(date);
+      stock__total =
+        stockMapperReport.getEndingBalance104_office_equipment(date);
       stock_mms_total =
         stockMapperReport.getEndingBalanceMms104_office_equipment(date);
     }
@@ -2117,9 +2117,9 @@ public class FileService {
     ByteArrayInputStream in = ExcelHelperSTOCK.GenerateExcelStock(
       date,
       type,
-      data_stock_core,
+      data_stock_,
       data_stock_mms,
-      stock_core_total,
+      stock__total,
       stock_mms_total
     );
 
@@ -2167,70 +2167,70 @@ public class FileService {
 
   public String exportPdfSTOCK(String date, String type)
     throws IOException, DocumentException, ParseException, WriterException {
-    List<StockReport> data_stock_core = null;
+    List<StockReport> data_stock_ = null;
     List<StockReport> data_stock_mms = null;
-    Double stock_core_total = 0d;
+    Double stock__total = 0d;
     Double stock_mms_total = 0d;
 
     if (type.equalsIgnoreCase("121_stationary_pdf")) {
-      data_stock_core = stockMapperReport.reportCoreStationary(date);
+      data_stock_ = stockMapperReport.reportStationary(date);
       data_stock_mms = stockMapperReport.reportMmsStationary(date);
-      stock_core_total =
-        stockMapperReport.getEndingBalanceCore121_stationary(date);
+      stock__total =
+        stockMapperReport.getEndingBalance121_stationary(date);
       stock_mms_total =
         stockMapperReport.getEndingBalanceMms121_stationary(date);
     } else if (type.equalsIgnoreCase("111_tools_pdf")) {
-      data_stock_core = stockMapperReport.reportCoreTools(date);
+      data_stock_ = stockMapperReport.reportTools(date);
       data_stock_mms = stockMapperReport.reportMmsTools(date);
-      stock_core_total = stockMapperReport.getEndingBalanceCore111_tools(date);
+      stock__total = stockMapperReport.getEndingBalance111_tools(date);
       stock_mms_total = stockMapperReport.getEndingBalanceMms111_tools(date);
     } else if (type.equalsIgnoreCase("113_spares_pdf")) {
-      data_stock_core = stockMapperReport.reportCoreSpares(date);
+      data_stock_ = stockMapperReport.reportSpares(date);
       data_stock_mms = stockMapperReport.reportMmsSpares(date);
-      stock_core_total = stockMapperReport.getEndingBalanceCore113_spares(date);
+      stock__total = stockMapperReport.getEndingBalance113_spares(date);
       stock_mms_total = stockMapperReport.getEndingBalanceMms113_spares(date);
     } else if (type.equalsIgnoreCase("105_uniform_pdf")) {
-      data_stock_core = stockMapperReport.reportCoreUniform(date);
+      data_stock_ = stockMapperReport.reportUniform(date);
       data_stock_mms = stockMapperReport.reportMmsUniform(date);
-      stock_core_total =
-        stockMapperReport.getEndingBalanceCore105_uniform(date);
+      stock__total =
+        stockMapperReport.getEndingBalance105_uniform(date);
       stock_mms_total = stockMapperReport.getEndingBalanceMms105_uniform(date);
     } else if (type.equalsIgnoreCase("119_accessory_pdf")) {
-      data_stock_core = stockMapperReport.reportCoreAccessory(date);
+      data_stock_ = stockMapperReport.reportAccessory(date);
       data_stock_mms = stockMapperReport.reportMmsAccessory(date);
-      stock_core_total =
-        stockMapperReport.getEndingBalanceCore119_accessory(date);
+      stock__total =
+        stockMapperReport.getEndingBalance119_accessory(date);
       stock_mms_total =
         stockMapperReport.getEndingBalanceMms119_accessory(date);
     } else if (type.equalsIgnoreCase("120_check_pdf")) {
-      data_stock_core = stockMapperReport.reportCoreCheck(date);
+      data_stock_ = stockMapperReport.reportCheck(date);
       data_stock_mms = stockMapperReport.reportMmsCheck(date);
-      stock_core_total = stockMapperReport.getEndingBalanceCore120_check(date);
+      stock__total = stockMapperReport.getEndingBalance120_check(date);
       stock_mms_total = stockMapperReport.getEndingBalanceMms120_check(date);
     } else if (type.equalsIgnoreCase("112_sanitory_pdf")) {
-      data_stock_core = stockMapperReport.reportCoreSanitory(date);
+      data_stock_ = stockMapperReport.reportSanitory(date);
       data_stock_mms = stockMapperReport.reportMmsSanitory(date);
-      stock_core_total =
-        stockMapperReport.getEndingBalanceCore112_sanitory(date);
+      stock__total =
+        stockMapperReport.getEndingBalance112_sanitory(date);
       stock_mms_total = stockMapperReport.getEndingBalanceMms112_sanitory(date);
     } else if (type.equalsIgnoreCase("106_computer_pdf")) {
-      data_stock_core = stockMapperReport.reportCoreComputer(date);
+      data_stock_ = stockMapperReport.reportComputer(date);
       data_stock_mms = stockMapperReport.reportMmsComputer(date);
-      stock_core_total =
-        stockMapperReport.getEndingBalanceCore106_computer(date);
+      stock__total =
+        stockMapperReport.getEndingBalance106_computer(date);
       stock_mms_total = stockMapperReport.getEndingBalanceMms106_computer(date);
     } else if (type.equalsIgnoreCase("107_furniture_pdf")) {
-      data_stock_core = stockMapperReport.reportCoreFurniture(date);
+      data_stock_ = stockMapperReport.reportFurniture(date);
       data_stock_mms = stockMapperReport.reportMmsFurniture(date);
-      stock_core_total =
-        stockMapperReport.getEndingBalanceCore107_furniture(date);
+      stock__total =
+        stockMapperReport.getEndingBalance107_furniture(date);
       stock_mms_total =
         stockMapperReport.getEndingBalanceMms107_furniture(date);
     } else if (type.equalsIgnoreCase("104_office_equipment_pdf")) {
-      data_stock_core = stockMapperReport.reportCoreOfficeEquipment(date);
+      data_stock_ = stockMapperReport.reportOfficeEquipment(date);
       data_stock_mms = stockMapperReport.reportMmsOfficeEquipment(date);
-      stock_core_total =
-        stockMapperReport.getEndingBalanceCore104_office_equipment(date);
+      stock__total =
+        stockMapperReport.getEndingBalance104_office_equipment(date);
       stock_mms_total =
         stockMapperReport.getEndingBalanceMms104_office_equipment(date);
     }
@@ -2240,9 +2240,9 @@ public class FileService {
     return generator.generate(
       date,
       type,
-      data_stock_core,
+      data_stock_,
       data_stock_mms,
-      stock_core_total,
+      stock__total,
       stock_mms_total
     );
   }
@@ -2348,20 +2348,20 @@ public class FileService {
     throws IOException, DocumentException, ParseException, WriterException {
     double con_ending;
     double ifb_ending;
-    System.out.println("extracting: reportCoreDebit");
-    List<File_rtgs_awb_core> data_core_debit = atsMaper.reportCoreDebit(
+    System.out.println("extracting: reportDebit");
+    List<File_rtgs__> data__debit = atsMaper.reportDebit(
       date.replace("-", "")
     );
-    System.out.println("extracting: reportCoreCredit");
-    List<File_rtgs_awb_core> data_core_credit = atsMaper.reportCoreCredit(
+    System.out.println("extracting: reportCredit");
+    List<File_rtgs__> data__credit = atsMaper.reportCredit(
       date.replace("-", "")
     );
     System.out.println("extracting: reportAtsCredit");
-    List<File_rtgs_nbe_ats> ats_credit_data = atsMaper.reportAtsCredit(
+    List<File_rtgs__ats> ats_credit_data = atsMaper.reportAtsCredit(
       date.replace("-", "")
     );
     System.out.println("extracting: reportAtsDebit");
-    List<File_rtgs_nbe_ats> ats_debit_data = atsMaper.reportAtsDebit(
+    List<File_rtgs__ats> ats_debit_data = atsMaper.reportAtsDebit(
       date.replace("-", "")
     );
     System.out.println("generating: pdf");
@@ -2369,9 +2369,9 @@ public class FileService {
     Map<String, Double> totalAmountsByDateOs = new HashMap<>();
 
     // iterate over the transactions in the list
-    Iterator<File_rtgs_awb_core> iterator = data_core_debit.iterator();
+    Iterator<File_rtgs__> iterator = data__debit.iterator();
     while (iterator.hasNext()) {
-      File_rtgs_awb_core t = iterator.next();
+      File_rtgs__ t = iterator.next();
       // check if the name starts with 'is'
       if (t.getAdditional_information().toLowerCase().startsWith("os:")) {
         // if the name starts with 'is', add its amount to the total for the date
@@ -2387,22 +2387,22 @@ public class FileService {
     }
     // add the total amounts to the existing transactions as new data
     for (Map.Entry<String, Double> entry : totalAmountsByDateOs.entrySet()) {
-      File_rtgs_awb_core newTransaction = new File_rtgs_awb_core();
+      File_rtgs__ newTransaction = new File_rtgs__();
       newTransaction.setAdditional_information(
         "Total OS as of " + entry.getKey()
       );
       newTransaction.setAmount(entry.getValue());
       newTransaction.setValue_date(entry.getKey());
       //	        	newTransaction.setBranch(entry.getKey());
-      data_core_debit.add(newTransaction);
+      data__debit.add(newTransaction);
     }
 
     Map<String, Double> totalAmountsByDateIs = new HashMap<>();
 
     // iterate over the transactions in the list
-    Iterator<File_rtgs_awb_core> iteratoris = data_core_credit.iterator();
+    Iterator<File_rtgs__> iteratoris = data__credit.iterator();
     while (iteratoris.hasNext()) {
-      File_rtgs_awb_core t = iteratoris.next();
+      File_rtgs__ t = iteratoris.next();
       // check if the name starts with 'is'
       if (t.getAdditional_information().toLowerCase().startsWith("is:")) {
         // if the name starts with 'is', add its amount to the total for the date
@@ -2418,14 +2418,14 @@ public class FileService {
     }
     // add the total amounts to the existing transactions as new data
     for (Map.Entry<String, Double> entry : totalAmountsByDateIs.entrySet()) {
-      File_rtgs_awb_core newTransaction = new File_rtgs_awb_core();
+      File_rtgs__ newTransaction = new File_rtgs__();
       newTransaction.setAdditional_information(
         "Total IS as of " + entry.getKey()
       );
       newTransaction.setAmount(entry.getValue());
       newTransaction.setValue_date(entry.getKey());
       //		        	newTransaction.setBranch(entry.getKey());
-      data_core_credit.add(newTransaction);
+      data__credit.add(newTransaction);
     }
     if (con.equalsIgnoreCase("1")) {
       con_ending = atsMaper.getConventionalEndingBalance(date);
@@ -2440,11 +2440,11 @@ public class FileService {
     PDFGenerator generator = new PDFGenerator();
     return generator.generate(
       date,
-      data_core_debit,
+      data__debit,
       atsMaper.getAtsEndingbalance(date),
-      atsMaper.getCoreTotalDebit(date.replace("-", "")),
-      data_core_credit,
-      atsMaper.getCoreTotalCredit(date.replace("-", "")),
+      atsMaper.getTotalDebit(date.replace("-", "")),
+      data__credit,
+      atsMaper.getTotalCredit(date.replace("-", "")),
       con_ending,
       ifb_ending,
       ats_credit_data,
@@ -2452,8 +2452,8 @@ public class FileService {
       ats_debit_data,
       atsMaper.getAtsTotalDebit(date.replace("-", ""))
     );
-    //        ByteArrayInputStream in = ExcelHelper.tutorialsToExcel(data_core_debit, rtgsMapper.getAtsEndingbalance(date),
-    //        		rtgsMapper.getCoreTotalDebit(date.replace("-", "")), data_core_credit, rtgsMapper.getCoreTotalCredit(date.replace("-", "")),
+    //        ByteArrayInputStream in = ExcelHelper.tutorialsToExcel(data__debit, rtgsMapper.getAtsEndingbalance(date),
+    //        		rtgsMapper.getTotalDebit(date.replace("-", "")), data__credit, rtgsMapper.getTotalCredit(date.replace("-", "")),
     //        		rtgsMapper.getConventionalEndingBalance(date), rtgsMapper.getIfbEndingBalance(date),
     //        		ats_credit_data, rtgsMapper.getAtsTotalCredit(date.replace("-", "")), ats_debit_data, rtgsMapper.getAtsTotalDebit(date.replace("-", "")));
     //        InputStreamResource file = new InputStreamResource(in);
@@ -2465,17 +2465,17 @@ public class FileService {
   public String exportPdfFilePayable(String date)
     throws IOException, DocumentException, ParseException, WriterException {
     System.out.println("extracting: reportPayableDebit");
-    List<File_rtgs_awb_core> data_payable_debit = atsMaper.reportPayableDebit(
+    List<File_rtgs__> data_payable_debit = atsMaper.reportPayableDebit(
       date.replace("-", "")
     );
     System.out.println("extracting: reportPayableCredit");
-    List<File_rtgs_awb_core> data_payable_credit = atsMaper.reportPayableCredit(
+    List<File_rtgs__> data_payable_credit = atsMaper.reportPayableCredit(
       date.replace("-", "")
     );
     System.out.println("finished: reportPayableCredit" + data_payable_credit);
-    //		List<File_rtgs_nbe_ats> ats_credit_data = atsMaper.reportAtsCredit(date.replace("-", ""));
+    //		List<File_rtgs__ats> ats_credit_data = atsMaper.reportAtsCredit(date.replace("-", ""));
     //		System.out.println("extracting: reportAtsDebit" );
-    //		List<File_rtgs_nbe_ats> ats_debit_data = atsMaper.reportAtsDebit(date.replace("-", ""));
+    //		List<File_rtgs__ats> ats_debit_data = atsMaper.reportAtsDebit(date.replace("-", ""));
     System.out.println("generating: pdf");
     PDFGeneratorPayable generator = new PDFGeneratorPayable();
 
@@ -2489,8 +2489,8 @@ public class FileService {
     );
     //				atsMaper.getIfbEndingBalance(date), ats_credit_data, atsMaper.getAtsTotalCredit(date.replace("-", "")),
     //				ats_debit_data, atsMaper.getAtsTotalDebit(date.replace("-", "")));
-    //        ByteArrayInputStream in = ExcelHelper.tutorialsToExcel(data_core_debit, rtgsMapper.getAtsEndingbalance(date),
-    //        		rtgsMapper.getCoreTotalDebit(date.replace("-", "")), data_core_credit, rtgsMapper.getCoreTotalCredit(date.replace("-", "")),
+    //        ByteArrayInputStream in = ExcelHelper.tutorialsToExcel(data__debit, rtgsMapper.getAtsEndingbalance(date),
+    //        		rtgsMapper.getTotalDebit(date.replace("-", "")), data__credit, rtgsMapper.getTotalCredit(date.replace("-", "")),
     //        		rtgsMapper.getConventionalEndingBalance(date), rtgsMapper.getIfbEndingBalance(date),
     //        		ats_credit_data, rtgsMapper.getAtsTotalCredit(date.replace("-", "")), ats_debit_data, rtgsMapper.getAtsTotalDebit(date.replace("-", "")));
     //        InputStreamResource file = new InputStreamResource(in);
@@ -2502,19 +2502,19 @@ public class FileService {
   public String exportPdfFileReceivable(String date)
     throws IOException, DocumentException, ParseException, WriterException {
     System.out.println("extracting: reportReceivableDebit");
-    List<File_rtgs_awb_core> data_receivable_debit = mapperReceivable.reportReceivableDebit(
+    List<File_rtgs__> data_receivable_debit = mapperReceivable.reportReceivableDebit(
       date.replace("-", "")
     );
     System.out.println("extracting: reportReceivableCredit");
-    List<File_rtgs_awb_core> data_receivable_credit = mapperReceivable.reportReceivableCredit(
+    List<File_rtgs__> data_receivable_credit = mapperReceivable.reportReceivableCredit(
       date.replace("-", "")
     );
     System.out.println(
       "finished: reportReceivableCredit" + data_receivable_credit
     );
-    //		List<File_rtgs_nbe_ats> ats_credit_data = atsMaper.reportAtsCredit(date.replace("-", ""));
+    //		List<File_rtgs__ats> ats_credit_data = atsMaper.reportAtsCredit(date.replace("-", ""));
     //		System.out.println("extracting: reportAtsDebit" );
-    //		List<File_rtgs_nbe_ats> ats_debit_data = atsMaper.reportAtsDebit(date.replace("-", ""));
+    //		List<File_rtgs__ats> ats_debit_data = atsMaper.reportAtsDebit(date.replace("-", ""));
     System.out.println("generating: pdf");
     PDFGeneratorReceivable generator = new PDFGeneratorReceivable();
 
@@ -2528,8 +2528,8 @@ public class FileService {
     );
     //				atsMaper.getIfbEndingBalance(date), ats_credit_data, atsMaper.getAtsTotalCredit(date.replace("-", "")),
     //				ats_debit_data, atsMaper.getAtsTotalDebit(date.replace("-", "")));
-    //        ByteArrayInputStream in = ExcelHelper.tutorialsToExcel(data_core_debit, rtgsMapper.getAtsEndingbalance(date),
-    //        		rtgsMapper.getCoreTotalDebit(date.replace("-", "")), data_core_credit, rtgsMapper.getCoreTotalCredit(date.replace("-", "")),
+    //        ByteArrayInputStream in = ExcelHelper.tutorialsToExcel(data__debit, rtgsMapper.getAtsEndingbalance(date),
+    //        		rtgsMapper.getTotalDebit(date.replace("-", "")), data__credit, rtgsMapper.getTotalCredit(date.replace("-", "")),
     //        		rtgsMapper.getConventionalEndingBalance(date), rtgsMapper.getIfbEndingBalance(date),
     //        		ats_credit_data, rtgsMapper.getAtsTotalCredit(date.replace("-", "")), ats_debit_data, rtgsMapper.getAtsTotalDebit(date.replace("-", "")));
     //        InputStreamResource file = new InputStreamResource(in);
@@ -2543,19 +2543,19 @@ public class FileService {
     double con_ending;
     double ifb_ending;
     System.out.println("The almighty DATE: " + date.replace("-", ""));
-    List<File_rtgs_awb_core> data_core_debit = atsMaper.reportCoreDebit(
+    List<File_rtgs__> data__debit = atsMaper.reportDebit(
       date.replace("-", "")
     );
     System.out.println("The almighty DATE: " + date.replace("-", ""));
-    List<File_rtgs_awb_core> data_core_credit = atsMaper.reportCoreCredit(
+    List<File_rtgs__> data__credit = atsMaper.reportCredit(
       date.replace("-", "")
     );
     System.out.println("The almighty DATE: " + date.replace("-", ""));
-    List<File_rtgs_nbe_ats> ats_credit_data = atsMaper.reportAtsCredit(
+    List<File_rtgs__ats> ats_credit_data = atsMaper.reportAtsCredit(
       date.replace("-", "")
     );
     System.out.println("The almighty DATE: " + date.replace("-", ""));
-    List<File_rtgs_nbe_ats> ats_debit_data = atsMaper.reportAtsDebit(
+    List<File_rtgs__ats> ats_debit_data = atsMaper.reportAtsDebit(
       date.replace("-", "")
     );
     System.out.println("The almighty DATE: " + date.replace("-", ""));
@@ -2563,9 +2563,9 @@ public class FileService {
     Map<String, Double> totalAmountsByDateOs = new HashMap<>();
 
     // iterate over the transactions in the list
-    Iterator<File_rtgs_awb_core> iterator = data_core_debit.iterator();
+    Iterator<File_rtgs__> iterator = data__debit.iterator();
     while (iterator.hasNext()) {
-      File_rtgs_awb_core t = iterator.next();
+      File_rtgs__ t = iterator.next();
       // check if the name starts with 'is'
       if (t.getAdditional_information().toLowerCase().startsWith("os:")) {
         // if the name starts with 'is', add its amount to the total for the date
@@ -2581,22 +2581,22 @@ public class FileService {
     }
     // add the total amounts to the existing transactions as new data
     for (Map.Entry<String, Double> entry : totalAmountsByDateOs.entrySet()) {
-      File_rtgs_awb_core newTransaction = new File_rtgs_awb_core();
+      File_rtgs__ newTransaction = new File_rtgs__();
       newTransaction.setAdditional_information(
         "Total OS as of " + entry.getKey()
       );
       newTransaction.setAmount(entry.getValue());
       newTransaction.setValue_date(entry.getKey());
       //	        	newTransaction.setBranch(entry.getKey());
-      data_core_debit.add(newTransaction);
+      data__debit.add(newTransaction);
     }
 
     Map<String, Double> totalAmountsByDateIs = new HashMap<>();
 
     // iterate over the transactions in the list
-    Iterator<File_rtgs_awb_core> iteratoris = data_core_credit.iterator();
+    Iterator<File_rtgs__> iteratoris = data__credit.iterator();
     while (iteratoris.hasNext()) {
-      File_rtgs_awb_core t = iteratoris.next();
+      File_rtgs__ t = iteratoris.next();
       // check if the name starts with 'is'
       if (t.getAdditional_information().toLowerCase().startsWith("is:")) {
         // if the name starts with 'is', add its amount to the total for the date
@@ -2613,14 +2613,14 @@ public class FileService {
 
     // add the total amounts to the existing transactions as new data
     for (Map.Entry<String, Double> entry : totalAmountsByDateIs.entrySet()) {
-      File_rtgs_awb_core newTransaction = new File_rtgs_awb_core();
+      File_rtgs__ newTransaction = new File_rtgs__();
       newTransaction.setAdditional_information(
         "Total IS as of " + entry.getKey()
       );
       newTransaction.setAmount(entry.getValue());
       newTransaction.setValue_date(entry.getKey());
       //		        	newTransaction.setBranch(entry.getKey());
-      data_core_credit.add(newTransaction);
+      data__credit.add(newTransaction);
     }
     if (con.equalsIgnoreCase("1")) {
       con_ending = atsMaper.getConventionalEndingBalance(date);
@@ -2635,11 +2635,11 @@ public class FileService {
 
     ByteArrayInputStream in = ExcelHelper.tutorialsToExcel(
       date,
-      data_core_debit,
+      data__debit,
       atsMaper.getAtsEndingbalance(date),
-      atsMaper.getCoreTotalDebit(date.replace("-", "")),
-      data_core_credit,
-      atsMaper.getCoreTotalCredit(date.replace("-", "")),
+      atsMaper.getTotalDebit(date.replace("-", "")),
+      data__credit,
+      atsMaper.getTotalCredit(date.replace("-", "")),
       con_ending,
       ifb_ending,
       ats_credit_data,
@@ -2734,36 +2734,36 @@ public class FileService {
 
   public String exportPdfFileIssue(String date)
     throws IOException, DocumentException, ParseException, WriterException {
-    System.out.println("extracting: reportCoreDebit");
-    List<File_rtgs_awb_core> data_core_debit = mapperIssue.reportCoreDebit(
+    System.out.println("extracting: reportDebit");
+    List<File_rtgs__> data__debit = mapperIssue.reportDebit(
       date.replace("-", "")
     );
-    System.out.println("extracting: reportCoreCreditSetteled");
-    List<File_rtgs_awb_core> data_core_debit_setteled = mapperIssue.reportCoreDebitSetteled(
+    System.out.println("extracting: reportCreditSetteled");
+    List<File_rtgs__> data__debit_setteled = mapperIssue.reportDebitSetteled(
       date.replace("-", "")
     );
-    System.out.println("extracting: reportCoreCredit");
-    List<File_rtgs_awb_core> data_core_credit = mapperIssue.reportCoreCredit(
+    System.out.println("extracting: reportCredit");
+    List<File_rtgs__> data__credit = mapperIssue.reportCredit(
       date.replace("-", "")
     );
-    System.out.println("extracting: reportCoreCreditSetteled");
-    List<File_rtgs_awb_core> data_core_credit_setteled = mapperIssue.reportCoreCreditSetteled(
+    System.out.println("extracting: reportCreditSetteled");
+    List<File_rtgs__> data__credit_setteled = mapperIssue.reportCreditSetteled(
       date.replace("-", "")
     );
     System.out.println("extracting: reportAtsCredit");
-    List<File_rtgs_nbe_ats> ats_credit_data = mapperIssue.reportQbsCredit(
+    List<File_rtgs__ats> ats_credit_data = mapperIssue.reportQbsCredit(
       date.replace("-", "")
     );
     System.out.println("extracting: reportQbsCreditSetteled");
-    List<File_rtgs_nbe_ats> ats_credit_data_setteled = mapperIssue.reportQbsCreditSetteled(
+    List<File_rtgs__ats> ats_credit_data_setteled = mapperIssue.reportQbsCreditSetteled(
       date.replace("-", "")
     );
     System.out.println("extracting: reportAtsDebit");
-    List<File_rtgs_nbe_ats> ats_debit_data = mapperIssue.reportQbsDebit(
+    List<File_rtgs__ats> ats_debit_data = mapperIssue.reportQbsDebit(
       date.replace("-", "")
     );
     System.out.println("extracting: reportQbsDebitSetteled");
-    List<File_rtgs_nbe_ats> ats_debit_data_setteled = mapperIssue.reportQbsDebitSetteled(
+    List<File_rtgs__ats> ats_debit_data_setteled = mapperIssue.reportQbsDebitSetteled(
       date.replace("-", "")
     );
     System.out.println("generating: pdf");
@@ -2771,15 +2771,15 @@ public class FileService {
 
     return generator.generate(
       date,
-      data_core_debit,
-      data_core_debit_setteled,
+      data__debit,
+      data__debit_setteled,
       mapperIssue.getQbsEndingbalance(date),
-      mapperIssue.getCoreTotalDebit(date.replace("-", "")),
-      mapperIssue.getCoreTotalDebitSetteled(date.replace("-", "")),
-      data_core_credit,
-      data_core_credit_setteled,
-      mapperIssue.getCoreTotalCredit(date.replace("-", "")),
-      mapperIssue.getCoreTotalCreditSetteled(date.replace("-", "")),
+      mapperIssue.getTotalDebit(date.replace("-", "")),
+      mapperIssue.getTotalDebitSetteled(date.replace("-", "")),
+      data__credit,
+      data__credit_setteled,
+      mapperIssue.getTotalCredit(date.replace("-", "")),
+      mapperIssue.getTotalCreditSetteled(date.replace("-", "")),
       // mapperIssue.getConventionalEndingBalance(date),
       mapperIssue.getIfbEndingBalance(date),
       ats_credit_data,
@@ -2791,8 +2791,8 @@ public class FileService {
       mapperIssue.getQbsTotalDebit(date.replace("-", "")),
       mapperIssue.getQbsTotalDebitSetteled(date.replace("-", ""))
     );
-    //        ByteArrayInputStream in = ExcelHelper.tutorialsToExcel(data_core_debit, rtgsMapper.getAtsEndingbalance(date),
-    //        		rtgsMapper.getCoreTotalDebit(date.replace("-", "")), data_core_credit, rtgsMapper.getCoreTotalCredit(date.replace("-", "")),
+    //        ByteArrayInputStream in = ExcelHelper.tutorialsToExcel(data__debit, rtgsMapper.getAtsEndingbalance(date),
+    //        		rtgsMapper.getTotalDebit(date.replace("-", "")), data__credit, rtgsMapper.getTotalCredit(date.replace("-", "")),
     //        		rtgsMapper.getConventionalEndingBalance(date), rtgsMapper.getIfbEndingBalance(date),
     //        		ats_credit_data, rtgsMapper.getAtsTotalCredit(date.replace("-", "")), ats_debit_data, rtgsMapper.getAtsTotalDebit(date.replace("-", "")));
     //        InputStreamResource file = new InputStreamResource(in);
@@ -2803,12 +2803,12 @@ public class FileService {
 
   public String exportPdfFileFixedFurniture(String date, String type)
     throws IOException, DocumentException, ParseException, WriterException {
-    System.out.println("extracting: reportCore");
-    List<Fixed_core_report> data_core_debit = fixedMapper.reportCoreDebitFurn(
+    System.out.println("extracting: report");
+    List<Fixed__report> data__debit = fixedMapper.reportDebitFurn(
       date
     );
-    System.out.println("extracting: reportCore");
-    List<Fixed_core_report> data_core_credit = fixedMapper.reportCoreCreditFurn(
+    System.out.println("extracting: report");
+    List<Fixed__report> data__credit = fixedMapper.reportCreditFurn(
       date
     );
     System.out.println("extracting: reportAtsCredit");
@@ -2826,9 +2826,9 @@ public class FileService {
     return generator.generateFixedPDF(
       date,
       type,
-      data_core_debit,
-      data_core_credit,
-      fixedMapper.getCoreTotalFurn(date),
+      data__debit,
+      data__credit,
+      fixedMapper.getTotalFurn(date),
       mms_data,
       fixedMapper.getMMSTotalFurn(date),
       fixedMapper.getConvFurniture(date),
@@ -2842,12 +2842,12 @@ public class FileService {
 
   public String exportPdfFileFixedComputer(String date, String type)
     throws IOException, DocumentException, ParseException, WriterException {
-    System.out.println("extracting: reportCore");
-    List<Fixed_core_report> data_core_debit = fixedMapper.reportCoreDebitComp(
+    System.out.println("extracting: report");
+    List<Fixed__report> data__debit = fixedMapper.reportDebitComp(
       date
     );
-    System.out.println("extracting: reportCore");
-    List<Fixed_core_report> data_core_credit = fixedMapper.reportCoreCreditComp(
+    System.out.println("extracting: report");
+    List<Fixed__report> data__credit = fixedMapper.reportCreditComp(
       date
     );
     System.out.println("extracting: reportAtsCredit");
@@ -2860,9 +2860,9 @@ public class FileService {
     return generator.generateFixedPDF(
       date,
       type,
-      data_core_debit,
-      data_core_credit,
-      fixedMapper.getCoreTotalComp(date),
+      data__debit,
+      data__credit,
+      fixedMapper.getTotalComp(date),
       mms_data,
       fixedMapper.getMMSTotalComp(date),
       fixedMapper.getConvComputer(date),
@@ -2876,12 +2876,12 @@ public class FileService {
 
   public String exportPdfFileFixedMotorVehicle(String date, String type)
     throws IOException, DocumentException, ParseException, WriterException {
-    System.out.println("extracting: reportCore");
-    List<Fixed_core_report> data_core_debit = fixedMapper.reportCoreDebitMotor(
+    System.out.println("extracting: report");
+    List<Fixed__report> data__debit = fixedMapper.reportDebitMotor(
       date
     );
-    System.out.println("extracting: reportCore");
-    List<Fixed_core_report> data_core_credit = fixedMapper.reportCoreCreditMotor(
+    System.out.println("extracting: report");
+    List<Fixed__report> data__credit = fixedMapper.reportCreditMotor(
       date
     );
     System.out.println("extracting: reportAtsCredit");
@@ -2894,9 +2894,9 @@ public class FileService {
     return generator.generateFixedPDF(
       date,
       type,
-      data_core_debit,
-      data_core_credit,
-      fixedMapper.getCoreTotalMotor(date),
+      data__debit,
+      data__credit,
+      fixedMapper.getTotalMotor(date),
       mms_data,
       fixedMapper.getMMSTotalMotor(date),
       fixedMapper.getConvVehicle(date),
@@ -2910,12 +2910,12 @@ public class FileService {
 
   public String exportPdfFileFixedOfficeEquipment(String date, String type)
     throws IOException, DocumentException, ParseException, WriterException {
-    System.out.println("extracting: reportCore");
-    List<Fixed_core_report> data_core_debit = fixedMapper.reportCoreDebitOfficeEqipment(
+    System.out.println("extracting: report");
+    List<Fixed__report> data__debit = fixedMapper.reportDebitOfficeEqipment(
       date
     );
-    System.out.println("extracting: reportCore");
-    List<Fixed_core_report> data_core_credit = fixedMapper.reportCoreCreditOfficeEqipment(
+    System.out.println("extracting: report");
+    List<Fixed__report> data__credit = fixedMapper.reportCreditOfficeEqipment(
       date
     );
     System.out.println("extracting: reportAtsCredit");
@@ -2930,9 +2930,9 @@ public class FileService {
     return generator.generateFixedPDF(
       date,
       type,
-      data_core_debit,
-      data_core_credit,
-      fixedMapper.getCoreTotalOfficeEqipment(date),
+      data__debit,
+      data__credit,
+      fixedMapper.getTotalOfficeEqipment(date),
       mms_data,
       fixedMapper.getMMSTotalOfficeEqipment(date),
       fixedMapper.getConvEquipment(date),
@@ -2946,11 +2946,11 @@ public class FileService {
 
   public String exportExcelFileFixedFurniture(String date, String type)
     throws IOException, ParseException, WriterException {
-    List<Fixed_core_report> data_core_debit = fixedMapper.reportCoreDebitFurn(
+    List<Fixed__report> data__debit = fixedMapper.reportDebitFurn(
       date
     );
-    System.out.println("extracting: reportCore");
-    List<Fixed_core_report> data_core_credit = fixedMapper.reportCoreCreditFurn(
+    System.out.println("extracting: report");
+    List<Fixed__report> data__credit = fixedMapper.reportCreditFurn(
       date
     );
     System.out.println("extracting: reportAtsCredit");
@@ -2960,9 +2960,9 @@ public class FileService {
     ByteArrayInputStream in = ExcelHelperFixed.GenerateExcelFixed(
       date,
       type,
-      data_core_debit,
-      data_core_credit,
-      fixedMapper.getCoreTotalFurn(date),
+      data__debit,
+      data__credit,
+      fixedMapper.getTotalFurn(date),
       mms_data,
       fixedMapper.getMMSTotalFurn(date),
       fixedMapper.getConvFurniture(date),
@@ -3016,11 +3016,11 @@ public class FileService {
 
   public String exportExcelFileFixedComputer(String date, String type)
     throws IOException, ParseException, WriterException {
-    List<Fixed_core_report> data_core_debit = fixedMapper.reportCoreDebitComp(
+    List<Fixed__report> data__debit = fixedMapper.reportDebitComp(
       date
     );
-    System.out.println("extracting: reportCore");
-    List<Fixed_core_report> data_core_credit = fixedMapper.reportCoreCreditComp(
+    System.out.println("extracting: report");
+    List<Fixed__report> data__credit = fixedMapper.reportCreditComp(
       date
     );
     System.out.println("extracting: reportAtsCredit");
@@ -3030,9 +3030,9 @@ public class FileService {
     ByteArrayInputStream in = ExcelHelperFixed.GenerateExcelFixed(
       date,
       type,
-      data_core_debit,
-      data_core_credit,
-      fixedMapper.getCoreTotalComp(date),
+      data__debit,
+      data__credit,
+      fixedMapper.getTotalComp(date),
       mms_data,
       fixedMapper.getMMSTotalComp(date),
       fixedMapper.getConvComputer(date),
@@ -3086,11 +3086,11 @@ public class FileService {
 
   public String exportExcelFileFixedMotorVehicle(String date, String type)
     throws IOException, ParseException, WriterException {
-    List<Fixed_core_report> data_core_debit = fixedMapper.reportCoreDebitMotor(
+    List<Fixed__report> data__debit = fixedMapper.reportDebitMotor(
       date
     );
-    System.out.println("extracting: reportCore");
-    List<Fixed_core_report> data_core_credit = fixedMapper.reportCoreCreditMotor(
+    System.out.println("extracting: report");
+    List<Fixed__report> data__credit = fixedMapper.reportCreditMotor(
       date
     );
     System.out.println("extracting: reportAtsCredit");
@@ -3100,9 +3100,9 @@ public class FileService {
     ByteArrayInputStream in = ExcelHelperFixed.GenerateExcelFixed(
       date,
       type,
-      data_core_debit,
-      data_core_credit,
-      fixedMapper.getCoreTotalMotor(date),
+      data__debit,
+      data__credit,
+      fixedMapper.getTotalMotor(date),
       mms_data,
       fixedMapper.getMMSTotalMotor(date),
       fixedMapper.getConvVehicle(date),
@@ -3156,11 +3156,11 @@ public class FileService {
 
   public String exportExcelFileFixedOfficeEquipment(String date, String type)
     throws IOException, ParseException, WriterException {
-    List<Fixed_core_report> data_core_debit = fixedMapper.reportCoreDebitOfficeEqipment(
+    List<Fixed__report> data__debit = fixedMapper.reportDebitOfficeEqipment(
       date
     );
-    System.out.println("extracting: reportCore");
-    List<Fixed_core_report> data_core_credit = fixedMapper.reportCoreCreditOfficeEqipment(
+    System.out.println("extracting: report");
+    List<Fixed__report> data__credit = fixedMapper.reportCreditOfficeEqipment(
       date
     );
     System.out.println("extracting: reportAtsCredit");
@@ -3172,9 +3172,9 @@ public class FileService {
     ByteArrayInputStream in = ExcelHelperFixed.GenerateExcelFixed(
       date,
       type,
-      data_core_debit,
-      data_core_credit,
-      fixedMapper.getCoreTotalOfficeEqipment(date),
+      data__debit,
+      data__credit,
+      fixedMapper.getTotalOfficeEqipment(date),
       mms_data,
       fixedMapper.getMMSTotalOfficeEqipment(date),
       fixedMapper.getConvEquipment(date),
@@ -3229,41 +3229,41 @@ public class FileService {
 
   public String exportExcelFileIssue(String date)
     throws IOException, ParseException, WriterException {
-    List<File_rtgs_awb_core> data_core_debit = mapperIssue.reportCoreDebit(
+    List<File_rtgs__> data__debit = mapperIssue.reportDebit(
       date.replace("-", "")
     );
-    List<File_rtgs_awb_core> data_core_debit_setteled = mapperIssue.reportCoreDebitSetteled(
+    List<File_rtgs__> data__debit_setteled = mapperIssue.reportDebitSetteled(
       date.replace("-", "")
     );
-    List<File_rtgs_awb_core> data_core_credit = mapperIssue.reportCoreCredit(
+    List<File_rtgs__> data__credit = mapperIssue.reportCredit(
       date.replace("-", "")
     );
-    List<File_rtgs_awb_core> data_core_credit_setteled = mapperIssue.reportCoreCreditSetteled(
+    List<File_rtgs__> data__credit_setteled = mapperIssue.reportCreditSetteled(
       date.replace("-", "")
     );
-    List<File_rtgs_nbe_ats> ats_credit_data = mapperIssue.reportQbsCredit(
+    List<File_rtgs__ats> ats_credit_data = mapperIssue.reportQbsCredit(
       date.replace("-", "")
     );
-    List<File_rtgs_nbe_ats> ats_credit_data_setteled = mapperIssue.reportQbsCreditSetteled(
+    List<File_rtgs__ats> ats_credit_data_setteled = mapperIssue.reportQbsCreditSetteled(
       date.replace("-", "")
     );
-    List<File_rtgs_nbe_ats> ats_debit_data = mapperIssue.reportQbsDebit(
+    List<File_rtgs__ats> ats_debit_data = mapperIssue.reportQbsDebit(
       date.replace("-", "")
     );
-    List<File_rtgs_nbe_ats> ats_debit_data_setteled = mapperIssue.reportQbsDebitSetteled(
+    List<File_rtgs__ats> ats_debit_data_setteled = mapperIssue.reportQbsDebitSetteled(
       date.replace("-", "")
     );
     ByteArrayInputStream in = ExcelHelperIssue.tutorialsToExcel(
       date,
-      data_core_debit,
-      data_core_debit_setteled,
+      data__debit,
+      data__debit_setteled,
       mapperIssue.getQbsEndingbalance(date),
-      mapperIssue.getCoreTotalDebit(date.replace("-", "")),
-      mapperIssue.getCoreTotalDebitSetteled(date.replace("-", "")),
-      data_core_credit,
-      data_core_credit_setteled,
-      mapperIssue.getCoreTotalCredit(date.replace("-", "")),
-      mapperIssue.getCoreTotalCreditSetteled(date.replace("-", "")),
+      mapperIssue.getTotalDebit(date.replace("-", "")),
+      mapperIssue.getTotalDebitSetteled(date.replace("-", "")),
+      data__credit,
+      data__credit_setteled,
+      mapperIssue.getTotalCredit(date.replace("-", "")),
+      mapperIssue.getTotalCreditSetteled(date.replace("-", "")),
       // mapperIssue.getConventionalEndingBalance(date),
       mapperIssue.getIfbEndingBalance(date),
       ats_credit_data,
@@ -3321,11 +3321,11 @@ public class FileService {
   public String exportExcelFilePayable(String date)
     throws IOException, ParseException, WriterException {
     System.out.println("extracting: reportPayableDebit");
-    List<File_rtgs_awb_core> data_payable_debit = atsMaper.reportPayableDebit(
+    List<File_rtgs__> data_payable_debit = atsMaper.reportPayableDebit(
       date.replace("-", "")
     );
     System.out.println("extracting: reportPayableCredit");
-    List<File_rtgs_awb_core> data_payable_credit = atsMaper.reportPayableCredit(
+    List<File_rtgs__> data_payable_credit = atsMaper.reportPayableCredit(
       date.replace("-", "")
     );
     System.out.println("finished: reportPayableCredit" + data_payable_credit);
@@ -3382,56 +3382,56 @@ public class FileService {
   public String exportExcelFilePayableRaw(String date)
     throws IOException, ParseException, WriterException {
     //		System.out.println("extracting: reportPayableDebit");
-    //		List<File_rtgs_awb_core> data_payable_debit = atsMaper.reportPayableDebit(date.replace("-", ""));
+    //		List<File_rtgs__> data_payable_debit = atsMaper.reportPayableDebit(date.replace("-", ""));
     //		System.out.println("extracting: reportPayableCredit");
-    // List<File_rtgs_awb_core> Payable_raw_data_all = null;
-    ArrayList<File_rtgs_awb_core> Payable_raw_data_all = new ArrayList<File_rtgs_awb_core>();
-    // <File_rtgs_awb_core> Payable_raw_data_unmatched =
+    // List<File_rtgs__> Payable_raw_data_all = null;
+    ArrayList<File_rtgs__> Payable_raw_data_all = new ArrayList<File_rtgs__>();
+    // <File_rtgs__> Payable_raw_data_unmatched =
     // atsMaper.PayableRawData(date.replace("-", ""));
-    List<File_rtgs_awb_core> Payable_raw_data_unmatched = atsMaper.PayableRawData_unmatched(
+    List<File_rtgs__> Payable_raw_data_unmatched = atsMaper.PayableRawData_unmatched(
       date.replace("-", "")
     );
-    List<File_rtgs_awb_core> Payable_raw_data_matched_cr = atsMaper.PayableRawData_matched_cr(
+    List<File_rtgs__> Payable_raw_data_matched_cr = atsMaper.PayableRawData_matched_cr(
       date.replace("-", "")
     );
-    List<File_rtgs_awb_core> Payable_raw_data_matched_dr = atsMaper.PayableRawData_matched_dr(
+    List<File_rtgs__> Payable_raw_data_matched_dr = atsMaper.PayableRawData_matched_dr(
       date.replace("-", "")
     );
 
-    for (File_rtgs_awb_core data_payable : Payable_raw_data_unmatched) {
+    for (File_rtgs__ data_payable : Payable_raw_data_unmatched) {
       System.out.println("ctrrrr sizeeeeeeeee" + data_payable.getCtr());
     }
-    for (File_rtgs_awb_core data_payable : Payable_raw_data_matched_cr) {
+    for (File_rtgs__ data_payable : Payable_raw_data_matched_cr) {
       System.out.println("ctrrrr sizeeeeeeeeeyyy" + data_payable.getCtr());
     }
-    for (File_rtgs_awb_core data_payable : Payable_raw_data_matched_dr) {
+    for (File_rtgs__ data_payable : Payable_raw_data_matched_dr) {
       System.out.println("ctrrrr sizeeeeeeeeezz" + data_payable.getCtr());
     }
 
-    for (File_rtgs_awb_core data_payable : Payable_raw_data_unmatched) {
+    for (File_rtgs__ data_payable : Payable_raw_data_unmatched) {
       Payable_raw_data_all.add(data_payable);
       System.out.println(
         "Payable_raw_data_all sizeeeeeeeee" + Payable_raw_data_all.size()
       );
     }
 
-    for (File_rtgs_awb_core data_payable : Payable_raw_data_matched_cr) {
-      File_rtgs_awb_core aa = new File_rtgs_awb_core();
+    for (File_rtgs__ data_payable : Payable_raw_data_matched_cr) {
+      File_rtgs__ aa = new File_rtgs__();
       //			aa.setAdditional_information(data_payable.getAdditional_information());
       Payable_raw_data_all.add(data_payable);
     }
 
-    for (File_rtgs_awb_core data_payable : Payable_raw_data_matched_dr) {
-      File_rtgs_awb_core aa = new File_rtgs_awb_core();
+    for (File_rtgs__ data_payable : Payable_raw_data_matched_dr) {
+      File_rtgs__ aa = new File_rtgs__();
       //			aa.setAdditional_information(data_payable.getAdditional_information());
       Payable_raw_data_all.add(data_payable);
     }
 
     Collections.sort(
       Payable_raw_data_all,
-      new Comparator<File_rtgs_awb_core>() {
+      new Comparator<File_rtgs__>() {
         @Override
-        public int compare(File_rtgs_awb_core file1, File_rtgs_awb_core file2) {
+        public int compare(File_rtgs__ file1, File_rtgs__ file2) {
           int ctr1 = Integer.parseInt(file1.getCtr());
           int ctr2 = Integer.parseInt(file2.getCtr());
 
@@ -3443,10 +3443,10 @@ public class FileService {
     //         System.out.println("data payable listttttttttttt: "+ Payable_raw_data_unmatched.get(0).getCtr().getClass().getName());
     // Define a custom comparator that sorts by the ctr field
 
-    //         Comparator<File_rtgs_awb_core> byCtr = Comparator.comparingLong(File_rtgs_awb_core -> Long.parseLong(Payable_raw_data_unmatched.get(0).getCtr()));
+    //         Comparator<File_rtgs__> byCtr = Comparator.comparingLong(File_rtgs__ -> Long.parseLong(Payable_raw_data_unmatched.get(0).getCtr()));
     //         System.out.println("ctr valuesssssssssss: "+ byCtr);
     //
-    //		//Comparator<File_rtgs_awb_core> byCtr = Comparator.comparingDouble(Long.parseLong(Payable_raw_data_unmatched.get(0).getCtr()));
+    //		//Comparator<File_rtgs__> byCtr = Comparator.comparingDouble(Long.parseLong(Payable_raw_data_unmatched.get(0).getCtr()));
     //
     //		// Sort the list using the custom comparator
     //		Collections.sort(Payable_raw_data_all, byCtr);
@@ -3504,40 +3504,40 @@ public class FileService {
   public String exportExcelFileRecievableRaw(String date)
     throws IOException, ParseException, WriterException {
     //		System.out.println("extracting: reportPayableDebit");
-    //		List<File_rtgs_awb_core> data_payable_debit = atsMaper.reportPayableDebit(date.replace("-", ""));
+    //		List<File_rtgs__> data_payable_debit = atsMaper.reportPayableDebit(date.replace("-", ""));
     //		System.out.println("extracting: reportPayableCredit");
-    // List<File_rtgs_awb_core> Payable_raw_data_all = null;
-    ArrayList<File_rtgs_awb_core> Recievable_raw_data_all = new ArrayList<File_rtgs_awb_core>();
-    // <File_rtgs_awb_core> Payable_raw_data_unmatched =
+    // List<File_rtgs__> Payable_raw_data_all = null;
+    ArrayList<File_rtgs__> Recievable_raw_data_all = new ArrayList<File_rtgs__>();
+    // <File_rtgs__> Payable_raw_data_unmatched =
     // atsMaper.PayableRawData(date.replace("-", ""));
-    List<File_rtgs_awb_core> Recievable_raw_data_unmatched = atsMaper.RecievableRawData_unmatched(
+    List<File_rtgs__> Recievable_raw_data_unmatched = atsMaper.RecievableRawData_unmatched(
       date.replace("-", "")
     );
-    List<File_rtgs_awb_core> Reciavable_raw_data_matched_cr = atsMaper.RecievableRawData_matched_cr(
+    List<File_rtgs__> Reciavable_raw_data_matched_cr = atsMaper.RecievableRawData_matched_cr(
       date.replace("-", "")
     );
-    List<File_rtgs_awb_core> Reciavable_raw_data_matched_dr = atsMaper.RecievableRawData_matched_dr(
+    List<File_rtgs__> Reciavable_raw_data_matched_dr = atsMaper.RecievableRawData_matched_dr(
       date.replace("-", "")
     );
 
-    for (File_rtgs_awb_core data_payable : Recievable_raw_data_unmatched) {
+    for (File_rtgs__ data_payable : Recievable_raw_data_unmatched) {
       Recievable_raw_data_all.add(data_payable);
     }
-    for (File_rtgs_awb_core data_payable : Reciavable_raw_data_matched_cr) {
-      File_rtgs_awb_core aa = new File_rtgs_awb_core();
+    for (File_rtgs__ data_payable : Reciavable_raw_data_matched_cr) {
+      File_rtgs__ aa = new File_rtgs__();
       Recievable_raw_data_all.add(data_payable);
     }
 
-    for (File_rtgs_awb_core data_payable : Reciavable_raw_data_matched_dr) {
-      File_rtgs_awb_core aa = new File_rtgs_awb_core();
+    for (File_rtgs__ data_payable : Reciavable_raw_data_matched_dr) {
+      File_rtgs__ aa = new File_rtgs__();
       Recievable_raw_data_all.add(data_payable);
     }
 
     Collections.sort(
       Recievable_raw_data_all,
-      new Comparator<File_rtgs_awb_core>() {
+      new Comparator<File_rtgs__>() {
         @Override
-        public int compare(File_rtgs_awb_core file1, File_rtgs_awb_core file2) {
+        public int compare(File_rtgs__ file1, File_rtgs__ file2) {
           int ctr1 = Integer.parseInt(file1.getCtr());
           int ctr2 = Integer.parseInt(file2.getCtr());
 
@@ -3610,11 +3610,11 @@ public class FileService {
   public String exportExcelFileReceivable(String date)
     throws IOException, ParseException, WriterException {
     System.out.println("extracting: reportReceivableDebit");
-    List<File_rtgs_awb_core> data_receivable_debit = mapperReceivable.reportReceivableDebit(
+    List<File_rtgs__> data_receivable_debit = mapperReceivable.reportReceivableDebit(
       date.replace("-", "")
     );
     System.out.println("extracting: reportReceivableCredit");
-    List<File_rtgs_awb_core> data_receivable_credit = mapperReceivable.reportReceivableCredit(
+    List<File_rtgs__> data_receivable_credit = mapperReceivable.reportReceivableCredit(
       date.replace("-", "")
     );
     System.out.println(

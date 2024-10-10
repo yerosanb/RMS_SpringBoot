@@ -1,6 +1,6 @@
 package com.example.demo.Stock.Model;
 
-public class stockCoreDetail {
+public class stockDetail {
 	private Long id;
 	private String transaction_reference;
 	private String posting_date;
@@ -19,11 +19,11 @@ public class stockCoreDetail {
 	private String edit_reason_id;
 	private String new_old;
 	
-	public stockCoreDetail() {
+	public stockDetail() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public stockCoreDetail(Long id, String transaction_reference, String posting_date, String value_date, float amount,
+	public stockDetail(Long id, String transaction_reference, String posting_date, String value_date, float amount,
 			String source_branch, String branch_name, String description, String dr_cr, String account, String reason,
 			String firstname, String lastname, String dATE, String edit_delete, String edit_reason_id,
 			String new_old) {

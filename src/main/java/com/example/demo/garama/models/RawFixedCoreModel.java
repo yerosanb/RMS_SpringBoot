@@ -5,7 +5,7 @@ package com.example.demo.garama.models;
 //import lombok.Getter;
 //import lombok.NoArgsConstructor;
 
-public class RawFixedCoreModel {
+public class RawFixedModel {
 	private Long id;
 	private String account_number;
 	private String transaction_date;
@@ -23,7 +23,7 @@ public class RawFixedCoreModel {
 	private Long file_id;
 	private String match_id;
 
-	public RawFixedCoreModel(Long id, String account_number, String transaction_date, String posting_date,
+	public RawFixedModel(Long id, String account_number, String transaction_date, String posting_date,
 			String value_date, float credit, float debit, String branch_code, String reference, String naration,
 			String account_description, String account_name, String status, String availability, Long file_id,
 			String match_id) {

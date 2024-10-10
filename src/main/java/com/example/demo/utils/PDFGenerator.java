@@ -15,8 +15,8 @@ import java.util.Locale;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.util.IOUtils;
 
-import com.example.demo.user.model.File_rtgs_awb_core;
-import com.example.demo.user.model.File_rtgs_nbe_ats;
+import com.example.demo.user.model.File_rtgs__;
+import com.example.demo.user.model.File_rtgs__ats;
 import com.google.zxing.WriterException;
 import com.lowagie.text.Chunk;
 import com.lowagie.text.Document;
@@ -38,10 +38,10 @@ public class PDFGenerator {
 //		private List<Student> studentList;
 	
 
-	public String generate(String date, List<File_rtgs_awb_core> core_debit_data, Double ats_ending_balance,
-			Double total_core_debit, List<File_rtgs_awb_core> core_credit_data, Double total_core_credit,
-			Double conventional_ending_balance, Double ifb_ending_balance, List<File_rtgs_nbe_ats> ats_credit_data,
-			Double total_ats_credit, List<File_rtgs_nbe_ats> ats_debit_data, Double total_ats_debit)
+	public String generate(String date, List<File_rtgs__> _debit_data, Double ats_ending_balance,
+			Double total__debit, List<File_rtgs__> _credit_data, Double total__credit,
+			Double conventional_ending_balance, Double ifb_ending_balance, List<File_rtgs__ats> ats_credit_data,
+			Double total_ats_credit, List<File_rtgs__ats> ats_debit_data, Double total_ats_debit)
 			throws DocumentException, IOException, ParseException, WriterException {
 
 //		DecimalFormat df = new DecimalFormat("#.##");
@@ -53,7 +53,7 @@ public class PDFGenerator {
 		String monthName = new SimpleDateFormat("MMMM").format(cal.getTime());
 		
 		final String DIRECTORY_logo = System.getProperty("user.dir")
-				+ "/src/main/resources/static/awash_logo/awash_logo_002.png";
+				+ "/src/main/resources/static//_002.png";
 
 		final String DIRECTORY2 = System.getProperty("user.dir") + "/src/main/resources/static/generated_reports/" 
 				+ date.substring(0, 7) + "/";
@@ -107,7 +107,7 @@ public class PDFGenerator {
 		cellt2.setPhrase(pt);
 		tablet.addCell(cellt2);
 		
-		String signature = "AWASH BANK RECONCCILIATION SYSTEM " + "PAS report " + monthName + " " + date2.getDate() + ", " + date2.toString().split(" ")[5];
+		String signature = " RECONCCILIATION SYSTEM " + "PAS report " + monthName + " " + date2.getDate() + ", " + date2.toString().split(" ")[5];
         PdfPCell celly = new PdfPCell();
         celly.setFixedHeight(60.5f);
         celly.setPaddingLeft(50f);
@@ -130,7 +130,7 @@ public class PDFGenerator {
 		cell13.setBorder(0);
 		tablet.addCell(cell13);
 		PdfPCell cell14 = new PdfPCell();
-		cell14.setPhrase(new Phrase("AWAH BANK R.M.S", fo7));
+		cell14.setPhrase(new Phrase("AWAH  R.M.S", fo7));
 		cell14.setBorder(0);
 		tablet.addCell(cell14);
         
@@ -189,7 +189,7 @@ public class PDFGenerator {
 		cell.setPhrase(new Phrase("Balance", fo));
 		table.addCell(cell);
 
-		cell.setPhrase(new Phrase("Balance as per NBE Statement", fo));
+		cell.setPhrase(new Phrase("Balance as per  Statement", fo));
 		table.addCell(cell);
 		cell.setPhrase(new Phrase("", fo));
 		table.addCell(cell);
@@ -200,15 +200,15 @@ public class PDFGenerator {
 		cell2.setPhrase(new Phrase(NumberFormat.getCurrencyInstance().format(ats_ending_balance).replace("$", ""), fo));
 		table.addCell(cell2);
 
-		for (File_rtgs_awb_core data_core : core_debit_data) {
+		for (File_rtgs__ data_ : _debit_data) {
 			
-			cell2.setPhrase(new Phrase(data_core.getValue_date(), fo2));
+			cell2.setPhrase(new Phrase(data_.getValue_date(), fo2));
 			table.addCell(cell2);
-			cell.setPhrase(new Phrase(data_core.getAdditional_information(), fo2));
+			cell.setPhrase(new Phrase(data_.getAdditional_information(), fo2));
 			table.addCell(cell);
-			cell.setPhrase(new Phrase(data_core.getBranch_code(), fo2));
+			cell.setPhrase(new Phrase(data_.getBranch_code(), fo2));
 			table.addCell(cell);
-			cell2.setPhrase(new Phrase("" + data_core.getAmount(), fo2));
+			cell2.setPhrase(new Phrase("" + data_.getAmount(), fo2));
 			table.addCell(cell2);
 			cell.setPhrase(new Phrase("", fo2));
 			table.addCell(cell);
@@ -220,7 +220,7 @@ public class PDFGenerator {
 		table.addCell(cell);
 		cell.setPhrase(new Phrase("", fo));
 		table.addCell(cell);
-		cell2.setPhrase(new Phrase(NumberFormat.getCurrencyInstance().format(total_core_debit).replace("$", ""), fo));
+		cell2.setPhrase(new Phrase(NumberFormat.getCurrencyInstance().format(total__debit).replace("$", ""), fo));
 		table.addCell(cell2);
 		cell.setPhrase(new Phrase("", fo));
 		table.addCell(cell);
@@ -234,7 +234,7 @@ public class PDFGenerator {
 		cell.setPhrase(new Phrase("", fo));
 		table.addCell(cell);
 		cell2.setPhrase(new Phrase(
-				NumberFormat.getCurrencyInstance().format(ats_ending_balance + total_core_debit).replace("$", ""), fo));
+				NumberFormat.getCurrencyInstance().format(ats_ending_balance + total__debit).replace("$", ""), fo));
 		table.addCell(cell2);
 
 		cell.setPhrase(new Phrase("Less: Credit Entries in Book", fo));
@@ -248,32 +248,32 @@ public class PDFGenerator {
 		cell.setPhrase(new Phrase("", fo));
 		table.addCell(cell);
 
-		for (File_rtgs_awb_core data_core : core_credit_data) {
+		for (File_rtgs__ data_ : _credit_data) {
 			
-			cell2.setPhrase(new Phrase(data_core.getValue_date(), fo2));
+			cell2.setPhrase(new Phrase(data_.getValue_date(), fo2));
 			table.addCell(cell2);
-			cell.setPhrase(new Phrase(data_core.getAdditional_information(), fo2));
+			cell.setPhrase(new Phrase(data_.getAdditional_information(), fo2));
 			table.addCell(cell);
-			cell.setPhrase(new Phrase(data_core.getBranch_code(), fo2));
+			cell.setPhrase(new Phrase(data_.getBranch_code(), fo2));
 			table.addCell(cell);
-			cell2.setPhrase(new Phrase("" + data_core.getAmount(), fo2));
+			cell2.setPhrase(new Phrase("" + data_.getAmount(), fo2));
 			table.addCell(cell2);
 			cell.setPhrase(new Phrase("", fo2));
 			table.addCell(cell);
 		}
 
-		cell.setPhrase(new Phrase("Total credit in bank", fo));
+		cell.setPhrase(new Phrase("Total credit in ", fo));
 		table.addCell(cell);
 		cell.setPhrase(new Phrase("", fo));
 		table.addCell(cell);
 		cell.setPhrase(new Phrase("", fo));
 		table.addCell(cell);
-		cell2.setPhrase(new Phrase(NumberFormat.getCurrencyInstance().format(total_core_credit).replace("$", ""), fo));
+		cell2.setPhrase(new Phrase(NumberFormat.getCurrencyInstance().format(total__credit).replace("$", ""), fo));
 		table.addCell(cell2);
 		cell.setPhrase(new Phrase("", fo));
 		table.addCell(cell);
 
-		cell.setPhrase(new Phrase("Total Adjustment Balance of NBE", fo));
+		cell.setPhrase(new Phrase("Total Adjustment Balance of ", fo));
 		table.addCell(cell);
 		cell.setPhrase(new Phrase("", fo));
 		table.addCell(cell);
@@ -282,12 +282,12 @@ public class PDFGenerator {
 		cell.setPhrase(new Phrase("", fo));
 		table.addCell(cell);
 		cell2.setPhrase(new Phrase(NumberFormat.getCurrencyInstance()
-				.format((ats_ending_balance + total_core_debit) - total_core_credit).replace("$", ""), fo));
+				.format((ats_ending_balance + total__debit) - total__credit).replace("$", ""), fo));
 		table.addCell(cell2);
 		System.out.println("ats_ending_balance: " + ats_ending_balance);
-		System.out.println("total_core_debit: " + total_core_debit);
-		System.out.println("total_core_credit: " + total_core_credit);
-		System.out.println("adjustment at nbe: " + ((ats_ending_balance + total_core_debit) - total_core_credit));
+		System.out.println("total__debit: " + total__debit);
+		System.out.println("total__credit: " + total__credit);
+		System.out.println("adjustment at : " + ((ats_ending_balance + total__debit) - total__credit));
 
 		cell.setPhrase(new Phrase("Balance as per CON Statement", fo));
 		table.addCell(cell);
@@ -324,7 +324,7 @@ public class PDFGenerator {
 				.format(conventional_ending_balance + ifb_ending_balance).replace("$", ""), fo));
 		table.addCell(cell2);
 
-		for (File_rtgs_nbe_ats data_ats : ats_credit_data) {
+		for (File_rtgs__ats data_ats : ats_credit_data) {
 			// System.out.println("sender and receiver: " + data_ats.getSender() + " " + data_ats.getReceiver());
 			cell2.setPhrase(new Phrase(data_ats.getValue_date_type(), fo2));
 			table.addCell(cell2);
@@ -349,7 +349,7 @@ public class PDFGenerator {
 		cell.setPhrase(new Phrase("", fo));
 		table.addCell(cell);
 
-		cell.setPhrase(new Phrase("Less: Debit Entries in NBE", fo));
+		cell.setPhrase(new Phrase("Less: Debit Entries in ", fo));
 		table.addCell(cell);
 		cell.setPhrase(new Phrase("", fo));
 		table.addCell(cell);
@@ -363,7 +363,7 @@ public class PDFGenerator {
 				fo));
 		table.addCell(cell2);
 
-		for (File_rtgs_nbe_ats data_ats : ats_debit_data) {
+		for (File_rtgs__ats data_ats : ats_debit_data) {
 			cell2.setPhrase(new Phrase(data_ats.getValue_date_type(), fo2));
 			table.addCell(cell2);
 			cell.setPhrase(new Phrase(data_ats.getReference(), fo2));
@@ -376,7 +376,7 @@ public class PDFGenerator {
 			table.addCell(cell);
 		}
 
-		cell.setPhrase(new Phrase("Total Debit on NBE", fo));
+		cell.setPhrase(new Phrase("Total Debit on ", fo));
 		table.addCell(cell);
 		cell.setPhrase(new Phrase("", fo));
 		table.addCell(cell);
@@ -410,7 +410,7 @@ public class PDFGenerator {
 		cell.setPhrase(new Phrase("", fo));
 		table.addCell(cell);
 		cell2.setPhrase(new Phrase(NumberFormat.getCurrencyInstance()
-				.format(((ats_ending_balance + total_core_debit) - total_core_credit)-((conventional_ending_balance + ifb_ending_balance + total_ats_credit) - total_ats_debit))
+				.format(((ats_ending_balance + total__debit) - total__credit)-((conventional_ending_balance + ifb_ending_balance + total_ats_credit) - total_ats_debit))
 				.replace("$", ""), fo));
 		table.addCell(cell2);
 

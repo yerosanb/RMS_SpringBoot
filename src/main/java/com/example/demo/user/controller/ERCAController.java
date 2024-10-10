@@ -38,13 +38,13 @@ public class ERCAController {
 		
 	}
 	
-	@RequestMapping(value = "get_erca_core_for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Object> get_core_for_view(HttpServletRequest request,
+	@RequestMapping(value = "get_erca__for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Object> get__for_view(HttpServletRequest request,
 			@PathVariable("recon_date") String recon_date) {
-		return APIResponse.response(ercaService.get_erca_core_for_view(request, recon_date));
+		return APIResponse.response(ercaService.get_erca__for_view(request, recon_date));
 	}
 	
-//	bank to bank 
+//	 to  
 	
 	@RequestMapping(value = "get_btb_ats_for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
 	public ResponseEntity <Object> get_btb_ats_for_view(HttpServletRequest request,
@@ -53,10 +53,10 @@ public class ERCAController {
 		
 	}
 	
-	@RequestMapping(value = "get_btb_core_for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity <Object> get_btb_core_for_view(HttpServletRequest request,
+	@RequestMapping(value = "get_btb__for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity <Object> get_btb__for_view(HttpServletRequest request,
 			@PathVariable("recon_date") String recon_date) {
-		return APIResponse.response(ercaService.get_btb_core_for_view(request, recon_date));	
+		return APIResponse.response(ercaService.get_btb__for_view(request, recon_date));	
 	}	
 	
 
@@ -70,10 +70,10 @@ public class ERCAController {
 		
 	}
 	
-	@RequestMapping(value = "get_sos_core_for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity <Object> get_sos_core_for_view(HttpServletRequest request,
+	@RequestMapping(value = "get_sos__for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity <Object> get_sos__for_view(HttpServletRequest request,
 			@PathVariable("recon_date") String recon_date) {
-		return APIResponse.response(ercaService.get_sos_core_for_view(request, recon_date));
+		return APIResponse.response(ercaService.get_sos__for_view(request, recon_date));
 		
 	}
 	
@@ -84,10 +84,10 @@ public class ERCAController {
 		return APIResponse.response(ercaService.get_all_ats_for_view(request, recon_date));
 		
 	}
-	@RequestMapping(value = "get_all_core_for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity <Object> get_all_core_for_view(HttpServletRequest request,
+	@RequestMapping(value = "get_all__for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity <Object> get_all__for_view(HttpServletRequest request,
 			@PathVariable("recon_date") String recon_date) {
-		return APIResponse.response(ercaService.get_all_core_for_view(request, recon_date));
+		return APIResponse.response(ercaService.get_all__for_view(request, recon_date));
 		
 	}
 	@RequestMapping(value = "get_all_ats_unmatched_for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
@@ -95,10 +95,10 @@ public class ERCAController {
 			@PathVariable("recon_date") String recon_date) {
 		return APIResponse.response(ercaService.get_all_ats_unmatched_for_view(request, recon_date));
 	}
-	@RequestMapping(value = "get_all_core_unmatched_for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Object> get_all_cores_unmatched_for_view(HttpServletRequest request,
+	@RequestMapping(value = "get_all__unmatched_for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Object> get_all_s_unmatched_for_view(HttpServletRequest request,
 			@PathVariable("recon_date") String recon_date) {
-		return APIResponse.response(ercaService.get_all_core_unmatched_for_view(request, recon_date));
+		return APIResponse.response(ercaService.get_all__unmatched_for_view(request, recon_date));
 	}
 	
 	//===================================== get all unmatch payable transaction  start ==============================
@@ -116,10 +116,10 @@ public class ERCAController {
 			@PathVariable("recon_date") String recon_date) {
 		return APIResponse.response(ercaService.get_all_ats_partial_for_view(request, recon_date));
 	}
-	@RequestMapping(value = "get_all_core_partial_for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<Object> get_all_core_partial_for_view(HttpServletRequest request,
+	@RequestMapping(value = "get_all__partial_for_view/{recon_date}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Object> get_all__partial_for_view(HttpServletRequest request,
 			@PathVariable("recon_date") String recon_date) {
-		return APIResponse.response(ercaService.get_all_core_partial_for_view(request, recon_date));
+		return APIResponse.response(ercaService.get_all__partial_for_view(request, recon_date));
 	}
 	
 	@RequestMapping(value = "unmatch_erca_transactions", method = RequestMethod.POST, produces = "application/json")

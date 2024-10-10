@@ -7,7 +7,7 @@ package com.example.demo.garama.models;
 //@Getter
 //@NoArgsConstructor
 //@AllArgsConstructor
-public class UnMatchFixedCoreModel {
+public class UnMatchFixedModel {
     private Long id;
     private String account_number;
     private String transaction_date;
@@ -29,11 +29,11 @@ public class UnMatchFixedCoreModel {
 
     private String lastname;
 //    private String reason;
-//	public UnMatchFixedCoreModel() {
+//	public UnMatchFixedModel() {
 //		super();
 //		// TODO Auto-generated constructor stub
 //	}
-	public UnMatchFixedCoreModel(Long id, String account_number, String transaction_date, String posting_date,
+	public UnMatchFixedModel(Long id, String account_number, String transaction_date, String posting_date,
 			String value_date, float credit, float debit, String branch_code, String reference, String naration,
 			String account_description, String account_name, String status, String availability, String match_id,
 			String match_date, String firstname, String middlename, String lastname) {

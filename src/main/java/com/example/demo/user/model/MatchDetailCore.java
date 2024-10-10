@@ -1,6 +1,6 @@
 package com.example.demo.user.model;
 
-public class MatchDetailCore {
+public class MatchDetail {
   private Long id;
   private String match_date;
   private String reconciliation_type;
@@ -13,13 +13,13 @@ public class MatchDetailCore {
   private String additional_information;
   
   
-public MatchDetailCore() {
+public MatchDetail() {
 	super();
 	// TODO Auto-generated constructor stub
 }
 
 
-public MatchDetailCore(Long id, String match_date, String reconciliation_type, String firstname, String lastname,
+public MatchDetail(Long id, String match_date, String reconciliation_type, String firstname, String lastname,
 		double amount, String reference, String value_date_type, String value_date, String additional_information) {
 	super();
 	this.id = id;
@@ -137,7 +137,7 @@ public void setAdditional_information(String additional_information) {
 
 @Override
 public String toString() {
-	return "MatchDetailCore [id=" + id + ", match_date=" + match_date + ", reconciliation_type=" + reconciliation_type
+	return "MatchDetail [id=" + id + ", match_date=" + match_date + ", reconciliation_type=" + reconciliation_type
 			+ ", firstname=" + firstname + ", lastname=" + lastname + ", amount=" + amount + ", reference=" + reference
 			+ ", value_date_type=" + value_date_type + ", value_date=" + value_date + ", additional_information="
 			+ additional_information + "]";

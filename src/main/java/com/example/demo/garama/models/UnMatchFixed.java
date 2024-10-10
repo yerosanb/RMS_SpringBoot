@@ -213,12 +213,12 @@ package com.example.demo.garama.models;
     // this.type = type;
     // }
 
-    // public Long getCore_id() {
-    // return core_id;
+    // public Long get_id() {
+    // return _id;
     // }
 
-    // public void setCore_id(Long core_id) {
-    // this.core_id = core_id;
+    // public void set_id(Long _id) {
+    // this._id = _id;
     // }
 
     public String getMatch_date() {

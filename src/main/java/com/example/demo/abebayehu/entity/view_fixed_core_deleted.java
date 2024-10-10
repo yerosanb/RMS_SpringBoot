@@ -1,6 +1,6 @@
 package com.example.demo.abebayehu.entity;
 
-public class view_fixed_core_deleted {
+public class view_fixed__deleted {
 	private Long id;
 //    private String account_number;
 //    private String transaction_date;
@@ -16,7 +16,7 @@ public class view_fixed_core_deleted {
     private String  edit_delete;
 //    private String  availability;
 //    private String  match_status;
-view_fixed_core_deleted(Long id, String value_date, double credit, double debit, String branch_code, String naration,
+view_fixed__deleted(Long id, String value_date, double credit, double debit, String branch_code, String naration,
 		String account_name, String edit_delete) {
 	super();
 	this.id = id;

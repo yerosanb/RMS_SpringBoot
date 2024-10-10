@@ -7,7 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
+import org.springframework..io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,8 +32,8 @@ public class FileController {
 	@PostMapping("upload")
 	public ResponseEntity<Boolean> uploadAndExtractFile(@RequestParam("file") MultipartFile multipartFile,
 			@RequestParam("transaction_date") String transaction_date,
-			@RequestParam("nbe_core") String nbe_core, HttpServletRequest request) throws IOException {
-		return APIResponse.response(fileService.uploadAndExtractFile(multipartFile, transaction_date, nbe_core, request));
+			@RequestParam("_") String _, HttpServletRequest request) throws IOException {
+		return APIResponse.response(fileService.uploadAndExtractFile(multipartFile, transaction_date, _, request));
 	}
 	@RequestMapping(value = "get_uploaded_files", method = RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<Object> getUploadedFiles(HttpServletRequest request) {

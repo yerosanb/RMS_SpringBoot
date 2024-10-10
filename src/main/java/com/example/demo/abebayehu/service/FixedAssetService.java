@@ -16,14 +16,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.Exception.ExceptionsList;
 import com.example.demo.abebayehu.entity.Mms_trial_balance;
-import com.example.demo.abebayehu.entity.Raw_fixed_core;
+import com.example.demo.abebayehu.entity.Raw_fixed_;
 import com.example.demo.abebayehu.entity.Raw_fixed_mms;
-import com.example.demo.abebayehu.entity.core_detail_deleted;
+import com.example.demo.abebayehu.entity._detail_deleted;
 import com.example.demo.abebayehu.entity.mms_detail_deleted;
-import com.example.demo.abebayehu.entity.view_fixed_core_deleted;
+import com.example.demo.abebayehu.entity.view_fixed__deleted;
 import com.example.demo.abebayehu.entity.view_fixed_mms_deleted;
 import com.example.demo.abebayehu.mapper.MapperFixedAsset;
-import com.example.demo.user.model.File_rtgs_awb_core;
+import com.example.demo.user.model.File_rtgs__;
 import com.example.demo.utils.Utils;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -36,16 +36,16 @@ public class FixedAssetService {
 	@Autowired
 	private MapperFixedAsset mapperFixedAsset;
 
-	public List<Raw_fixed_core> get_raw_fixed_core_for_recon_computer(HttpServletRequest request) {
+	public List<Raw_fixed_> get_raw_fixed__for_recon_computer(HttpServletRequest request) {
 		try {
-			if (util.isPermitted(request, "FixedAsset", "get_raw_fixed_core_data_for_manual_recon")) {
-				util.registerActivity(request, "Get all Fixed Asset Core transactions",
-						"Get all Fixed Asset Core transactions to match manually");
-				List<Raw_fixed_core> fixedCoreList = mapperFixedAsset.get_raw_fixed_core_for_recon_computer();
+			if (util.isPermitted(request, "FixedAsset", "get_raw_fixed__data_for_manual_recon")) {
+				util.registerActivity(request, "Get all Fixed Asset  transactions",
+						"Get all Fixed Asset  transactions to match manually");
+				List<Raw_fixed_> fixedList = mapperFixedAsset.get_raw_fixed__for_recon_computer();
 
-				return fixedCoreList;
+				return fixedList;
 			} else {
-				System.out.println("No user does not have permission in get_raw_fixed_core_for_recon");
+				System.out.println("No user does not have permission in get_raw_fixed__for_recon");
 				return null;
 			}
 		} catch (Exception e) {
@@ -53,16 +53,16 @@ public class FixedAssetService {
 		}
 	}
 
-	public List<Raw_fixed_core> get_raw_fixed_core_for_recon_equipment(HttpServletRequest request) {
+	public List<Raw_fixed_> get_raw_fixed__for_recon_equipment(HttpServletRequest request) {
 		try {
-			if (util.isPermitted(request, "FixedAsset", "get_raw_fixed_core_data_for_manual_recon")) {
-				util.registerActivity(request, "Get all Fixed Asset Core transactions",
-						"Get all Fixed Asset Core transactions to match manually");
-				List<Raw_fixed_core> fixedCoreList = mapperFixedAsset.get_raw_fixed_core_for_recon_equipment();
+			if (util.isPermitted(request, "FixedAsset", "get_raw_fixed__data_for_manual_recon")) {
+				util.registerActivity(request, "Get all Fixed Asset  transactions",
+						"Get all Fixed Asset  transactions to match manually");
+				List<Raw_fixed_> fixedList = mapperFixedAsset.get_raw_fixed__for_recon_equipment();
 
-				return fixedCoreList;
+				return fixedList;
 			} else {
-				System.out.println("No user does not have permission in get_raw_fixed_core_for_recon");
+				System.out.println("No user does not have permission in get_raw_fixed__for_recon");
 				return null;
 			}
 		} catch (Exception e) {
@@ -70,16 +70,16 @@ public class FixedAssetService {
 		}
 	}
 
-	public List<Raw_fixed_core> get_raw_fixed_core_for_recon_vehicle(HttpServletRequest request) {
+	public List<Raw_fixed_> get_raw_fixed__for_recon_vehicle(HttpServletRequest request) {
 		try {
-			if (util.isPermitted(request, "FixedAsset", "get_raw_fixed_core_data_for_manual_recon")) {
-				util.registerActivity(request, "Get all Fixed Asset Core transactions",
-						"Get all Fixed Asset Core transactions to match manually");
-				List<Raw_fixed_core> fixedCoreList = mapperFixedAsset.get_raw_fixed_core_for_recon_vehicle();
+			if (util.isPermitted(request, "FixedAsset", "get_raw_fixed__data_for_manual_recon")) {
+				util.registerActivity(request, "Get all Fixed Asset  transactions",
+						"Get all Fixed Asset  transactions to match manually");
+				List<Raw_fixed_> fixedList = mapperFixedAsset.get_raw_fixed__for_recon_vehicle();
 
-				return fixedCoreList;
+				return fixedList;
 			} else {
-				System.out.println("No user does not have permission in get_raw_fixed_core_for_recon");
+				System.out.println("No user does not have permission in get_raw_fixed__for_recon");
 				return null;
 			}
 		} catch (Exception e) {
@@ -87,16 +87,16 @@ public class FixedAssetService {
 		}
 	}
 
-	public List<Raw_fixed_core> get_raw_fixed_core_for_recon_furniture(HttpServletRequest request) {
+	public List<Raw_fixed_> get_raw_fixed__for_recon_furniture(HttpServletRequest request) {
 		try {
-			if (util.isPermitted(request, "FixedAsset", "get_raw_fixed_core_data_for_manual_recon")) {
-				util.registerActivity(request, "Get all Fixed Asset Core transactions",
-						"Get all Fixed Asset Core transactions to match manually");
-				List<Raw_fixed_core> fixedCoreList = mapperFixedAsset.get_raw_fixed_core_for_recon_furniture();
+			if (util.isPermitted(request, "FixedAsset", "get_raw_fixed__data_for_manual_recon")) {
+				util.registerActivity(request, "Get all Fixed Asset  transactions",
+						"Get all Fixed Asset  transactions to match manually");
+				List<Raw_fixed_> fixedList = mapperFixedAsset.get_raw_fixed__for_recon_furniture();
 
-				return fixedCoreList;
+				return fixedList;
 			} else {
-				System.out.println("No user does not have permission in get_raw_fixed_core_for_recon");
+				System.out.println("No user does not have permission in get_raw_fixed__for_recon");
 				return null;
 			}
 		} catch (Exception e) {
@@ -115,7 +115,7 @@ public class FixedAssetService {
 
 				return fixedMMSList;
 			} else {
-				System.out.println("No user does not have permission in get_raw_fixed_core_for_recon");
+				System.out.println("No user does not have permission in get_raw_fixed__for_recon");
 				return null;
 			}
 		} catch (Exception e) {
@@ -135,7 +135,7 @@ public class FixedAssetService {
 
 				return fixedMMSList;
 			} else {
-				System.out.println("No user does not have permission in get_raw_fixed_core_for_recon");
+				System.out.println("No user does not have permission in get_raw_fixed__for_recon");
 				return null;
 			}
 		} catch (Exception e) {
@@ -155,7 +155,7 @@ public class FixedAssetService {
 
 				return fixedMMSList;
 			} else {
-				System.out.println("No user does not have permission in get_raw_fixed_core_for_recon");
+				System.out.println("No user does not have permission in get_raw_fixed__for_recon");
 				return null;
 			}
 		} catch (Exception e) {
@@ -175,7 +175,7 @@ public class FixedAssetService {
 
 				return fixedMMSList;
 			} else {
-				System.out.println("No user does not have permission in get_raw_fixed_core_for_recon");
+				System.out.println("No user does not have permission in get_raw_fixed__for_recon");
 				return null;
 			}
 		} catch (Exception e) {
@@ -193,7 +193,7 @@ public class FixedAssetService {
 				Long current_id = null;
 				Long matched_data_id = null;
 				int mms_length = matched_fixed_asset_ids.get(0).size();
-				int core_length = matched_fixed_asset_ids.get(1).size();
+				int _length = matched_fixed_asset_ids.get(1).size();
 
 				int count = 0;
 				for (List<Long> matched_fixed_asset_ids_list : matched_fixed_asset_ids) {
@@ -201,14 +201,14 @@ public class FixedAssetService {
 						for (Long mms_id : matched_fixed_asset_ids_list) {
 							current_id = mapperFixedAsset.moveFixedAssetMmsData(mms_id);
 							matched_data_id = mapperFixedAsset.addFixedAssetMatched(current_id, match_id, date_now, "1",
-									mms_length > 1 && core_length > 1 ? "1".toString() : "0".toString(), "1", "1");
+									mms_length > 1 && _length > 1 ? "1".toString() : "0".toString(), "1", "1");
 
 							mapperFixedAsset.addUserFixedMatched(util.get_user_id(request), matched_data_id, date_now,
 									"1", "1", "1");
 						}
 					else {
-						for (Long core_id : matched_fixed_asset_ids_list) {
-							current_id = mapperFixedAsset.moveFixedAssetCoreData(core_id, match_id);
+						for (Long _id : matched_fixed_asset_ids_list) {
+							current_id = mapperFixedAsset.moveFixedAssetData(_id, match_id);
 						}
 					}
 					count++;
@@ -232,9 +232,9 @@ public class FixedAssetService {
 
 				for (List<Long> matched_fixed_asset_ids_list : matched_fixed_asset_ids) {
 
-					for (Long core_id : matched_fixed_asset_ids_list) {
-						System.out.println("core-id=" + core_id);
-						mapperFixedAsset.moveFixedAssetCoreReversalData(core_id, match_id, date_now,
+					for (Long _id : matched_fixed_asset_ids_list) {
+						System.out.println("-id=" + _id);
+						mapperFixedAsset.moveFixedAssetReversalData(_id, match_id, date_now,
 								mapperFixedAsset.fullName(util.get_user_id(request)));
 					}
 
@@ -254,11 +254,11 @@ public class FixedAssetService {
 			if (util.isPermitted(request, "FixedAsset", "match_fixed_asset_transactions_with_reason")) {
 				util.registerActivity(request, "match fixed asset transactions with reason", "-");
 
-				List<Integer> core_fixed_ids = matched_fixed_asset_ids.get(0);
+				List<Integer> _fixed_ids = matched_fixed_asset_ids.get(0);
 				List<Integer> mms_fixed_ids = matched_fixed_asset_ids.get(1);
 
 				int mms_length = mms_fixed_ids.size();
-				int core_length = core_fixed_ids.size();
+				int _length = _fixed_ids.size();
 
 				String reason = matched_fixed_asset_ids.get(2).get(0).toString();
 				String type = matched_fixed_asset_ids.get(2).get(1).toString();
@@ -271,13 +271,13 @@ public class FixedAssetService {
 				for (int mms_id : mms_fixed_ids) {
 					current_id = mapperFixedAsset.moveFixedAssetMmsData((long) mms_id);
 					matched_data_id = mapperFixedAsset.addFixedAssetMatched(current_id, match_id, date_now, "1",
-							mms_length > 1 && core_length > 1 ? "1".toString() : "0".toString(), "1", "1");
+							mms_length > 1 && _length > 1 ? "1".toString() : "0".toString(), "1", "1");
 					mapperFixedAsset.addUserFixedMatched(util.get_user_id(request), matched_data_id, date_now, "1", "1",
 							"1");
 				}
 
-				for (int core_id : core_fixed_ids) {
-					current_id = mapperFixedAsset.moveFixedAssetCoreData((long) core_id, match_id);
+				for (int _id : _fixed_ids) {
+					current_id = mapperFixedAsset.moveFixedAssetData((long) _id, match_id);
 				}
 
 				if (type.equalsIgnoreCase("reference")) {
@@ -328,12 +328,12 @@ public class FixedAssetService {
 						mapperFixedAsset.deleteWaitingTransaction(ids[i]);
 					}
 
-					else if (type != null && type.equalsIgnoreCase("core")) {
-						type1 = "data_fixed_core";
+					else if (type != null && type.equalsIgnoreCase("")) {
+						type1 = "data_fixed_";
 						Long reason_id = mapperFixedAsset.addReasonForEdit(ids[i], user_id, type1, reason,
 								new Date().toString(), "1", "1", "2");
-						mapperFixedAsset.moveDeletedFixedCoreData(ids[i], reason_id);
-						mapperFixedAsset.deleteFixedCoreTransaction(ids[i]);
+						mapperFixedAsset.moveDeletedFixedData(ids[i], reason_id);
+						mapperFixedAsset.deleteFixedTransaction(ids[i]);
 					}
 				}
 				return true;
@@ -346,12 +346,12 @@ public class FixedAssetService {
 		}
 	}
 
-	public List<view_fixed_core_deleted> get_edited_fixed_core(HttpServletRequest request) {
+	public List<view_fixed__deleted> get_edited_fixed_(HttpServletRequest request) {
 		try {
-			if (util.isPermitted(request, "FixedAsset", "get_deleted_fixed_core_transaction")) {
-				util.registerActivity(request, "Get all deleted fixed core transaction", "-");
-				System.out.println("nothing special==============>" + mapperFixedAsset.get_edited_fixed_core());
-				return mapperFixedAsset.get_edited_fixed_core();
+			if (util.isPermitted(request, "FixedAsset", "get_deleted_fixed__transaction")) {
+				util.registerActivity(request, "Get all deleted fixed  transaction", "-");
+				System.out.println("nothing special==============>" + mapperFixedAsset.get_edited_fixed_());
+				return mapperFixedAsset.get_edited_fixed_();
 			} else {
 				System.out.println("No user does not have permission.");
 				return null;
@@ -361,11 +361,11 @@ public class FixedAssetService {
 		}
 	}
 
-	public List<core_detail_deleted> get_edited_detail_fixed_core(HttpServletRequest request, Long id) {
+	public List<_detail_deleted> get_edited_detail_fixed_(HttpServletRequest request, Long id) {
 		try {
-			if (util.isPermitted(request, "FixedAsset", "get_deleted_fixed_core_transaction")) {
-				util.registerActivity(request, "Get detail deleted fixed core transaction", "-");
-				return mapperFixedAsset.get_edited_detail_fixed_core(id);
+			if (util.isPermitted(request, "FixedAsset", "get_deleted_fixed__transaction")) {
+				util.registerActivity(request, "Get detail deleted fixed  transaction", "-");
+				return mapperFixedAsset.get_edited_detail_fixed_(id);
 			} else {
 				System.out.println("No user does not have permission.");
 				return null;
@@ -393,7 +393,7 @@ public class FixedAssetService {
 	public List<mms_detail_deleted> get_edited_detail_fixed_mms(HttpServletRequest request, Long id) {
 		try {
 			if (util.isPermitted(request, "FixedAsset", "get_deleted_fixed_mms_transaction")) {
-				util.registerActivity(request, "Get detail edited issue core transaction", "-");
+				util.registerActivity(request, "Get detail edited issue  transaction", "-");
 				System.out.println("menchachat =,,,,,,,,,,,,,,,,,,,,>");
 
 				return mapperFixedAsset.get_edited_detail_fixed_mms(id);
@@ -534,7 +534,7 @@ public class FixedAssetService {
 			HttpServletRequest request) {
 		try {
 			System.out.println("here is disposed date1 "+disposed_date);
-			if (util.isPermitted(request, "FixedAsset", "get_raw_fixed_core_data_for_manual_recon")) {
+			if (util.isPermitted(request, "FixedAsset", "get_raw_fixed__data_for_manual_recon")) {
 				System.out.println("here is disposed ------date "+disposed_date);
 				if ((disposed_date).equalsIgnoreCase("empty")) {
 					System.out.println("here is disposed date11111 "+disposed_date);

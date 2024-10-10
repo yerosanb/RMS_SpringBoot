@@ -32,7 +32,7 @@ public class GeneralTransactionHistory {
 	private String source_branch;
 	private String account;
 	
-	private String categoryStockCore;
+	private String categoryStock;
 	private String categoryStockMMs;
 
  
@@ -53,7 +53,7 @@ public class GeneralTransactionHistory {
 			String max_match_date, int min_match_date2, int max_match_date2, String reference, String branch_code,
 			String value_date, String account_name, String match_date, int match_date2, String posting_date,
 			String value_date2, String max_value_date, String store_code, String transaction_date, Long period,
-			double debit, double credit, String source_branch, String account, String categoryStockCore,
+			double debit, double credit, String source_branch, String account, String categoryStock,
 			String categoryStockMMs, String store_name, String category_description, int tran_code,
 			String stock_account_segment, String max_posting_date, String tag_number, String category, String ifb,
 			String com) {
@@ -85,7 +85,7 @@ public class GeneralTransactionHistory {
 		this.credit = credit;
 		this.source_branch = source_branch;
 		this.account = account;
-		this.categoryStockCore = categoryStockCore;
+		this.categoryStock = categoryStock;
 		this.categoryStockMMs = categoryStockMMs;
 		this.store_name = store_name;
 		this.category_description = category_description;
@@ -259,11 +259,11 @@ public class GeneralTransactionHistory {
 	public void setAccount(String account) {
 		this.account = account;
 	}
-	public String getCategoryStockCore() {
-		return categoryStockCore;
+	public String getCategoryStock() {
+		return categoryStock;
 	}
-	public void setCategoryStockCore(String categoryStockCore) {
-		this.categoryStockCore = categoryStockCore;
+	public void setCategoryStock(String categoryStock) {
+		this.categoryStock = categoryStock;
 	}
 	public String getCategoryStockMMs() {
 		return categoryStockMMs;

@@ -1,6 +1,6 @@
 package com.example.demo.abebayehu.entity;
 
-public class Raw_fixed_core {  
+public class Raw_fixed_ {  
 	private Long id;
     private String account_number;
     private String transaction_date;
@@ -17,7 +17,7 @@ public class Raw_fixed_core {
     private String  availability;
     private String  match_status;
 
-	Raw_fixed_core(Long id, String account_number, String transaction_date, String posting_date, String value_date,
+	Raw_fixed_(Long id, String account_number, String transaction_date, String posting_date, String value_date,
 			double credit, double debit, String branch_code, String reference, String naration,
 
 			String account_description, String account_name, String status, String availability, String match_status) {

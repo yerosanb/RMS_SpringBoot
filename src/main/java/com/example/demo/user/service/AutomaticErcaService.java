@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.Exception.ExceptionsList;
 import com.example.demo.user.mapper.ErcaMapper;
-import com.example.demo.user.model.File_erca_core;
-import com.example.demo.user.model.File_erca_nbe;
+import com.example.demo.user.model.File_erca_;
+import com.example.demo.user.model.File_erca_;
 import com.example.demo.utils.Utils;
 
 @Service
@@ -25,12 +25,12 @@ public class AutomaticErcaService {
 	private List<String> value_date_types;
 	
 	
-	public List<File_erca_nbe> get_erca_for_AutoMatch(HttpServletRequest request) {
+	public List<File_erca_> get_erca_for_AutoMatch(HttpServletRequest request) {
 		
 		try {
 			if (util.isPermitted(request, "User", "get_all_erca_for_auto_match")) {
-				util.registerActivity(request, "Automatic match Erca NBE transaction", "-");
-				return autoErcaMapper.get_erca_nbe_for_recon(value_date_type);
+				util.registerActivity(request, "Automatic match Erca  transaction", "-");
+				return autoErcaMapper.get_erca__for_recon(value_date_type);
 			} else {
 				System.out.println("No user does not have permission.");
 				return null;
@@ -40,11 +40,11 @@ public class AutomaticErcaService {
 		}
 	}
 	
-	public List<File_erca_core> get_erca_core_for_AutoMatch(HttpServletRequest request) {
+	public List<File_erca_> get_erca__for_AutoMatch(HttpServletRequest request) {
 		try {
-			if (util.isPermitted(request, "User", "get_all_erca_core_for_auto_match")) {
-				util.registerActivity(request, "Automatic match Awash core banking transaction", "-");
-				return autoErcaMapper.get_erca_core_for_recon(amount);
+			if (util.isPermitted(request, "User", "get_all_erca__for_auto_match")) {
+				util.registerActivity(request, "Automatic match transaction", "-");
+				return autoErcaMapper.get_erca__for_recon(amount);
 			} else {
 				System.out.println("No user does not have permission.");
 				return null;

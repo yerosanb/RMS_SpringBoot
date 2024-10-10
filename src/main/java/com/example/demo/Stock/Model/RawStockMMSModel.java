@@ -20,7 +20,7 @@ public class RawStockMMSModel {
 	private String availability;
 	private String match_status;
 	private String match_id;
-	private Long core_id;
+	private Long _id;
 	private String match_date;
 	private String firstname;
 	private String lastname;
@@ -36,7 +36,7 @@ public class RawStockMMSModel {
 	public RawStockMMSModel(Long id, String date, String store_code, String description, String category_description,
 			String branch_name, String account_segment, String store_name, Long period, String transaction_code,
 			String reference, double bbf, double amount, String main_pg, String dr_cr, String status,
-			String availability, String match_status, String match_id, Long core_id, String match_date,
+			String availability, String match_status, String match_id, Long _id, String match_date,
 			String firstname, String lastname, String reason,String edit_reason_id, String new_old) {
 		super();
 		this.id = id;
@@ -58,7 +58,7 @@ public class RawStockMMSModel {
 		this.availability = availability;
 		this.match_status = match_status;
 		this.match_id = match_id;
-		this.core_id = core_id;
+		this._id = _id;
 		this.match_date = match_date;
 		this.firstname = firstname;
 		this.lastname = lastname;
@@ -191,11 +191,11 @@ public class RawStockMMSModel {
 	public void setMatch_id(String match_id) {
 		this.match_id = match_id;
 	}
-	public Long getCore_id() {
-		return core_id;
+	public Long get_id() {
+		return _id;
 	}
-	public void setCore_id(Long core_id) {
-		this.core_id = core_id;
+	public void set_id(Long _id) {
+		this._id = _id;
 	}
 	public String getMatch_date() {
 		return match_date;

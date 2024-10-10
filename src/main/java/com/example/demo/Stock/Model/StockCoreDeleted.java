@@ -1,6 +1,6 @@
 package com.example.demo.Stock.Model;
 
-public class StockCoreDeleted {
+public class StockDeleted {
 	private Long id;
 	private String transaction_reference;
 //	private String transaction_date;
@@ -14,7 +14,7 @@ public class StockCoreDeleted {
 	private String dr_cr;
 	private String account;
 	private String  edit_delete;
-	public StockCoreDeleted(Long id, String transaction_reference, String posting_date,
+	public StockDeleted(Long id, String transaction_reference, String posting_date,
 			String value_date, float amount, String source_branch, String branch_name,
 			String description, String dr_cr, String account, String edit_delete) {
 		super();

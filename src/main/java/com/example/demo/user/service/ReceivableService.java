@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 import com.example.demo.Exception.ExceptionsList;
 import com.example.demo.user.mapper.MapperAccount;
 import com.example.demo.user.mapper.MapperReceivable;
-import com.example.demo.user.model.File_rtgs_awb_core;
-import com.example.demo.user.model.File_rtgs_nbe_ats;
+import com.example.demo.user.model.File_rtgs__;
+import com.example.demo.user.model.File_rtgs__ats;
 import com.example.demo.utils.Utils;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -32,17 +32,17 @@ public class ReceivableService {
 	@Autowired
 	private MapperAccount accountMapper;
 
-	public List<File_rtgs_awb_core> get_credit_for_recon(HttpServletRequest request) {
+	public List<File_rtgs__> get_credit_for_recon(HttpServletRequest request) {
 
 		try {
 			if (util.isPermitted(request, "User", "get_receivable_credit_transactions_for_recon_manual")) {
 				util.registerActivity(request, "Get all receivable credit transactions",
 						"Get receivable credit transactions for recon manual");
-				List<File_rtgs_awb_core> coreList = receivableMapper.get_credit_for_recon();
-				for (File_rtgs_awb_core aa : coreList) {
+				List<File_rtgs__> List = receivableMapper.get_credit_for_recon();
+				for (File_rtgs__ aa : List) {
 					System.out.println("amount:::::::::::::::::::::: " + aa.getAmount());
 				}
-				return coreList;
+				return List;
 			} else {
 				System.out.println("No user does not have permission. get_receivable_credit_transactions_for_recon_manual");
 				return null;
@@ -51,17 +51,17 @@ public class ReceivableService {
 			throw new ExceptionsList(e);
 		}
 	}
-	public List<File_rtgs_awb_core> get_debit_for_recon(HttpServletRequest request) {
+	public List<File_rtgs__> get_debit_for_recon(HttpServletRequest request) {
 
 		try {
 			if (util.isPermitted(request, "User", "get_receivable_debit_transactions_for_recon_manual")) {
 				util.registerActivity(request, "Get all receivable debit transactions",
 						"Get receivable debit transactions for recon manual");
-				List<File_rtgs_awb_core> coreList = receivableMapper.get_debit_for_recon();
-				for (File_rtgs_awb_core aa : coreList) {
+				List<File_rtgs__> List = receivableMapper.get_debit_for_recon();
+				for (File_rtgs__ aa : List) {
 					System.out.println("amount:::::::::::::::::::::: " + aa.getAmount());
 				}
-				return coreList;
+				return List;
 			} else {
 				System.out.println("No user does not have permission. get_receivable_debit_transactions_for_recon_manual");
 				return null;
@@ -71,7 +71,7 @@ public class ReceivableService {
 		}
 	}
 	
-	public List<File_rtgs_awb_core> get_receivable_credit_for_recon_auto(HttpServletRequest request) {
+	public List<File_rtgs__> get_receivable_credit_for_recon_auto(HttpServletRequest request) {
 		try {
 			if (util.isPermitted(request, "User", "get_all_receivable_credit_transaction_for_recon_auto")) {
 				util.registerActivity(request, "Get all receivable credit transactions",
@@ -88,7 +88,7 @@ public class ReceivableService {
 		}
 	}
 
-	public List<File_rtgs_awb_core> get_receivable_debit_for_recon_auto(HttpServletRequest request) {
+	public List<File_rtgs__> get_receivable_debit_for_recon_auto(HttpServletRequest request) {
 		try {
 			if (util.isPermitted(request, "User", "get_all_receivable_debit_transaction_for_recon_auto")) {
 				util.registerActivity(request, "Get all receivable debit transactions",
@@ -103,7 +103,7 @@ public class ReceivableService {
 		}
 	}
 	
-	public List<File_rtgs_awb_core> get_receivable_credit_matched(HttpServletRequest request,String matched_date) {
+	public List<File_rtgs__> get_receivable_credit_matched(HttpServletRequest request,String matched_date) {
 		try {
 			if (util.isPermitted(request, "User", "get_receivable_credit_matched")) {
 				util.registerActivity(request, "Get receivable credit matched trnsaction", "-");
@@ -118,7 +118,7 @@ public class ReceivableService {
 		}
 	}
 
-	public List<File_rtgs_awb_core> get_receivable_debit_matched(HttpServletRequest request,String matched_date) {
+	public List<File_rtgs__> get_receivable_debit_matched(HttpServletRequest request,String matched_date) {
 		try {
 			if (util.isPermitted(request, "User", "get_receivable_debit_matched")) {
 				util.registerActivity(request, "Get receivable debit matched trnsaction", "-");
@@ -265,11 +265,11 @@ public class ReceivableService {
 				}
 				String type1 =  "data_receivable";
 				for (int i = 0; i < ids.length; i++) {
-						System.out.println("it is core and the id is: " + ids[i]);
-						Long reason_id = receivableMapper.addReasonForEditCore(ids[i], user_id, type1, reason,
+						System.out.println("it is  and the id is: " + ids[i]);
+						Long reason_id = receivableMapper.addReasonForEdit(ids[i], user_id, type1, reason,
 								new Date().toString(), "1", "1", "2");
-						receivableMapper.moveDeletedCoreData(ids[i], reason_id);
-						receivableMapper.deleteTransactionCore(ids[i]);
+						receivableMapper.moveDeletedData(ids[i], reason_id);
+						receivableMapper.deleteTransaction(ids[i]);
 					
 				}
 				return true;
@@ -282,7 +282,7 @@ public class ReceivableService {
 		}
 	}
 	
-	public Boolean update_transaction(HttpServletRequest request, File_rtgs_nbe_ats edit_data) {
+	public Boolean update_transaction(HttpServletRequest request, File_rtgs__ats edit_data) {
 		try {
 			if (util.isPermitted(request, "User", "update_receivable_transaction")) {
 				util.registerActivity(request, "Update transaction", "Update receivable transaction");
@@ -290,11 +290,11 @@ public class ReceivableService {
 				System.out.println("reference:-------------------> " + edit_data.getReference());
 				String type = "data_receivable";
 				
-					Long edit_reason_id = receivableMapper.addReasonForEditCore(edit_data.getId(), user_id, type,
+					Long edit_reason_id = receivableMapper.addReasonForEdit(edit_data.getId(), user_id, type,
 							edit_data.getReason(), new Date().toString(), "1", "1", "1");
-					receivableMapper.moveOldCoreData(edit_data.getId(), edit_reason_id);
-					receivableMapper.updateTransactionCore(edit_data);
-					receivableMapper.moveEditedCoreData(edit_data.getId(), edit_reason_id);
+					receivableMapper.moveOldData(edit_data.getId(), edit_reason_id);
+					receivableMapper.updateTransaction(edit_data);
+					receivableMapper.moveEditedData(edit_data.getId(), edit_reason_id);
 					return true;
 				
 
@@ -312,7 +312,7 @@ public class ReceivableService {
 			if (util.isPermitted(request, "User", "match_all_receivable_transactions_auto")) {
 				util.registerActivity(request, "match all  receivable transactions", "match all  receivable transactions automatically");
 				JsonObject id_data_object = JsonParser.parseString(data_ids).getAsJsonObject();
-				String[] core_id = id_data_object.get("core_id").getAsString().split(",");
+				String[] _id = id_data_object.get("_id").getAsString().split(",");
 				String[] id_1_string = id_data_object.get("id_1").getAsString().split(",");
 				String[] id_2_string = id_data_object.get("id_2").getAsString().split(",");
 				String[] amount_1_string = id_data_object.get("amount_1").getAsString().split(",");
@@ -397,7 +397,7 @@ public class ReceivableService {
 				String type = "";
 				Long matched_data_id = null;
 				for (int i = 0; i < id_2.length; i++) {
-					System.out.println("Core id=" + id_2[i]);
+					System.out.println(" id=" + id_2[i]);
 					current_id = receivableMapper.moveReceivableDebitMatched(id_2[i]);
 					type = "data_receivable_debit";
 					receivableMapper.updateEditReason(current_id, matched_data_id, type, id_2[i]);
@@ -428,10 +428,10 @@ public class ReceivableService {
 		}
 	}
 	
-	public List<File_rtgs_awb_core> get_receivable_credit_matched_with_reason(HttpServletRequest request) {
+	public List<File_rtgs__> get_receivable_credit_matched_with_reason(HttpServletRequest request) {
 		try {
-			if (util.isPermitted(request, "User", "get_all_core_transaction_matched_with_reason")) {
-				util.registerActivity(request, "Get all core matched with reason  transactions", "-");
+			if (util.isPermitted(request, "User", "get_all__transaction_matched_with_reason")) {
+				util.registerActivity(request, "Get all  matched with reason  transactions", "-");
 				return receivableMapper.get_receivable_credit_matched_with_reason(
 						accountMapper.getUserAccountId(util.get_user_id(request)));
 
@@ -444,10 +444,10 @@ public class ReceivableService {
 		}
 	}
 
-	public List<File_rtgs_awb_core> get_receivable_debit_matched_with_reason(HttpServletRequest request) {
+	public List<File_rtgs__> get_receivable_debit_matched_with_reason(HttpServletRequest request) {
 		try {
-			if (util.isPermitted(request, "User", "get_all_core_transaction_matched_with_reason")) {
-				util.registerActivity(request, "Get all core matched with reason  transactions", "-");
+			if (util.isPermitted(request, "User", "get_all__transaction_matched_with_reason")) {
+				util.registerActivity(request, "Get all  matched with reason  transactions", "-");
 
 				return receivableMapper.get_receivable_debit_matched_with_reason(
 						accountMapper.getUserAccountId(util.get_user_id(request)));

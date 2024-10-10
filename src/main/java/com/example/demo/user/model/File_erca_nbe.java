@@ -1,6 +1,6 @@
 package com.example.demo.user.model;
 
-public class File_erca_nbe {
+public class File_erca_ {
 
 	private Long id;
   	private String value_date_type;
@@ -14,11 +14,11 @@ public class File_erca_nbe {
   	private String match_status;
   	private String status;
   	private String availability;
-	public File_erca_nbe() {
+	public File_erca_() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public File_erca_nbe(Long id, String value_date_type, String reference, String sender, String receiver,
+	public File_erca_(Long id, String value_date_type, String reference, String sender, String receiver,
 			String additional_information, Double amount, String dr_cr, Long upload_date, String match_status,
 			String status, String availability) {
 		super();
@@ -109,7 +109,7 @@ public class File_erca_nbe {
 	}
 	@Override
 	public String toString() {
-		return "File_erca_nbe [id=" + id + ", value_date_type=" + value_date_type + ", reference=" + reference
+		return "File_erca_ [id=" + id + ", value_date_type=" + value_date_type + ", reference=" + reference
 				+ ", sender=" + sender + ", receiver=" + receiver + ", additional_information=" + additional_information
 				+ ", amount=" + amount + ", dr_cr=" + dr_cr + ", upload_date=" + upload_date + ", match_status="
 				+ match_status + ", status=" + status + ", availability=" + availability + "]";

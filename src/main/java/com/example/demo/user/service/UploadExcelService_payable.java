@@ -23,7 +23,7 @@ import org.springframework.stereotype.Service;
 //import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.demo.user.model.File_rtgs_awb_core;
+import com.example.demo.user.model.File_rtgs__;
 import com.example.demo.utils.ExcelUtils;
 import com.example.demo.utils.Utils;
 
@@ -53,7 +53,7 @@ public class UploadExcelService_payable {
 		df.setMaximumFractionDigits(24);
 
 		Map<String, Object> resp = new HashMap<>();
-		List<File_rtgs_awb_core> payable = new ArrayList<>();
+		List<File_rtgs__> payable = new ArrayList<>();
 		Double beginningBallance = 0d;
 		Double endingBallance = 0d;
 		int totalCredit = 0;
@@ -92,7 +92,7 @@ public class UploadExcelService_payable {
 				} else {
 					Iterator<Cell> cellIterator = row.iterator();
 					int cellIndex = 0;
-					File_rtgs_awb_core Payable = new File_rtgs_awb_core();
+					File_rtgs__ Payable = new File_rtgs__();
 					boolean checker = true;
 					boolean last = true;
 					while (cellIterator.hasNext()) {
@@ -216,7 +216,7 @@ public class UploadExcelService_payable {
 					Payable.setStatus("1".trim());
 					Payable.setUpload_date(date);
 
-					// awb_core.setFile_id(file_id);
+					// _.setFile_id(file_id);
 
 					if (checker)
 						payable.add(Payable);

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.response.APIResponse;
-import com.example.demo.user.model.File_rtgs_nbe_ats;
+import com.example.demo.user.model.File_rtgs__ats;
 import com.example.demo.user.service.ReceivableService;
 
 @RestController
@@ -46,7 +46,7 @@ public class ReceivableController {
 	
 	@RequestMapping(value = "update_transaction", method = RequestMethod.POST, produces = "application/json")
 	public ResponseEntity<Boolean> update_transaction(HttpServletRequest request,
-			@RequestBody() File_rtgs_nbe_ats edit_data) {
+			@RequestBody() File_rtgs__ats edit_data) {
 		return APIResponse.response(receivableService.update_transaction(request, edit_data));
 	}
 	

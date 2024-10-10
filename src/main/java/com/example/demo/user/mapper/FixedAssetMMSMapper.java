@@ -165,7 +165,7 @@ public interface FixedAssetMMSMapper {
 	@Select(" select fm.tag_number as store_name, fm.asset_description as additional_information, fm.old_main_pg as stock_account_segment, fm. main_pg as type ,fd.match_date, u.firstname, u.middlename, u.lastname from fixed_mms fm , fixed_matched fd , users u , user_fixed_matched fmd where fm.id=fd.fixed_mms_id and fmd.user_id=u.id and fmd.fixed_matched_id=fd.fixed_mms_id and fm.id=#{id}")
 	public Transactionhistory matchDetailFixedMms(Long id);
 	
-	@Select("select distinct fm.main_pg as type, fm.account_segment as stock_account_segment, fd.match_date, fd.reconciliation_type, u.firstname, u.middlename, u.lastname, sc.value_date from stock_mms fm ,stock_core sc, stock_matched fd,\r\n"
+	@Select("select distinct fm.main_pg as type, fm.account_segment as stock_account_segment, fd.match_date, fd.reconciliation_type, u.firstname, u.middlename, u.lastname, sc.value_date from stock_mms fm ,stock_ sc, stock_matched fd,\r\n"
 			+ "			users u, user_stock_matched fmd where fm.id=fd.stock_mms_id and fmd.user_id=u.id and fmd.stock_matched_id=fd.stock_mms_id and sc.match_id = fd.match_id\r\n"
 			+ "			and fm.id=#{id}")
 	public Transactionhistory matchDetailStockMms(Long id);

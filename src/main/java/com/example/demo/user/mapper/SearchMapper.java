@@ -38,8 +38,8 @@ public interface SearchMapper {
 			@Param("max_match_date") int max_match_date);
 	
 	
-	@SelectProvider(type = SearchSqlProvider.class, method = "getStockCoreSearchQuery")
-	List<Transactionhistory> getStockCoreSearch(
+	@SelectProvider(type = SearchSqlProvider.class, method = "getStockSearchQuery")
+	List<Transactionhistory> getStockSearch(
 			@Param("min_amount") String min_amount,
 			@Param("max_amount") String max_amount, 
 			@Param("reference") String reference,

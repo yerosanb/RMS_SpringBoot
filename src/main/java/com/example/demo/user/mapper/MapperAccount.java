@@ -13,8 +13,8 @@ import org.apache.ibatis.annotations.Update;
 import com.example.demo.model.Files_;
 import com.example.demo.user.model.Account;
 import com.example.demo.user.model.FileUpload;
-import com.example.demo.user.model.File_rtgs_awb_core;
-import com.example.demo.user.model.File_rtgs_nbe_ats;
+import com.example.demo.user.model.File_rtgs__;
+import com.example.demo.user.model.File_rtgs__ats;
 import com.example.demo.user.model.Notification;
 
 @Mapper
@@ -200,10 +200,10 @@ public interface MapperAccount {
 	// @Select("select workspace_id from user_workspace where user_id = #{user_id}")
 	// public Long getUserWorkspaceId(@Param("user_id") Long user_id);
 
-	@Insert("insert into data_nbe_ats (value_date_type, reference, sender, receiver, additional_information, amount, "
+	@Insert("insert into data__ats (value_date_type, reference, sender, receiver, additional_information, amount, "
 			+ "dr_cr, upload_date, match_status, status, availability, file_id) values (#{value_date_type}, #{reference}, #{sender}, #{receiver}, "
 			+ "#{additional_information}, #{amount}, #{dr_cr}, #{upload_date}, #{match_status}, #{status}, #{availability}, #{file_id});")
-	public void uploadData_nbe_ats(File_rtgs_nbe_ats file_Rtgs);
+	public void uploadData__ats(File_rtgs__ats file_Rtgs);
 
 	// @Select("select top 1 '1' from files f, file_workspace_date fwd, file_account
 	// fc"
@@ -220,31 +220,31 @@ public interface MapperAccount {
 	public Optional<String> getWorkspaceIdFromReconciliationType(@Param("upload_date") String transaction_date,
 			@Param("account_id") Long user_account_id, @Param("left_right") String recon_left_right);
 
-	@Insert("insert into data_awb_core (posting_date, transaction_reference, branch_code, additional_information, amount, "
+	@Insert("insert into data__ (posting_date, transaction_reference, branch_code, additional_information, amount, "
 			+ "dr_cr, upload_date, match_status, status, availability, value_date, file_id) values (#{posting_date}, #{transaction_reference}, #{branch_code},"
 			+ " #{additional_information}, #{amount}, #{dr_cr}, #{upload_date}, #{match_status}, #{status}, #{availability}, #{value_date}, #{file_id});")
-	public void uploadData_awb_core(File_rtgs_awb_core file_rtgs_awb_core);
+	public void uploadData__(File_rtgs__ file_rtgs__);
 	
 	@Insert("insert into data_recivable (posting_date, transaction_reference, branch_code, additional_information, amount, "
 			+ "dr_cr, upload_date, match_status, status, availability, value_date, file_id) values (#{posting_date}, #{transaction_reference}, #{branch_code},"
 			+ " #{additional_information}, #{amount}, #{dr_cr}, #{upload_date}, #{match_status}, #{status}, #{availability}, #{value_date}, #{file_id});")
-	public void uploadData_receivable(File_rtgs_awb_core file_rtgs_awb_core);
+	public void uploadData_receivable(File_rtgs__ file_rtgs__);
 
 	/////////////////////////////////// Payable started //////////////////////////////
 	@Insert("insert into data_payable (posting_date, transaction_reference, branch_code, additional_information, amount, "
 			+ "dr_cr, upload_date, match_status, status, availability, value_date, file_id) values (#{posting_date}, #{transaction_reference}, #{branch_code},"
 			+ " #{additional_information}, #{amount}, #{dr_cr}, #{upload_date}, #{match_status}, #{status}, #{availability}, #{value_date}, #{file_id});")
-	public void uploadDataPayable(File_rtgs_awb_core file_rtgs_awb_core);
+	public void uploadDataPayable(File_rtgs__ file_rtgs__);
 	
-	@Insert("insert into data_issue_core (posting_date, branch, additional_information, amount, "
+	@Insert("insert into data_issue_ (posting_date, branch, additional_information, amount, "
 			+ "dr_cr, upload_date, match_status, status, availability, value_date, file_id, balance) values (#{posting_date}, #{branch},"
 			+ " #{additional_information}, #{amount}, #{dr_cr}, #{upload_date}, #{match_status}, #{status}, #{availability}, #{value_date}, #{file_id}, #{balance});")
-	public void uploadData_issue_core(File_rtgs_awb_core file_rtgs_awb_core);	
+	public void uploadData_issue_(File_rtgs__ file_rtgs__);	
 	
 	@Insert("insert into data_issue_qbs (posting_date, branch, additional_information, amount, "
 			+ "dr_cr, upload_date, match_status, status, availability, value_date, file_id, balance) values (#{posting_date}, #{branch},"
 			+ " #{additional_information}, #{amount}, #{dr_cr}, #{upload_date}, #{match_status}, #{status}, #{availability}, #{value_date}, #{file_id}, #{balance});")
-	public void uploadData_issue_qbs(File_rtgs_awb_core file_rtgs_awb_core);
+	public void uploadData_issue_qbs(File_rtgs__ file_rtgs__);
 
 
 	@Select("select top 1 '1' from account_request where code = #{code}")
@@ -280,7 +280,7 @@ public interface MapperAccount {
 			+ "total_number_of_debit_ifb = #{total_number_of_debit_ifb}, " + "total_credit_con = #{total_credit_con}, "
 			+ "total_credit_ifb = #{total_credit_ifb}, " + "total_debit_con = #{total_debit_con}, "
 			+ "total_debit_ifb = #{total_debit_ifb} " + " where id = #{file_id} ")
-	public void updateAdditionalFileInfoCore(@Param("beginning_balance_con") Double double1,
+	public void updateAdditionalFileInfo(@Param("beginning_balance_con") Double double1,
 			@Param("beginning_balance_ifb") Double double2, @Param("ending_balance_con") Double double3,
 			@Param("ending_balance_ifb") Double double4, @Param("total_number_of_credit_con") int totalCredit_con,
 			@Param("total_number_of_credit_ifb") int totalCredit_ifb,
@@ -318,7 +318,7 @@ public interface MapperAccount {
 			@Param("total_debit_ifb") Double double8,
 			@Param("file_id") Long file_id);
 
-	@Select("select amount from data_nbe_ats where reference = '0011677063'")
+	@Select("select amount from data__ats where reference = '0011677063'")
 	public Double getAmountMM();
 
 	@Select("select f.id, f.original_file_name as file_name, f.file_type, f.upload_date, a.name as account_name, c.name as currency_name,\r\n"
@@ -352,7 +352,7 @@ public interface MapperAccount {
 	// "total_debit_ats = #{total_debit_ats}, " +
 	// "business_date = #{business_date}, " +
 	// "account_number = #{account_number} where id = #{file_id} ")
-	// public void updateAdditionalFileInfoCore(
+	// public void updateAdditionalFileInfo(
 	// @Param("beginning_balance_ats") Float beginningBallance,
 	// @Param("ending_balance_ats") Float endingBallance,
 	// @Param("total_number_of_credit_ats") int totalCredit,
@@ -394,7 +394,7 @@ public interface MapperAccount {
 	
 	@Select("select distinct f.id, f.original_file_name as file_name, f.file_type, f.upload_date, \r\n"
 			+ " u.firstname as first_name,u.email, u.middlename as middle_name, u.lastname as last_name, fud.left_right as type\r\n"
-			+ "from files f, users u, file_user_date fud where (f.type = 'ISSUE_QBS' or f.type = 'ISSUE_CORE') and  fud.file_id = f.id and fud.user_id = u.id  \r\n"
+			+ "from files f, users u, file_user_date fud where (f.type = 'ISSUE_QBS' or f.type = 'ISSUE_') and  fud.file_id = f.id and fud.user_id = u.id  \r\n"
 			+ "and f.availability = '1'  and f.status='1'  \r\n"
 			+ "and fud.availability='1'  and u.availability='1'")
 	public List<FileUpload> getAllUploadedFiles_for_issue();

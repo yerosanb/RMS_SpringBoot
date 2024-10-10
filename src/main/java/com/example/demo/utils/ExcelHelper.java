@@ -37,8 +37,8 @@ import org.apache.poi.ss.util.CellUtil;
 import org.apache.poi.util.IOUtils;
 import org.apache.poi.util.Units;
 
-import com.example.demo.user.model.File_rtgs_awb_core;
-import com.example.demo.user.model.File_rtgs_nbe_ats;
+import com.example.demo.user.model.File_rtgs__;
+import com.example.demo.user.model.File_rtgs__ats;
 import com.google.zxing.WriterException;
 
 public class ExcelHelper {
@@ -50,7 +50,7 @@ public class ExcelHelper {
 			throws IOException, WriterException, ParseException {
 
 //		final String DIRECTORY_logo = System.getProperty("user.dir")
-//				+ "/src/main/resources/static/awash_logo/awash_logo_002.png";
+//				+ "/src/main/resources/static//_002.png";
 //		File file_path = new File(StringUtils.join(DIRECTORY_logo));
 //		if (!file_path.exists()) {
 //			file_path.mkdirs();
@@ -62,7 +62,7 @@ public class ExcelHelper {
 		cal.setTime(date2);
 		String monthName = new SimpleDateFormat("MMMM").format(cal.getTime());
 
-		String signature = "AWASH BANK RECONCCILIATION SYSTEM " + "PAS report " + monthName + " " + date2.getDate() + ", " + date2.toString().split(" ")[5];
+		String signature = " RECONCCILIATION SYSTEM " + "PAS report " + monthName + " " + date2.getDate() + ", " + date2.toString().split(" ")[5];
 		byte[] image = new byte[0];
 		image = QRCodeGenerator.getQRCodeImage(signature, 300, 300);
 
@@ -84,7 +84,7 @@ public class ExcelHelper {
 	private static void insertLogoToCell(Workbook workbook, int rowNum, Drawing drawing) throws IOException {
 
 		final String DIRECTORY_logo = System.getProperty("user.dir")
-				+ "/src/main/resources/static/awash_logo/awash_logo_002.png";
+				+ "/src/main/resources/static//_002.png";
 		File file_path = new File(StringUtils.join(DIRECTORY_logo));
 		if (!file_path.exists()) {
 			file_path.mkdirs();
@@ -104,10 +104,10 @@ public class ExcelHelper {
 
 	}
 
-	public static ByteArrayInputStream tutorialsToExcel(String date, List<File_rtgs_awb_core> core_debit_data,
-			Double ats_ending_balance, Double total_core_debit, List<File_rtgs_awb_core> core_credit_data,
-			Double total_core_credit, Double conventional_ending_balance, Double ifb_ending_balance,
-			List<File_rtgs_nbe_ats> ats_credit_data, Double total_ats_credit, List<File_rtgs_nbe_ats> ats_debit_data,
+	public static ByteArrayInputStream tutorialsToExcel(String date, List<File_rtgs__> _debit_data,
+			Double ats_ending_balance, Double total__debit, List<File_rtgs__> _credit_data,
+			Double total__credit, Double conventional_ending_balance, Double ifb_ending_balance,
+			List<File_rtgs__ats> ats_credit_data, Double total_ats_credit, List<File_rtgs__ats> ats_debit_data,
 			Double total_ats_debit) throws ParseException, WriterException {
 
 		try (Workbook workbook = new HSSFWorkbook(); ByteArrayOutputStream out = new ByteArrayOutputStream();) {
@@ -178,7 +178,7 @@ public class ExcelHelper {
 			cellt.setCellStyle(cs);
 			CellUtil.setAlignment(cellt, HorizontalAlignment.CENTER);
 			CellUtil.setVerticalAlignment(cellt, VerticalAlignment.CENTER);
-			cellt.setCellValue("AWASH BANK R.M.S");
+			cellt.setCellValue(" R.M.S");
 
 //			Cell cell23 = titleRow.createCell(2);
 //			cell23.setCellValue("hollaa");
@@ -214,7 +214,7 @@ public class ExcelHelper {
 			for (int col = 0; col < HEADERs.length; col++) {
 				Cell cell = row_1.createCell(col);
 				if (col == 0) {
-					cell.setCellValue("Balance as per NBE Statement");
+					cell.setCellValue("Balance as per  Statement");
 				} else if (col == 4) {
 					cell.setCellValue(
 							" " + NumberFormat.getCurrencyInstance().format(ats_ending_balance).replace("$", ""));
@@ -239,30 +239,30 @@ public class ExcelHelper {
 			}
 
 			int rowIdx = 5;
-			for (File_rtgs_awb_core data_core : core_debit_data) {
+			for (File_rtgs__ data_ : _debit_data) {
 				Row row = sheet.createRow(rowIdx++);
 				row.setHeight((short) (row.getHeight()));
 				Cell c1 = row.createCell(0);
 				c1.setCellStyle(style2);
 				CellUtil.setVerticalAlignment(c1, VerticalAlignment.CENTER);
 				CellUtil.setAlignment(c1, HorizontalAlignment.RIGHT);
-				c1.setCellValue(data_core.getValue_date());
+				c1.setCellValue(data_.getValue_date());
 				Cell c2 = row.createCell(1);
 				c2.setCellStyle(style2);
 				CellUtil.setVerticalAlignment(c2, VerticalAlignment.CENTER);
-				c2.setCellValue(data_core.getAdditional_information());
+				c2.setCellValue(data_.getAdditional_information());
 				Cell c3 = row.createCell(2);
 				c3.setCellStyle(style2);
 				CellUtil.setVerticalAlignment(c3, VerticalAlignment.CENTER);
-				c3.setCellValue(data_core.getBranch_code());
+				c3.setCellValue(data_.getBranch_code());
 				Cell c4 = row.createCell(3);
 				c4.setCellStyle(style2);
 				CellUtil.setVerticalAlignment(c4, VerticalAlignment.CENTER);
-				c4.setCellValue(data_core.getAmount());
+				c4.setCellValue(data_.getAmount());
 				Cell c5 = row.createCell(4);
 				c5.setCellStyle(style2);
 				CellUtil.setVerticalAlignment(c5, VerticalAlignment.CENTER);
-				// c5.setCellValue(data_core.getID());
+				// c5.setCellValue(data_.getID());
 				c5.setCellValue("");
 			}
 
@@ -273,7 +273,7 @@ public class ExcelHelper {
 				if (col == 0) {
 					cell.setCellValue("Total Debit in Book");
 				} else if (col == 3) {
-					cell.setCellValue(NumberFormat.getCurrencyInstance().format(total_core_debit).replace("$", ""));
+					cell.setCellValue(NumberFormat.getCurrencyInstance().format(total__debit).replace("$", ""));
 				}
 				cell.setCellStyle(style);
 				CellUtil.setVerticalAlignment(cell, VerticalAlignment.CENTER);
@@ -290,7 +290,7 @@ public class ExcelHelper {
 				if (col == 0) {
 					cell.setCellValue("Total Debit Balance");
 				} else if (col == 4) {
-					cell.setCellValue(NumberFormat.getCurrencyInstance().format(ats_ending_balance + total_core_debit)
+					cell.setCellValue(NumberFormat.getCurrencyInstance().format(ats_ending_balance + total__debit)
 							.replace("$", ""));
 				}
 				cell.setCellStyle(style);
@@ -313,30 +313,30 @@ public class ExcelHelper {
 			}
 
 			rowIdx++;
-			for (File_rtgs_awb_core data_core : core_credit_data) {
+			for (File_rtgs__ data_ : _credit_data) {
 				Row row = sheet.createRow(rowIdx++);
 				row.setHeight((short) (row.getHeight()));
 				Cell c1 = row.createCell(0);
 				c1.setCellStyle(style2);
 				CellUtil.setVerticalAlignment(c1, VerticalAlignment.CENTER);
 				CellUtil.setAlignment(c1, HorizontalAlignment.RIGHT);
-				c1.setCellValue(data_core.getValue_date());
+				c1.setCellValue(data_.getValue_date());
 				Cell c2 = row.createCell(1);
 				c2.setCellStyle(style2);
 				CellUtil.setVerticalAlignment(c2, VerticalAlignment.CENTER);
-				c2.setCellValue(data_core.getAdditional_information());
+				c2.setCellValue(data_.getAdditional_information());
 				Cell c3 = row.createCell(2);
 				c3.setCellStyle(style2);
 				CellUtil.setVerticalAlignment(c3, VerticalAlignment.CENTER);
-				c3.setCellValue(data_core.getBranch_code());
+				c3.setCellValue(data_.getBranch_code());
 				Cell c4 = row.createCell(3);
 				c4.setCellStyle(style2);
 				CellUtil.setVerticalAlignment(c4, VerticalAlignment.CENTER);
-				c4.setCellValue(data_core.getAmount());
+				c4.setCellValue(data_.getAmount());
 				Cell c5 = row.createCell(4);
 				c5.setCellStyle(style2);
 				CellUtil.setVerticalAlignment(c5, VerticalAlignment.CENTER);
-				// c5.setCellValue(data_core.getID());
+				// c5.setCellValue(data_.getID());
 				c5.setCellValue("");
 			}
 
@@ -345,9 +345,9 @@ public class ExcelHelper {
 			for (int col = 0; col < HEADERs.length; col++) {
 				Cell cell = row_6.createCell(col);
 				if (col == 0) {
-					cell.setCellValue("Total credit in bank");
+					cell.setCellValue("Total credit in ");
 				} else if (col == 3) {
-					cell.setCellValue(NumberFormat.getCurrencyInstance().format(total_core_credit).replace("$", ""));
+					cell.setCellValue(NumberFormat.getCurrencyInstance().format(total__credit).replace("$", ""));
 				}
 				cell.setCellStyle(style);
 				CellUtil.setVerticalAlignment(cell, VerticalAlignment.CENTER);
@@ -361,10 +361,10 @@ public class ExcelHelper {
 			for (int col = 0; col < HEADERs.length; col++) {
 				Cell cell = row_7.createCell(col);
 				if (col == 0) {
-					cell.setCellValue("Total Adjustment and correct Balance of NBE");
+					cell.setCellValue("Total Adjustment and correct Balance of ");
 				} else if (col == 4) {
 					cell.setCellValue(NumberFormat.getCurrencyInstance()
-							.format((ats_ending_balance + total_core_debit) - total_core_credit).replace("$", ""));
+							.format((ats_ending_balance + total__debit) - total__credit).replace("$", ""));
 				}
 				cell.setCellStyle(style);
 				CellUtil.setVerticalAlignment(cell, VerticalAlignment.CENTER);
@@ -423,7 +423,7 @@ public class ExcelHelper {
 			}
 
 			rowIdx++;
-			for (File_rtgs_nbe_ats data_ats : ats_credit_data) {
+			for (File_rtgs__ats data_ats : ats_credit_data) {
 				Row row = sheet.createRow(rowIdx++);
 				row.setHeight((short) (row.getHeight()));
 				Cell c1 = row.createCell(0);
@@ -446,7 +446,7 @@ public class ExcelHelper {
 				Cell c5 = row.createCell(4);
 				c5.setCellStyle(style2);
 				CellUtil.setVerticalAlignment(c5, VerticalAlignment.CENTER);
-				// c5.setCellValue(data_core.getID());
+				// c5.setCellValue(data_.getID());
 				c5.setCellValue("");
 			}
 
@@ -472,7 +472,7 @@ public class ExcelHelper {
 			for (int col = 0; col < HEADERs.length; col++) {
 				Cell cell = row_12.createCell(col);
 				if (col == 0) {
-					cell.setCellValue("Less: Debit Entries in NBE");
+					cell.setCellValue("Less: Debit Entries in ");
 				} else if (col == 4) {
 					cell.setCellValue(NumberFormat.getCurrencyInstance()
 							.format(conventional_ending_balance + ifb_ending_balance + total_ats_credit)
@@ -485,7 +485,7 @@ public class ExcelHelper {
 			}
 
 			rowIdx++;
-			for (File_rtgs_nbe_ats data_ats : ats_debit_data) {
+			for (File_rtgs__ats data_ats : ats_debit_data) {
 				Row row = sheet.createRow(rowIdx++);
 				row.setHeight((short) (row.getHeight()));
 				Cell c1 = row.createCell(0);
@@ -508,7 +508,7 @@ public class ExcelHelper {
 				Cell c5 = row.createCell(4);
 				c5.setCellStyle(style2);
 				CellUtil.setVerticalAlignment(c5, VerticalAlignment.CENTER);
-				// c5.setCellValue(data_core.getID());
+				// c5.setCellValue(data_.getID());
 				c5.setCellValue("");
 			}
 
@@ -517,7 +517,7 @@ public class ExcelHelper {
 			for (int col = 0; col < HEADERs.length; col++) {
 				Cell cell = row_13.createCell(col);
 				if (col == 0) {
-					cell.setCellValue("Total Debit on NBE");
+					cell.setCellValue("Total Debit on ");
 				} else if (col == 3) {
 					cell.setCellValue(NumberFormat.getCurrencyInstance().format(total_ats_debit).replace("$", ""));
 				}
@@ -554,7 +554,7 @@ public class ExcelHelper {
 					cell.setCellValue("Diff");
 				} else if (col == 4) {
 					cell.setCellValue(NumberFormat.getCurrencyInstance().format(
-							(((ats_ending_balance + total_core_debit) - total_core_credit)-((conventional_ending_balance + ifb_ending_balance + total_ats_credit) - total_ats_debit)))
+							(((ats_ending_balance + total__debit) - total__credit)-((conventional_ending_balance + ifb_ending_balance + total_ats_credit) - total_ats_debit)))
 							.replace("$", ""));
 				}
 				cell.setCellStyle(style);

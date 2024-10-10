@@ -15,12 +15,12 @@ import java.util.Locale;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.util.IOUtils;
 
-import com.example.demo.abebayehu.entity.Fixed_core_report;
+import com.example.demo.abebayehu.entity.Fixed__report;
 import com.example.demo.abebayehu.entity.Fixed_mms_report;
-import com.example.demo.abebayehu.entity.Raw_fixed_core;
+import com.example.demo.abebayehu.entity.Raw_fixed_;
 import com.example.demo.abebayehu.entity.Raw_fixed_mms;
-import com.example.demo.user.model.File_rtgs_awb_core;
-import com.example.demo.user.model.File_rtgs_nbe_ats;
+import com.example.demo.user.model.File_rtgs__;
+import com.example.demo.user.model.File_rtgs__ats;
 import com.google.zxing.WriterException;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
@@ -36,8 +36,8 @@ import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 
 public class PDFGeneratorFixed {
-	public String generateFixedPDF(String date, String type, List<Fixed_core_report> core_debit_data,
-			List<Fixed_core_report> core_credit_data, Double total_core, List<Fixed_mms_report> mms_data,
+	public String generateFixedPDF(String date, String type, List<Fixed__report> _debit_data,
+			List<Fixed__report> _credit_data, Double total_, List<Fixed_mms_report> mms_data,
 			 Double total_mms, Double conv, Double ifb, Double waiting, Double disposed, Double removed, Double mms_balance)
 			throws DocumentException, IOException, ParseException, WriterException {
 
@@ -51,7 +51,7 @@ public class PDFGeneratorFixed {
 		String monthName = new SimpleDateFormat("MMMM").format(cal.getTime());
 
 		final String DIRECTORY_logo = System.getProperty("user.dir")
-				+ "/src/main/resources/static/awash_logo/awash_logo_002.png";
+				+ "/src/main/resources/static//_002.png";
 
 		final String DIRECTORY2 = System.getProperty("user.dir") + "/src/main/resources/static/generated_reports/"
 				+ date.substring(0, 7) + "/";
@@ -132,7 +132,7 @@ public class PDFGeneratorFixed {
 			tablet.addCell(cellt2);
 		}
 		
-		String signature = "AWASH BANK RECONCCILIATION SYSTEM " + "Fixed Asset Report " + monthName + " "
+		String signature = " RECONCCILIATION SYSTEM " + "Fixed Asset Report " + monthName + " "
 				+ date2.getDate() + ", " + date2.toString().split(" ")[5];
 		PdfPCell celly = new PdfPCell();
 		celly.setFixedHeight(60.5f);
@@ -155,7 +155,7 @@ public class PDFGeneratorFixed {
 		cell13.setBorder(0);
 		tablet.addCell(cell13);
 		PdfPCell cell14 = new PdfPCell();
-		cell14.setPhrase(new Phrase("AWAH BANK R.M.S", fo7));
+		cell14.setPhrase(new Phrase("AWAH  R.M.S", fo7));
 		cell14.setBorder(0);
 		tablet.addCell(cell14);
 
@@ -263,7 +263,7 @@ public class PDFGeneratorFixed {
 		table.addCell(cell);
 		cell.setPhrase(new Phrase("", fo));
 		table.addCell(cell);
-		cell.setPhrase(new Phrase("List of Core Autstanding", fo));
+		cell.setPhrase(new Phrase("List of  Autstanding", fo));
 		table.addCell(cell);
 		cell.setPhrase(new Phrase("", fo));
 		table.addCell(cell);
@@ -271,31 +271,31 @@ public class PDFGeneratorFixed {
 		table.addCell(cell);
 		cell.setPhrase(new Phrase("", fo));
 		table.addCell(cell);
-		for (Fixed_core_report data_core : core_debit_data) {
-			cell2.setPhrase(new Phrase(data_core.getTransaction_date(), fo2));
+		for (Fixed__report data_ : _debit_data) {
+			cell2.setPhrase(new Phrase(data_.getTransaction_date(), fo2));
 			table.addCell(cell2);
-			cell.setPhrase(new Phrase(data_core.getAccount_description(), fo2));
+			cell.setPhrase(new Phrase(data_.getAccount_description(), fo2));
 			table.addCell(cell);
-			cell.setPhrase(new Phrase(data_core.getNaration(), fo2));
+			cell.setPhrase(new Phrase(data_.getNaration(), fo2));
 			table.addCell(cell);
-			cell.setPhrase(new Phrase("" + data_core.getAccount_name(), fo2));
+			cell.setPhrase(new Phrase("" + data_.getAccount_name(), fo2));
 			table.addCell(cell);
-			cell2.setPhrase(new Phrase("" + data_core.getAmount(), fo2));
+			cell2.setPhrase(new Phrase("" + data_.getAmount(), fo2));
 			table.addCell(cell2);
 			cell.setPhrase(new Phrase("", fo2));
 			table.addCell(cell);
 		}
 
-		for (Fixed_core_report data_core : core_credit_data) {
-			cell2.setPhrase(new Phrase(data_core.getTransaction_date(), fo2));
+		for (Fixed__report data_ : _credit_data) {
+			cell2.setPhrase(new Phrase(data_.getTransaction_date(), fo2));
 			table.addCell(cell2);
-			cell.setPhrase(new Phrase(data_core.getAccount_description(), fo2));
+			cell.setPhrase(new Phrase(data_.getAccount_description(), fo2));
 			table.addCell(cell);
-			cell.setPhrase(new Phrase(data_core.getNaration(), fo2));
+			cell.setPhrase(new Phrase(data_.getNaration(), fo2));
 			table.addCell(cell);
-			cell.setPhrase(new Phrase("" + data_core.getAccount_name(), fo2));
+			cell.setPhrase(new Phrase("" + data_.getAccount_name(), fo2));
 			table.addCell(cell);
-			cell2.setPhrase(new Phrase("" + data_core.getAmount(), fo2));
+			cell2.setPhrase(new Phrase("" + data_.getAmount(), fo2));
 			table.addCell(cell2);
 			cell.setPhrase(new Phrase("", fo2));
 			table.addCell(cell);
@@ -311,7 +311,7 @@ public class PDFGeneratorFixed {
 		table.addCell(cell2);
 		cell2.setPhrase(new Phrase("", fo));
 		table.addCell(cell2);
-		cell2.setPhrase(new Phrase(NumberFormat.getCurrencyInstance().format(total_core).replace("$", ""), fo));
+		cell2.setPhrase(new Phrase(NumberFormat.getCurrencyInstance().format(total_).replace("$", ""), fo));
 		table.addCell(cell2);
 
 		cell.setPhrase(new Phrase("", fo));
@@ -327,31 +327,31 @@ public class PDFGeneratorFixed {
 		cell.setPhrase(new Phrase("", fo));
 		table.addCell(cell);
 
-		for (Fixed_mms_report data_core : mms_data) {
-			cell2.setPhrase(new Phrase(data_core.getCreated_date(), fo2));
+		for (Fixed_mms_report data_ : mms_data) {
+			cell2.setPhrase(new Phrase(data_.getCreated_date(), fo2));
 			table.addCell(cell2);
-			cell.setPhrase(new Phrase(data_core.getAsset_description(), fo2));
+			cell.setPhrase(new Phrase(data_.getAsset_description(), fo2));
 			table.addCell(cell);
-			cell.setPhrase(new Phrase(data_core.getTag_number(), fo2));
+			cell.setPhrase(new Phrase(data_.getTag_number(), fo2));
 			table.addCell(cell);
-			cell.setPhrase(new Phrase("" + data_core.getBranch_name(), fo2));
+			cell.setPhrase(new Phrase("" + data_.getBranch_name(), fo2));
 			table.addCell(cell);
-			cell2.setPhrase(new Phrase("" + data_core.getAmount(), fo2));
+			cell2.setPhrase(new Phrase("" + data_.getAmount(), fo2));
 			table.addCell(cell2);
 			cell.setPhrase(new Phrase("", fo2));
 			table.addCell(cell);
 		}
 
-//		for (Fixed_mms_report data_core : mms_debit_data) {
-//			cell2.setPhrase(new Phrase(data_core.getTransaction_date(), fo2));
+//		for (Fixed_mms_report data_ : mms_debit_data) {
+//			cell2.setPhrase(new Phrase(data_.getTransaction_date(), fo2));
 //			table.addCell(cell2);
-//			cell.setPhrase(new Phrase(data_core.getCategory_description(), fo2));
+//			cell.setPhrase(new Phrase(data_.getCategory_description(), fo2));
 //			table.addCell(cell);
-//			cell.setPhrase(new Phrase(data_core.getReference(), fo2));
+//			cell.setPhrase(new Phrase(data_.getReference(), fo2));
 //			table.addCell(cell);
-//			cell.setPhrase(new Phrase("" + data_core.getAdditional_information(), fo2));
+//			cell.setPhrase(new Phrase("" + data_.getAdditional_information(), fo2));
 //			table.addCell(cell);
-//			cell2.setPhrase(new Phrase("" + data_core.getAmount(), fo2));
+//			cell2.setPhrase(new Phrase("" + data_.getAmount(), fo2));
 //			table.addCell(cell2);
 //			cell.setPhrase(new Phrase("", fo2));
 //			table.addCell(cell);
@@ -380,7 +380,7 @@ public class PDFGeneratorFixed {
 		table.addCell(cell);
 		cell.setPhrase(new Phrase("", fo));
 		table.addCell(cell);
-		cell2.setPhrase(new Phrase(NumberFormat.getCurrencyInstance().format((conv + ifb + total_mms)-total_core).replace("$", ""), fo));
+		cell2.setPhrase(new Phrase(NumberFormat.getCurrencyInstance().format((conv + ifb + total_mms)-total_).replace("$", ""), fo));
 		table.addCell(cell2);
 
 		cell.setPhrase(new Phrase("", fo));
@@ -460,7 +460,7 @@ public class PDFGeneratorFixed {
 		table.addCell(cell);
 		cell.setPhrase(new Phrase("", fo));
 		table.addCell(cell);
-		cell2.setPhrase(new Phrase(NumberFormat.getCurrencyInstance().format(((conv+ifb+total_mms)-total_core)-(mms_balance+waiting+disposed+removed)).replace("$", ""), fo));
+		cell2.setPhrase(new Phrase(NumberFormat.getCurrencyInstance().format(((conv+ifb+total_mms)-total_)-(mms_balance+waiting+disposed+removed)).replace("$", ""), fo));
 		table.addCell(cell2);
 
 		table.addCell(cell);

@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.Exception.ExceptionsList;
 import com.example.demo.admin.mapper.AdminDashboardMapper;
 import com.example.demo.user.model.AtsBeginningEnding;
-import com.example.demo.user.model.CoreBeginningEnding;
+import com.example.demo.user.model.BeginningEnding;
 import com.example.demo.utils.Utils;
 
 @Service
